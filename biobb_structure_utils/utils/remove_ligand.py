@@ -68,30 +68,13 @@ class RemoveLigand():
 
         else:
             fu.log('PDB format detected, removing all atoms from residues named %s' % self.ligand, out_log)
-
-            #Example from Biopython's cookbook: 11.1.6  Writing PDB files
-            #http://biopython.org/DIST/docs/tutorial/Tutorial.html
-            parser = Bio.PDB.PDBParser(QUIET=True, PERMISSIVE=True)
-            structure = parser.get_structure('structure', self.input_structure_path)
-
-            class LigandSelect(Bio.PDB.Select):
-                def __init__(self, ligand):
-                    self.ligand = ligand
-
-                def accept_residue(self, residue):
-                    if residue.get_resname().lower() != self.ligand.lower():
-                        return True
-                    return False
-
-            io = Bio.PDB.PDBIO()
-            io.set_structure(structure)
-            io.save(self.output_structure_path, LigandSelect(self.ligand), preserve_atom_numbering=self.preserve_atom_numbering)
-
-            # with open(self.input_structure_path, "r") as input_pdb, open(self.output_structure_path, "w") as output_pdb:
-            #     for line in input_pdb:
-            #         if len(line) > 19 and self.ligand.lower() in line[17:20].lower():
-            #             continue
-            #         output_pdb.write(line)
+            # Direct aproach solution implemented to avoid the issues presented in commit message (c92aab9604a6a31d13f4170ff47b231df0a588ef)
+            # with the Biopython library
+            with open(self.input_structure_path, "r") as input_pdb, open(self.output_structure_path, "w") as output_pdb:
+                for line in input_pdb:
+                    if len(line) > 19 and self.ligand.lower() in line[17:20].lower():
+                        continue
+                    output_pdb.write(line)
 
 
         if self.remove_tmp:
