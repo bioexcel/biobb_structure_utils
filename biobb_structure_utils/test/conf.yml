@@ -1,0 +1,26 @@
+working_dir_path: /tmp/biobb/unitests
+
+remove_ligand_pdb:
+  paths:
+    input_structure_path: file:test_data_dir/utils/WT_aq4_md_1.pdb
+    output_structure_path: output_structure_path.pdb
+    reference_output_stucture_path: file:test_reference_dir/utils/WT_apo_md_1.pdb
+  properties:
+    ligand: 'AQ4'
+
+remove_ligand_gro:
+  paths:
+    input_structure_path: file:test_data_dir/utils/WT_aq4_md_1.gro
+    output_structure_path: output_structure_path.gro
+    reference_output_stucture_path: file:test_reference_dir/utils/WT_apo_md_1.gro
+  properties:
+    ligand: 'AQ4'
+
+
+mutate:
+  paths:
+    input_pdb_path: file:test_data_dir/model/2ki5.pdb
+    output_pdb_path: output_mutated_pdb_path.pdb
+    reference_output_pdb_path: file:test_reference_dir/model/output_mutated_pdb_path.pdb
+  properties:
+    mutation_list: Leu49Ile, B:arg51Lys

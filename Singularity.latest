@@ -1,0 +1,4 @@
+Bootstrap: docker
+From: biobb_structure_utils:1.0.0--py_0
+Registry: quay.io
+Namespace: biocontainers
