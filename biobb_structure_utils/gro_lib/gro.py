@@ -124,12 +124,16 @@ class Gro:
         """
             renumber residue_id and atom_id starting from 1; the original composition of each resdiue is maintained
         """
-        last_old_residue_id = -1                # use negative num to avoid coincidence
+        atom_mapping = {}
+        residue_mapping = {}
+        #TODO: Redo the whole function.
+        last_old_residue_id = -0.1                # use negative float num to avoid coincidence
         last_old_residue_name = 'to_be_defined'
         last_new_resiue_id = 0
         for i_atom in range(self.num_of_atoms):
+            atom_mapping[str(self.atom_id[i_atom])] = i_atom + 1
             self.atom_id[i_atom] = i_atom + 1   # starting from 1
-            #if self.residue_id[i_atom] == last_residue_id and self.residue_name[i_atom] == last_residue_name:
+
             if self.residue_id[i_atom] == last_old_residue_id and self.residue_name[i_atom] == last_old_residue_name:
                 self.residue_id[i_atom] = last_new_resiue_id
             else:
