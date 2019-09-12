@@ -1,3 +1,5 @@
+import sys
+
 class Gro:
     """
         the central class in gropy
@@ -120,28 +122,45 @@ class Gro:
                     break
 
 
-    def renumber_atoms(self):
+    def renumber_atoms(self,renumber_residues=True, renumber_residues_per_chain=True):
         """
             renumber residue_id and atom_id starting from 1; the original composition of each resdiue is maintained
         """
         atom_mapping = {}
         residue_mapping = {}
-        #TODO: Redo the whole function.
-        last_old_residue_id = -0.1                # use negative float num to avoid coincidence
-        last_old_residue_name = 'to_be_defined'
-        last_new_resiue_id = 0
+        residue_count = 0
+        last_residue_id = sys.maxsize * -1
+        chain_number = 1
+        residue_mapping[str(chain_number)] = {}
+        new_chain = False
         for i_atom in range(self.num_of_atoms):
-            atom_mapping[str(self.atom_id[i_atom])] = i_atom + 1
-            self.atom_id[i_atom] = i_atom + 1   # starting from 1
+            gro_atom_number = str(self.atom_id[i_atom])
+            new_atom_number = i_atom + 1
+            atom_mapping[str(gro_atom_number)] = str(new_atom_number)
+            self.atom_id[i_atom] = new_atom_number
 
-            if self.residue_id[i_atom] == last_old_residue_id and self.residue_name[i_atom] == last_old_residue_name:
-                self.residue_id[i_atom] = last_new_resiue_id
-            else:
-                last_old_residue_id = self.residue_id[i_atom]
-                last_old_residue_name = self.residue_name[i_atom]
-                self.residue_id[i_atom] = last_new_resiue_id + 1
-                last_new_resiue_id += 1
+            # As in the GRO files there is no chain information, the residue number is used as heuristics.
+            if self.residue_id[i_atom] < last_residue_id:
+                new_chain = True
+                chain_number += 1
+                residue_mapping[str(chain_number)] = {}
 
+            # New residue
+            if self.residue_id[i_atom] != last_residue_id:
+                residue_count += 1
+                # New chain
+                if renumber_residues_per_chain and new_chain:
+                    residue_count = 1
+                    new_chain = False
+
+            if not renumber_residues:
+                residue_count = str(self.residue_id[i_atom])
+
+            residue_mapping[str(chain_number)][str(self.residue_id[i_atom])] = str(residue_count)
+            last_residue_id = self.residue_id[i_atom]
+            self.residue_id[i_atom] = residue_count
+
+        return residue_mapping, atom_mapping
 
     def replace_atom_entry(self, i_atom, another_gro_object, j_atom):
         """

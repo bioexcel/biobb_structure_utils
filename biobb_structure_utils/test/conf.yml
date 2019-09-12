@@ -17,10 +17,34 @@ remove_ligand_gro:
     ligand: 'AQ4'
 
 
-mutate:
+renumber_structure_pdb:
   paths:
-    input_pdb_path: file:test_data_dir/model/2ki5.pdb
-    output_pdb_path: output_mutated_pdb_path.pdb
-    reference_output_pdb_path: file:test_reference_dir/model/output_mutated_pdb_path.pdb
-  properties:
-    mutation_list: Leu49Ile, B:arg51Lys
+    input_structure_path: file:test_data_dir/utils/cl3.noH.pdb
+    output_structure_path: output_structure_path.pdb
+    reference_output_stucture_path: file:test_reference_dir/utils/renum_cl3_noH.pdb
+    output_mapping_json_path: output_mapping_json_path.json
+    reference_output_mapping_json_path: file:test_reference_dir/utils/cl3_output_mapping_json_path.json
+
+renumber_structure_2vgb:
+  paths:
+    input_structure_path: file:test_data_dir/utils/2vgb.pdb
+    output_structure_path: output_structure_path.pdb
+    reference_output_stucture_path: file:test_reference_dir/utils/ref_2vgb.pdb
+    output_mapping_json_path: output_mapping_json_path.json
+    reference_output_mapping_json_path: file:test_reference_dir/utils/2vgb_output_mapping_json_path.json
+
+renumber_structure_gro:
+  paths:
+    input_structure_path: file:test_data_dir/utils/pyruvate.gro
+    output_structure_path: output_structure_path.gro
+    reference_output_stucture_path: file:test_reference_dir/utils/renum_pyruvate.gro
+    output_mapping_json_path: output_mapping_json_path.json
+    reference_output_mapping_json_path: file:test_reference_dir/utils/pyruvate_output_mapping_json_path.json
+
+renumber_structure_smallgro:
+  paths:
+    input_structure_path: file:test_data_dir/utils/smallgro.gro
+    output_structure_path: output_structure_path.gro
+    reference_output_stucture_path: file:test_reference_dir/utils/renum_smallgro.gro
+    output_mapping_json_path: output_mapping_json_path.json
+    reference_output_mapping_json_path: file:test_reference_dir/utils/smallgro_output_mapping_json_path.json
