@@ -1,4 +1,5 @@
 import sys
+import re
 
 class Gro:
     """
@@ -327,6 +328,15 @@ class Gro:
         for i_atom in range(num_of_atoms_to_be_removed):
             self.remove_atom_entry(atom_indice_to_be_removed[i_atom] - i_atom)  # shift atom indice to match the shrinkage of atom list
 
+    def select_atoms(self, regular_expression_pattern):
+        atom_indice_to_be_removed = []
+        for i_atom in range(self.num_of_atoms):
+            if not re.search(regular_expression_pattern, self.atom_name[i_atom]):
+                atom_indice_to_be_removed.append(i_atom)
+
+        num_of_atoms_to_be_removed = len(atom_indice_to_be_removed)
+        for i_atom in range(num_of_atoms_to_be_removed):
+            self.remove_atom_entry(atom_indice_to_be_removed[i_atom] - i_atom)
 
     def remove_residues(self, residue_name_list):
         """
