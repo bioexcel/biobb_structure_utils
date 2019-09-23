@@ -12,7 +12,8 @@ from biobb_common.command_wrapper import cmd_wrapper
 from biobb_structure_utils.gro_lib.gro import Gro
 from biobb_structure_utils.utils.common import PDB_SERIAL_RECORDS
 
-class RenumberStructure():
+
+class RenumberStructure:
     """Class to remove the selected ligand atoms from a 3D structure.
 
     Args:
@@ -59,7 +60,7 @@ class RenumberStructure():
         out_log = getattr(self, 'out_log', None)
         err_log = getattr(self, 'err_log', None)
 
-        #Restart if needed
+        # Restart if needed
         if self.restart:
             output_file_list = [self.output_structure_path, self.output_mapping_json_path]
             if fu.check_complete_files(output_file_list):
@@ -83,7 +84,7 @@ class RenumberStructure():
             with open(self.input_structure_path, "r") as input_pdb, open(self.output_structure_path, "w") as output_pdb:
                 for line in input_pdb:
                     record = line[:6].upper().strip()
-                    if len(line) > 10 and record in PDB_SERIAL_RECORDS: #Avoid MODEL, ENDMDL records and empty lines
+                    if len(line) > 10 and record in PDB_SERIAL_RECORDS:  # Avoid MODEL, ENDMDL records and empty lines
                         # Renumbering atoms
                         pdb_atom_number = line[6:11].strip()
                         if not atom_mapping.get(pdb_atom_number): # ANISOU records should have the same numeration as ATOM records

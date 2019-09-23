@@ -11,7 +11,7 @@ from biobb_common.tools.file_utils import launchlogger
 from biobb_common.command_wrapper import cmd_wrapper
 
 
-class RemovePdbWater():
+class RemovePdbWater:
     """Class to remove water molecules from PDB 3D structures.
 
     Args:
@@ -50,7 +50,7 @@ class RemovePdbWater():
         """Remove water molecules."""
         tmp_files = []
 
-        # Get local loggers from launchlogger decorator
+        # Get local loggers from @launchlogger decorator
         out_log = getattr(self, 'out_log', None)
         err_log = getattr(self, 'err_log', None)
 
@@ -60,22 +60,25 @@ class RemovePdbWater():
                '--force_save',
                'water', '--remove', 'yes']
 
-        returncode = cmd_wrapper.CmdWrapper(cmd, out_log, err_log, self.global_log).launch()
-
+        returncode: int = cmd_wrapper.CmdWrapper(cmd, out_log, err_log, self.global_log).launch()
 
         if self.remove_tmp:
             fu.rm_file_list(tmp_files)
 
         return returncode
 
+
 def main():
     """Command line interface."""
-    parser = argparse.ArgumentParser(description="Remove the selected ligand atoms from a 3D structure.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
+    parser = argparse.ArgumentParser(description="Remove the water molecules from a PDB 3D structure.",
+                                     formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
     parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
-    parser.add_argument('--system', required=False, help="Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help")
-    parser.add_argument('--step', required=False, help="Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help")
+    parser.add_argument('--system', required=False,
+                        help="Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help")
+    parser.add_argument('--step', required=False,
+                        help="Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help")
 
-    #Specific args of each building block
+    # Specific args of each building block
     required_args = parser.add_argument_group('required arguments')
     required_args.add_argument('-i', '--input_pdb_path', required=True, help="Input pdb file name")
     required_args.add_argument('-o', '--output_pdb_path', required=True, help="Output pdb file name")
@@ -86,8 +89,10 @@ def main():
     if args.step:
         properties = properties[args.step]
 
-    #Specific call of each building block
-    ExtractAtoms(input_pdb_path=args.input_pdb_path, output_pdb_path=args.output_pdb_path, properties=properties).launch()
+    # Specific call of each building block
+    RemovePdbWater(input_pdb_path=args.input_pdb_path, output_pdb_path=args.output_pdb_path,
+                   properties=properties).launch()
+
 
 if __name__ == '__main__':
     main()

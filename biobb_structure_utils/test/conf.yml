@@ -72,3 +72,10 @@ extract_atoms_pdb:
     reference_output_stucture_path: file:test_reference_dir/utils/OE2_atoms.pdb
   properties:
     regular_expression_pattern: OE2
+
+remove_pdb_water:
+  paths:
+    input_pdb_path: file:test_data_dir/utils/WT_aq4_md_WAT.pdb
+    output_pdb_path: output_pdb_path.pdb
+    reference_output_pdb_path: file:test_reference_dir/utils/WT_apo_no_wat.pdb
+
