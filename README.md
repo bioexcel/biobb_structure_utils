@@ -1,4 +1,4 @@
-[![Documentation Status](https://readthedocs.org/projects/biobb-model/badge/?version=latest)](https://biobb-model.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/biobb-structure-utils/badge/?version=latest)](https://biobb-structure-utils.readthedocs.io/en/latest/?badge=latest)
 
 
 # biobb_structure_utils
