@@ -5,4 +5,4 @@ biobb_structure_utils
    :maxdepth: 4
 
    gro_lib
-   utilsm
+   utils
