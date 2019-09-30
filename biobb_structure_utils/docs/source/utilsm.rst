@@ -1,45 +1,45 @@
-utils package
+utilsm package
 ================
 
 Submodules
 ----------
 
-utils.extract_atoms module
+utilsm.extract_atoms module
 -----------------------------
 
-.. automodule:: utils.extract_atoms
+.. automodule:: utilsm.extract_atoms
     :members:
     :undoc-members:
     :show-inheritance:
 
-utils.remove_ligand module
+utilsm.remove_ligand module
 ------------------------------
 
-.. automodule:: utils.remove_ligand
+.. automodule:: utilsm.remove_ligand
     :members:
     :undoc-members:
     :show-inheritance:
 
-utils.remove_pdb_water module
+utilsm.remove_pdb_water module
 --------------------------------
 
-.. automodule:: utils.remove_pdb_water
+.. automodule:: utilsm.remove_pdb_water
     :members:
     :undoc-members:
     :show-inheritance:
 
-utils.renumber_structure module
+utilsm.renumber_structure module
 ----------------------------------
 
-.. automodule:: utils.renumber_structure
+.. automodule:: utilsm.renumber_structure
     :members:
     :undoc-members:
     :show-inheritance:
 
-utils.sort_gro_residues module
+utilsm.sort_gro_residues module
 ---------------------------------
 
-.. automodule:: utils.sort_gro_residues
+.. automodule:: utilsm.sort_gro_residues
     :members:
     :undoc-members:
     :show-inheritance:
