@@ -1,7 +1,8 @@
-biobb_model
-============
+biobb_structure_utils
+=====================
 
 .. toctree::
    :maxdepth: 4
 
-   model
+   gro_lib
+   utils

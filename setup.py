@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="biobb_model",
+    name="biobb_structure_utils",
     version="1.0.0",
     author="Biobb developers",
     author_email="pau.andrio@bsc.es",
@@ -12,7 +12,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     keywords="Bioinformatics Workflows BioExcel Compatibility",
-    url="https://github.com/bioexcel/biobb_model",
+    url="https://github.com/bioexcel/biobb_structure_utils",
     project_urls={
         "Documentation": "http://biobb_structure_utils.readthedocs.io/en/latest/",
         "Bioexcel": "https://bioexcel.eu/"
