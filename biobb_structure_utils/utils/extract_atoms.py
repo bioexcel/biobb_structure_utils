@@ -19,9 +19,9 @@ class ExtractAtoms():
         input_structure_path (str): Input structure file path.
         output_structure_path (str): Output structure file path.
         properties (dic):
-            | - **regular_expression_pattern** (*str*) - ("^D") Python style regular expression matching the selected atom names.
-            | - **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
-            | - **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+            * **regular_expression_pattern** (*str*) - ("^D") Python style regular expression matching the selected atom names.
+            * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
+            * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
     """
 

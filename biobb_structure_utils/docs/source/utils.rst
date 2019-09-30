@@ -21,7 +21,7 @@ utils.remove_ligand module
     :show-inheritance:
 
 utils.remove_pdb_water module
------------------------------*
+-----------------------------
 
 .. automodule:: utils.remove_pdb_water
     :members:
