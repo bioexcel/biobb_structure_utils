@@ -22,6 +22,7 @@ class ExtractAtoms():
             * **regular_expression_pattern** (*str*) - ("^D") Python style regular expression matching the selected atom names.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+            
     """
 
     def __init__(self, input_structure_path, output_structure_path, properties=None, **kwargs):
