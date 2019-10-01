@@ -45,7 +45,7 @@ class RemovePdbWater:
         # Check the properties
         fu.check_properties(self, properties)
 
-    
+    @launchlogger
     def launch(self):
         """Remove water molecules."""
         tmp_files = []
