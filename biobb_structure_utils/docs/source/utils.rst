@@ -12,6 +12,37 @@ utils.extract_hetero_atoms module
     :undoc-members:
     :show-inheritance:
 
+utils.extract_protein module
+-----------------------------
+
+.. automodule:: utils.extract_protein
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+utils.cat_pdb module
+-----------------------------
+
+.. automodule:: utils.cat_pdb
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+utils.extract_chain module
+-----------------------------
+
+.. automodule:: utils.extract_chain
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+utils.extract_model module
+-----------------------------
+
+.. automodule:: utils.extract_model
+    :members:
+    :undoc-members:
+    :show-inheritance:
 
 utils.extract_atoms module
 -----------------------------

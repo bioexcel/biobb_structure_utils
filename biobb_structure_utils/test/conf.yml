@@ -79,3 +79,31 @@ remove_pdb_water:
     output_pdb_path: output_pdb_path.pdb
     reference_output_pdb_path: file:test_reference_dir/utils/WT_apo_no_wat.pdb
 
+extract_protein:
+  paths:
+    input_structure_path: file:test_data_dir/utils/extract_protein.pdb
+    output_protein_path: output_protein_path.pdb
+    reference_output_protein_path: file:test_reference_dir/utils/ref_extract_protein.pdb
+
+cat_pdb:
+  paths:
+    input_structure1: file:test_data_dir/utils/cat_protein.pdb
+    input_structure2: file:test_data_dir/utils/cat_ligand.pdb
+    output_structure_path: output_structure_path.pdb
+    reference_output_structure_path: file:test_reference_dir/utils/ref_cat_pdb.pdb
+
+extract_chain:
+  paths:
+    input_structure_path: file:test_data_dir/utils/extract_chain.pdb
+    output_structure_path: output_structure_path.pdb
+    reference_output_structure_path: file:test_reference_dir/utils/ref_extract_chain.pdb
+  properties:
+    chains: [B,C]
+
+extract_model:
+  paths:
+    input_structure_path: file:test_data_dir/utils/extract_model.pdb
+    output_structure_path: output_structure_path.pdb
+    reference_output_structure_path: file:test_reference_dir/utils/ref_extract_model.pdb
+  properties:
+    models: [1,4]

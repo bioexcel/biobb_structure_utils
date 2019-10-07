@@ -117,12 +117,12 @@ class ExtractModel():
             with open(self.output_structure_path, 'w') as outfile:
                 for i, fname in enumerate(filenames):
                     with open(fname) as infile:
-                        outfile.write('MODEL        ' +  str(i + 1) + '                                                                  \n')
+                        outfile.write('MODEL     ' +  "{:>4}".format(str(i + 1)) + '\n')
                         for line in infile:
                             if not line.startswith("END"): 
                                 outfile.write(line)
                             else:
-                                outfile.write('ENDMDL                                                                          \n')
+                                outfile.write('ENDMDL\n')
 
             fu.log('File %s created' % self.output_structure_path,  out_log, self.global_log)
 
