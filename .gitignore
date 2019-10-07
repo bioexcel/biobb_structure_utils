@@ -112,3 +112,6 @@ traj_comp.xtc
 
 # vs code
 .vscode
+
+# old files
+*.old.*
