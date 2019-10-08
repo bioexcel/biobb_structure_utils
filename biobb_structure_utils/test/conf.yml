@@ -79,6 +79,21 @@ remove_pdb_water:
     output_pdb_path: output_pdb_path.pdb
     reference_output_pdb_path: file:test_reference_dir/utils/WT_apo_no_wat.pdb
 
+
+extract_heteroatoms:
+  paths:
+    input_structure_path: file:test_data_dir/utils/extract_heteroatom.pdb
+    output_heteroatom_path: output_heteroatom_path.pdb
+    reference_output_heteroatom_path: file:test_reference_dir/utils/ref_extract_heteroatom.pdb
+  properties:
+    heteroatoms: [{
+      "name": "TA1",
+      "model": "1"
+    },
+    {
+      "name": "ADP"
+    }]
+
 extract_protein:
   paths:
     input_structure_path: file:test_data_dir/utils/extract_protein.pdb
