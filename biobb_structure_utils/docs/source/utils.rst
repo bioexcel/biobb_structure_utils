@@ -4,10 +4,10 @@ utils package
 Submodules
 ----------
 
-utils.extract_hetero_atoms module
------------------------------
+utils.extract_heteroatoms module
+---------------------------------
 
-.. automodule:: utils.extract_hetero_atoms
+.. automodule:: utils.extract_heteroatoms
     :members:
     :undoc-members:
     :show-inheritance:
