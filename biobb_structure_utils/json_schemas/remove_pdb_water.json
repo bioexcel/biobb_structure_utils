@@ -1,0 +1,36 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://bioexcel.eu/biobb_structure_utils/json_schemas/1.0/remove_pdb_water",
+    "title": "Class to remove water molecules from PDB 3D structures.",
+    "type": "object",
+    "required": [
+        "input_pdb_path",
+        "output_pdb_path"
+    ],
+    "properties": {
+        "input_pdb_path": {
+            "type": "string",
+            "description": "Input PDB file path."
+        },
+        "output_pdb_path": {
+            "type": "string",
+            "description": "Output PDB file path."
+        },
+        "properties": {
+            "type": "object",
+            "properties": {
+                "remove_tmp": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "[WF property] Remove temporal files."
+                },
+                "restart": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "[WF property] Do not execute if output files exist."
+                }
+            }
+        }
+    },
+    "additionalProperties": false
+}

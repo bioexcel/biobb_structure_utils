@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://bioexcel.eu/biobb_structure_utils/json_schemas/1.0/extract_model",
+    "title": "Class to extract a model from a 3D structure.",
+    "type": "object",
+    "required": [
+        "input_structure_path",
+        "output_structure_path"
+    ],
+    "properties": {
+        "input_structure_path": {
+            "type": "string",
+            "description": "Input structure file path.",
+            "enum": [
+                ".*\\.pdb$"
+            ]
+        },
+        "output_structure_path": {
+            "type": "string",
+            "description": "Output structure file path.",
+            "enum": [
+                ".*\\.pdb$"
+            ]
+        },
+        "properties": {
+            "type": "object",
+            "properties": {
+                "models": {
+                    "type": "list",
+                    "default": null,
+                    "description": "List of models to be extracted from the input_structure_path file. If empty, all the models of the structure will be returned."
+                }
+            }
+        }
+    },
+    "additionalProperties": false
+}

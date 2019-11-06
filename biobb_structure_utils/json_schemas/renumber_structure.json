@@ -1,0 +1,51 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://bioexcel.eu/biobb_structure_utils/json_schemas/1.0/renumber_structure",
+    "title": "Class to remove the selected ligand atoms from a 3D structure.",
+    "type": "object",
+    "required": [
+        "input_structure_path",
+        "output_structure_path",
+        "output_mapping_json_path"
+    ],
+    "properties": {
+        "input_structure_path": {
+            "type": "string",
+            "description": "Input structure file path."
+        },
+        "output_structure_path": {
+            "type": "string",
+            "description": "Output structure file path."
+        },
+        "output_mapping_json_path": {
+            "type": "string",
+            "description": "Output mapping json file path."
+        },
+        "properties": {
+            "type": "object",
+            "properties": {
+                "renumber_residues": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Residue code of the ligand to be removed."
+                },
+                "renumber_residues_per_chain": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Restart residue enumeration every time a new chain is detected."
+                },
+                "remove_tmp": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "[WF property] Remove temporal files."
+                },
+                "restart": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "[WF property] Do not execute if output files exist."
+                }
+            }
+        }
+    },
+    "additionalProperties": false
+}

@@ -1,0 +1,41 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://bioexcel.eu/biobb_structure_utils/json_schemas/1.0/extract_atoms",
+    "title": "Class to remove the selected ligand atoms from a 3D structure.",
+    "type": "object",
+    "required": [
+        "input_structure_path",
+        "output_structure_path"
+    ],
+    "properties": {
+        "input_structure_path": {
+            "type": "string",
+            "description": "Input structure file path."
+        },
+        "output_structure_path": {
+            "type": "string",
+            "description": "Output structure file path."
+        },
+        "properties": {
+            "type": "object",
+            "properties": {
+                "regular_expression_pattern": {
+                    "type": "string",
+                    "default": "^D",
+                    "description": "Python style regular expression matching the selected atom names."
+                },
+                "remove_tmp": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "[WF property] Remove temporal files."
+                },
+                "restart": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "[WF property] Do not execute if output files exist."
+                }
+            }
+        }
+    },
+    "additionalProperties": false
+}

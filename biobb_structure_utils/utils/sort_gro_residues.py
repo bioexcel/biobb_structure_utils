@@ -19,7 +19,7 @@ class SortGroResidues():
         input_gro_path (str): Input GRO file path.
         output_gro_path (str): Output sorted GRO file path.
         properties (dic):
-            | - **residue_name_list** (*list*) - ("NA", "CL", "SOL") Ordered residue name list.
+            | - **residue_name_list** (*list*) - (["NA", "CL", "SOL"]) Ordered residue name list.
             | - **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             | - **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
     """

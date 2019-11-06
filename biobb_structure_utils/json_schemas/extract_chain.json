@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://bioexcel.eu/biobb_structure_utils/json_schemas/1.0/extract_chain",
+    "title": "Class to extract a chain from a 3D structure.",
+    "type": "object",
+    "required": [
+        "input_structure_path",
+        "output_structure_path"
+    ],
+    "properties": {
+        "input_structure_path": {
+            "type": "string",
+            "description": "Input structure file path.",
+            "enum": [
+                ".*\\.pdb$"
+            ]
+        },
+        "output_structure_path": {
+            "type": "string",
+            "description": "Output structure file path.",
+            "enum": [
+                ".*\\.pdb$"
+            ]
+        },
+        "properties": {
+            "type": "object",
+            "properties": {
+                "chains": {
+                    "type": "list",
+                    "default": null,
+                    "description": "List of chains to be extracted from the input_structure_path file. If empty, all the chains of the structure will be returned."
+                }
+            }
+        }
+    },
+    "additionalProperties": false
+}

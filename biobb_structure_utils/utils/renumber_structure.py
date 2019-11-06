@@ -22,7 +22,7 @@ class RenumberStructure:
         output_mapping_json_path (str): Output mapping json file path.
         properties (dic):
             | - **renumber_residues** (*bool*) - (True) Residue code of the ligand to be removed.
-            | - **renumber_residues_per_chain (*bool*) - (True) Restart residue enumeration every time a new chain is detected.
+            | - **renumber_residues_per_chain** (*bool*) - (True) Restart residue enumeration every time a new chain is detected.
             | - **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             | - **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
     """

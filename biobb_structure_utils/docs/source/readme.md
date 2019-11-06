@@ -4,12 +4,7 @@
 # biobb_structure_utils
 
 ### Introduction
-Biobb_model is the Biobb module collection to check and model 3d structures,
-create mutations or reconstruct missing atoms.
-Biobb (BioExcel building blocks) packages are Python building blocks that
-create new layer of compatibility and interoperability over popular
-bioinformatics tools.
-The latest documentation of this package can be found in our readthedocs site:
+Biobb_structure_utils is the Biobb module collection to modify or extract information from a PDB structure file, such as pulling out a particular model or chain, removing water molecules or ligands, or renumbering or sorting atoms or residues. Biobb (BioExcel building blocks) packages are Python building blocks that create new layer of compatibility and interoperability over popular bioinformatics tools. The latest documentation of this package can be found in our readthedocs site:
 [latest API documentation](https://biobb-structure-utils.readthedocs.io/en/latest/).
 
 ### Version

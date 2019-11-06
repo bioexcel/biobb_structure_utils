@@ -1,0 +1,27 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://bioexcel.eu/biobb_structure_utils/json_schemas/1.0/extract_protein",
+    "title": "Class to extract a protein from a 3D structure.",
+    "type": "object",
+    "required": [
+        "input_structure_path",
+        "output_protein_path"
+    ],
+    "properties": {
+        "input_structure_path": {
+            "type": "string",
+            "description": "Input structure file path.",
+            "enum": [
+                ".*\\.pdb$"
+            ]
+        },
+        "output_protein_path": {
+            "type": "string",
+            "description": "Output protein file path.",
+            "enum": [
+                ".*\\.pdb$"
+            ]
+        }
+    },
+    "additionalProperties": false
+}
