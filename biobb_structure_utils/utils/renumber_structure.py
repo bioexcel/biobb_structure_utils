@@ -14,7 +14,7 @@ from biobb_structure_utils.utils.common import PDB_SERIAL_RECORDS
 
 
 class RenumberStructure:
-    """Class to remove the selected ligand atoms from a 3D structure.
+    """Class to renumber atomic indexes from a 3D structure.
 
     Args:
         input_structure_path (str): Input structure file path.

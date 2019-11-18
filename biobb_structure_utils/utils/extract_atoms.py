@@ -13,7 +13,7 @@ from biobb_structure_utils.gro_lib.gro import Gro
 from biobb_structure_utils.utils.common import PDB_SERIAL_RECORDS
 
 class ExtractAtoms():
-    """Class to remove the selected ligand atoms from a 3D structure.
+    """Class to extract atoms from a 3D structure.
 
     Args:
         input_structure_path (str): Input structure file path.

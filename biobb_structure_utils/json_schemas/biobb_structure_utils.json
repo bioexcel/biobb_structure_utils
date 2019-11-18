@@ -16,7 +16,7 @@
         {
             "block" : "ExtractAtoms", 
             "tool" : "in house", 
-            "desc" : "Class to remove the selected ligand atoms from a 3D structure."
+            "desc" : "Class to extract atoms from a 3D structure."
         },
         {
             "block" : "ExtractChain", 
@@ -26,7 +26,7 @@
         {
             "block" : "ExtractHeteroAtoms", 
             "tool" : "in house using biopython", 
-            "desc" : "Small molecule parameterization for OPLS/AA MD package."
+            "desc" : "Class to extract hetero-atoms from a 3D structure."
         }, 
         {
             "block" : "ExtractModel", 
@@ -51,7 +51,7 @@
         {
             "block" : "RenumberStructure", 
             "tool" : "in house", 
-            "desc" : "Class to remove the selected ligand atoms from a 3D structure."
+            "desc" : "Class to renumber atomic indexes from a 3D structure."
         },
         {
             "block" : "SortGroResidues", 

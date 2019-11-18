@@ -13,7 +13,7 @@ from Bio.PDB.PDBIO import PDBIO
 from biobb_structure_utils.utils.common import *
 
 class ExtractHeteroAtoms():
-    """Class to extract a list of heteroatoms from a 3D structure.
+    """Class to extract hetero-atoms from a 3D structure.
 
     Args:
         input_structure_path (str): Input structure file path. Accepted formats: pdb.
