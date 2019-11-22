@@ -3,7 +3,6 @@
 """Module containing the ExtractChain class and the command line interface."""
 import argparse
 import re
-from pathlib import Path
 from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger

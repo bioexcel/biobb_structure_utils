@@ -2,13 +2,13 @@
 
 """Module containing the RemoveLigand class and the command line interface."""
 import argparse
-from pathlib import Path
 import Bio.PDB
 from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
 from biobb_common.command_wrapper import cmd_wrapper
 from biobb_structure_utils.gro_lib.gro import Gro
+from biobb_structure_utils.utils.common import *
 
 class RemoveLigand():
     """Class to remove the selected ligand atoms from a 3D structure.
