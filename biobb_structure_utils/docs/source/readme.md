@@ -1,4 +1,6 @@
-[![Documentation Status](https://readthedocs.org/projects/biobb-structure-utils/badge/?version=latest)](https://biobb-structure-utils.readthedocs.io/en/latest/?badge=latest)
+[![](https://readthedocs.org/projects/biobb-structure-utils/badge/?version=latest)](https://biobb-structure-utils.readthedocs.io/en/latest/?badge=latest)
+[![](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat)](https://anaconda.org/bioconda/biobb_structure_utils)
+[![](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 
 # biobb_structure_utils

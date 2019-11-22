@@ -3,7 +3,7 @@
     "desc" : "Biobb_structure_utils is the Biobb module collection to modify or extract information from a PDB structure file.", 
     "github" : "https://github.com/bioexcel/biobb_structure_utils", 
     "readthedocs" : "https://biobb-structure-utils.readthedocs.io/en/latest/", 
-    "conda" : "", 
+    "conda" : "https://anaconda.org/bioconda/biobb_structure_utils", 
     "docker" : "", 
     "singularity" : "", 
     "version" : "2.0.0",
