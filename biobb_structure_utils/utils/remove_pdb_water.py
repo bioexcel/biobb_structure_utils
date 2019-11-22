@@ -2,7 +2,6 @@
 
 """Module containing the RemovePdbWater class and the command line interface."""
 import argparse
-import re
 import Bio.PDB
 from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
