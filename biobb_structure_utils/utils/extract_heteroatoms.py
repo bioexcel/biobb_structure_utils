@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 
 """Module containing the ExtractHeteroAtoms class and the command line interface."""
-"""import argparse
-import re
+import argparse
 from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
 from Bio import BiopythonWarning
 from Bio.PDB.PDBParser import PDBParser
 from Bio.PDB.PDBIO import PDBIO
-from biobb_structure_utils.utils.common import *"""
+from biobb_structure_utils.utils.common import *
 
 class ExtractHeteroAtoms():
     """Class to extract hetero-atoms from a 3D structure.
