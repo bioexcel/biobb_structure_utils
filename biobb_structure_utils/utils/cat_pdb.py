@@ -14,6 +14,9 @@ class CatPDB():
         input_structure1 (str): Input structure 1 file path. Accepted formats: pdb.
         input_structure2 (str): Input structure 2 file path. Accepted formats: pdb.
         output_structure_path (str): Output protein file path. Accepted formats: pdb.
+        properties (dic):
+            * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
+            * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
     """
 
     def __init__(self, input_structure1, input_structure2, output_structure_path, properties=None, **kwargs):

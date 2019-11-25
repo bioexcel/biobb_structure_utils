@@ -14,6 +14,9 @@ class ExtractProtein():
     Args:
         input_structure_path (str): Input structure file path. Accepted formats: pdb.
         output_protein_path (str): Output protein file path. Accepted formats: pdb.
+        properties (dic):
+            * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
+            * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
     """
 
     def __init__(self, input_structure_path, output_protein_path, properties=None, **kwargs):

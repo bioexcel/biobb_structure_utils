@@ -1,5 +1,6 @@
 [![](https://readthedocs.org/projects/biobb-structure-utils/badge/?version=latest)](https://biobb-structure-utils.readthedocs.io/en/latest/?badge=latest)
 [![](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat)](https://anaconda.org/bioconda/biobb_structure_utils)
+[![](https://quay.io/repository/biocontainers/biobb_io/status)](https://hub.docker.com/r/mmbirb/biobb_structure_utils)
 [![](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 
@@ -11,6 +12,42 @@ Biobb_structure_utils is the Biobb module collection to modify or extract inform
 
 ### Version
 v2.0.0 2019.4
+
+### Installation
+Using PIP:
+* Installation:
+
+
+        pip install "biobb_structure_utils>=2.0.0"
+
+
+* Usage: [Python API documentation](https://biobb-structure-utils.readthedocs.io/en/latest/modules.html)
+
+Using ANACONDA:
+
+* Installation:
+
+
+        conda install -c bioconda "biobb_structure_utils>=2.0.0"
+
+
+* Usage: With conda installation BioBBs can be used with the [Python API documentation](https://biobb-structure-utils.readthedocs.io/en/latest/modules.html) and the [Command Line documentation](https://biobb-structure-utils.readthedocs.io/en/latest/command_line.html)
+
+Using DOCKER:
+
+* Installation:
+
+
+        docker pull mmbirb/biobb_structure_utils:latest
+
+
+* Usage:
+
+
+        docker run mmbirb/biobb_structure_utils:latest <command>
+
+
+The command list and specification can be found at the [Command Line documentation](https://biobb-structure-utils.readthedocs.io/en/latest/command_line.html).
 
 ### Copyright & Licensing
 This software has been developed in the [MMB group](http://mmb.irbbarcelona.org) at the [BSC](http://www.bsc.es/) & [IRB](https://www.irbbarcelona.org/) for the [European BioExcel](http://bioexcel.eu/), funded by the European Commission (EU H2020 [823830](http://cordis.europa.eu/projects/823830), EU H2020 [675728](http://cordis.europa.eu/projects/675728)).

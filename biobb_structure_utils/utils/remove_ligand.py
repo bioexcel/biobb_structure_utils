@@ -20,6 +20,8 @@ class RemoveLigand():
             | - **ligand** (*str*) - ("AQ4") Residue code of the ligand to be removed.
             | - **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             | - **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+            | - **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
+            | - **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
     """
 

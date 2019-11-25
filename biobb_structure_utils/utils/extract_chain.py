@@ -16,6 +16,8 @@ class ExtractChain():
         output_structure_path (str): Output structure file path. Accepted formats: pdb.
         properties (dic):
             * **chains** (*list*) - (None) List of chains to be extracted from the input_structure_path file. If empty, all the chains of the structure will be returned.
+            * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
+            * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
     """
 
     def __init__(self, input_structure_path, output_structure_path, properties=None, **kwargs):

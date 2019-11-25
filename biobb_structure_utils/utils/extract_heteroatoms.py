@@ -18,6 +18,8 @@ class ExtractHeteroAtoms():
         output_heteroatom_path (str): Output heteroatom file path. Accepted formats: pdb.
         properties (dic):
             * **heteroatoms** (*list*) - (None) List of dictionaries with the name | res_id | chain | model of the heteroatoms to be extracted. Format: [{"name": "ZZ7", "res_id": "302", "chain": "B", "model": "1"}]. If empty, all the heteroatoms of the structure will be returned.
+            * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
+            * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
     """
 
     def __init__(self, input_structure_path, output_heteroatom_path, properties=None, **kwargs):
