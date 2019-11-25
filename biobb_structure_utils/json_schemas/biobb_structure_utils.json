@@ -5,7 +5,7 @@
     "readthedocs" : "https://biobb-structure-utils.readthedocs.io/en/latest/", 
     "conda" : "https://anaconda.org/bioconda/biobb_structure_utils", 
     "docker" : "https://hub.docker.com/r/mmbirb/biobb_structure_utils", 
-    "singularity" : "https://singularity-hub.org/collections/3836", 
+    "singularity" : "https://singularity-hub.org/collections/3836/usage", 
     "version" : "2.0.0",
     "tools" : [
         {
