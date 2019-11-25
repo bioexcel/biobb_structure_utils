@@ -4,8 +4,8 @@
     "github" : "https://github.com/bioexcel/biobb_structure_utils", 
     "readthedocs" : "https://biobb-structure-utils.readthedocs.io/en/latest/", 
     "conda" : "https://anaconda.org/bioconda/biobb_structure_utils", 
-    "docker" : "", 
-    "singularity" : "", 
+    "docker" : "https://hub.docker.com/r/mmbirb/biobb_structure_utils", 
+    "singularity" : "https://singularity-hub.org/collections/3836", 
     "version" : "2.0.0",
     "tools" : [
         {
