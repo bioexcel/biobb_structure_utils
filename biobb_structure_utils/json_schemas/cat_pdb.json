@@ -29,6 +29,21 @@
             "enum": [
                 ".*\\.pdb$"
             ]
+        },
+        "properties": {
+            "type": "object",
+            "properties": {
+                "remove_tmp": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "[WF property] Remove temporal files."
+                },
+                "restart": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "[WF property] Do not execute if output files exist."
+                }
+            }
         }
     },
     "additionalProperties": false
