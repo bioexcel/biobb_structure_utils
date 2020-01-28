@@ -14,8 +14,8 @@ class RemoveLigand():
     """Class to remove the selected ligand atoms from a 3D structure.
 
     Args:
-        input_structure_path (str): Input structure file path.
-        output_structure_path (str): Output structure file path.
+        input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/WT_aq4_md_1.pdb>`_. Accepted formats: pdb, gro.
+        output_structure_path (str): Output structure file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/WT_apo_md_1.pdb>`_. Accepted formats: pdb, gro.
         properties (dic):
             | - **ligand** (*str*) - ("AQ4") Residue code of the ligand to be removed.
             | - **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.

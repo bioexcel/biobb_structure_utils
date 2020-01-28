@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "http://bioexcel.eu/biobb_structure_utils/json_schemas/1.0/cat_pdb",
-    "title": "Class to concat two PDB structures in a single PDB file",
+    "title": "Class to concat two PDB structures in a single PDB file.",
     "type": "object",
     "required": [
         "input_structure1",
@@ -11,21 +11,27 @@
     "properties": {
         "input_structure1": {
             "type": "string",
-            "description": "Input structure 1 file path.",
+            "description": "Input structure 1 file path",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/cat_protein.pdb",
             "enum": [
                 ".*\\.pdb$"
             ]
         },
         "input_structure2": {
             "type": "string",
-            "description": "Input structure 2 file path.",
+            "description": "Input structure 2 file path",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/cat_ligand.pdb",
             "enum": [
                 ".*\\.pdb$"
             ]
         },
         "output_structure_path": {
             "type": "string",
-            "description": "Output protein file path.",
+            "description": "Output protein file path",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_cat_pdb.pdb",
             "enum": [
                 ".*\\.pdb$"
             ]

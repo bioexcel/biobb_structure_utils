@@ -11,15 +11,32 @@
     "properties": {
         "input_structure_path": {
             "type": "string",
-            "description": "Input structure file path."
+            "description": "Input structure file path",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/cl3.noH.pdb",
+            "enum": [
+                ".*\\.pdb$",
+                ".*\\.gro$"
+            ]
         },
         "output_structure_path": {
             "type": "string",
-            "description": "Output structure file path."
+            "description": "Output structure file path",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/renum_cl3_noH.pdb",
+            "enum": [
+                ".*\\.pdb$",
+                ".*\\.gro$"
+            ]
         },
         "output_mapping_json_path": {
             "type": "string",
-            "description": "Output mapping json file path."
+            "description": "Output mapping json file path",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/cl3_output_mapping_json_path.json",
+            "enum": [
+                ".*\\.json$"
+            ]
         },
         "properties": {
             "type": "object",

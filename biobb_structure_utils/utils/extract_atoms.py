@@ -14,8 +14,8 @@ class ExtractAtoms():
     """Class to extract atoms from a 3D structure.
 
     Args:
-        input_structure_path (str): Input structure file path.
-        output_structure_path (str): Output structure file path.
+        input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/2vgb.pdb>`_. Accepted formats: pdb, gro.
+        output_structure_path (str): Output structure file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/OE2_atoms.pdb>`_. Accepted formats: pdb, gro.
         properties (dic):
             * **regular_expression_pattern** (*str*) - ("^D") Python style regular expression matching the selected atom names.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.

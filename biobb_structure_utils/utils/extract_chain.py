@@ -12,8 +12,8 @@ class ExtractChain():
     """Class to extract a chain from a 3D structure.
 
     Args:
-        input_structure_path (str): Input structure file path. Accepted formats: pdb.
-        output_structure_path (str): Output structure file path. Accepted formats: pdb.
+        input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_chain.pdb>`_. Accepted formats: pdb.
+        output_structure_path (str): Output structure file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_chain.pdb>`_. Accepted formats: pdb.
         properties (dic):
             * **chains** (*list*) - (None) List of chains to be extracted from the input_structure_path file. If empty, all the chains of the structure will be returned.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.

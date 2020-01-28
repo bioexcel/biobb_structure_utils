@@ -10,11 +10,21 @@
     "properties": {
         "input_gro_path": {
             "type": "string",
-            "description": "Input GRO file path."
+            "description": "Input GRO file path",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/WT_aq4_md_1.gro",
+            "enum": [
+                ".*\\.gro$"
+            ]
         },
         "output_gro_path": {
             "type": "string",
-            "description": "Output sorted GRO file path."
+            "description": "Output sorted GRO file path",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/WT_aq4_md_sorted.gro",
+            "enum": [
+                ".*\\.gro$"
+            ]
         },
         "properties": {
             "type": "object",

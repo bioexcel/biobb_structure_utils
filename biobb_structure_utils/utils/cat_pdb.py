@@ -11,9 +11,9 @@ class CatPDB():
     """Class to concat two PDB structures in a single PDB file.
 
     Args:
-        input_structure1 (str): Input structure 1 file path. Accepted formats: pdb.
-        input_structure2 (str): Input structure 2 file path. Accepted formats: pdb.
-        output_structure_path (str): Output protein file path. Accepted formats: pdb.
+        input_structure1 (str): Input structure 1 file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/cat_protein.pdb>`_. Accepted formats: pdb.
+        input_structure2 (str): Input structure 2 file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/cat_ligand.pdb>`_. Accepted formats: pdb.
+        output_structure_path (str): Output protein file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_cat_pdb.pdb>`_. Accepted formats: pdb.
         properties (dic):
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.

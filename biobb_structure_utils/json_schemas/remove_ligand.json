@@ -10,11 +10,23 @@
     "properties": {
         "input_structure_path": {
             "type": "string",
-            "description": "Input structure file path."
+            "description": "Input structure file path",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/WT_aq4_md_1.pdb",
+            "enum": [
+                ".*\\.pdb$",
+                ".*\\.gro$"
+            ]
         },
         "output_structure_path": {
             "type": "string",
-            "description": "Output structure file path."
+            "description": "Output structure file path",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/WT_apo_md_1.pdb",
+            "enum": [
+                ".*\\.pdb$",
+                ".*\\.gro$"
+            ]
         },
         "properties": {
             "type": "object",

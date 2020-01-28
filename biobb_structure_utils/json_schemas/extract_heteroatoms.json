@@ -10,14 +10,18 @@
     "properties": {
         "input_structure_path": {
             "type": "string",
-            "description": "Input structure file path.",
+            "description": "Input structure file path",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_heteroatom.pdb",
             "enum": [
                 ".*\\.pdb$"
             ]
         },
         "output_heteroatom_path": {
             "type": "string",
-            "description": "Output heteroatom file path.",
+            "description": "Output heteroatom file path",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_heteroatom.pdb",
             "enum": [
                 ".*\\.pdb$"
             ]

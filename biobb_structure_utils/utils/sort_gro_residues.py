@@ -16,8 +16,8 @@ class SortGroResidues():
     """Class to sort the selected residues from a GRO 3D structure.
 
     Args:
-        input_gro_path (str): Input GRO file path.
-        output_gro_path (str): Output sorted GRO file path.
+        input_gro_path (str): Input GRO file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/WT_aq4_md_1.gro>`_. Accepted formats: gro.
+        output_gro_path (str): Output sorted GRO file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/WT_aq4_md_sorted.gro>`_. Accepted formats: gro.
         properties (dic):
             | - **residue_name_list** (*list*) - (["NA", "CL", "SOL"]) Ordered residue name list.
             | - **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.

@@ -10,11 +10,21 @@
     "properties": {
         "input_pdb_path": {
             "type": "string",
-            "description": "Input PDB file path."
+            "description": "Input PDB file path",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/WT_aq4_md_WAT.pdb",
+            "enum": [
+                ".*\\.pdb$"
+            ]
         },
         "output_pdb_path": {
             "type": "string",
-            "description": "Output PDB file path."
+            "description": "Output PDB file path",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/WT_apo_no_wat.pdb",
+            "enum": [
+                ".*\\.pdb$"
+            ]
         },
         "properties": {
             "type": "object",

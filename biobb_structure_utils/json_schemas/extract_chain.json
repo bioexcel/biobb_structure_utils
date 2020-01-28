@@ -10,14 +10,18 @@
     "properties": {
         "input_structure_path": {
             "type": "string",
-            "description": "Input structure file path.",
+            "description": "Input structure file path",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_chain.pdb",
             "enum": [
                 ".*\\.pdb$"
             ]
         },
         "output_structure_path": {
             "type": "string",
-            "description": "Output structure file path.",
+            "description": "Output structure file path",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_chain.pdb",
             "enum": [
                 ".*\\.pdb$"
             ]

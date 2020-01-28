@@ -13,8 +13,8 @@ class ExtractModel():
     """Class to extract a model from a 3D structure.
 
     Args:
-        input_structure_path (str): Input structure file path. Accepted formats: pdb.
-        output_structure_path (str): Output structure file path. Accepted formats: pdb.
+        input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_model.pdb>`_. Accepted formats: pdb.
+        output_structure_path (str): Output structure file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_model.pdb>`_. Accepted formats: pdb.
         properties (dic):
             * **models** (*list*) - (None) List of models to be extracted from the input_structure_path file. If empty, all the models of the structure will be returned.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.

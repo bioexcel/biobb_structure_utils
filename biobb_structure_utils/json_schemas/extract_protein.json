@@ -10,14 +10,18 @@
     "properties": {
         "input_structure_path": {
             "type": "string",
-            "description": "Input structure file path.",
+            "description": "Input structure file path",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_protein.pdb",
             "enum": [
                 ".*\\.pdb$"
             ]
         },
         "output_protein_path": {
             "type": "string",
-            "description": "Output protein file path.",
+            "description": "Output protein file path",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_protein.pdb",
             "enum": [
                 ".*\\.pdb$"
             ]
