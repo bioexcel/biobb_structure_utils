@@ -4,7 +4,7 @@ from biobb_structure_utils.utils.extract_atoms import ExtractAtoms
 
 class TestExtractAtomsPDB():
     def setUp(self):
-        fx.test_setup(self, 'extract_atoms_pdb')
+        fx.test_setup(self, 'extract_atoms')
 
     def tearDown(self):
         pass

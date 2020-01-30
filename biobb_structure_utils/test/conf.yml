@@ -1,6 +1,6 @@
 working_dir_path: /tmp/biobb/unitests
 
-remove_ligand_pdb:
+remove_ligand:
   paths:
     input_structure_path: file:test_data_dir/utils/WT_aq4_md_1.pdb
     output_structure_path: output_structure_path.pdb
@@ -17,7 +17,7 @@ remove_ligand_gro:
     ligand: 'AQ4'
 
 
-renumber_structure_pdb:
+renumber_structure:
   paths:
     input_structure_path: file:test_data_dir/utils/cl3.noH.pdb
     output_structure_path: output_structure_path.pdb
@@ -65,7 +65,7 @@ extract_atoms_gro:
   properties:
     regular_expression_pattern: ^D
 
-extract_atoms_pdb:
+extract_atoms:
   paths:
     input_structure_path: file:test_data_dir/utils/2vgb.pdb
     output_structure_path: output_structure_path.pdb

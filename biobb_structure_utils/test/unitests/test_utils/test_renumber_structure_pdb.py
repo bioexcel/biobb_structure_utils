@@ -4,7 +4,7 @@ from biobb_structure_utils.utils.renumber_structure import RenumberStructure
 
 class TestRenumberStructurePDB():
     def setUp(self):
-        fx.test_setup(self, 'renumber_structure_pdb')
+        fx.test_setup(self, 'renumber_structure')
 
     def tearDown(self):
         pass
