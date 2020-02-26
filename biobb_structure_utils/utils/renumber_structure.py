@@ -116,8 +116,6 @@ def main():
     """Command line interface."""
     parser = argparse.ArgumentParser(description="Renumber atoms and residues from a 3D structure.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
     parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
-    parser.add_argument('--system', required=False, help="Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help")
-    parser.add_argument('--step', required=False, help="Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help")
 
     #Specific args of each building block
     required_args = parser.add_argument_group('required arguments')
@@ -125,15 +123,14 @@ def main():
     required_args.add_argument('-o', '--output_structure_path', required=True, help="Output structure file name")
     required_args.add_argument('-j', '--output_mapping_json_path', required=True, help="Output mapping json file name")
 
-
     args = parser.parse_args()
     config = args.config if args.config else None
-    properties = settings.ConfReader(config=config, system=args.system).get_prop_dic()
-    if args.step:
-        properties = properties[args.step]
+    properties = settings.ConfReader(config=config).get_prop_dic()
 
     #Specific call of each building block
-    RenumberStructure(input_structure_path=args.input_structure_path, output_structure_path=args.output_structure_path, output_mapping_json_path=args.output_mapping_json_path, properties=properties).launch()
+    RenumberStructure(input_structure_path=args.input_structure_path, output_structure_path=args.output_structure_path, 
+                      output_mapping_json_path=args.output_mapping_json_path, 
+                      properties=properties).launch()
 
 if __name__ == '__main__':
     main()

@@ -1,14 +1,11 @@
-
 # BioBB Structure Utils Command Line Help
 
 Generic usage:
 
 
 ```python
-biobb_command [-h] --config CONFIG [--system SYSTEM] [--step STEP] --input_file(s) <input_file(s)> --output_file <output_file>
+biobb_command [-h] --config CONFIG --input_file(s) <input_file(s)> --output_file <output_file>
 ```
-
-Please refer to the system & step documentation for more information of these two parameters.
 
 -----------------
 
@@ -27,7 +24,7 @@ cat_pdb -h
 
 
 ```python
-usage: cat_pdb [-h] [-c CONFIG] [--system SYSTEM] [--step STEP] -i1 INPUT_STRUCTURE1 -i2 INPUT_STRUCTURE2 -o OUTPUT_STRUCTURE_PATH
+usage: cat_pdb [-h] [-c CONFIG] -i1 INPUT_STRUCTURE1 -i2 INPUT_STRUCTURE2 -o OUTPUT_STRUCTURE_PATH
 
 Concat two PDB structures in a single PDB file.
 
@@ -35,8 +32,6 @@ optional arguments:
   -h, --help            show this help message and exit
   -c CONFIG, --config CONFIG
                         This file can be a YAML file, JSON file or JSON string
-  --system SYSTEM       Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help
-  --step STEP           Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help
 
 required arguments:
   -i1 INPUT_STRUCTURE1, --input_structure1 INPUT_STRUCTURE1
@@ -88,7 +83,7 @@ extract_atoms -h
 
 
 ```python
-usage: extract_atoms [-h] [-c CONFIG] [--system SYSTEM] [--step STEP] -i INPUT_STRUCTURE_PATH -o OUTPUT_STRUCTURE_PATH
+usage: extract_atoms [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_STRUCTURE_PATH
 
 Remove the selected ligand atoms from a 3D structure.
 
@@ -96,8 +91,6 @@ optional arguments:
   -h, --help            show this help message and exit
   -c CONFIG, --config CONFIG
                         This file can be a YAML file, JSON file or JSON string
-  --system SYSTEM       Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help
-  --step STEP           Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help
 
 required arguments:
   -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
@@ -175,7 +168,7 @@ extract_chain -h
 
 
 ```python
-usage: extract_chain [-h] [-c CONFIG] [--system SYSTEM] [--step STEP] -i INPUT_STRUCTURE_PATH -o OUTPUT_STRUCTURE_PATH
+usage: extract_chain [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_STRUCTURE_PATH
 
 Extract a chain from a 3D structure.
 
@@ -183,8 +176,6 @@ optional arguments:
   -h, --help            show this help message and exit
   -c CONFIG, --config CONFIG
                         This file can be a YAML file, JSON file or JSON string
-  --system SYSTEM       Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help
-  --step STEP           Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help
 
 required arguments:
   -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
@@ -262,7 +253,7 @@ extract_heteroatoms -h
 
 
 ```python
-usage: extract_heteroatoms [-h] [-c CONFIG] [--system SYSTEM] [--step STEP] -i INPUT_STRUCTURE_PATH -o OUTPUT_HETEROATOM_PATH
+usage: extract_heteroatoms [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_HETEROATOM_PATH
 
 Extract a list of heteroatoms from a 3D structure.
 
@@ -270,8 +261,6 @@ optional arguments:
   -h, --help            show this help message and exit
   -c CONFIG, --config CONFIG
                         This file can be a YAML file, JSON file or JSON string
-  --system SYSTEM       Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help
-  --step STEP           Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help
 
 required arguments:
   -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
@@ -363,7 +352,7 @@ extract_model -h
 
 
 ```python
-usage: extract_model [-h] [-c CONFIG] [--system SYSTEM] [--step STEP] -i INPUT_STRUCTURE_PATH -o OUTPUT_STRUCTURE_PATH
+usage: extract_model [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_STRUCTURE_PATH
 
 Extract a model from a 3D structure.
 
@@ -371,8 +360,6 @@ optional arguments:
   -h, --help            show this help message and exit
   -c CONFIG, --config CONFIG
                         This file can be a YAML file, JSON file or JSON string
-  --system SYSTEM       Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help
-  --step STEP           Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help
 
 required arguments:
   -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
@@ -450,7 +437,7 @@ extract_protein -h
 
 
 ```python
-usage: extract_protein [-h] [-c CONFIG] [--system SYSTEM] [--step STEP] -i INPUT_STRUCTURE_PATH -o OUTPUT_PROTEIN_PATH
+usage: extract_protein [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_PROTEIN_PATH
 
 Extract a protein from a 3D structure.
 
@@ -458,8 +445,6 @@ optional arguments:
   -h, --help            show this help message and exit
   -c CONFIG, --config CONFIG
                         This file can be a YAML file, JSON file or JSON string
-  --system SYSTEM       Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help
-  --step STEP           Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help
 
 required arguments:
   -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
@@ -508,7 +493,7 @@ remove_ligand -h
 
 
 ```python
-usage: remove_ligand [-h] [-c CONFIG] [--system SYSTEM] [--step STEP] -i INPUT_STRUCTURE_PATH -o OUTPUT_STRUCTURE_PATH
+usage: remove_ligand [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_STRUCTURE_PATH
 
 Remove the selected ligand atoms from a 3D structure.
 
@@ -516,8 +501,6 @@ optional arguments:
   -h, --help            show this help message and exit
   -c CONFIG, --config CONFIG
                         This file can be a YAML file, JSON file or JSON string
-  --system SYSTEM       Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help
-  --step STEP           Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help
 
 required arguments:
   -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
@@ -597,7 +580,7 @@ remove_pdb_water -h
 
 
 ```python
-usage: remove_pdb_water [-h] [-c CONFIG] [--system SYSTEM] [--step STEP] -i INPUT_PDB_PATH -o OUTPUT_PDB_PATH
+usage: remove_pdb_water [-h] [-c CONFIG] -i INPUT_PDB_PATH -o OUTPUT_PDB_PATH
 
 Remove the water molecules from a PDB 3D structure.
 
@@ -605,8 +588,6 @@ optional arguments:
   -h, --help            show this help message and exit
   -c CONFIG, --config CONFIG
                         This file can be a YAML file, JSON file or JSON string
-  --system SYSTEM       Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help
-  --step STEP           Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help
 
 required arguments:
   -i INPUT_PDB_PATH, --input_pdb_path INPUT_PDB_PATH
@@ -655,7 +636,7 @@ renumber_structure -h
 
 
 ```python
-usage: renumber_structure [-h] [-c CONFIG] [--system SYSTEM] [--step STEP] -i INPUT_STRUCTURE_PATH -o OUTPUT_STRUCTURE_PATH -j OUTPUT_MAPPING_JSON_PATH
+usage: renumber_structure [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_STRUCTURE_PATH -j OUTPUT_MAPPING_JSON_PATH
 
 Renumber atoms and residues from a 3D structure.
 
@@ -663,8 +644,6 @@ optional arguments:
   -h, --help            show this help message and exit
   -c CONFIG, --config CONFIG
                         This file can be a YAML file, JSON file or JSON string
-  --system SYSTEM       Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help
-  --step STEP           Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help
 
 required arguments:
   -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
@@ -718,7 +697,7 @@ sort_gro_residues -h
 
 
 ```python
-usage: sort_gro_residues [-h] [-c CONFIG] [--system SYSTEM] [--step STEP] -i INPUT_GRO_PATH -o OUTPUT_GRO_PATH
+usage: sort_gro_residues [-h] [-c CONFIG] -i INPUT_GRO_PATH -o OUTPUT_GRO_PATH
 
 Renumber atoms and residues from a 3D structure.
 
@@ -726,8 +705,6 @@ optional arguments:
   -h, --help            show this help message and exit
   -c CONFIG, --config CONFIG
                         This file can be a YAML file, JSON file or JSON string
-  --system SYSTEM       Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help
-  --step STEP           Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help
 
 required arguments:
   -i INPUT_GRO_PATH, --input_gro_path INPUT_GRO_PATH

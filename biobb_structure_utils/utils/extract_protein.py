@@ -107,8 +107,6 @@ def main():
     """Command line interface."""
     parser = argparse.ArgumentParser(description="Extract a protein from a 3D structure.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
     parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
-    parser.add_argument('--system', required=False, help="Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help")
-    parser.add_argument('--step', required=False, help="Check 'https://biobb-common.readthedocs.io/en/latest/system_step.html' for help")
 
     #Specific args of each building block
     required_args = parser.add_argument_group('required arguments')
@@ -117,12 +115,11 @@ def main():
 
     args = parser.parse_args()
     config = args.config if args.config else None
-    properties = settings.ConfReader(config=config, system=args.system).get_prop_dic()
-    if args.step:
-        properties = properties[args.step]
+    properties = settings.ConfReader(config=config).get_prop_dic()
 
     #Specific call of each building block
-    ExtractProtein(input_structure_path=args.input_structure_path, output_protein_path=args.output_protein_path, properties=properties).launch()
+    ExtractProtein(input_structure_path=args.input_structure_path, output_protein_path=args.output_protein_path, 
+                   properties=properties).launch()
 
 if __name__ == '__main__':
     main()
