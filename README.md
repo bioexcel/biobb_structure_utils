@@ -39,13 +39,13 @@ Using DOCKER:
 * Installation:
 
 
-        docker pull quay.io/biocontainers/biobb_structure_utils:2.0.1--py_0
+        docker pull quay.io/biocontainers/biobb_structure_utils:2.0.0--py_0
 
 
 * Usage:
 
 
-        docker run quay.io/biocontainers/biobb_structure_utils:2.0.1--py_0 <command>
+        docker run quay.io/biocontainers/biobb_structure_utils:2.0.0--py_0 <command>
 
 Using SINGULARITY:
 
