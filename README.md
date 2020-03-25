@@ -15,7 +15,9 @@ Biobb_structure_utils is the Biobb module collection to modify or extract inform
 v2.0.0 2019.4
 
 ### Installation
+
 Using PIP:
+
 * Installation:
 
 
@@ -48,6 +50,8 @@ Using DOCKER:
         docker run quay.io/biocontainers/biobb_structure_utils:2.0.0--py_0 <command>
 
 Using SINGULARITY:
+
+**MacOS users**: it's strongly recommended to avoid Singularity and use **Docker** as containerization system.
 
 * Installation:
 
