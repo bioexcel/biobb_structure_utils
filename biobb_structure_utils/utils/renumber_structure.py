@@ -26,7 +26,8 @@ class RenumberStructure:
             | - **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
     """
 
-    def __init__(self, input_structure_path, output_structure_path, output_mapping_json_path, properties=None, **kwargs):
+    def __init__(self, input_structure_path, 
+                 output_structure_path, output_mapping_json_path, properties=None, **kwargs) -> None:
         properties = properties or {}
 
         # Input/Output files
@@ -51,7 +52,7 @@ class RenumberStructure:
         fu.check_properties(self, properties)
 
     @launchlogger
-    def launch(self):
+    def launch(self) -> int:
         """renumber atoms in the structure."""
         tmp_files = []
 

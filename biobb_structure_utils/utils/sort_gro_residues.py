@@ -24,7 +24,8 @@ class SortGroResidues():
             | - **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
     """
 
-    def __init__(self, input_gro_path, output_gro_path, properties=None, **kwargs):
+    def __init__(self, input_gro_path, 
+                 output_gro_path, properties=None, **kwargs) -> None:
         properties = properties or {}
 
         # Input/Output files
@@ -47,7 +48,7 @@ class SortGroResidues():
         fu.check_properties(self, properties)
 
     @launchlogger
-    def launch(self):
+    def launch(self) -> int:
         """Sort residues in GRO structure."""
         tmp_files = []
 

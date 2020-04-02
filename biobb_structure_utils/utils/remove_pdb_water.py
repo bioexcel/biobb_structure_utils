@@ -22,7 +22,8 @@ class RemovePdbWater:
 
     """
 
-    def __init__(self, input_pdb_path, output_pdb_path, properties=None, **kwargs):
+    def __init__(self, input_pdb_path, 
+                 output_pdb_path, properties=None, **kwargs) -> None:
         properties = properties or {}
 
         # Input/Output files
@@ -45,7 +46,7 @@ class RemovePdbWater:
         fu.check_properties(self, properties)
 
     @launchlogger
-    def launch(self):
+    def launch(self) -> int:
         """Remove water molecules."""
         tmp_files = []
 

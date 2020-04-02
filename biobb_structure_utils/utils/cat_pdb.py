@@ -19,7 +19,8 @@ class CatPDB():
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
     """
 
-    def __init__(self, input_structure1, input_structure2, output_structure_path, properties=None, **kwargs):
+    def __init__(self, input_structure1, input_structure2, 
+                 output_structure_path, properties=None, **kwargs) -> None:
         properties = properties or {}
 
         # Input/Output files
@@ -47,7 +48,7 @@ class CatPDB():
         self.output_structure_path = check_output_path(self.output_structure_path, out_log, self.__class__.__name__)
 
     @launchlogger
-    def launch(self):
+    def launch(self) -> int:
         """Remove ligand atoms from the structure."""
         tmp_files = []
 

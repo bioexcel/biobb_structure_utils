@@ -22,7 +22,8 @@ class ExtractHeteroAtoms():
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
     """
 
-    def __init__(self, input_structure_path, output_heteroatom_path, properties=None, **kwargs):
+    def __init__(self, input_structure_path, 
+                 output_heteroatom_path, properties=None, **kwargs) -> None:
         properties = properties or {}
 
         # Input/Output files
@@ -70,7 +71,7 @@ class ExtractHeteroAtoms():
 
 
     @launchlogger
-    def launch(self):
+    def launch(self) -> int:
         """Remove ligand atoms from the structure."""
         tmp_files = []
 
