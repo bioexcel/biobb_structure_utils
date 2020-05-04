@@ -48,9 +48,9 @@ Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
 
-* **input_structure1** (*str*): Input structure 1 file path. Accepted formats: pdb.
-* **input_structure2** (*str*): Input structure 2 file path. Accepted formats: pdb.
-* **output_structure_path** (*str*): Output protein file path. Accepted formats: pdb.
+* **input_structure1** (*str*): Input structure 1 file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/cat_protein.pdb). Accepted formats: pdb.
+* **input_structure2** (*str*): Input structure 2 file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/cat_ligand.pdb). Accepted formats: pdb.
+* **output_structure_path** (*str*): Output protein file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_cat_pdb.pdb). Accepted formats: pdb.
 
 ### Config
 
@@ -105,8 +105,8 @@ Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
 
-* **input_structure_path** (*str*): Input structure file path.
-* **output_structure_path** (*str*): Output structure file path.
+* **input_structure_path** (*str*): Input structure file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/2vgb.pdb). Accepted formats: pdb, gro.
+* **output_structure_path** (*str*): Output structure file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/OE2_atoms.pdb). Accepted formats: pdb, gro.
 
 ### Config
 
@@ -190,8 +190,8 @@ Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
 
-* **input_structure_path** (*str*): Input structure file path. Accepted formats: pdb.
-* **output_structure_path** (*str*): Output structure file path. Accepted formats: pdb.
+* **input_structure_path** (*str*): Input structure file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_chain.pdb). Accepted formats: pdb.
+* **output_structure_path** (*str*): Output structure file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_chain.pdb). Accepted formats: pdb.
 
 ### Config
 
@@ -275,8 +275,8 @@ Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
 
-* **input_structure_path** (*str*): Input structure file path. Accepted formats: pdb.
-* **output_heteroatom_path** (*str*): Output heteroatom file path. Accepted formats: pdb.
+* **input_structure_path** (*str*): Input structure file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_heteroatom.pdb). Accepted formats: pdb.
+* **output_heteroatom_path** (*str*): Output heteroatom file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_heteroatom.pdb). Accepted formats: pdb.
 
 ### Config
 
@@ -374,8 +374,8 @@ Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
 
-* **input_structure_path** (*str*): Input structure file path. Accepted formats: pdb.
-* **output_structure_path** (*str*): Output structure file path. Accepted formats: pdb.
+* **input_structure_path** (*str*): Input structure file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_model.pdb). Accepted formats: pdb.
+* **output_structure_path** (*str*): Output structure file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_model.pdb). Accepted formats: pdb.
 
 ### Config
 
@@ -459,8 +459,8 @@ Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
 
-* **input_structure_path** (*str*): Input structure file path. Accepted formats: pdb.
-* **output_protein_path** (*str*): Output heteroatom file path. Accepted formats: pdb.
+* **input_structure_path** (*str*): Input structure file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_protein.pdb). Accepted formats: pdb.
+* **output_protein_path** (*str*): Output protein file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_protein.pdb). Accepted formats: pdb.
 
 ### Config
 
@@ -515,8 +515,8 @@ Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
 
-* **input_structure_path** (*str*): Input structure file name
-* **output_structure_path** (*str*): Output structure file name
+* **input_structure_path** (*str*): Input structure file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/WT_aq4_md_1.pdb). Accepted formats: pdb, gro.
+* **output_structure_path** (*str*): Output structure file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/WT_apo_md_1.pdb). Accepted formats: pdb, gro.
 
 ### Config
 
@@ -602,8 +602,8 @@ Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
 
-* **input_pdb_path** (*str*): Input pdb file name
-* **output_pdb_path** (*str*): Output pdb file name
+* **input_pdb_path** (*str*): Input PDB file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/WT_aq4_md_WAT.pdb). Accepted formats: pdb.
+* **output_pdb_path** (*str*): Output PDB file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/WT_apo_no_wat.pdb). Accepted formats: pdb.
 
 ### Config
 
@@ -660,9 +660,9 @@ Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
 
-* **input_structure_path** (*str*): Input structure file name
-* **output_structure_path** (*str*): Output structure file name
-* **output_mapping_json_path** (*str*): Output mapping json file name
+* **input_structure_path** (*str*): Input structure file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/cl3.noH.pdb). Accepted formats: pdb, gro.
+* **output_structure_path** (*str*): Output structure file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/renum_cl3_noH.pdb). Accepted formats: pdb, gro.
+* **output_mapping_json_path** (*str*): Output mapping json file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/cl3_output_mapping_json_path.json). Accepted formats: json.
 
 ### Config
 
@@ -719,8 +719,8 @@ Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
 
-* **input_gro_path** (*str*): Input GRO file name
-* **output_gro_path** (*str*): Output sorted GRO file name
+* **input_gro_path** (*str*): Input GRO file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/WT_aq4_md_1.gro). Accepted formats: gro.
+* **output_gro_path** (*str*): Output sorted GRO file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/WT_aq4_md_sorted.gro). Accepted formats: gro.
 
 ### Config
 
