@@ -1,4 +1,4 @@
-# Biobb Chemistry changelog
+# Biobb Structure Utils changelog
 
 ## What's new in version [3.0.0](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v3.0.0)?
 In version 3.0.0 Python has been updated to version 3.7 and Biopython to version 1.76. Big changes in the documentation style and content. Finally a new conda installation recipe has been introduced.
