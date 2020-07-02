@@ -12,61 +12,71 @@
             "block" : "CatPDB", 
             "tool" : "in house", 
             "desc" : "Class to concat two PDB structures in a single PDB file.",
-            "exec" : "cat_pdb"
+            "exec" : "cat_pdb",
+            "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.cat_pdb"
         }, 
         {
             "block" : "ExtractAtoms", 
             "tool" : "in house", 
             "desc" : "Class to extract atoms from a 3D structure.",
-            "exec" : "extract_atoms"
+            "exec" : "extract_atoms",
+            "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.extract_atoms"
         },
         {
             "block" : "ExtractChain", 
             "tool" : "in house", 
             "desc" : "Class to extract a chain from a 3D structure.",
-            "exec" : "extract_chain"
+            "exec" : "extract_chain",
+            "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.extract_chain"
         }, 
         {
             "block" : "ExtractHeteroAtoms", 
             "tool" : "in house using biopython", 
             "desc" : "Class to extract hetero-atoms from a 3D structure.",
-            "exec" : "extract_heteroatoms"
+            "exec" : "extract_heteroatoms",
+            "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.extract_heteroatoms"
         }, 
         {
             "block" : "ExtractModel", 
             "tool" : "in house", 
             "desc" : "Class to extract a model from a 3D structure.",
-            "exec" : "extract_model"
+            "exec" : "extract_model",
+            "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.extract_model"
         }, 
         {
             "block" : "ExtractProtein", 
             "tool" : "in house", 
             "desc" : "Class to extract a protein from a 3D structure.",
-            "exec" : "extract_protein"
+            "exec" : "extract_protein",
+            "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.extract_protein"
         }, 
         {
             "block" : "RemoveLigand", 
             "tool" : "in house", 
             "desc" : "Class to remove the selected ligand atoms from a 3D structure.",
-            "exec" : "remove_ligand"
+            "exec" : "remove_ligand",
+            "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.remove_ligand"
         },
         {
             "block" : "RemovePdbWater", 
             "tool" : "in house", 
             "desc" : "Class to remove water molecules from PDB 3D structures.",
-            "exec" : "remove_pdb_water"
+            "exec" : "remove_pdb_water",
+            "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.remove_pdb_water"
         }, 
         {
             "block" : "RenumberStructure", 
             "tool" : "in house", 
             "desc" : "Class to renumber atomic indexes from a 3D structure.",
-            "exec" : "renumber_structure"
+            "exec" : "renumber_structure",
+            "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.renumber_structure"
         },
         {
             "block" : "SortGroResidues", 
             "tool" : "in house", 
             "desc" : "Class to sort the selected residues from a GRO 3D structure.",
-            "exec" : "sort_gro_residues"
+            "exec" : "sort_gro_residues",
+            "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.sort_gro_residues"
         }
     ],
     "dep_pypi" : [
