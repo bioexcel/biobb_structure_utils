@@ -146,6 +146,7 @@ class ExtractHeteroAtoms():
                     res_id = line[23:27].strip()
                     if curr_model != 0: model = curr_model.strip()
                     else: model = "1"
+                    if chain == "": chain = " "
 
                     for nstr in new_structure:
                         if nstr['res_id'] == res_id and nstr['name'] == name and  nstr['chain'] == chain and nstr['model'] == model:
