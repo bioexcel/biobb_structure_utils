@@ -9,6 +9,64 @@ biobb_command [-h] --config CONFIG --input_file(s) <input_file(s)> --output_file
 
 -----------------
 
+## Add hydrogens
+
+Class to add hydrogens to a 3D structure.
+
+### Get help
+
+Command:
+
+
+```python
+add_hydrogens -h
+```
+
+
+```python
+usage: add_hydrogens [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_STRUCTURE_PATH
+
+Class to add hydrogens to a 3D structure.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -c CONFIG, --config CONFIG
+                        This file can be a YAML file, JSON file or JSON string
+
+required arguments:
+  -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
+                        Input structure file path. Accepted formats: pdb.
+  -o OUTPUT_STRUCTURE_PATH, --output_structure_path OUTPUT_STRUCTURE_PATH
+                        Output structure file path. Accepted formats: pdb, pdbqt.
+```
+
+### I / O Arguments
+
+Syntax: input_argument (datatype) : Definition
+
+Config input / output arguments for this building block:
+
+* **input_structure_path** (*str*): Input structure file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/str_no_H.pdb). Accepted formats: pdb.
+* **output_structure_path** (*str*): Output structure file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_str_H.pdbqt). Accepted formats: pdb, pdbqt.
+
+### Config
+
+Syntax: input_parameter (datatype) - (default_value) Definition
+
+Config parameters for this building block:
+
+* **charges** (*bool*) - (False) Wether or not to add charges to the output file. It must be True if output is a PDBQT.
+* **mode** (*string*) - (None) Selection mode. Values: auto, list, ph, int, int_his
+* **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
+* **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+
+### Command line
+
+
+```python
+add_hydrogens --input_structure_path data/input/structure_no_H.pdb --output_structure_path data/output/structure_H.pdb
+```
+
 ## Cat PDB
 
 Class to concat two PDB structures in a single PDB file.
