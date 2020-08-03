@@ -122,3 +122,12 @@ extract_model:
     reference_output_structure_path: file:test_reference_dir/utils/ref_extract_model.pdb
   properties:
     models: [1,4]
+
+add_hydrogens:
+  paths:
+    input_structure_path: file:test_data_dir/utils/str_no_H.pdb
+    output_structure_path: output_structure_path.pdb
+    reference_output_structure_path: file:test_reference_dir/utils/ref_str_H.pdbqt
+  properties:
+    charges: true
+    mode: auto

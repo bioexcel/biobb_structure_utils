@@ -32,8 +32,25 @@ def check_output_path(path, out_log, classname):
 		raise SystemExit(classname + ': Format %s in output file is not compatible' % file_extension[1:])
 	return path
 
+def check_output_path_pdbqt(path, out_log, classname):
+	""" Checks output file path """ 
+	if PurePath(path).parent and not Path(PurePath(path).parent).exists():
+		fu.log(classname + ': Unexisting output folder, exiting', out_log)
+		raise SystemExit(classname + ': Unexisting output folder')
+	file_extension = PurePath(path).suffix
+	if not is_valid_pdbqt(file_extension[1:]):
+		fu.log(classname + ': Format %s in output file is not compatible' % file_extension[1:], out_log)
+		raise SystemExit(classname + ': Format %s in output file is not compatible' % file_extension[1:])
+	return path
+
 
 def is_valid_pdb(ext):
 	""" Checks if is a valid PDB file """
 	formats = ['pdb']
+	return ext in formats
+
+
+def is_valid_pdbqt(ext):
+	""" Checks if is a valid PDB/PDBQT file """
+	formats = ['pdb', 'pdbqt']
 	return ext in formats
