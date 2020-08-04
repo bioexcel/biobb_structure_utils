@@ -123,7 +123,7 @@ extract_model:
   properties:
     models: [1,4]
 
-add_hydrogens:
+str_check_add_hydrogens:
   paths:
     input_structure_path: file:test_data_dir/utils/str_no_H.pdb
     output_structure_path: output_structure_path.pdb

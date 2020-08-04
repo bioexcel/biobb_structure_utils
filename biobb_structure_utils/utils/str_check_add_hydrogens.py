@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Module containing the AddHydrogens class and the command line interface."""
+"""Module containing the StrCheckAddHydrogens class and the command line interface."""
 import argparse
 from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
@@ -8,7 +8,7 @@ from biobb_common.tools.file_utils import launchlogger
 from biobb_common.command_wrapper import cmd_wrapper
 from biobb_structure_utils.utils.common import *
 
-class AddHydrogens():
+class StrCheckAddHydrogens():
     """Class to add hydrogens to a 3D structure.
 
     Args:
@@ -107,7 +107,7 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     #Specific call of each building block
-    AddHydrogens(input_structure_path=args.input_structure_path, output_structure_path=args.output_structure_path, 
+    StrCheckAddHydrogens(input_structure_path=args.input_structure_path, output_structure_path=args.output_structure_path, 
                  properties=properties).launch()
 
 if __name__ == '__main__':

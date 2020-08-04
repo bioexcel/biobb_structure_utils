@@ -4,10 +4,10 @@ utils package
 Submodules
 ----------
 
-utils.add_hydrogens module
+utils.str_check_add_hydrogens module
 ---------------------------------
 
-.. automodule:: utils.add_hydrogens
+.. automodule:: utils.str_check_add_hydrogens
     :members:
     :undoc-members:
     :show-inheritance:

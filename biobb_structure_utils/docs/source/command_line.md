@@ -9,7 +9,7 @@ biobb_command [-h] --config CONFIG --input_file(s) <input_file(s)> --output_file
 
 -----------------
 
-## Add hydrogens
+## Structure Checking Add hydrogens
 
 Class to add hydrogens to a 3D structure.
 
@@ -19,12 +19,12 @@ Command:
 
 
 ```python
-add_hydrogens -h
+str_check_add_hydrogens -h
 ```
 
 
 ```python
-usage: add_hydrogens [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_STRUCTURE_PATH
+usage: str_check_add_hydrogens [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_STRUCTURE_PATH
 
 Class to add hydrogens to a 3D structure.
 
@@ -61,11 +61,41 @@ Config parameters for this building block:
 * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
 * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
-### Command line
+### YAML file config
+
+add_hydrogens.yml
 
 
 ```python
-add_hydrogens --input_structure_path data/input/structure_no_H.pdb --output_structure_path data/output/structure_H.pdb
+properties:
+  charges: true
+  mode: auto
+```
+
+
+```python
+str_check_add_hydrogens --config data/conf/add_hydrogens.yml --input_structure_path data/input/structure_no_H.pdb --output_structure_path data/output/structure_H.pdb
+```
+
+### JSON file config
+
+add_hydrogens.json
+
+
+```python
+{
+  "properties": {
+    "charges": true,
+    "mode": "auto"
+  }
+}
+```
+
+Command:
+
+
+```python
+str_check_add_hydrogens --config data/conf/add_hydrogens.json --input_structure_path data/input/structure_no_H.pdb --output_structure_path data/output/structure_H.pdb
 ```
 
 ## Cat PDB
