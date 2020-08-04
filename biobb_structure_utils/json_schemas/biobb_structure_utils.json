@@ -9,6 +9,13 @@
     "version" : "3.0.0",
     "tools" : [
         {
+            "block" : "StrCheckAddHydrogens", 
+            "tool" : "in house", 
+            "desc" : "Class to add hydrogens to a 3D structure.",
+            "exec" : "str_check_add_hydrogens",
+            "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#utils-str-check-add-hydrogens-module"
+        }, 
+        {
             "block" : "CatPDB", 
             "tool" : "in house", 
             "desc" : "Class to concat two PDB structures in a single PDB file.",
