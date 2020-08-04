@@ -57,6 +57,7 @@ Config parameters for this building block:
 
 * **charges** (*bool*) - (False) Wether or not to add charges to the output file. It must be True if output is a PDBQT.
 * **mode** (*string*) - (None) Selection mode. Values: auto, list, ph, int, int_his
+* **check_structure_path** (*string*) - ("check_structure") path to the check_structure application
 * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
 * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -258,6 +259,7 @@ Syntax: input_parameter (datatype) - (default_value) Definition
 Config parameters for this building block:
 
 * **chains** (*list*) - (None) List of chains to be extracted from the input_structure_path file. If empty, all the chains of the structure will be returned.
+* **check_structure_path** (*string*) - ("check_structure") path to the check_structure application
 * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
 * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -442,6 +444,7 @@ Syntax: input_parameter (datatype) - (default_value) Definition
 Config parameters for this building block:
 
 * **models** (*list*) - (None) List of models to be extracted from the input_structure_path file. If empty, all the models of the structure will be returned.
+* **check_structure_path** (*string*) - ("check_structure") path to the check_structure application
 * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
 * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -526,6 +529,7 @@ Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
 
+* **check_structure_path** (*string*) - ("check_structure") path to the check_structure application
 * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
 * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -669,6 +673,7 @@ Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
 
+* **check_structure_path** (*string*) - ("check_structure") path to the check_structure application
 * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
 * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 

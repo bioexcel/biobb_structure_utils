@@ -29,7 +29,6 @@ class CatPDB():
         self.output_structure_path = str(output_structure_path)
 
         # Properties specific for BB
-        self.check_structure_path = properties.get('check_structure_path', 'check_structure')
         self.properties = properties
 
         # Common in all BB

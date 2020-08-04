@@ -29,6 +29,11 @@
         "properties": {
             "type": "object",
             "properties": {
+                "check_structure_path": {
+                    "type": "string",
+                    "default": "check_structure",
+                    "description": "path to the check_structure application"
+                },
                 "remove_tmp": {
                     "type": "boolean",
                     "default": true,

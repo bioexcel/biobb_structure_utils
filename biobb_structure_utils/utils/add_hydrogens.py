@@ -17,6 +17,7 @@ class AddHydrogens():
         properties (dic):
             * **charges** (*bool*) - (False) Wether or not to add charges to the output file. It must be True if output is a PDBQT.
             * **mode** (*string*) - (None) Selection mode. Values: auto, list, ph, int, int_his
+            * **check_structure_path** (*string*) - ("check_structure") path to the check_structure application
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
     """

@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://bioexcel.eu/biobb_structure_utils/json_schemas/1.0/extract_chain",
-    "title": "Class to extract a chain from a 3D structure.",
+    "$id": "http://bioexcel.eu/biobb_structure_utils/json_schemas/1.0/add_hydrogens",
+    "title": "Class to add hydrogens to a 3D structure.",
     "type": "object",
     "required": [
         "input_structure_path",
@@ -12,7 +12,7 @@
             "type": "string",
             "description": "Input structure file path",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_chain.pdb",
+            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/str_no_H.pdb",
             "enum": [
                 ".*\\.pdb$"
             ]
@@ -21,18 +21,31 @@
             "type": "string",
             "description": "Output structure file path",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_chain.pdb",
+            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_str_H.pdbqt",
             "enum": [
-                ".*\\.pdb$"
+                ".*\\.pdb$",
+                ".*\\.pdbqt$"
             ]
         },
         "properties": {
             "type": "object",
             "properties": {
-                "chains": {
-                    "type": "list",
+                "charges": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Wether or not to add charges to the output file. It must be True if output is a PDBQT."
+                },
+                "mode": {
+                    "type": "string",
                     "default": null,
-                    "description": "List of chains to be extracted from the input_structure_path file. If empty, all the chains of the structure will be returned."
+                    "description": "Selection mode.",
+                    "enum": [
+                        "auto",
+                        "list",
+                        "ph",
+                        "int",
+                        "int_his"
+                    ]
                 },
                 "check_structure_path": {
                     "type": "string",

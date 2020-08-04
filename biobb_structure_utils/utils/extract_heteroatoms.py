@@ -31,7 +31,6 @@ class ExtractHeteroAtoms():
         self.output_heteroatom_path = str(output_heteroatom_path)
 
         # Properties specific for BB
-        self.check_structure_path = properties.get('check_structure_path', 'check_structure')
         self.heteroatoms = properties.get('heteroatoms', [])
         self.properties = properties
 
