@@ -78,6 +78,7 @@ class StrCheckAddHydrogens():
         cmd = [self.check_structure_path,
                '-i', self.input_structure_path,
                '-o', self.output_structure_path,
+               '--force_save',
                'add_hydrogen']
 
         if self.charges:

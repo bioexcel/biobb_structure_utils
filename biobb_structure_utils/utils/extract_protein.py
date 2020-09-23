@@ -93,6 +93,7 @@ class ExtractProtein():
         cmd = [self.check_structure_path,
                '-i', self.input_structure_path,
                '-o', self.output_protein_path,
+               '--force_save',
                '--non_interactive',
                'command_list', '--list', self.tmp_folder + '/extract_prot.lst']
 
