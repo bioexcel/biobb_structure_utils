@@ -1,5 +1,22 @@
 # Biobb Structure Utils changelog
 
+## What's new in version [3.0.1](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v3.0.1)?
+In version 3.0.1 the dependency biobb_common has been updated to 3.0.1 version. New tool for adding hydrogens to a 3D structure.
+
+### New features
+
+* Update to biobb_common 3.0.1
+* New StrCheckAddHydrogens tool
+
+### Other changes
+
+* Bug fixes in CatPDB
+* Bug fixes in ExtractChain
+* Bug fixes in ExtractHeteroAtoms
+* Bug fixes in ExtractModel
+* Bug fixes in ExtractProtein
+* Bug fixes in RemovePdbWater
+
 ## What's new in version [3.0.0](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v3.0.0)?
 In version 3.0.0 Python has been updated to version 3.7 and Biopython to version 1.76. Big changes in the documentation style and content. Finally a new conda installation recipe has been introduced.
 

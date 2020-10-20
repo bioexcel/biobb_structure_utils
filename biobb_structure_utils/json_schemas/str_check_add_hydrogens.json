@@ -33,7 +33,7 @@
                 "charges": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Wether or not to add charges to the output file. It must be True if output is a PDBQT."
+                    "description": "Wether or not to add charges to the output file. If True the output is in PDBQT format."
                 },
                 "mode": {
                     "type": "string",
