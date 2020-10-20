@@ -1,5 +1,4 @@
-# bug fixing 2.0.0.17.3.14
 Bootstrap: docker
-From: biobb_structure_utils:2.0.0--py_0
+From: biobb_structure_utils:3.0.1--py_0
 Registry: quay.io
 Namespace: biocontainers
