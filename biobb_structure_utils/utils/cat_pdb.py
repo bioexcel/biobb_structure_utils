@@ -78,7 +78,7 @@ class CatPDB():
 
         fu.log('File %s created' % self.output_structure_path,  out_log, self.global_log)
 
-        return 1
+        return 0
 
 def main():
     """Command line interface."""
