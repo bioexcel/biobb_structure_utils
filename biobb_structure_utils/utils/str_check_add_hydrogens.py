@@ -9,17 +9,30 @@ from biobb_common.command_wrapper import cmd_wrapper
 from biobb_structure_utils.utils.common import *
 
 class StrCheckAddHydrogens():
-    """Class to add hydrogens to a 3D structure.
+    """
+    | biobb_structure_utils StrCheckAddHydrogens
+    | This class is a wrapper of the Structure Checking tool to add hydrogens to a 3D structure.
+    | Wrapper for the `Structure Checking <https://github.com/bioexcel/biobb_structure_checking>`_ tool to add hydrogens to a 3D structure.
 
     Args:
-        input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/str_no_H.pdb>`_. Accepted formats: pdb.
-        output_structure_path (str): Output structure file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_str_H.pdbqt>`_. Accepted formats: pdb, pdbqt.
+        input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/str_no_H.pdb>`_. Accepted formats: pdb (edam:format_1476).
+        output_structure_path (str): Output structure file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_str_H.pdbqt>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).
         properties (dic):
             * **charges** (*bool*) - (False) Wether or not to add charges to the output file. If True the output is in PDBQT format.
             * **mode** (*string*) - (None) Selection mode. Values: auto, list, ph, int, int_his
             * **check_structure_path** (*string*) - ("check_structure") path to the check_structure application
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+
+    Info:
+        * wrapped_software:
+            * name: Structure Checking from MDWeb
+            * version: >=3.0.3
+            * license: Apache-2.0
+        * ontology:
+            * name: EDAM
+            * schema: http://edamontology.org/EDAM.owl
+            
     """
 
     def __init__(self, input_structure_path, 

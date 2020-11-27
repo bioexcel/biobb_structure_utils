@@ -1,5 +1,5 @@
 {
   "properties": {
-    "ligand": "AQ4"
+    "remove_tmp": true
   }
 }

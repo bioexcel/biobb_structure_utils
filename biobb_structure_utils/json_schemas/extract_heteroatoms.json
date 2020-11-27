@@ -1,8 +1,21 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "http://bioexcel.eu/biobb_structure_utils/json_schemas/1.0/extract_heteroatoms",
-    "title": "Class to extract hetero-atoms from a 3D structure.",
+    "name": "biobb_structure_utils ExtractHeteroAtoms",
+    "title": "Class to extract hetero-atoms from a 3D structure using Biopython.",
+    "description": null,
     "type": "object",
+    "info": {
+        "wrapped_software": {
+            "name": "In house using Biopython",
+            "version": ">=1.76",
+            "license": "other"
+        },
+        "ontology": {
+            "name": "EDAM",
+            "schema": "http://edamontology.org/EDAM.owl"
+        }
+    },
     "required": [
         "input_structure_path",
         "output_heteroatom_path"
@@ -15,6 +28,13 @@
             "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_heteroatom.pdb",
             "enum": [
                 ".*\\.pdb$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.pdb$",
+                    "description": "Input structure file path",
+                    "edam": "format_1476"
+                }
             ]
         },
         "output_heteroatom_path": {
@@ -24,25 +44,35 @@
             "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_heteroatom.pdb",
             "enum": [
                 ".*\\.pdb$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.pdb$",
+                    "description": "Output heteroatom file path",
+                    "edam": "format_1476"
+                }
             ]
         },
         "properties": {
             "type": "object",
             "properties": {
                 "heteroatoms": {
-                    "type": "list",
+                    "type": "array",
                     "default": null,
+                    "wf_prop": false,
                     "description": "List of dictionaries with the name | res_id | chain | model of the heteroatoms to be extracted. Format: [{\"name\": \"ZZ7\", \"res_id\": \"302\", \"chain\": \"B\", \"model\": \"1\"}]. If empty, all the heteroatoms of the structure will be returned."
                 },
                 "remove_tmp": {
                     "type": "boolean",
                     "default": true,
-                    "description": "[WF property] Remove temporal files."
+                    "wf_prop": true,
+                    "description": "Remove temporal files."
                 },
                 "restart": {
                     "type": "boolean",
                     "default": false,
-                    "description": "[WF property] Do not execute if output files exist."
+                    "wf_prop": true,
+                    "description": "Do not execute if output files exist."
                 }
             }
         }

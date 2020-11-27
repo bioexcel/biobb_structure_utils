@@ -11,17 +11,25 @@ from biobb_structure_utils.gro_lib.gro import Gro
 from biobb_structure_utils.utils.common import *
 
 class RemoveLigand():
-    """Class to remove the selected ligand atoms from a 3D structure.
+    """
+    | biobb_structure_utils RemoveLigand
+    | Class to remove the selected ligand atoms from a 3D structure.
 
     Args:
-        input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/WT_aq4_md_1.pdb>`_. Accepted formats: pdb, gro.
-        output_structure_path (str): Output structure file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/WT_apo_md_1.pdb>`_. Accepted formats: pdb, gro.
+        input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/WT_aq4_md_1.pdb>`_. Accepted formats: pdb (edam:format_1476), gro (edam:format_2033).
+        output_structure_path (str): Output structure file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/WT_apo_md_1.pdb>`_. Accepted formats: pdb (edam:format_1476), gro (edam:format_2033).
         properties (dic):
-            | - **ligand** (*str*) - ("AQ4") Residue code of the ligand to be removed.
-            | - **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
-            | - **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
-            | - **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
-            | - **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+            * **ligand** (*str*) - ("AQ4") Residue code of the ligand to be removed.
+            * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
+            * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+
+    Info:
+        * wrapped_software:
+            * name: In house
+            * license: Apache-2.0
+        * ontology:
+            * name: EDAM
+            * schema: http://edamontology.org/EDAM.owl
 
     """
 

@@ -13,15 +13,26 @@ from biobb_structure_utils.utils.common import *
 
 
 class SortGroResidues():
-    """Class to sort the selected residues from a GRO 3D structure.
+    """
+    | biobb_structure_utils SortGroResidues
+    | Class to sort the selected residues from a GRO 3D structure.
 
     Args:
-        input_gro_path (str): Input GRO file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/WT_aq4_md_1.gro>`_. Accepted formats: gro.
-        output_gro_path (str): Output sorted GRO file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/WT_aq4_md_sorted.gro>`_. Accepted formats: gro.
+        input_gro_path (str): Input GRO file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/WT_aq4_md_1.gro>`_. Accepted formats: gro (edam:format_2033).
+        output_gro_path (str): Output sorted GRO file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/WT_aq4_md_sorted.gro>`_. Accepted formats: gro (edam:format_2033).
         properties (dic):
-            | - **residue_name_list** (*list*) - (["NA", "CL", "SOL"]) Ordered residue name list.
-            | - **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
-            | - **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+            * **residue_name_list** (*list*) - (["NA", "CL", "SOL"]) Ordered residue name list.
+            * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
+            * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+
+    Info:
+        * wrapped_software:
+            * name: In house
+            * license: Apache-2.0
+        * ontology:
+            * name: EDAM
+            * schema: http://edamontology.org/EDAM.owl
+
     """
 
     def __init__(self, input_gro_path, 

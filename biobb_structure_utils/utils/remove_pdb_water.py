@@ -11,15 +11,27 @@ from biobb_structure_utils.utils.common import *
 
 
 class RemovePdbWater:
-    """Class to remove water molecules from PDB 3D structures.
+    """
+    | biobb_structure_utils RemovePdbWater
+    | This class is a wrapper of the Structure Checking tool to remove water molecules from PDB 3D structures.
+    | Wrapper for the `Structure Checking <https://github.com/bioexcel/biobb_structure_checking>`_ tool to remove water molecules from PDB 3D structures.
 
     Args:
-        input_pdb_path (str): Input PDB file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/WT_aq4_md_WAT.pdb>`_. Accepted formats: pdb.
-        output_pdb_path (str): Output PDB file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/WT_apo_no_wat.pdb>`_. Accepted formats: pdb.
+        input_pdb_path (str): Input PDB file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/WT_aq4_md_WAT.pdb>`_. Accepted formats: pdb (edam:format_1476).
+        output_pdb_path (str): Output PDB file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/WT_apo_no_wat.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dic):
             * **check_structure_path** (*string*) - ("check_structure") path to the check_structure application
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+
+    Info:
+        * wrapped_software:
+            * name: Structure Checking from MDWeb
+            * version: >=3.0.3
+            * license: Apache-2.0
+        * ontology:
+            * name: EDAM
+            * schema: http://edamontology.org/EDAM.owl
 
     """
 

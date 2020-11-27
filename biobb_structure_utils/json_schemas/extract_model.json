@@ -1,8 +1,21 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "http://bioexcel.eu/biobb_structure_utils/json_schemas/1.0/extract_model",
-    "title": "Class to extract a model from a 3D structure.",
+    "name": "biobb_structure_utils ExtractModel",
+    "title": "This class is a wrapper of the Structure Checking tool to extract a model from a 3D structure.",
+    "description": "Wrapper for the Structure Checking tool to extract a model from a 3D structure.",
     "type": "object",
+    "info": {
+        "wrapped_software": {
+            "name": "Structure Checking from MDWeb",
+            "version": ">=3.0.3",
+            "license": "Apache-2.0"
+        },
+        "ontology": {
+            "name": "EDAM",
+            "schema": "http://edamontology.org/EDAM.owl"
+        }
+    },
     "required": [
         "input_structure_path",
         "output_structure_path"
@@ -15,6 +28,13 @@
             "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_model.pdb",
             "enum": [
                 ".*\\.pdb$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.pdb$",
+                    "description": "Input structure file path",
+                    "edam": "format_1476"
+                }
             ]
         },
         "output_structure_path": {
@@ -24,30 +44,41 @@
             "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_model.pdb",
             "enum": [
                 ".*\\.pdb$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.pdb$",
+                    "description": "Output structure file path",
+                    "edam": "format_1476"
+                }
             ]
         },
         "properties": {
             "type": "object",
             "properties": {
                 "models": {
-                    "type": "list",
+                    "type": "array",
                     "default": null,
+                    "wf_prop": false,
                     "description": "List of models to be extracted from the input_structure_path file. If empty, all the models of the structure will be returned."
                 },
                 "check_structure_path": {
                     "type": "string",
                     "default": "check_structure",
+                    "wf_prop": false,
                     "description": "path to the check_structure application"
                 },
                 "remove_tmp": {
                     "type": "boolean",
                     "default": true,
-                    "description": "[WF property] Remove temporal files."
+                    "wf_prop": true,
+                    "description": "Remove temporal files."
                 },
                 "restart": {
                     "type": "boolean",
                     "default": false,
-                    "description": "[WF property] Do not execute if output files exist."
+                    "wf_prop": true,
+                    "description": "Do not execute if output files exist."
                 }
             }
         }

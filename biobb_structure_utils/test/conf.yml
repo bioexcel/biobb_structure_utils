@@ -24,6 +24,8 @@ renumber_structure:
     reference_output_stucture_path: file:test_reference_dir/utils/renum_cl3_noH.pdb
     output_mapping_json_path: output_mapping_json_path.json
     reference_output_mapping_json_path: file:test_reference_dir/utils/cl3_output_mapping_json_path.json
+  properties:
+    renumber_residues: true
 
 renumber_structure_2vgb:
   paths:
@@ -32,6 +34,8 @@ renumber_structure_2vgb:
     reference_output_stucture_path: file:test_reference_dir/utils/ref_2vgb.pdb
     output_mapping_json_path: output_mapping_json_path.json
     reference_output_mapping_json_path: file:test_reference_dir/utils/2vgb_output_mapping_json_path.json
+  properties:
+    renumber_residues: true
 
 renumber_structure_gro:
   paths:
@@ -40,6 +44,8 @@ renumber_structure_gro:
     reference_output_stucture_path: file:test_reference_dir/utils/renum_pyruvate.gro
     output_mapping_json_path: output_mapping_json_path.json
     reference_output_mapping_json_path: file:test_reference_dir/utils/pyruvate_output_mapping_json_path.json
+  properties:
+    renumber_residues: true
 
 renumber_structure_smallgro:
   paths:
@@ -48,6 +54,8 @@ renumber_structure_smallgro:
     reference_output_stucture_path: file:test_reference_dir/utils/renum_smallgro.gro
     output_mapping_json_path: output_mapping_json_path.json
     reference_output_mapping_json_path: file:test_reference_dir/utils/smallgro_output_mapping_json_path.json
+  properties:
+    renumber_residues: true
 
 sort_gro_residues:
   paths:
@@ -78,6 +86,8 @@ remove_pdb_water:
     input_pdb_path: file:test_data_dir/utils/WT_aq4_md_WAT.pdb
     output_pdb_path: output_pdb_path.pdb
     reference_output_pdb_path: file:test_reference_dir/utils/WT_apo_no_wat.pdb
+  properties:
+    remove_tmp: true
 
 
 extract_heteroatoms:
@@ -99,6 +109,8 @@ extract_protein:
     input_structure_path: file:test_data_dir/utils/extract_protein.pdb
     output_protein_path: output_protein_path.pdb
     reference_output_protein_path: file:test_reference_dir/utils/ref_extract_protein.pdb
+  properties:
+    remove_tmp: true
 
 cat_pdb:
   paths:
@@ -106,6 +118,8 @@ cat_pdb:
     input_structure2: file:test_data_dir/utils/cat_ligand.pdb
     output_structure_path: output_structure_path.pdb
     reference_output_structure_path: file:test_reference_dir/utils/ref_cat_pdb.pdb
+  properties:
+    remove_tmp: true
 
 extract_chain:
   paths:

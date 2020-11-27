@@ -9,15 +9,28 @@ from biobb_common.command_wrapper import cmd_wrapper
 from biobb_structure_utils.utils.common import *
 
 class ExtractProtein():
-    """Class to extract a protein from a 3D structure.
+    """
+    | biobb_structure_utils ExtractProtein
+    | This class is a wrapper of the Structure Checking tool to extract a protein from a 3D structure.
+    | Wrapper for the `Structure Checking <https://github.com/bioexcel/biobb_structure_checking>`_ tool to extract a protein from a 3D structure.
 
     Args:
-        input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_protein.pdb>`_. Accepted formats: pdb.
-        output_protein_path (str): Output protein file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_protein.pdb>`_. Accepted formats: pdb.
+        input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_protein.pdb>`_. Accepted formats: pdb (edam:format_1476).
+        output_protein_path (str): Output protein file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_protein.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dic):
             * **check_structure_path** (*string*) - ("check_structure") path to the check_structure application
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+
+    Info:
+        * wrapped_software:
+            * name: Structure Checking from MDWeb
+            * version: >=3.0.3
+            * license: Apache-2.0
+        * ontology:
+            * name: EDAM
+            * schema: http://edamontology.org/EDAM.owl
+            
     """
 
     def __init__(self, input_structure_path, 

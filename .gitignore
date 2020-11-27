@@ -123,3 +123,5 @@ traj_comp.xtc
 biobb_structure_utils/docs/jupyter/data
 biobb_structure_utils/docs/jupyter/log*
 biobb_structure_utils/docs/jupyter/.ipynb_checkpoints/
+
+*.bk

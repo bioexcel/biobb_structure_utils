@@ -13,17 +13,28 @@ from biobb_structure_utils.utils.common import *
 
 
 class RenumberStructure:
-    """Class to renumber atomic indexes from a 3D structure.
+    """
+    | biobb_structure_utils RenumberStructure
+    | Class to renumber atomic indexes from a 3D structure.
 
     Args:
-        input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/cl3.noH.pdb>`_. Accepted formats: pdb, gro.
-        output_structure_path (str): Output structure file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/renum_cl3_noH.pdb>`_. Accepted formats: pdb, gro.
-        output_mapping_json_path (str): Output mapping json file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/cl3_output_mapping_json_path.json>`_. Accepted formats: json.
+        input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/cl3.noH.pdb>`_. Accepted formats: pdb (edam:format_1476), gro (edam:format_2033).
+        output_structure_path (str): Output structure file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/renum_cl3_noH.pdb>`_. Accepted formats: pdb (edam:format_1476), gro (edam:format_2033).
+        output_mapping_json_path (str): Output mapping json file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/cl3_output_mapping_json_path.json>`_. Accepted formats: json (edam:format_3464).
         properties (dic):
-            | - **renumber_residues** (*bool*) - (True) Residue code of the ligand to be removed.
-            | - **renumber_residues_per_chain** (*bool*) - (True) Restart residue enumeration every time a new chain is detected.
-            | - **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
-            | - **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+            * **renumber_residues** (*bool*) - (True) Residue code of the ligand to be removed.
+            * **renumber_residues_per_chain** (*bool*) - (True) Restart residue enumeration every time a new chain is detected.
+            * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
+            * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+
+    Info:
+        * wrapped_software:
+            * name: In house
+            * license: Apache-2.0
+        * ontology:
+            * name: EDAM
+            * schema: http://edamontology.org/EDAM.owl
+
     """
 
     def __init__(self, input_structure_path, 

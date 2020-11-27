@@ -8,15 +8,26 @@ from biobb_common.tools.file_utils import launchlogger
 from biobb_structure_utils.utils.common import *
 
 class CatPDB():
-    """Class to concat two PDB structures in a single PDB file.
+    """
+    | biobb_structure_utils CatPDB
+    | Class to concat two PDB structures in a single PDB file.
 
     Args:
-        input_structure1 (str): Input structure 1 file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/cat_protein.pdb>`_. Accepted formats: pdb.
-        input_structure2 (str): Input structure 2 file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/cat_ligand.pdb>`_. Accepted formats: pdb.
-        output_structure_path (str): Output protein file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_cat_pdb.pdb>`_. Accepted formats: pdb.
+        input_structure1 (str): Input structure 1 file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/cat_protein.pdb>`_. Accepted formats: pdb (edam:format_1476).
+        input_structure2 (str): Input structure 2 file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/cat_ligand.pdb>`_. Accepted formats: pdb (edam:format_1476).
+        output_structure_path (str): Output protein file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_cat_pdb.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dic):
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+
+    Info:
+        * wrapped_software:
+            * name: In house
+            * license: Apache-2.0
+        * ontology:
+            * name: EDAM
+            * schema: http://edamontology.org/EDAM.owl
+            
     """
 
     def __init__(self, input_structure1, input_structure2, 

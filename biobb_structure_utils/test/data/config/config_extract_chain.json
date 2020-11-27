@@ -1,8 +1,8 @@
 {
-    "properties": {
-        "chains": [
-            "B",
-            "C"
-        ]
-    }
+  "properties": {
+    "chains": [
+      "B",
+      "C"
+    ]
+  }
 }

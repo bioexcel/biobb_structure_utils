@@ -1,8 +1,21 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "http://bioexcel.eu/biobb_structure_utils/json_schemas/1.0/remove_pdb_water",
-    "title": "Class to remove water molecules from PDB 3D structures.",
+    "name": "biobb_structure_utils RemovePdbWater",
+    "title": "This class is a wrapper of the Structure Checking tool to remove water molecules from PDB 3D structures.",
+    "description": "Wrapper for the Structure Checking tool to remove water molecules from PDB 3D structures.",
     "type": "object",
+    "info": {
+        "wrapped_software": {
+            "name": "Structure Checking from MDWeb",
+            "version": ">=3.0.3",
+            "license": "Apache-2.0"
+        },
+        "ontology": {
+            "name": "EDAM",
+            "schema": "http://edamontology.org/EDAM.owl"
+        }
+    },
     "required": [
         "input_pdb_path",
         "output_pdb_path"
@@ -15,6 +28,13 @@
             "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/WT_aq4_md_WAT.pdb",
             "enum": [
                 ".*\\.pdb$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.pdb$",
+                    "description": "Input PDB file path",
+                    "edam": "format_1476"
+                }
             ]
         },
         "output_pdb_path": {
@@ -24,6 +44,13 @@
             "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/WT_apo_no_wat.pdb",
             "enum": [
                 ".*\\.pdb$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.pdb$",
+                    "description": "Output PDB file path",
+                    "edam": "format_1476"
+                }
             ]
         },
         "properties": {
@@ -32,17 +59,20 @@
                 "check_structure_path": {
                     "type": "string",
                     "default": "check_structure",
+                    "wf_prop": false,
                     "description": "path to the check_structure application"
                 },
                 "remove_tmp": {
                     "type": "boolean",
                     "default": true,
-                    "description": "[WF property] Remove temporal files."
+                    "wf_prop": true,
+                    "description": "Remove temporal files."
                 },
                 "restart": {
                     "type": "boolean",
                     "default": false,
-                    "description": "[WF property] Do not execute if output files exist."
+                    "wf_prop": true,
+                    "description": "Do not execute if output files exist."
                 }
             }
         }
