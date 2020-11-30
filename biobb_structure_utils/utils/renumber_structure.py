@@ -21,7 +21,7 @@ class RenumberStructure:
         input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/cl3.noH.pdb>`_. Accepted formats: pdb (edam:format_1476), gro (edam:format_2033).
         output_structure_path (str): Output structure file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/renum_cl3_noH.pdb>`_. Accepted formats: pdb (edam:format_1476), gro (edam:format_2033).
         output_mapping_json_path (str): Output mapping json file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/cl3_output_mapping_json_path.json>`_. Accepted formats: json (edam:format_3464).
-        properties (dic):
+        properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **renumber_residues** (*bool*) - (True) Residue code of the ligand to be removed.
             * **renumber_residues_per_chain** (*bool*) - (True) Restart residue enumeration every time a new chain is detected.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.

@@ -18,7 +18,7 @@ class RemoveLigand():
     Args:
         input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/WT_aq4_md_1.pdb>`_. Accepted formats: pdb (edam:format_1476), gro (edam:format_2033).
         output_structure_path (str): Output structure file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/WT_apo_md_1.pdb>`_. Accepted formats: pdb (edam:format_1476), gro (edam:format_2033).
-        properties (dic):
+        properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **ligand** (*str*) - ("AQ4") Residue code of the ligand to be removed.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.

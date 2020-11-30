@@ -17,7 +17,7 @@ class StrCheckAddHydrogens():
     Args:
         input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/str_no_H.pdb>`_. Accepted formats: pdb (edam:format_1476).
         output_structure_path (str): Output structure file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_str_H.pdbqt>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).
-        properties (dic):
+        properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **charges** (*bool*) - (False) Wether or not to add charges to the output file. If True the output is in PDBQT format.
             * **mode** (*string*) - (None) Selection mode. Values: auto, list, ph, int, int_his
             * **check_structure_path** (*string*) - ("check_structure") path to the check_structure application
