@@ -57,7 +57,16 @@ class ExtractAtoms():
 
     @launchlogger
     def launch(self) -> int:
-        """Remove ligand atoms from the structure."""
+        """Remove ligand atoms from the structure.
+
+        Examples:
+            This is a use example of how to use the ExtractAtoms module from Python
+
+            >>> from biobb_structure_utils.utils.extract_atoms import ExtractAtoms
+            >>> prop = { 'regular_expression_pattern': '^D' }
+            >>> ExtractAtoms(input_structure_path='/path/to/myInputStr.pdb, output_structure_path='/path/to/newStructure.pdb', properties=prop).launch()
+
+        """
         tmp_files = []
 
         # Get local loggers from launchlogger decorator

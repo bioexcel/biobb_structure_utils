@@ -75,7 +75,16 @@ class ExtractProtein():
 
     @launchlogger
     def launch(self) -> int:
-        """Remove ligand atoms from the structure."""
+        """Remove ligand atoms from the structure.
+
+        Examples:
+            This is a use example of how to use the ExtractProtein module from Python
+
+            >>> from biobb_structure_utils.utils.extract_protein import ExtractProtein
+            >>> prop = { }
+            >>> ExtractProtein(input_structure_path='/path/to/myInputStr.pdb, output_protein_path='/path/to/newProtein.pdb', properties=prop).launch()
+
+        """
         tmp_files = []
 
         # Get local loggers from launchlogger decorator

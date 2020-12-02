@@ -60,7 +60,16 @@ class SortGroResidues():
 
     @launchlogger
     def launch(self) -> int:
-        """Sort residues in GRO structure."""
+        """Sort residues in GRO structure.
+
+        Examples:
+            This is a use example of how to use the SortGroResidues module from Python
+
+            >>> from biobb_structure_utils.utils.sort_gro_residues import SortGroResidues
+            >>> prop = { 'residue_name_list': ['NA', 'CL', 'SOL'] }
+            >>> SortGroResidues(input_gro_path='/path/to/myInputStr.gro, output_gro_path='/path/to/newStructure.gro', properties=prop).launch()
+
+        """
         tmp_files = []
 
         # Get local loggers from launchlogger decorator

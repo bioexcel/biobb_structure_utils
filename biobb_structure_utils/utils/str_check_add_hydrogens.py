@@ -65,7 +65,16 @@ class StrCheckAddHydrogens():
 
     @launchlogger
     def launch(self) -> int:
-        """Remove ligand atoms from the structure."""
+        """Remove ligand atoms from the structure.
+
+        Examples:
+            This is a use example of how to use the StrCheckAddHydrogens module from Python
+
+            >>> from biobb_structure_utils.utils.str_check_add_hydrogens import StrCheckAddHydrogens
+            >>> prop = { 'charges': False, 'mode': 'auto' }
+            >>> StrCheckAddHydrogens(input_structure_path='/path/to/myInputStr.pdb, output_structure_path='/path/to/newStructure.pdb', properties=prop).launch()
+
+        """
         tmp_files = []
 
         # Get local loggers from launchlogger decorator

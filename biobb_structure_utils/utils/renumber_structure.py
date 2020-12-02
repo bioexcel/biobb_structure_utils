@@ -64,7 +64,16 @@ class RenumberStructure:
 
     @launchlogger
     def launch(self) -> int:
-        """renumber atoms in the structure."""
+        """renumber atoms in the structure.
+
+        Examples:
+            This is a use example of how to use the RenumberStructure module from Python
+
+            >>> from biobb_structure_utils.utils.renumber_structure import RenumberStructure
+            >>> prop = { 'renumber_residues': True, 'renumber_residues_per_chain': True }
+            >>> RenumberStructure(input_structure_path='/path/to/myInputStr.pdb, output_structure_path='/path/to/newStructure.pdb', output_mapping_json_path='/path/to/newMapping.json', properties=prop).launch()
+
+        """
         tmp_files = []
 
         # Get local loggers from launchlogger decorator

@@ -59,7 +59,16 @@ class CatPDB():
 
     @launchlogger
     def launch(self) -> int:
-        """Remove ligand atoms from the structure."""
+        """Remove ligand atoms from the structure.
+
+        Examples:
+            This is a use example of how to use the CatPDB module from Python
+
+            >>> from biobb_structure_utils.utils.cat_pdb import CatPDB
+            >>> prop = { }
+            >>> CatPDB(input_structure1='/path/to/myInputStr1.pdb, input_structure2='/path/to/myInputStr2.pdb, output_structure_path='/path/to/newStructure.pdb', properties=prop).launch()
+
+        """
         tmp_files = []
 
         # Get local loggers from launchlogger decorator

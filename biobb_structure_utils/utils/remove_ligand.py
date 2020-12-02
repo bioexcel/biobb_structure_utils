@@ -58,7 +58,16 @@ class RemoveLigand():
 
     @launchlogger
     def launch(self) -> int:
-        """Remove ligand atoms from the structure."""
+        """Remove ligand atoms from the structure.
+
+        Examples:
+            This is a use example of how to use the RemoveLigand module from Python
+
+            >>> from biobb_structure_utils.utils.remove_ligand import RemoveLigand
+            >>> prop = { 'ligand': 'AQ4'}
+            >>> RemoveLigand(input_structure_path='/path/to/myInputStr.pdb, output_structure_path='/path/to/newStructure.pdb', properties=prop).launch()
+
+        """
         tmp_files = []
 
         # Get local loggers from launchlogger decorator

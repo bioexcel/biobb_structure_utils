@@ -60,7 +60,16 @@ class RemovePdbWater:
 
     @launchlogger
     def launch(self) -> int:
-        """Remove water molecules."""
+        """Remove water molecules.
+
+        Examples:
+            This is a use example of how to use the RemovePdbWater module from Python
+
+            >>> from biobb_structure_utils.utils.remove_pdb_water import RemovePdbWater
+            >>> prop = { }
+            >>> RemovePdbWater(input_structure_path='/path/to/myInputStr.pdb, output_structure_path='/path/to/newStructure.pdb', properties=prop).launch()
+
+        """
         tmp_files = []
 
         # Get local loggers from @launchlogger decorator

@@ -83,7 +83,16 @@ class ExtractHeteroAtoms():
 
     @launchlogger
     def launch(self) -> int:
-        """Remove ligand atoms from the structure."""
+        """Remove ligand atoms from the structure.
+
+        Examples:
+            This is a use example of how to use the ExtractHeteroAtoms module from Python
+
+            >>> from biobb_structure_utils.utils.extract_heteroatoms import ExtractHeteroAtoms
+            >>> prop = { 'heteroatoms': [{"name": "ZZ7", "res_id": "302", "chain": "B", "model": "1"}] }
+            >>> ExtractHeteroAtoms(input_structure_path='/path/to/myInputStr.pdb, output_heteroatom_path='/path/to/newHeteroatom.pdb', properties=prop).launch()
+
+        """
         tmp_files = []
 
         # Get local loggers from launchlogger decorator
@@ -109,11 +118,6 @@ class ExtractHeteroAtoms():
         # load input into BioPython structure
         structure = PDBParser(QUIET = True).get_structure('structure', self.input_structure_path)
 
-        # if empty list of heteroatoms, raise exit
-        if not list_heteroatoms:
-            fu.log('Empty list of heteroatoms or incorrect format', out_log)
-            raise SystemExit('Empty list of heteroatoms or incorrect format')
-
         new_structure = []
 
         # get desired heteroatoms
@@ -126,21 +130,23 @@ class ExtractHeteroAtoms():
                 'res_id': str(residue.get_id()[1])
             }
 
-            
-            for het in list_heteroatoms:
-                match = True
-                for code in het['code']:
-                    if het[code].strip() != r[code].strip():
-                        match = False
-                        break
+            if list_heteroatoms:
+                for het in list_heteroatoms:
+                    match = True
+                    for code in het['code']:
+                        if het[code].strip() != r[code].strip():
+                            match = False
+                            break
 
-                if(match): 
-                    new_structure.append(r)
+                    if(match): 
+                        new_structure.append(r)
+            else:
+                new_structure.append(r)
 
         # if not heteroatoms found in structure, raise exit
         if not new_structure:
-            fu.log('The heteroatoms given by user were not found in input structure', out_log)
-            raise SystemExit('The heteroatoms given by user were not found in input structure')
+            fu.log(self.__class__.__name__ + ': The heteroatoms given by user were not found in input structure', out_log)
+            raise SystemExit(self.__class__.__name__ + ': The heteroatoms given by user were not found in input structure')
 
         # parse PDB file and get heteroatoms line by line
         new_file_lines = []
