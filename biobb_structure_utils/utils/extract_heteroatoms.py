@@ -23,6 +23,24 @@ class ExtractHeteroAtoms():
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
+    Examples:
+        This is a use example of how to use the building block from Python::
+
+            from biobb_structure_utils.utils.extract_heteroatoms import extract_heteroatoms
+            prop = { 
+                'heteroatoms': [
+                    {
+                        'name': 'ZZ7', 
+                        'res_id': '302', 
+                        'chain': 'B', 
+                        'model': '1'
+                    }
+                ] 
+            }
+            extract_heteroatoms(input_structure_path='/path/to/myStructure.pdb, 
+                                output_heteroatom_path='/path/to/newHeteroatom.pdb', 
+                                properties=prop)
+
     Info:
         * wrapped_software:
             * name: In house using Biopython
@@ -34,8 +52,8 @@ class ExtractHeteroAtoms():
 
     """
 
-    def __init__(self, input_structure_path, 
-                 output_heteroatom_path, properties=None, **kwargs) -> None:
+    def __init__(self, input_structure_path, output_heteroatom_path, 
+                properties=None, **kwargs) -> None:
         properties = properties or {}
 
         # Input/Output files
@@ -83,16 +101,8 @@ class ExtractHeteroAtoms():
 
     @launchlogger
     def launch(self) -> int:
-        """Remove ligand atoms from the structure.
-
-        Examples:
-            This is a use example of how to use the ExtractHeteroAtoms module from Python
-
-            >>> from biobb_structure_utils.utils.extract_heteroatoms import ExtractHeteroAtoms
-            >>> prop = { 'heteroatoms': [{"name": "ZZ7", "res_id": "302", "chain": "B", "model": "1"}] }
-            >>> ExtractHeteroAtoms(input_structure_path='/path/to/myInputStr.pdb, output_heteroatom_path='/path/to/newHeteroatom.pdb', properties=prop).launch()
-
-        """
+        """Execute the :class:`ExtractHeteroAtoms <utils.extract_heteroatoms.ExtractHeteroAtoms>` utils.extract_heteroatoms.ExtractHeteroAtoms object."""
+        
         tmp_files = []
 
         # Get local loggers from launchlogger decorator
@@ -180,8 +190,16 @@ class ExtractHeteroAtoms():
 
         return 0
 
+def extract_heteroatoms(input_structure_path: str, output_heteroatom_path: str, properties: dict = None, **kwargs) -> None:
+    """Execute the :class:`ExtractHeteroAtoms <utils.extract_heteroatoms.ExtractHeteroAtoms>` class and
+    execute the :meth:`launch() <utils.extract_heteroatoms.ExtractHeteroAtoms.launch> method."""
+
+    return ExtractHeteroAtoms(input_structure_path=input_structure_path, 
+                    output_heteroatom_path=output_heteroatom_path,
+                    properties=properties).launch()
+
 def main():
-    """Command line interface."""
+    """Command line execution of this building block. Please check the command line documentation."""
     parser = argparse.ArgumentParser(description="Extract a list of heteroatoms from a 3D structure.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
     parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
 
@@ -195,7 +213,9 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     #Specific call of each building block
-    ExtractHeteroAtoms(input_structure_path=args.input_structure_path, output_heteroatom_path=args.output_heteroatom_path, properties=properties).launch()
+    ExtractHeteroAtoms(input_structure_path=args.input_structure_path, 
+                        output_heteroatom_path=args.output_heteroatom_path, 
+                        properties=properties).launch()
 
 if __name__ == '__main__':
     main()

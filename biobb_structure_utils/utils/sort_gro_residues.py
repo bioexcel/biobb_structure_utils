@@ -25,6 +25,17 @@ class SortGroResidues():
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
+    Examples:
+        This is a use example of how to use the building block from Python::
+
+            from biobb_structure_utils.utils.sort_gro_residues import sort_gro_residues
+            prop = { 
+                'residue_name_list': ['NA', 'CL', 'SOL'] 
+            }
+            sort_gro_residues(input_gro_path='/path/to/myInputStr.gro, 
+                            output_gro_path='/path/to/newStructure.gro', 
+                            properties=prop)
+
     Info:
         * wrapped_software:
             * name: In house
@@ -35,8 +46,8 @@ class SortGroResidues():
 
     """
 
-    def __init__(self, input_gro_path, 
-                 output_gro_path, properties=None, **kwargs) -> None:
+    def __init__(self, input_gro_path, output_gro_path, 
+                properties=None, **kwargs) -> None:
         properties = properties or {}
 
         # Input/Output files
@@ -60,16 +71,8 @@ class SortGroResidues():
 
     @launchlogger
     def launch(self) -> int:
-        """Sort residues in GRO structure.
-
-        Examples:
-            This is a use example of how to use the SortGroResidues module from Python
-
-            >>> from biobb_structure_utils.utils.sort_gro_residues import SortGroResidues
-            >>> prop = { 'residue_name_list': ['NA', 'CL', 'SOL'] }
-            >>> SortGroResidues(input_gro_path='/path/to/myInputStr.gro, output_gro_path='/path/to/newStructure.gro', properties=prop).launch()
-
-        """
+        """Execute the :class:`SortGroResidues <utils.sort_gro_residues.SortGroResidues>` utils.sort_gro_residues.SortGroResidues object."""
+        
         tmp_files = []
 
         # Get local loggers from launchlogger decorator
@@ -93,8 +96,16 @@ class SortGroResidues():
 
         return 0
 
+def sort_gro_residues(input_gro_path: str, output_gro_path: str, properties: dict = None, **kwargs) -> None:
+    """Execute the :class:`SortGroResidues <utils.sort_gro_residues.SortGroResidues>` class and
+    execute the :meth:`launch() <utils.sort_gro_residues.SortGroResidues.launch> method."""
+
+    return SortGroResidues(input_gro_path=input_gro_path, 
+                        output_gro_path=output_gro_path,
+                        properties=properties).launch()
+
 def main():
-    """Command line interface."""
+    """Command line execution of this building block. Please check the command line documentation."""
     parser = argparse.ArgumentParser(description="Renumber atoms and residues from a 3D structure.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
     parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
 
@@ -108,7 +119,8 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     #Specific call of each building block
-    SortGroResidues(input_gro_path=args.input_gro_path, output_gro_path=args.output_gro_path, 
+    SortGroResidues(input_gro_path=args.input_gro_path, 
+                    output_gro_path=args.output_gro_path, 
                     properties=properties).launch()
 
 if __name__ == '__main__':

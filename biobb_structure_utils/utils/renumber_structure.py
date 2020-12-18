@@ -27,6 +27,19 @@ class RenumberStructure:
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
+    Examples:
+        This is a use example of how to use the building block from Python::
+
+            from biobb_structure_utils.utils.renumber_structure import renumber_structure
+            prop = { 
+                'renumber_residues': True, 
+                'renumber_residues_per_chain': True 
+            }
+            renumber_structure(input_structure_path='/path/to/myInputStr.pdb, 
+                                output_structure_path='/path/to/newStructure.pdb', 
+                                output_mapping_json_path='/path/to/newMapping.json', 
+                                properties=prop)
+    
     Info:
         * wrapped_software:
             * name: In house
@@ -37,8 +50,8 @@ class RenumberStructure:
 
     """
 
-    def __init__(self, input_structure_path, 
-                 output_structure_path, output_mapping_json_path, properties=None, **kwargs) -> None:
+    def __init__(self, input_structure_path, output_structure_path, output_mapping_json_path, 
+                properties=None, **kwargs) -> None:
         properties = properties or {}
 
         # Input/Output files
@@ -64,16 +77,8 @@ class RenumberStructure:
 
     @launchlogger
     def launch(self) -> int:
-        """renumber atoms in the structure.
+        """Execute the :class:`RenumberStructure <utils.renumber_structure.RenumberStructure>` utils.renumber_structure.RenumberStructure object."""
 
-        Examples:
-            This is a use example of how to use the RenumberStructure module from Python
-
-            >>> from biobb_structure_utils.utils.renumber_structure import RenumberStructure
-            >>> prop = { 'renumber_residues': True, 'renumber_residues_per_chain': True }
-            >>> RenumberStructure(input_structure_path='/path/to/myInputStr.pdb, output_structure_path='/path/to/newStructure.pdb', output_mapping_json_path='/path/to/newMapping.json', properties=prop).launch()
-
-        """
         tmp_files = []
 
         # Get local loggers from launchlogger decorator
@@ -133,8 +138,17 @@ class RenumberStructure:
 
         return 0
 
+def renumber_structure(input_structure_path: str, output_structure_path: str, output_mapping_json_path: str, properties: dict = None, **kwargs) -> None:
+    """Execute the :class:`RenumberStructure <utils.renumber_structure.RenumberStructure>` class and
+    execute the :meth:`launch() <utils.renumber_structure.RenumberStructure.launch> method."""
+
+    return RenumberStructure(input_structure_path=input_structure_path, 
+                        output_structure_path=output_structure_path,
+                        output_mapping_json_path=output_mapping_json_path,
+                        properties=properties).launch()
+
 def main():
-    """Command line interface."""
+    """Command line execution of this building block. Please check the command line documentation."""
     parser = argparse.ArgumentParser(description="Renumber atoms and residues from a 3D structure.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
     parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
 
@@ -149,9 +163,10 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     #Specific call of each building block
-    RenumberStructure(input_structure_path=args.input_structure_path, output_structure_path=args.output_structure_path, 
-                      output_mapping_json_path=args.output_mapping_json_path, 
-                      properties=properties).launch()
+    RenumberStructure(input_structure_path=args.input_structure_path, 
+                        output_structure_path=args.output_structure_path, 
+                        output_mapping_json_path=args.output_mapping_json_path, 
+                        properties=properties).launch()
 
 if __name__ == '__main__':
     main()

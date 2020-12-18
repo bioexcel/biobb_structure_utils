@@ -22,6 +22,15 @@ class ExtractProtein():
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
+    Examples:
+        This is a use example of how to use the building block from Python::
+
+            from biobb_structure_utils.utils.extract_protein import extract_protein
+            prop = { }
+            extract_protein(input_structure_path='/path/to/myStructure.pdb, 
+                            output_protein_path='/path/to/newProtein.pdb', 
+                            properties=prop)
+
     Info:
         * wrapped_software:
             * name: Structure Checking from MDWeb
@@ -33,8 +42,8 @@ class ExtractProtein():
             
     """
 
-    def __init__(self, input_structure_path, 
-                 output_protein_path, properties=None, **kwargs) -> None:
+    def __init__(self, input_structure_path, output_protein_path, 
+                properties=None, **kwargs) -> None:
         properties = properties or {}
 
         # Input/Output files
@@ -75,16 +84,8 @@ class ExtractProtein():
 
     @launchlogger
     def launch(self) -> int:
-        """Remove ligand atoms from the structure.
-
-        Examples:
-            This is a use example of how to use the ExtractProtein module from Python
-
-            >>> from biobb_structure_utils.utils.extract_protein import ExtractProtein
-            >>> prop = { }
-            >>> ExtractProtein(input_structure_path='/path/to/myInputStr.pdb, output_protein_path='/path/to/newProtein.pdb', properties=prop).launch()
-
-        """
+        """Execute the :class:`ExtractProtein <utils.extract_protein.ExtractProtein>` utils.extract_protein.ExtractProtein object."""
+        
         tmp_files = []
 
         # Get local loggers from launchlogger decorator
@@ -128,8 +129,16 @@ class ExtractProtein():
 
         return returncode
 
+def extract_protein(input_structure_path: str, output_protein_path: str, properties: dict = None, **kwargs) -> None:
+    """Execute the :class:`ExtractProtein <utils.extract_protein.ExtractProtein>` class and
+    execute the :meth:`launch() <utils.extract_protein.ExtractProtein.launch> method."""
+
+    return ExtractProtein(input_structure_path=input_structure_path, 
+                        output_protein_path=output_protein_path,
+                        properties=properties).launch()
+
 def main():
-    """Command line interface."""
+    """Command line execution of this building block. Please check the command line documentation."""
     parser = argparse.ArgumentParser(description="Extract a protein from a 3D structure.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
     parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
 
@@ -143,8 +152,9 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     #Specific call of each building block
-    ExtractProtein(input_structure_path=args.input_structure_path, output_protein_path=args.output_protein_path, 
-                   properties=properties).launch()
+    ExtractProtein(input_structure_path=args.input_structure_path, 
+                    output_protein_path=args.output_protein_path, 
+                    properties=properties).launch()
 
 if __name__ == '__main__':
     main()

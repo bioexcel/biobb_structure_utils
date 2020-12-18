@@ -24,6 +24,15 @@ class RemovePdbWater:
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
+    Examples:
+        This is a use example of how to use the building block from Python::
+
+            from biobb_structure_utils.utils.remove_pdb_water import remove_pdb_water
+            prop = { }
+            remove_pdb_water(input_pdb_path='/path/to/myStructure.pdb, 
+                            output_pdb_path='/path/to/newStructure.pdb', 
+                            properties=prop)
+
     Info:
         * wrapped_software:
             * name: Structure Checking from MDWeb
@@ -35,8 +44,8 @@ class RemovePdbWater:
 
     """
 
-    def __init__(self, input_pdb_path, 
-                 output_pdb_path, properties=None, **kwargs) -> None:
+    def __init__(self, input_pdb_path, output_pdb_path, 
+                properties=None, **kwargs) -> None:
         properties = properties or {}
 
         # Input/Output files
@@ -60,16 +69,8 @@ class RemovePdbWater:
 
     @launchlogger
     def launch(self) -> int:
-        """Remove water molecules.
-
-        Examples:
-            This is a use example of how to use the RemovePdbWater module from Python
-
-            >>> from biobb_structure_utils.utils.remove_pdb_water import RemovePdbWater
-            >>> prop = { }
-            >>> RemovePdbWater(input_structure_path='/path/to/myInputStr.pdb, output_structure_path='/path/to/newStructure.pdb', properties=prop).launch()
-
-        """
+        """Execute the :class:`RemovePdbWater <utils.remove_pdb_water.RemovePdbWater>` utils.remove_pdb_water.RemovePdbWater object."""
+        
         tmp_files = []
 
         # Get local loggers from @launchlogger decorator
@@ -89,9 +90,16 @@ class RemovePdbWater:
 
         return returncode
 
+def remove_pdb_water(input_pdb_path: str, output_pdb_path: str, properties: dict = None, **kwargs) -> None:
+    """Execute the :class:`RemovePdbWater <utils.remove_pdb_water.RemovePdbWater>` class and
+    execute the :meth:`launch() <utils.remove_pdb_water.RemovePdbWater.launch> method."""
+
+    return RemovePdbWater(input_pdb_path=input_pdb_path, 
+                        output_pdb_path=output_pdb_path,
+                        properties=properties).launch()
 
 def main():
-    """Command line interface."""
+    """Command line execution of this building block. Please check the command line documentation."""
     parser = argparse.ArgumentParser(description="Remove the water molecules from a PDB 3D structure.",
                                      formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
     parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
@@ -106,8 +114,9 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    RemovePdbWater(input_pdb_path=args.input_pdb_path, output_pdb_path=args.output_pdb_path,
-                   properties=properties).launch()
+    RemovePdbWater(input_pdb_path=args.input_pdb_path, 
+                    output_pdb_path=args.output_pdb_path,
+                    properties=properties).launch()
 
 
 if __name__ == '__main__':

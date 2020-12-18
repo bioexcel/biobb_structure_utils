@@ -24,6 +24,17 @@ class ExtractModel():
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
+    Examples:
+        This is a use example of how to use the building block from Python::
+
+            from biobb_structure_utils.utils.extract_model import extract_model
+            prop = { 
+                'models': [ 1, 2, 3 ] 
+            }
+            extract_model(input_structure_path='/path/to/myStructure.pdb, 
+                        output_structure_path='/path/to/newStructure.pdb', 
+                        properties=prop)
+
     Info:
         * wrapped_software:
             * name: Structure Checking from MDWeb
@@ -35,8 +46,8 @@ class ExtractModel():
 
     """
 
-    def __init__(self, input_structure_path, 
-                 output_structure_path, properties=None, **kwargs) -> None:
+    def __init__(self, input_structure_path, output_structure_path, 
+                properties=None, **kwargs) -> None:
         properties = properties or {}
 
         # Input/Output files
@@ -72,23 +83,13 @@ class ExtractModel():
             fu.log('Incorrect format of models parameter, all models will be returned.',  out_log, self.global_log)
             return 'All'
 
-        #return ','.join(str(x) for x in models)
-
         return models
 
 
     @launchlogger
     def launch(self) -> int:
-        """Remove ligand atoms from the structure.
-
-        Examples:
-            This is a use example of how to use the ExtractModel module from Python
-
-            >>> from biobb_structure_utils.utils.extract_model import ExtractModel
-            >>> prop = { 'models': [ 1, 2, 3 ] }
-            >>> ExtractModel(input_structure_path='/path/to/myInputStr.pdb, output_structure_path='/path/to/newStructure.pdb', properties=prop).launch()
-
-        """
+        """Execute the :class:`ExtractModel <utils.extract_model.ExtractModel>` utils.extract_model.ExtractModel object."""
+        
         tmp_files = []
 
         # Get local loggers from launchlogger decorator
@@ -156,10 +157,18 @@ class ExtractModel():
                 fu.log('Removing %s temporary folder' % self.tmp_folder, out_log)
 
 
-        return 1
+        return 0
+
+def extract_model(input_structure_path: str, output_structure_path: str, properties: dict = None, **kwargs) -> None:
+    """Execute the :class:`ExtractModel <utils.extract_model.ExtractModel>` class and
+    execute the :meth:`launch() <utils.extract_model.ExtractModel.launch> method."""
+
+    return ExtractModel(input_structure_path=input_structure_path, 
+                    output_structure_path=output_structure_path,
+                    properties=properties).launch()
 
 def main():
-    """Command line interface."""
+    """Command line execution of this building block. Please check the command line documentation."""
     parser = argparse.ArgumentParser(description="Extract a model from a 3D structure.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
     parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
 
@@ -173,8 +182,9 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     #Specific call of each building block
-    ExtractModel(input_structure_path=args.input_structure_path, output_structure_path=args.output_structure_path, 
-                 properties=properties).launch()
+    ExtractModel(input_structure_path=args.input_structure_path, 
+                output_structure_path=args.output_structure_path, 
+                properties=properties).launch()
 
 if __name__ == '__main__':
     main()

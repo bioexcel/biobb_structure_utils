@@ -20,6 +20,16 @@ class CatPDB():
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
+    Examples:
+        This is a use example of how to use the building block from Python::
+
+            from biobb_structure_utils.utils.cat_pdb import cat_pdb
+            prop = { }
+            cat_pdb(input_structure1='/path/to/myInputStr1.pdb, 
+                    input_structure2='/path/to/myInputStr2.pdb, 
+                    output_structure_path='/path/to/newStructure.pdb', 
+                    properties=prop)
+
     Info:
         * wrapped_software:
             * name: In house
@@ -30,8 +40,8 @@ class CatPDB():
             
     """
 
-    def __init__(self, input_structure1, input_structure2, 
-                 output_structure_path, properties=None, **kwargs) -> None:
+    def __init__(self, input_structure1, input_structure2, output_structure_path, 
+                properties=None, **kwargs) -> None:
         properties = properties or {}
 
         # Input/Output files
@@ -59,16 +69,8 @@ class CatPDB():
 
     @launchlogger
     def launch(self) -> int:
-        """Remove ligand atoms from the structure.
-
-        Examples:
-            This is a use example of how to use the CatPDB module from Python
-
-            >>> from biobb_structure_utils.utils.cat_pdb import CatPDB
-            >>> prop = { }
-            >>> CatPDB(input_structure1='/path/to/myInputStr1.pdb, input_structure2='/path/to/myInputStr2.pdb, output_structure_path='/path/to/newStructure.pdb', properties=prop).launch()
-
-        """
+        """Execute the :class:`CatPDB <utils.cat_pdb.CatPDB>` utils.cat_pdb.CatPDB object."""
+        
         tmp_files = []
 
         # Get local loggers from launchlogger decorator
@@ -100,8 +102,17 @@ class CatPDB():
 
         return 0
 
+def cat_pdb(input_structure1: str, input_structure2: str, output_structure_path: str, properties: dict = None, **kwargs) -> None:
+    """Execute the :class:`CatPDB <utils.cat_pdb.CatPDB>` class and
+    execute the :meth:`launch() <utils.cat_pdb.CatPDB.launch> method."""
+
+    return CatPDB(input_structure1=input_structure1, 
+                    input_structure2=input_structure2, 
+                    output_structure_path=output_structure_path,
+                    properties=properties).launch()
+
 def main():
-    """Command line interface."""
+    """Command line execution of this building block. Please check the command line documentation."""
     parser = argparse.ArgumentParser(description="Concat two PDB structures in a single PDB file.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
     parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
 
@@ -116,9 +127,10 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     #Specific call of each building block
-    CatPDB(input_structure1=args.input_structure1, input_structure2=args.input_structure2, 
-           output_structure_path=args.output_structure_path, 
-           properties=properties).launch()
+    CatPDB(input_structure1=args.input_structure1, 
+            input_structure2=args.input_structure2, 
+            output_structure_path=args.output_structure_path, 
+            properties=properties).launch()
 
 if __name__ == '__main__':
     main()

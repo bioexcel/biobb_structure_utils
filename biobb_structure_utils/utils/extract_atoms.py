@@ -22,6 +22,17 @@ class ExtractAtoms():
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
+    Examples:
+        This is a use example of how to use the building block from Python::
+
+            from biobb_structure_utils.utils.extract_atoms import extract_atoms
+            prop = { 
+                'regular_expression_pattern': '^D' 
+            }
+            extract_atoms(input_structure_path='/path/to/myStructure.pdb, 
+                        output_structure_path='/path/to/newStructure.pdb', 
+                        properties=prop)
+
     Info:
         * wrapped_software:
             * name: In house
@@ -32,8 +43,8 @@ class ExtractAtoms():
             
     """
 
-    def __init__(self, input_structure_path, 
-                 output_structure_path, properties=None, **kwargs) -> None:
+    def __init__(self, input_structure_path, output_structure_path, 
+                properties=None, **kwargs) -> None:
         properties = properties or {}
 
         # Input/Output files
@@ -57,16 +68,8 @@ class ExtractAtoms():
 
     @launchlogger
     def launch(self) -> int:
-        """Remove ligand atoms from the structure.
-
-        Examples:
-            This is a use example of how to use the ExtractAtoms module from Python
-
-            >>> from biobb_structure_utils.utils.extract_atoms import ExtractAtoms
-            >>> prop = { 'regular_expression_pattern': '^D' }
-            >>> ExtractAtoms(input_structure_path='/path/to/myInputStr.pdb, output_structure_path='/path/to/newStructure.pdb', properties=prop).launch()
-
-        """
+        """Execute the :class:`ExtractAtoms <utils.extract_atoms.ExtractAtoms>` utils.extract_atoms.ExtractAtoms object."""
+        
         tmp_files = []
 
         # Get local loggers from launchlogger decorator
@@ -116,8 +119,16 @@ class ExtractAtoms():
 
         return 0
 
+def extract_atoms(input_structure_path: str, output_structure_path: str, properties: dict = None, **kwargs) -> None:
+    """Execute the :class:`ExtractAtoms <utils.extract_atoms.ExtractAtoms>` class and
+    execute the :meth:`launch() <utils.extract_atoms.ExtractAtoms.launch> method."""
+
+    return ExtractAtoms(input_structure_path=input_structure_path, 
+                    output_structure_path=output_structure_path,
+                    properties=properties).launch()
+
 def main():
-    """Command line interface."""
+    """Command line execution of this building block. Please check the command line documentation."""
     parser = argparse.ArgumentParser(description="Remove the selected ligand atoms from a 3D structure.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
     parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
 
@@ -131,8 +142,9 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     #Specific call of each building block
-    ExtractAtoms(input_structure_path=args.input_structure_path, output_structure_path=args.output_structure_path, 
-                 properties=properties).launch()
+    ExtractAtoms(input_structure_path=args.input_structure_path, 
+                output_structure_path=args.output_structure_path, 
+                properties=properties).launch()
 
 if __name__ == '__main__':
     main()
