@@ -110,7 +110,7 @@ class RemoveLigand():
 
 def remove_ligand(input_structure_path: str, output_structure_path: str, properties: dict = None, **kwargs) -> None:
     """Execute the :class:`RemoveLigand <utils.remove_ligand.RemoveLigand>` class and
-    execute the :meth:`launch() <utils.remove_ligand.RemoveLigand.launch> method."""
+    execute the :meth:`launch() <utils.remove_ligand.RemoveLigand.launch>` method."""
 
     return RemoveLigand(input_structure_path=input_structure_path, 
                         output_structure_path=output_structure_path,

@@ -192,7 +192,7 @@ class ExtractHeteroAtoms():
 
 def extract_heteroatoms(input_structure_path: str, output_heteroatom_path: str, properties: dict = None, **kwargs) -> None:
     """Execute the :class:`ExtractHeteroAtoms <utils.extract_heteroatoms.ExtractHeteroAtoms>` class and
-    execute the :meth:`launch() <utils.extract_heteroatoms.ExtractHeteroAtoms.launch> method."""
+    execute the :meth:`launch() <utils.extract_heteroatoms.ExtractHeteroAtoms.launch>` method."""
 
     return ExtractHeteroAtoms(input_structure_path=input_structure_path, 
                     output_heteroatom_path=output_heteroatom_path,

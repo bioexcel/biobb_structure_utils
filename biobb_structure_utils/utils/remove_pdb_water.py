@@ -92,7 +92,7 @@ class RemovePdbWater:
 
 def remove_pdb_water(input_pdb_path: str, output_pdb_path: str, properties: dict = None, **kwargs) -> None:
     """Execute the :class:`RemovePdbWater <utils.remove_pdb_water.RemovePdbWater>` class and
-    execute the :meth:`launch() <utils.remove_pdb_water.RemovePdbWater.launch> method."""
+    execute the :meth:`launch() <utils.remove_pdb_water.RemovePdbWater.launch>` method."""
 
     return RemovePdbWater(input_pdb_path=input_pdb_path, 
                         output_pdb_path=output_pdb_path,

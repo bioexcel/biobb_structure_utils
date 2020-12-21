@@ -161,7 +161,7 @@ class ExtractModel():
 
 def extract_model(input_structure_path: str, output_structure_path: str, properties: dict = None, **kwargs) -> None:
     """Execute the :class:`ExtractModel <utils.extract_model.ExtractModel>` class and
-    execute the :meth:`launch() <utils.extract_model.ExtractModel.launch> method."""
+    execute the :meth:`launch() <utils.extract_model.ExtractModel.launch>` method."""
 
     return ExtractModel(input_structure_path=input_structure_path, 
                     output_structure_path=output_structure_path,

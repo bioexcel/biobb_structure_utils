@@ -98,7 +98,7 @@ class SortGroResidues():
 
 def sort_gro_residues(input_gro_path: str, output_gro_path: str, properties: dict = None, **kwargs) -> None:
     """Execute the :class:`SortGroResidues <utils.sort_gro_residues.SortGroResidues>` class and
-    execute the :meth:`launch() <utils.sort_gro_residues.SortGroResidues.launch> method."""
+    execute the :meth:`launch() <utils.sort_gro_residues.SortGroResidues.launch>` method."""
 
     return SortGroResidues(input_gro_path=input_gro_path, 
                         output_gro_path=output_gro_path,

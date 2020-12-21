@@ -121,7 +121,7 @@ class ExtractAtoms():
 
 def extract_atoms(input_structure_path: str, output_structure_path: str, properties: dict = None, **kwargs) -> None:
     """Execute the :class:`ExtractAtoms <utils.extract_atoms.ExtractAtoms>` class and
-    execute the :meth:`launch() <utils.extract_atoms.ExtractAtoms.launch> method."""
+    execute the :meth:`launch() <utils.extract_atoms.ExtractAtoms.launch>` method."""
 
     return ExtractAtoms(input_structure_path=input_structure_path, 
                     output_structure_path=output_structure_path,

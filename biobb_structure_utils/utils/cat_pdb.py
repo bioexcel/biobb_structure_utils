@@ -104,7 +104,7 @@ class CatPDB():
 
 def cat_pdb(input_structure1: str, input_structure2: str, output_structure_path: str, properties: dict = None, **kwargs) -> None:
     """Execute the :class:`CatPDB <utils.cat_pdb.CatPDB>` class and
-    execute the :meth:`launch() <utils.cat_pdb.CatPDB.launch> method."""
+    execute the :meth:`launch() <utils.cat_pdb.CatPDB.launch>` method."""
 
     return CatPDB(input_structure1=input_structure1, 
                     input_structure2=input_structure2, 

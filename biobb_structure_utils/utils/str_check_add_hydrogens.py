@@ -121,7 +121,7 @@ class StrCheckAddHydrogens():
 
 def str_check_add_hydrogens(input_structure_path: str, output_structure_path: str, properties: dict = None, **kwargs) -> None:
     """Execute the :class:`StrCheckAddHydrogens <utils.str_check_add_hydrogens.StrCheckAddHydrogens>` class and
-    execute the :meth:`launch() <utils.str_check_add_hydrogens.StrCheckAddHydrogens.launch> method."""
+    execute the :meth:`launch() <utils.str_check_add_hydrogens.StrCheckAddHydrogens.launch>` method."""
 
     return StrCheckAddHydrogens(input_structure_path=input_structure_path, 
                                 output_structure_path=output_structure_path,

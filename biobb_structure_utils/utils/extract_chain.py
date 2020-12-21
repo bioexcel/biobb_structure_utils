@@ -124,7 +124,7 @@ class ExtractChain():
 
 def extract_chain(input_structure_path: str, output_structure_path: str, properties: dict = None, **kwargs) -> None:
     """Execute the :class:`ExtractChain <utils.extract_chain.ExtractChain>` class and
-    execute the :meth:`launch() <utils.extract_chain.ExtractChain.launch> method."""
+    execute the :meth:`launch() <utils.extract_chain.ExtractChain.launch>` method."""
 
     return ExtractChain(input_structure_path=input_structure_path, 
                     output_structure_path=output_structure_path,

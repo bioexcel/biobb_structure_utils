@@ -140,7 +140,7 @@ class RenumberStructure:
 
 def renumber_structure(input_structure_path: str, output_structure_path: str, output_mapping_json_path: str, properties: dict = None, **kwargs) -> None:
     """Execute the :class:`RenumberStructure <utils.renumber_structure.RenumberStructure>` class and
-    execute the :meth:`launch() <utils.renumber_structure.RenumberStructure.launch> method."""
+    execute the :meth:`launch() <utils.renumber_structure.RenumberStructure.launch>` method."""
 
     return RenumberStructure(input_structure_path=input_structure_path, 
                         output_structure_path=output_structure_path,

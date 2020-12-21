@@ -131,7 +131,7 @@ class ExtractProtein():
 
 def extract_protein(input_structure_path: str, output_protein_path: str, properties: dict = None, **kwargs) -> None:
     """Execute the :class:`ExtractProtein <utils.extract_protein.ExtractProtein>` class and
-    execute the :meth:`launch() <utils.extract_protein.ExtractProtein.launch> method."""
+    execute the :meth:`launch() <utils.extract_protein.ExtractProtein.launch>` method."""
 
     return ExtractProtein(input_structure_path=input_structure_path, 
                         output_protein_path=output_protein_path,
