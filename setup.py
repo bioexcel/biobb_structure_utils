@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="biobb_structure_utils",
-    version="3.5.0",
+    version="3.5.1",
     author="Biobb developers",
     author_email="pau.andrio@bsc.es",
     description="biobb_structure_utils is the Biobb module collection to perform basic manipulations on 3d structures.",
@@ -18,7 +18,7 @@ setuptools.setup(
         "Bioexcel": "https://bioexcel.eu/"
     },
     packages=setuptools.find_packages(exclude=['docs', 'test',]),
-    install_requires=['biobb_common==3.5.1', 'biobb_structure_checking==3.0.2'],
+    install_requires=['biobb_common==3.5.1', 'biobb_structure_checking==3.5.3'],
     python_requires='==3.7.*',
     classifiers=(
         "Development Status :: 3 - Alpha",

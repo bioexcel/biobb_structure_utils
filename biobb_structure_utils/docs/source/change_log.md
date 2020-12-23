@@ -1,5 +1,12 @@
 # Biobb Structure Utils changelog
 
+## What's new in version [3.5.1](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v3.5.1)?
+In version 3.5.1 the dependency biobb_structure_checking has been updated to 3.5.3 version. 
+
+### New features
+
+* Update to biobb_structure_checking 3.5.3 
+
 ## What's new in version [3.5.0](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v3.5.0)?
 In version 3.5.0 the dependency biobb_common has been updated to 3.5.1 version. Also, there has been implemented the new version of docstrings, therefore the JSON Schemas have been modified.
 
