@@ -89,14 +89,25 @@ class CatPDB():
             if fu.check_complete_files(output_file_list):
                 fu.log('Restart is enabled, this step: %s will the skipped' % self.step,  out_log, self.global_log)
                 return 0
+       
+        filenames = [self.input_structure1, self.input_structure2]
+        # check if self.input_structure1 and self.input_structure2 end with newline
+        newline = [False, False]
+        for idx, fname in enumerate(filenames):
+            with open(fname, 'rb') as fh:
+                fh.seek(-1024, 2)
+                last = fh.readlines()[-1].decode()
+                newline[idx] = "\n" in last
 
         # concat both input files and save them into output file
-        filenames = [self.input_structure1, self.input_structure2]
         with open(self.output_structure_path, 'w') as outfile:
-            for fname in filenames:
+            for idx, fname in enumerate(filenames):
                 with open(fname) as infile:
                     for line in infile:
                         if not line.startswith("END"): outfile.write(line)
+                    # if not ends in newline, add it
+                    if not newline[idx]:
+                        outfile.write("\n")
 
         fu.log('File %s created' % self.output_structure_path,  out_log, self.global_log)
 
