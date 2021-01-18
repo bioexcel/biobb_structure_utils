@@ -145,3 +145,11 @@ str_check_add_hydrogens:
   properties:
     charges: true
     mode: auto
+
+structure_check:
+  paths:
+    input_structure_path: file:test_data_dir/utils/2vgb.pdb
+    output_summary_path: output_summary_path.json
+    reference_output_summary_path: file:test_reference_dir/utils/summary.json
+  properties:
+    features: [chains, models]

@@ -1,0 +1,38 @@
+{
+ "chains": {
+  "ids": {
+   "A": 1,
+   "B": 1,
+   "C": 1,
+   "D": 1
+  }
+ },
+ "headers": {
+  "keywords": "metal-binding, phosphorylation, pyruvate kinase in the active r- state, kinase, pyruvate, magnesium, glycolysis, transferase, disease mutation",
+  "method": "x-ray diffraction",
+  "resolution": 2.73,
+  "title": "human erythrocyte pyruvate kinase"
+ },
+ "models": {
+  "nmodels": 1
+ },
+ "stats": {
+  "biounit": false,
+  "ca_only": false,
+  "chain_ids": {
+   "A": 1,
+   "B": 1,
+   "C": 1,
+   "D": 1
+  },
+  "models_type": 0,
+  "nchains": 4,
+  "nmodels": 1,
+  "num_ats": 15612,
+  "num_res": 2118,
+  "num_wat": 65,
+  "res_hetats": 81,
+  "res_insc": 0,
+  "res_ligands": 16
+ }
+}
