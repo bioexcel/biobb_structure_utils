@@ -15,10 +15,10 @@ class StructureCheck():
     | Wrapper for the `Structure Checking <https://github.com/bioexcel/biobb_structure_checking>`_ tool to generate summary checking results on a json file from a given structure and a list of features.
 
     Args:
-        input_structure_path (str): Input structure file path. File type: input. `Sample file <>`_. Accepted formats: pdb (edam:format_1476).
-        output_summary_path (str): Output summary checking results. File type: output. `Sample file <>`_. Accepted formats: json (edam:format_3464).
+        input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/2vgb.pdb>`_. Accepted formats: pdb (edam:format_1476).
+        output_summary_path (str): Output summary checking results. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/summary.json>`_. Accepted formats: json (edam:format_3464).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
-            * **features** (*list*) - (None) Features to summarize. If None, all the features will be computed. Values: models, chains, altloc, metals, ligands, chiral, getss, cistransbck, backbone, amide, clashes.
+            * **features** (*list*) - (None) Features to summarize. If None, all the features will be computed. Values: models (multiple molecules or coordinate sets in a single file), chains (multiple chains in a single file), altloc (atom alternative conformation given an alternate location indicator and occupancy), metals (metals present in the structure), ligands (heteroatoms present in the structure), chiral (to say that a structure is chiral is to say that its mirror image is not the same as it self), getss (detect SS bonds or disulfides), cistransbck (detact cis/trans backbone), backbone (detect backbone breaks), amide (detect too close amides), clashes (detect clashes).
             * **check_structure_path** (*string*) - ("check_structure") path to the check_structure application
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.

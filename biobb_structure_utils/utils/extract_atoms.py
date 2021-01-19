@@ -119,13 +119,13 @@ class ExtractAtoms():
 
         return 0
 
-def extract_atoms(input_structure_path: str, output_structure_path: str, properties: dict = None, **kwargs) -> None:
+def extract_atoms(input_structure_path: str, output_structure_path: str, properties: dict = None, **kwargs) -> int:
     """Execute the :class:`ExtractAtoms <utils.extract_atoms.ExtractAtoms>` class and
     execute the :meth:`launch() <utils.extract_atoms.ExtractAtoms.launch>` method."""
 
     return ExtractAtoms(input_structure_path=input_structure_path, 
                     output_structure_path=output_structure_path,
-                    properties=properties).launch()
+                    properties=properties, **kwargs).launch()
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
@@ -142,9 +142,9 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     #Specific call of each building block
-    ExtractAtoms(input_structure_path=args.input_structure_path, 
+    extract_atoms(input_structure_path=args.input_structure_path, 
                 output_structure_path=args.output_structure_path, 
-                properties=properties).launch()
+                properties=properties)
 
 if __name__ == '__main__':
     main()

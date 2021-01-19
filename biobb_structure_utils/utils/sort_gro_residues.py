@@ -96,13 +96,13 @@ class SortGroResidues():
 
         return 0
 
-def sort_gro_residues(input_gro_path: str, output_gro_path: str, properties: dict = None, **kwargs) -> None:
+def sort_gro_residues(input_gro_path: str, output_gro_path: str, properties: dict = None, **kwargs) -> int:
     """Execute the :class:`SortGroResidues <utils.sort_gro_residues.SortGroResidues>` class and
     execute the :meth:`launch() <utils.sort_gro_residues.SortGroResidues.launch>` method."""
 
     return SortGroResidues(input_gro_path=input_gro_path, 
                         output_gro_path=output_gro_path,
-                        properties=properties).launch()
+                        properties=properties, **kwargs).launch()
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
@@ -119,9 +119,9 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     #Specific call of each building block
-    SortGroResidues(input_gro_path=args.input_gro_path, 
+    sort_gro_residues(input_gro_path=args.input_gro_path, 
                     output_gro_path=args.output_gro_path, 
-                    properties=properties).launch()
+                    properties=properties)
 
 if __name__ == '__main__':
     main()

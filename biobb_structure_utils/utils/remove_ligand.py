@@ -108,13 +108,13 @@ class RemoveLigand():
 
         return 0
 
-def remove_ligand(input_structure_path: str, output_structure_path: str, properties: dict = None, **kwargs) -> None:
+def remove_ligand(input_structure_path: str, output_structure_path: str, properties: dict = None, **kwargs) -> int:
     """Execute the :class:`RemoveLigand <utils.remove_ligand.RemoveLigand>` class and
     execute the :meth:`launch() <utils.remove_ligand.RemoveLigand.launch>` method."""
 
     return RemoveLigand(input_structure_path=input_structure_path, 
                         output_structure_path=output_structure_path,
-                        properties=properties).launch()
+                        properties=properties, **kwargs).launch()
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
@@ -131,9 +131,9 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     #Specific call of each building block
-    RemoveLigand(input_structure_path=args.input_structure_path, 
+    remove_ligand(input_structure_path=args.input_structure_path, 
                 output_structure_path=args.output_structure_path, 
-                properties=properties).launch()
+                properties=properties)
 
 if __name__ == '__main__':
     main()

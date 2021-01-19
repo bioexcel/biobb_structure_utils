@@ -4,17 +4,10 @@
     "github" : "https://github.com/bioexcel/biobb_structure_utils", 
     "readthedocs" : "https://biobb-structure-utils.readthedocs.io/en/latest/", 
     "conda" : "https://anaconda.org/bioconda/biobb_structure_utils", 
-    "docker" : "https://quay.io/biocontainers/biobb_structure_utils:3.5.1--py_0", 
+    "docker" : "https://quay.io/biocontainers/biobb_structure_utils:3.5.2--py_0", 
     "singularity" : "https://singularity-hub.org/collections/3836/usage", 
-    "version" : "3.5.1",
+    "version" : "3.5.2",
     "tools" : [
-        {
-            "block" : "StrCheckAddHydrogens", 
-            "tool" : "in house", 
-            "desc" : "Class to add hydrogens to a 3D structure.",
-            "exec" : "str_check_add_hydrogens",
-            "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#utils-str-check-add-hydrogens-module"
-        }, 
         {
             "block" : "CatPDB", 
             "tool" : "in house", 
@@ -31,8 +24,8 @@
         },
         {
             "block" : "ExtractChain", 
-            "tool" : "in house", 
-            "desc" : "Class to extract a chain from a 3D structure.",
+            "tool" : "Structure Checking from MDWeb", 
+            "desc" : "This class is a wrapper of the Structure Checking tool to extract a chain from a 3D structure.",
             "exec" : "extract_chain",
             "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.extract_chain"
         }, 
@@ -45,15 +38,15 @@
         }, 
         {
             "block" : "ExtractModel", 
-            "tool" : "in house", 
-            "desc" : "Class to extract a model from a 3D structure.",
+            "tool" : "Structure Checking from MDWeb", 
+            "desc" : "This class is a wrapper of the Structure Checking tool to extract a model from a 3D structure.",
             "exec" : "extract_model",
             "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.extract_model"
         }, 
         {
             "block" : "ExtractProtein", 
-            "tool" : "in house", 
-            "desc" : "Class to extract a protein from a 3D structure.",
+            "tool" : "Structure Checking from MDWeb", 
+            "desc" : "This class is a wrapper of the Structure Checking tool to extract a protein from a 3D structure.",
             "exec" : "extract_protein",
             "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.extract_protein"
         }, 
@@ -66,8 +59,8 @@
         },
         {
             "block" : "RemovePdbWater", 
-            "tool" : "in house", 
-            "desc" : "Class to remove water molecules from PDB 3D structures.",
+            "tool" : "Structure Checking from MDWeb", 
+            "desc" : "This class is a wrapper of the Structure Checking tool to remove water molecules from PDB 3D structures.",
             "exec" : "remove_pdb_water",
             "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.remove_pdb_water"
         }, 
@@ -84,16 +77,30 @@
             "desc" : "Class to sort the selected residues from a GRO 3D structure.",
             "exec" : "sort_gro_residues",
             "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.sort_gro_residues"
+        },
+        {
+            "block" : "StrCheckAddHydrogens", 
+            "tool" : "Structure Checking from MDWeb", 
+            "desc" : "This class is a wrapper of the Structure Checking tool to add hydrogens to a 3D structure.",
+            "exec" : "str_check_add_hydrogens",
+            "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#utils-str-check-add-hydrogens-module"
+        }, 
+        {
+            "block" : "StructureCheck", 
+            "tool" : "Structure Checking from MDWeb", 
+            "desc" : "This class is a wrapper of the Structure Checking tool to generate summary checking results on a json file.",
+            "exec" : "structure_check",
+            "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.structure_check"
         }
     ],
     "dep_pypi" : [
-        "install_requires=['biobb_common==3.5.1', 'biobb_structure_checking==3.5.3']", 
+        "install_requires=['biobb_common==3.5.1', 'biobb_structure_checking==3.7.3']", 
         "python_requires='==3.7.*'"
     ], 
     "dep_conda" : [
         "python ==3.7.*", 
         "biobb_common ==3.5.1",
-        "biobb_structure_checking ==3.5.3"
+        "biobb_structure_checking ==3.7.3"
     ],
     "dep_conda_extra" : [
     ], 

@@ -1,5 +1,13 @@
 # Biobb Structure Utils changelog
 
+## What's new in version [3.5.2](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v3.5.2)?
+In version 3.5.2 the dependency biobb_structure_checking has been updated to 3.7.3 version. New tool for checking structures.
+
+### New features
+
+* Update to biobb_structure_checking 3.7.3 
+* New StructureCheck tool
+
 ## What's new in version [3.5.1](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v3.5.1)?
 In version 3.5.1 the dependency biobb_structure_checking has been updated to 3.5.3 version. 
 

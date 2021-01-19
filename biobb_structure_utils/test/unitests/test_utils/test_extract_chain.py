@@ -1,5 +1,5 @@
 from biobb_common.tools import test_fixtures as fx
-from biobb_structure_utils.utils.extract_chain import ExtractChain
+from biobb_structure_utils.utils.extract_chain import extract_chain
 
 
 class TestExtractChain():
@@ -7,10 +7,10 @@ class TestExtractChain():
         fx.test_setup(self, 'extract_chain')
 
     def tearDown(self):
-        pass
         fx.test_teardown(self)
+        pass
 
     def test_launch(self):
-        ExtractChain(properties=self.properties, **self.paths).launch()
+        extract_chain(properties=self.properties, **self.paths)
         assert fx.not_empty(self.paths['output_structure_path'])
         assert fx.equal(self.paths['output_structure_path'], self.paths['reference_output_structure_path'])

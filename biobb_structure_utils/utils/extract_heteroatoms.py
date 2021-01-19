@@ -190,13 +190,13 @@ class ExtractHeteroAtoms():
 
         return 0
 
-def extract_heteroatoms(input_structure_path: str, output_heteroatom_path: str, properties: dict = None, **kwargs) -> None:
+def extract_heteroatoms(input_structure_path: str, output_heteroatom_path: str, properties: dict = None, **kwargs) -> int:
     """Execute the :class:`ExtractHeteroAtoms <utils.extract_heteroatoms.ExtractHeteroAtoms>` class and
     execute the :meth:`launch() <utils.extract_heteroatoms.ExtractHeteroAtoms.launch>` method."""
 
     return ExtractHeteroAtoms(input_structure_path=input_structure_path, 
                     output_heteroatom_path=output_heteroatom_path,
-                    properties=properties).launch()
+                    properties=properties, **kwargs).launch()
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
@@ -213,9 +213,9 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     #Specific call of each building block
-    ExtractHeteroAtoms(input_structure_path=args.input_structure_path, 
+    extract_heteroatoms(input_structure_path=args.input_structure_path, 
                         output_heteroatom_path=args.output_heteroatom_path, 
-                        properties=properties).launch()
+                        properties=properties)
 
 if __name__ == '__main__':
     main()

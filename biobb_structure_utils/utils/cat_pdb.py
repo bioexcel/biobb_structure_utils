@@ -113,14 +113,14 @@ class CatPDB():
 
         return 0
 
-def cat_pdb(input_structure1: str, input_structure2: str, output_structure_path: str, properties: dict = None, **kwargs) -> None:
+def cat_pdb(input_structure1: str, input_structure2: str, output_structure_path: str, properties: dict = None, **kwargs) -> int:
     """Execute the :class:`CatPDB <utils.cat_pdb.CatPDB>` class and
     execute the :meth:`launch() <utils.cat_pdb.CatPDB.launch>` method."""
 
     return CatPDB(input_structure1=input_structure1, 
                     input_structure2=input_structure2, 
                     output_structure_path=output_structure_path,
-                    properties=properties).launch()
+                    properties=properties, **kwargs).launch()
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
@@ -138,10 +138,10 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     #Specific call of each building block
-    CatPDB(input_structure1=args.input_structure1, 
+    cat_pdb(input_structure1=args.input_structure1, 
             input_structure2=args.input_structure2, 
             output_structure_path=args.output_structure_path, 
-            properties=properties).launch()
+            properties=properties)
 
 if __name__ == '__main__':
     main()

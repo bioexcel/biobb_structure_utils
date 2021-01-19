@@ -90,13 +90,13 @@ class RemovePdbWater:
 
         return returncode
 
-def remove_pdb_water(input_pdb_path: str, output_pdb_path: str, properties: dict = None, **kwargs) -> None:
+def remove_pdb_water(input_pdb_path: str, output_pdb_path: str, properties: dict = None, **kwargs) -> int:
     """Execute the :class:`RemovePdbWater <utils.remove_pdb_water.RemovePdbWater>` class and
     execute the :meth:`launch() <utils.remove_pdb_water.RemovePdbWater.launch>` method."""
 
     return RemovePdbWater(input_pdb_path=input_pdb_path, 
                         output_pdb_path=output_pdb_path,
-                        properties=properties).launch()
+                        properties=properties, **kwargs).launch()
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
@@ -114,9 +114,9 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    RemovePdbWater(input_pdb_path=args.input_pdb_path, 
+    remove_pdb_water(input_pdb_path=args.input_pdb_path, 
                     output_pdb_path=args.output_pdb_path,
-                    properties=properties).launch()
+                    properties=properties)
 
 
 if __name__ == '__main__':

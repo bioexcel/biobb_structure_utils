@@ -159,13 +159,13 @@ class ExtractModel():
 
         return 0
 
-def extract_model(input_structure_path: str, output_structure_path: str, properties: dict = None, **kwargs) -> None:
+def extract_model(input_structure_path: str, output_structure_path: str, properties: dict = None, **kwargs) -> int:
     """Execute the :class:`ExtractModel <utils.extract_model.ExtractModel>` class and
     execute the :meth:`launch() <utils.extract_model.ExtractModel.launch>` method."""
 
     return ExtractModel(input_structure_path=input_structure_path, 
                     output_structure_path=output_structure_path,
-                    properties=properties).launch()
+                    properties=properties, **kwargs).launch()
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
@@ -182,9 +182,9 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     #Specific call of each building block
-    ExtractModel(input_structure_path=args.input_structure_path, 
+    extract_model(input_structure_path=args.input_structure_path, 
                 output_structure_path=args.output_structure_path, 
-                properties=properties).launch()
+                properties=properties)
 
 if __name__ == '__main__':
     main()

@@ -129,13 +129,13 @@ class ExtractProtein():
 
         return returncode
 
-def extract_protein(input_structure_path: str, output_protein_path: str, properties: dict = None, **kwargs) -> None:
+def extract_protein(input_structure_path: str, output_protein_path: str, properties: dict = None, **kwargs) -> int:
     """Execute the :class:`ExtractProtein <utils.extract_protein.ExtractProtein>` class and
     execute the :meth:`launch() <utils.extract_protein.ExtractProtein.launch>` method."""
 
     return ExtractProtein(input_structure_path=input_structure_path, 
                         output_protein_path=output_protein_path,
-                        properties=properties).launch()
+                        properties=properties, **kwargs).launch()
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
@@ -152,9 +152,9 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     #Specific call of each building block
-    ExtractProtein(input_structure_path=args.input_structure_path, 
+    extract_protein(input_structure_path=args.input_structure_path, 
                     output_protein_path=args.output_protein_path, 
-                    properties=properties).launch()
+                    properties=properties)
 
 if __name__ == '__main__':
     main()

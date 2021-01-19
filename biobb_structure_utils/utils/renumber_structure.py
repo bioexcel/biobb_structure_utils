@@ -138,14 +138,14 @@ class RenumberStructure:
 
         return 0
 
-def renumber_structure(input_structure_path: str, output_structure_path: str, output_mapping_json_path: str, properties: dict = None, **kwargs) -> None:
+def renumber_structure(input_structure_path: str, output_structure_path: str, output_mapping_json_path: str, properties: dict = None, **kwargs) -> int:
     """Execute the :class:`RenumberStructure <utils.renumber_structure.RenumberStructure>` class and
     execute the :meth:`launch() <utils.renumber_structure.RenumberStructure.launch>` method."""
 
     return RenumberStructure(input_structure_path=input_structure_path, 
                         output_structure_path=output_structure_path,
                         output_mapping_json_path=output_mapping_json_path,
-                        properties=properties).launch()
+                        properties=properties, **kwargs).launch()
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
@@ -163,10 +163,10 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     #Specific call of each building block
-    RenumberStructure(input_structure_path=args.input_structure_path, 
+    renumber_structure(input_structure_path=args.input_structure_path, 
                         output_structure_path=args.output_structure_path, 
                         output_mapping_json_path=args.output_mapping_json_path, 
-                        properties=properties).launch()
+                        properties=properties)
 
 if __name__ == '__main__':
     main()
