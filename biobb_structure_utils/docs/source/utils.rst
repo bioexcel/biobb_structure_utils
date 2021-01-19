@@ -4,34 +4,18 @@ utils package
 Submodules
 ----------
 
-utils.str_check_add_hydrogens module
----------------------------------
-
-.. automodule:: utils.str_check_add_hydrogens
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-utils.extract_heteroatoms module
----------------------------------
-
-.. automodule:: utils.extract_heteroatoms
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-utils.extract_protein module
------------------------------
-
-.. automodule:: utils.extract_protein
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 utils.cat_pdb module
 -----------------------------
 
 .. automodule:: utils.cat_pdb
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+utils.extract_atoms module
+-----------------------------
+
+.. automodule:: utils.extract_atoms
     :members:
     :undoc-members:
     :show-inheritance:
@@ -44,6 +28,14 @@ utils.extract_chain module
     :undoc-members:
     :show-inheritance:
 
+utils.extract_heteroatoms module
+---------------------------------
+
+.. automodule:: utils.extract_heteroatoms
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 utils.extract_model module
 -----------------------------
 
@@ -52,10 +44,10 @@ utils.extract_model module
     :undoc-members:
     :show-inheritance:
 
-utils.extract_atoms module
+utils.extract_protein module
 -----------------------------
 
-.. automodule:: utils.extract_atoms
+.. automodule:: utils.extract_protein
     :members:
     :undoc-members:
     :show-inheritance:
@@ -88,6 +80,22 @@ utils.sort_gro_residues module
 ---------------------------------
 
 .. automodule:: utils.sort_gro_residues
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+utils.str_check_add_hydrogens module
+-------------------------------------
+
+.. automodule:: utils.str_check_add_hydrogens
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+utils.structure_check module
+---------------------------------
+
+.. automodule:: utils.structure_check
     :members:
     :undoc-members:
     :show-inheritance:
