@@ -44,11 +44,11 @@
             "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.extract_model"
         }, 
         {
-            "block" : "ExtractProtein", 
+            "block" : "ExtractMolecule", 
             "tool" : "Structure Checking from MDWeb", 
-            "desc" : "This class is a wrapper of the Structure Checking tool to extract a protein from a 3D structure.",
-            "exec" : "extract_protein",
-            "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.extract_protein"
+            "desc" : "This class is a wrapper of the Structure Checking tool to extract a molecule from a 3D structure.",
+            "exec" : "extract_molecule",
+            "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.extract_molecule"
         }, 
         {
             "block" : "RemoveLigand", 

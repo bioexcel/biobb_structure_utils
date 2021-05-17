@@ -5,9 +5,7 @@ import argparse
 from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from Bio import BiopythonWarning
 from Bio.PDB.PDBParser import PDBParser
-from Bio.PDB.PDBIO import PDBIO
 from biobb_structure_utils.utils.common import *
 
 class ExtractHeteroAtoms():
@@ -20,6 +18,7 @@ class ExtractHeteroAtoms():
         output_heteroatom_path (str): Output heteroatom file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_heteroatom.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **heteroatoms** (*list*) - (None) List of dictionaries with the name | res_id | chain | model of the heteroatoms to be extracted. Format: [{"name": "ZZ7", "res_id": "302", "chain": "B", "model": "1"}]. If empty, all the heteroatoms of the structure will be returned.
+            * **water** (*bool*) - (False) Add or not waters.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -62,6 +61,7 @@ class ExtractHeteroAtoms():
 
         # Properties specific for BB
         self.heteroatoms = properties.get('heteroatoms', [])
+        self.water = properties.get('water', False)
         self.properties = properties
 
         # Common in all BB
@@ -102,8 +102,6 @@ class ExtractHeteroAtoms():
     @launchlogger
     def launch(self) -> int:
         """Execute the :class:`ExtractHeteroAtoms <utils.extract_heteroatoms.ExtractHeteroAtoms>` utils.extract_heteroatoms.ExtractHeteroAtoms object."""
-        
-        tmp_files = []
 
         # Get local loggers from launchlogger decorator
         out_log = getattr(self, 'out_log', None)
@@ -149,9 +147,15 @@ class ExtractHeteroAtoms():
                             break
 
                     if(match): 
-                        new_structure.append(r)
+                        if not self.water and (r['name'] == 'HOH' or r['name'] == 'SOL' or r['name'] == 'WAT'):
+                            pass
+                        else:
+                            new_structure.append(r)
             else:
-                new_structure.append(r)
+                if not self.water and (r['name'] == 'HOH' or r['name'] == 'SOL' or r['name'] == 'WAT'):
+                    pass
+                else:
+                    new_structure.append(r)
 
         # if not heteroatoms found in structure, raise exit
         if not new_structure:
@@ -170,7 +174,7 @@ class ExtractHeteroAtoms():
                 if line.startswith("HETATM"): 
                     name = line[17:20].strip()
                     chain = line[21:22].strip()
-                    res_id = line[23:27].strip()
+                    res_id = line[22:27].strip()
                     if curr_model != 0: model = curr_model.strip()
                     else: model = "1"
                     if chain == "": chain = " "

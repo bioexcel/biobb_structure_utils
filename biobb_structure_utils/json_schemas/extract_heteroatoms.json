@@ -62,6 +62,12 @@
                     "wf_prop": false,
                     "description": "List of dictionaries with the name | res_id | chain | model of the heteroatoms to be extracted. Format: [{\"name\": \"ZZ7\", \"res_id\": \"302\", \"chain\": \"B\", \"model\": \"1\"}]. If empty, all the heteroatoms of the structure will be returned."
                 },
+                "water": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": false,
+                    "description": "Add or not waters."
+                },
                 "remove_tmp": {
                     "type": "boolean",
                     "default": true,

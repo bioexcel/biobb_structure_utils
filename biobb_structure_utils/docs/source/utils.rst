@@ -44,10 +44,10 @@ utils.extract_model module
     :undoc-members:
     :show-inheritance:
 
-utils.extract_protein module
+utils.extract_molecule module
 -----------------------------
 
-.. automodule:: utils.extract_protein
+.. automodule:: utils.extract_molecule
     :members:
     :undoc-members:
     :show-inheritance:

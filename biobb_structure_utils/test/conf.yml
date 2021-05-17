@@ -104,11 +104,11 @@ extract_heteroatoms:
       "name": "ADP"
     }]
 
-extract_protein:
+extract_molecule:
   paths:
-    input_structure_path: file:test_data_dir/utils/extract_protein.pdb
-    output_protein_path: output_protein_path.pdb
-    reference_output_protein_path: file:test_reference_dir/utils/ref_extract_protein.pdb
+    input_structure_path: file:test_data_dir/utils/extract_molecule.pdb
+    output_molecule_path: output_molecule_path.pdb
+    reference_output_molecule_path: file:test_reference_dir/utils/ref_extract_molecule.pdb
   properties:
     remove_tmp: true
 

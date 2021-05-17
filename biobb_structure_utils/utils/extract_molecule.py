@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Module containing the ExtractProtein class and the command line interface."""
+"""Module containing the ExtractMolecule class and the command line interface."""
 import argparse
 from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
@@ -8,15 +8,15 @@ from biobb_common.tools.file_utils import launchlogger
 from biobb_common.command_wrapper import cmd_wrapper
 from biobb_structure_utils.utils.common import *
 
-class ExtractProtein():
+class ExtractMolecule():
     """
-    | biobb_structure_utils ExtractProtein
-    | This class is a wrapper of the Structure Checking tool to extract a protein from a 3D structure.
-    | Wrapper for the `Structure Checking <https://github.com/bioexcel/biobb_structure_checking>`_ tool to extract a protein from a 3D structure.
+    | biobb_structure_utils ExtractMolecule
+    | This class is a wrapper of the Structure Checking tool to extract a molecule from a 3D structure.
+    | Wrapper for the `Structure Checking <https://github.com/bioexcel/biobb_structure_checking>`_ tool to extract a molecule from a 3D structure.
 
     Args:
-        input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_protein.pdb>`_. Accepted formats: pdb (edam:format_1476).
-        output_protein_path (str): Output protein file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_protein.pdb>`_. Accepted formats: pdb (edam:format_1476).
+        input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_molecule.pdb>`_. Accepted formats: pdb (edam:format_1476).
+        output_molecule_path (str): Output molecule file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_molecule.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **check_structure_path** (*string*) - ("check_structure") path to the check_structure application
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
@@ -25,10 +25,10 @@ class ExtractProtein():
     Examples:
         This is a use example of how to use the building block from Python::
 
-            from biobb_structure_utils.utils.extract_protein import extract_protein
+            from biobb_structure_utils.utils.extract_molecule import extract_molecule
             prop = { }
-            extract_protein(input_structure_path='/path/to/myStructure.pdb, 
-                            output_protein_path='/path/to/newProtein.pdb', 
+            extract_molecule(input_structure_path='/path/to/myStructure.pdb, 
+                            output_molecule_path='/path/to/newMolecule.pdb', 
                             properties=prop)
 
     Info:
@@ -42,13 +42,13 @@ class ExtractProtein():
             
     """
 
-    def __init__(self, input_structure_path, output_protein_path, 
+    def __init__(self, input_structure_path, output_molecule_path, 
                 properties=None, **kwargs) -> None:
         properties = properties or {}
 
         # Input/Output files
         self.input_structure_path = str(input_structure_path)
-        self.output_protein_path = str(output_protein_path)
+        self.output_molecule_path = str(output_molecule_path)
 
         # Properties specific for BB
         self.check_structure_path = properties.get('check_structure_path', 'check_structure')
@@ -66,7 +66,7 @@ class ExtractProtein():
     def check_data_params(self, out_log, err_log):
         """ Checks all the input/output paths and parameters """
         self.input_structure_path = check_input_path(self.input_structure_path, out_log, self.__class__.__name__)
-        self.output_protein_path = check_output_path(self.output_protein_path, out_log, self.__class__.__name__)
+        self.output_molecule_path = check_output_path(self.output_molecule_path, out_log, self.__class__.__name__)
 
     def create_command_list(self, command_list_path):
         """ Creates a command list file as a input for structure checking """
@@ -84,7 +84,7 @@ class ExtractProtein():
 
     @launchlogger
     def launch(self) -> int:
-        """Execute the :class:`ExtractProtein <utils.extract_protein.ExtractProtein>` utils.extract_protein.ExtractProtein object."""
+        """Execute the :class:`ExtractMolecule <utils.extract_molecule.ExtractMolecule>` utils.extract_molecule.ExtractMolecule object."""
         
         tmp_files = []
 
@@ -115,7 +115,7 @@ class ExtractProtein():
         # run command line
         cmd = [self.check_structure_path,
                '-i', self.input_structure_path,
-               '-o', self.output_protein_path,
+               '-o', self.output_molecule_path,
                '--force_save',
                '--non_interactive',
                'command_list', '--list', self.tmp_folder + '/extract_prot.lst']
@@ -129,31 +129,31 @@ class ExtractProtein():
 
         return returncode
 
-def extract_protein(input_structure_path: str, output_protein_path: str, properties: dict = None, **kwargs) -> int:
-    """Execute the :class:`ExtractProtein <utils.extract_protein.ExtractProtein>` class and
-    execute the :meth:`launch() <utils.extract_protein.ExtractProtein.launch>` method."""
+def extract_molecule(input_structure_path: str, output_molecule_path: str, properties: dict = None, **kwargs) -> int:
+    """Execute the :class:`ExtractMolecule <utils.extract_molecule.ExtractMolecule>` class and
+    execute the :meth:`launch() <utils.extract_molecule.ExtractMolecule.launch>` method."""
 
-    return ExtractProtein(input_structure_path=input_structure_path, 
-                        output_protein_path=output_protein_path,
+    return ExtractMolecule(input_structure_path=input_structure_path, 
+                        output_molecule_path=output_molecule_path,
                         properties=properties, **kwargs).launch()
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
-    parser = argparse.ArgumentParser(description="Extract a protein from a 3D structure.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
+    parser = argparse.ArgumentParser(description="Extract a molecule from a 3D structure.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
     parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
 
     #Specific args of each building block
     required_args = parser.add_argument_group('required arguments')
     required_args.add_argument('-i', '--input_structure_path', required=True, help="Input structure file path. Accepted formats: pdb.")
-    required_args.add_argument('-o', '--output_protein_path', required=True, help="Output heteroatom file path. Accepted formats: pdb.")
+    required_args.add_argument('-o', '--output_molecule_path', required=True, help="Output heteroatom file path. Accepted formats: pdb.")
 
     args = parser.parse_args()
     config = args.config if args.config else None
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     #Specific call of each building block
-    extract_protein(input_structure_path=args.input_structure_path, 
-                    output_protein_path=args.output_protein_path, 
+    extract_molecule(input_structure_path=args.input_structure_path, 
+                    output_molecule_path=args.output_molecule_path, 
                     properties=properties)
 
 if __name__ == '__main__':
