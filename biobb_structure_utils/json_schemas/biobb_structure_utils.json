@@ -4,9 +4,9 @@
     "github" : "https://github.com/bioexcel/biobb_structure_utils", 
     "readthedocs" : "https://biobb-structure-utils.readthedocs.io/en/latest/", 
     "conda" : "https://anaconda.org/bioconda/biobb_structure_utils", 
-    "docker" : "https://quay.io/biocontainers/biobb_structure_utils:3.5.2--py_0", 
+    "docker" : "https://quay.io/biocontainers/biobb_structure_utils:3.5.3--py_0", 
     "singularity" : "https://singularity-hub.org/collections/3836/usage", 
-    "version" : "3.5.2",
+    "version" : "3.5.3",
     "tools" : [
         {
             "block" : "CatPDB", 

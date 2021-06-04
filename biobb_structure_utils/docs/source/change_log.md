@@ -1,5 +1,12 @@
 # Biobb Structure Utils changelog
 
+## What's new in version [3.5.3](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v3.5.3)?
+In version 3.5.3 the tool extract_protein has been renamed to extract_molecule
+
+### New features
+
+* Tool extract_protein renamed to extract_molecule
+
 ## What's new in version [3.5.2](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v3.5.2)?
 In version 3.5.2 the dependency biobb_structure_checking has been updated to 3.7.3 version. New tool for checking structures.
 

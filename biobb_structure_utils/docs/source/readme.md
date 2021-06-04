@@ -12,7 +12,7 @@ Biobb_structure_utils is the Biobb module collection to modify or extract inform
 [latest API documentation](https://biobb-structure-utils.readthedocs.io/en/latest/).
 
 ### Version
-v3.5.2 2020.4
+v3.5.3 2021.2
 
 ### Installation
 
@@ -23,7 +23,7 @@ Using PIP:
 * Installation:
 
 
-        pip install "biobb_structure_utils>=3.5.2"
+        pip install "biobb_structure_utils>=3.5.3"
 
 
 * Usage: [Python API documentation](https://biobb-structure-utils.readthedocs.io/en/latest/modules.html)
@@ -33,7 +33,7 @@ Using ANACONDA:
 * Installation:
 
 
-        conda install -c bioconda "biobb_structure_utils>=3.5.2"
+        conda install -c bioconda "biobb_structure_utils>=3.5.3"
 
 
 * Usage: With conda installation BioBBs can be used with the [Python API documentation](https://biobb-structure-utils.readthedocs.io/en/latest/modules.html) and the [Command Line documentation](https://biobb-structure-utils.readthedocs.io/en/latest/command_line.html)
@@ -43,13 +43,13 @@ Using DOCKER:
 * Installation:
 
 
-        docker pull quay.io/biocontainers/biobb_structure_utils:3.5.2--py_0
+        docker pull quay.io/biocontainers/biobb_structure_utils:3.5.3--py_0
 
 
 * Usage:
 
 
-        docker run quay.io/biocontainers/biobb_structure_utils:3.5.2--py_0 <command>
+        docker run quay.io/biocontainers/biobb_structure_utils:3.5.3--py_0 <command>
 
 Using SINGULARITY:
 
