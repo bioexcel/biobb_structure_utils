@@ -19,7 +19,9 @@ class StrCheckAddHydrogens():
         output_structure_path (str): Output structure file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_str_H.pdbqt>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **charges** (*bool*) - (False) Wether or not to add charges to the output file. If True the output is in PDBQT format.
-            * **mode** (*string*) - (None) Selection mode. Values: auto, list, ph, int, int_his
+            * **mode** (*string*) - (None) Selection mode. Values: auto, list, ph
+            * **ph** (*float*) - (7.4) [0~14|0.1] Add hydrogens appropriate for pH. Only in case mode ph selected.
+            * **list** (*string*) - ("") List of residues to modify separated by commas (i.e HISA234HID,HISB33HIE). Only in case mode list selected.
             * **check_structure_path** (*string*) - ("check_structure") path to the check_structure application
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
@@ -59,6 +61,8 @@ class StrCheckAddHydrogens():
         self.check_structure_path = properties.get('check_structure_path', 'check_structure')
         self.charges = properties.get('charges', False)
         self.mode = properties.get('mode', None)
+        self.ph = properties.get('ph', 7.4)
+        self.list = properties.get('list', '')
         self.properties = properties
 
         # Common in all BB
@@ -112,6 +116,10 @@ class StrCheckAddHydrogens():
 
         if self.mode:
             cmd.extend(['--add_mode', self.mode])
+            if self.mode == 'ph':
+                cmd.extend(['--pH', self.ph])
+            if self.mode == 'list':
+                cmd.extend(['--list', self.list])
         else:
             cmd.extend(['--add_mode', 'None'])
 
