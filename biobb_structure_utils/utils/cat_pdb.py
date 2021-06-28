@@ -95,7 +95,7 @@ class CatPDB():
         newline = [False, False]
         for idx, fname in enumerate(filenames):
             with open(fname, 'rb') as fh:
-                fh.seek(-1024, 2)
+                fh.seek(-2, 2)
                 last = fh.readlines()[-1].decode()
                 newline[idx] = "\n" in last
 

@@ -1,7 +1,15 @@
 # Biobb Structure Utils changelog
 
+## What's new in version [3.6.0](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v3.6.0)?
+In version 3.6.0 the dependency biobb_common has been updated to 3.6.0 version
+
+### New features
+
+* Update to biobb_common 3.6.0 (general)
+* Update to Biopython 1.79 (general)
+
 ## What's new in version [3.5.3](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v3.5.3)?
-In version 3.5.3 the tool extract_protein has been renamed to extract_molecule
+In version 3.5.3 the tool extract_protein has been renamed to extract_molecule.
 
 ### New features
 
