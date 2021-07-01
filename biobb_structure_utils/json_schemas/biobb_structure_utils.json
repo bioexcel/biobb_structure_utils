@@ -4,9 +4,9 @@
     "github" : "https://github.com/bioexcel/biobb_structure_utils", 
     "readthedocs" : "https://biobb-structure-utils.readthedocs.io/en/latest/", 
     "conda" : "https://anaconda.org/bioconda/biobb_structure_utils", 
-    "docker" : "https://quay.io/biocontainers/biobb_structure_utils:3.6.0--py_0", 
+    "docker" : "https://quay.io/biocontainers/biobb_structure_utils:3.6.1--py_0", 
     "singularity" : "https://singularity-hub.org/collections/3836/usage", 
-    "version" : "3.6.0",
+    "version" : "3.6.1",
     "tools" : [
         {
             "block" : "CatPDB", 
@@ -94,13 +94,13 @@
         }
     ],
     "dep_pypi" : [
-        "install_requires=['biobb_common==3.6.0', 'biobb_structure_checking==3.7.3']", 
+        "install_requires=['biobb_common==3.6.0', 'biobb_structure_checking==3.8.5']", 
         "python_requires='==3.7.*'"
     ], 
     "dep_conda" : [
         "python ==3.7.*", 
         "biobb_common ==3.6.0",
-        "biobb_structure_checking ==3.7.3"
+        "biobb_structure_checking ==3.8.5"
     ],
     "dep_conda_extra" : [
     ], 
