@@ -104,6 +104,8 @@ Syntax: input_parameter (datatype) - (default_value) Definition
 Config parameters for this building block:
 * **charges** (*boolean*): (False) Wether or not to add charges to the output file. If True the output is in PDBQT format..
 * **mode** (*string*): (None) Selection mode. .
+* **ph** (*number*): (7.4) Add hydrogens appropriate for pH. Only in case mode ph selected..
+* **list** (*string*): () List of residues to modify separated by commas (i.e HISA234HID,HISB33HIE). Only in case mode list selected..
 * **check_structure_path** (*string*): (check_structure) path to the check_structure application.
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
@@ -165,6 +167,8 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
+* **molecule_type** (*string*): (all) type of molecule to be extracted. If all, only waters and ligands will be removed from the original structure. .
+* **chains** (*array*): (None) if chains selected in **molecule_type**, specify them here, e.g: ["A", "C", "N"]..
 * **check_structure_path** (*string*): (check_structure) path to the check_structure application.
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..

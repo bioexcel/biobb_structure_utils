@@ -18,6 +18,8 @@ class ExtractMolecule():
         input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_molecule.pdb>`_. Accepted formats: pdb (edam:format_1476).
         output_molecule_path (str): Output molecule file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_molecule.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
+            * **molecule_type** (*string*) - ("all") type of molecule to be extracted. If all, only waters and ligands will be removed from the original structure. Values: all, protein, na, dna, rna, chains.
+            * **chains** (*list*) - (None) if chains selected in **molecule_type**, specify them here, e.g: ["A", "C", "N"].
             * **check_structure_path** (*string*) - ("check_structure") path to the check_structure application
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
@@ -26,7 +28,10 @@ class ExtractMolecule():
         This is a use example of how to use the building block from Python::
 
             from biobb_structure_utils.utils.extract_molecule import extract_molecule
-            prop = { }
+            prop = { 
+                'molecule_type': 'chains',
+                'chains': ['A', 'N', 'F']
+            }
             extract_molecule(input_structure_path='/path/to/myStructure.pdb, 
                             output_molecule_path='/path/to/newMolecule.pdb', 
                             properties=prop)
@@ -51,6 +56,8 @@ class ExtractMolecule():
         self.output_molecule_path = str(output_molecule_path)
 
         # Properties specific for BB
+        self.molecule_type = properties.get('molecule_type', 'all')
+        self.chains = properties.get('chains', [])
         self.check_structure_path = properties.get('check_structure_path', 'check_structure')
         self.properties = properties
 
@@ -74,6 +81,12 @@ class ExtractMolecule():
 
         instructions_list.append('ligands --remove All')
         instructions_list.append('water --remove Yes')
+
+        if self.molecule_type != 'all':
+            if self.molecule_type == 'chains':
+                instructions_list.append('chains --select ' + ','.join(self.chains))
+            else:
+                instructions_list.append('chains --select ' + self.molecule_type)
 
         with open(command_list_path, 'w') as clp:
             for line in instructions_list:

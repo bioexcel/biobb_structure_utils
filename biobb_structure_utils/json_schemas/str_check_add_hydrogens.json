@@ -76,9 +76,7 @@
                     "enum": [
                         "auto",
                         "list",
-                        "ph",
-                        "int",
-                        "int_his"
+                        "ph"
                     ],
                     "property_formats": [
                         {
@@ -92,16 +90,23 @@
                         {
                             "name": "ph",
                             "description": null
-                        },
-                        {
-                            "name": "int",
-                            "description": null
-                        },
-                        {
-                            "name": "int_his",
-                            "description": null
                         }
                     ]
+                },
+                "ph": {
+                    "type": "number",
+                    "default": 7.4,
+                    "wf_prop": false,
+                    "description": "Add hydrogens appropriate for pH. Only in case mode ph selected.",
+                    "min": 0.0,
+                    "max": 14.0,
+                    "step": 0.1
+                },
+                "list": {
+                    "type": "string",
+                    "default": "",
+                    "wf_prop": false,
+                    "description": "List of residues to modify separated by commas (i.e HISA234HID,HISB33HIE). Only in case mode list selected."
                 },
                 "check_structure_path": {
                     "type": "string",

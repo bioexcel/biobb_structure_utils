@@ -56,6 +56,52 @@
         "properties": {
             "type": "object",
             "properties": {
+                "molecule_type": {
+                    "type": "string",
+                    "default": "all",
+                    "wf_prop": false,
+                    "description": "type of molecule to be extracted. If all, only waters and ligands will be removed from the original structure. ",
+                    "enum": [
+                        "all",
+                        "protein",
+                        "na",
+                        "dna",
+                        "rna",
+                        "chains"
+                    ],
+                    "property_formats": [
+                        {
+                            "name": "all",
+                            "description": null
+                        },
+                        {
+                            "name": "protein",
+                            "description": null
+                        },
+                        {
+                            "name": "na",
+                            "description": null
+                        },
+                        {
+                            "name": "dna",
+                            "description": null
+                        },
+                        {
+                            "name": "rna",
+                            "description": null
+                        },
+                        {
+                            "name": "chains",
+                            "description": null
+                        }
+                    ]
+                },
+                "chains": {
+                    "type": "array",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "if chains selected in **molecule_type**, specify them here, e.g: [\"A\", \"C\", \"N\"]."
+                },
                 "check_structure_path": {
                     "type": "string",
                     "default": "check_structure",
