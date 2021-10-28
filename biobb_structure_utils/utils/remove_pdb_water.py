@@ -2,15 +2,13 @@
 
 """Module containing the RemovePdbWater class and the command line interface."""
 import argparse
-import Bio.PDB
 from biobb_common.configuration import settings
-from biobb_common.tools import file_utils as fu
+from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
-from biobb_common.command_wrapper import cmd_wrapper
 from biobb_structure_utils.utils.common import *
 
 
-class RemovePdbWater:
+class RemovePdbWater(BiobbObject):
     """
     | biobb_structure_utils RemovePdbWater
     | This class is a wrapper of the Structure Checking tool to remove water molecules from PDB 3D structures.
@@ -44,25 +42,20 @@ class RemovePdbWater:
 
     """
 
-    def __init__(self, input_pdb_path, output_pdb_path, 
-                properties=None, **kwargs) -> None:
+    def __init__(self, input_pdb_path, output_pdb_path, properties=None, **kwargs) -> None:
         properties = properties or {}
 
+        # Call parent class constructor
+        super().__init__(properties)
+
         # Input/Output files
-        self.input_pdb_path = str(input_pdb_path)
-        self.output_pdb_path = str(output_pdb_path)
+        self.io_dict = {
+            "in": {"input_pdb_path": input_pdb_path},
+            "out": {"output_pdb_path": output_pdb_path}
+        }
 
         # Properties specific for BB
         self.check_structure_path = properties.get('check_structure_path', 'check_structure')
-
-        # Common in all BB
-        self.can_write_console_log = properties.get('can_write_console_log', True)
-        self.global_log = properties.get('global_log', None)
-        self.prefix = properties.get('prefix', None)
-        self.step = properties.get('step', None)
-        self.path = properties.get('path', '')
-        self.remove_tmp = properties.get('remove_tmp', True)
-        self.restart = properties.get('restart', False)
 
         # Check the properties
         fu.check_properties(self, properties)
@@ -70,33 +63,38 @@ class RemovePdbWater:
     @launchlogger
     def launch(self) -> int:
         """Execute the :class:`RemovePdbWater <utils.remove_pdb_water.RemovePdbWater>` utils.remove_pdb_water.RemovePdbWater object."""
-        
-        tmp_files = []
 
-        # Get local loggers from @launchlogger decorator
-        out_log = getattr(self, 'out_log', None)
-        err_log = getattr(self, 'err_log', None)
+        # Setup Biobb
+        if self.check_restart(): return 0
+        self.stage_files()
 
-        cmd = [self.check_structure_path,
-               '-i', self.input_pdb_path,
-               '-o', self.output_pdb_path,
-               '--force_save',
-               'water', '--remove', 'yes']
+        self.cmd = [self.check_structure_path,
+                    '-i', self.stage_io_dict['in']['input_pdb_path'],
+                    '-o', self.stage_io_dict['out']['output_pdb_path'],
+                    '--force_save',
+                    'water', '--remove', 'yes']
 
-        returncode: int = cmd_wrapper.CmdWrapper(cmd, out_log, err_log, self.global_log).launch()
+        # Run Biobb block
+        self.run_biobb()
 
-        if self.remove_tmp:
-            fu.rm_file_list(tmp_files)
+        # Copy files to host
+        self.copy_to_host()
 
-        return returncode
+        # Remove temporal files
+        self.tmp_files.append(self.stage_io_dict.get("unique_dir"))
+        self.remove_tmp_files()
+
+        return self.return_code
+
 
 def remove_pdb_water(input_pdb_path: str, output_pdb_path: str, properties: dict = None, **kwargs) -> int:
     """Execute the :class:`RemovePdbWater <utils.remove_pdb_water.RemovePdbWater>` class and
     execute the :meth:`launch() <utils.remove_pdb_water.RemovePdbWater.launch>` method."""
 
     return RemovePdbWater(input_pdb_path=input_pdb_path, 
-                        output_pdb_path=output_pdb_path,
-                        properties=properties, **kwargs).launch()
+                          output_pdb_path=output_pdb_path,
+                          properties=properties, **kwargs).launch()
+
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
@@ -115,8 +113,8 @@ def main():
 
     # Specific call of each building block
     remove_pdb_water(input_pdb_path=args.input_pdb_path, 
-                    output_pdb_path=args.output_pdb_path,
-                    properties=properties)
+                     output_pdb_path=args.output_pdb_path,
+                     properties=properties)
 
 
 if __name__ == '__main__':

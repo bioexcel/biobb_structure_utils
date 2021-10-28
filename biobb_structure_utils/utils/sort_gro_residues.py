@@ -1,18 +1,15 @@
 #!/usr/bin/env python3
 
 """Module containing the SortGroResidues class and the command line interface."""
-import os
-import json
 import argparse
 from biobb_common.configuration import settings
-from biobb_common.tools import file_utils as fu
+from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
-from biobb_common.command_wrapper import cmd_wrapper
 from biobb_structure_utils.gro_lib.gro import Gro
 from biobb_structure_utils.utils.common import *
 
 
-class SortGroResidues():
+class SortGroResidues(BiobbObject):
     """
     | biobb_structure_utils SortGroResidues
     | Class to sort the selected residues from a GRO 3D structure.
@@ -46,70 +43,65 @@ class SortGroResidues():
 
     """
 
-    def __init__(self, input_gro_path, output_gro_path, 
-                properties=None, **kwargs) -> None:
+    def __init__(self, input_gro_path, output_gro_path, properties=None, **kwargs) -> None:
         properties = properties or {}
 
+        # Call parent class constructor
+        super().__init__(properties)
+
         # Input/Output files
-        self.input_gro_path = str(input_gro_path)
-        self.output_gro_path = str(output_gro_path)
+        self.io_dict = {
+            "in": {"input_gro_path": input_gro_path},
+            "out": {"output_gro_path": output_gro_path}
+        }
 
         # Properties specific for BB
         self.residue_name_list = properties.get('residue_name_list', ["NA", "CL", "SOL"])
 
-        # Common in all BB
-        self.can_write_console_log = properties.get('can_write_console_log', True)
-        self.global_log = properties.get('global_log', None)
-        self.prefix = properties.get('prefix', None)
-        self.step = properties.get('step', None)
-        self.path = properties.get('path', '')
-        self.remove_tmp = properties.get('remove_tmp', True)
-        self.restart = properties.get('restart', False)
-
         # Check the properties
-        fu.check_properties(self, properties)
+        self.check_properties(properties)
 
     @launchlogger
     def launch(self) -> int:
         """Execute the :class:`SortGroResidues <utils.sort_gro_residues.SortGroResidues>` utils.sort_gro_residues.SortGroResidues object."""
-        
-        tmp_files = []
 
-        # Get local loggers from launchlogger decorator
-        out_log = getattr(self, 'out_log', None)
-        err_log = getattr(self, 'err_log', None)
+        # Setup Biobb
+        if self.check_restart(): return 0
+        self.stage_files()
 
-        #Restart if needed
-        if self.restart:
-            output_file_list = [self.output_gro_path]
-            if fu.check_complete_files(output_file_list):
-                fu.log('Restart is enabled, this step: %s will the skipped' % self.step, out_log, self.global_log)
-                return 0
-
+        # Business code
         in_gro = Gro()
-        in_gro.read_gro_file(self.input_gro_path)
+        in_gro.read_gro_file(self.stage_io_dict['in']['input_gro_path'])
         in_gro.sort_residues2(self.residue_name_list)
-        in_gro.write_gro_file(self.output_gro_path)
+        in_gro.write_gro_file(self.stage_io_dict['out']['output_gro_path'])
+        self.return_code = 0
+        ##########
 
-        if self.remove_tmp:
-            fu.rm_file_list(tmp_files)
+        # Copy files to host
+        self.copy_to_host()
 
-        return 0
+        # Remove temporal files
+        self.tmp_files.append(self.stage_io_dict.get("unique_dir"))
+        self.remove_tmp_files()
+
+        return self.return_code
+
 
 def sort_gro_residues(input_gro_path: str, output_gro_path: str, properties: dict = None, **kwargs) -> int:
     """Execute the :class:`SortGroResidues <utils.sort_gro_residues.SortGroResidues>` class and
     execute the :meth:`launch() <utils.sort_gro_residues.SortGroResidues.launch>` method."""
 
     return SortGroResidues(input_gro_path=input_gro_path, 
-                        output_gro_path=output_gro_path,
-                        properties=properties, **kwargs).launch()
+                           output_gro_path=output_gro_path,
+                           properties=properties, **kwargs).launch()
+
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
     parser = argparse.ArgumentParser(description="Renumber atoms and residues from a 3D structure.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
     parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
 
-    #Specific args of each building block
+    # Specific args of each building block
     required_args = parser.add_argument_group('required arguments')
     required_args.add_argument('-i', '--input_gro_path', required=True, help="Input GRO file name")
     required_args.add_argument('-o', '--output_gro_path', required=True, help="Output sorted GRO file name")
@@ -118,10 +110,11 @@ def main():
     config = args.config if args.config else None
     properties = settings.ConfReader(config=config).get_prop_dic()
 
-    #Specific call of each building block
+    # Specific call of each building block
     sort_gro_residues(input_gro_path=args.input_gro_path, 
-                    output_gro_path=args.output_gro_path, 
-                    properties=properties)
+                      output_gro_path=args.output_gro_path,
+                      properties=properties)
+
 
 if __name__ == '__main__':
     main()

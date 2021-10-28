@@ -2,12 +2,12 @@ from biobb_common.tools import test_fixtures as fx
 from biobb_structure_utils.utils.remove_pdb_water import remove_pdb_water
 
 
-class TestSortGroResidues():
+class TestRemovePDBWater():
     def setUp(self):
         fx.test_setup(self, 'remove_pdb_water')
 
     def tearDown(self):
-        fx.test_teardown(self)
+        #fx.test_teardown(self)
         pass
 
     def test_launch(self):

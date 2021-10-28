@@ -3,13 +3,13 @@
 """Module containing the ExtractAtoms class and the command line interface."""
 import argparse
 from biobb_common.configuration import settings
-from biobb_common.tools import file_utils as fu
+from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
-from biobb_common.command_wrapper import cmd_wrapper
 from biobb_structure_utils.gro_lib.gro import Gro
 from biobb_structure_utils.utils.common import *
 
-class ExtractAtoms():
+
+class ExtractAtoms(BiobbObject):
     """
     | biobb_structure_utils ExtractAtoms
     | Class to extract atoms from a 3D structure.
@@ -43,65 +43,53 @@ class ExtractAtoms():
             
     """
 
-    def __init__(self, input_structure_path, output_structure_path, 
-                properties=None, **kwargs) -> None:
+    def __init__(self, input_structure_path, output_structure_path, properties=None, **kwargs) -> None:
         properties = properties or {}
 
+        # Call parent class constructor
+        super().__init__(properties)
+
         # Input/Output files
-        self.input_structure_path = str(input_structure_path)
-        self.output_structure_path = str(output_structure_path)
+        self.io_dict = {
+            "in": {"input_structure_path": input_structure_path},
+            "out": {"output_structure_path": output_structure_path}
+        }
 
         # Properties specific for BB
         self.regular_expression_pattern = properties.get('regular_expression_pattern', '^D')
 
-        # Common in all BB
-        self.can_write_console_log = properties.get('can_write_console_log', True)
-        self.global_log = properties.get('global_log', None)
-        self.prefix = properties.get('prefix', None)
-        self.step = properties.get('step', None)
-        self.path = properties.get('path', '')
-        self.remove_tmp = properties.get('remove_tmp', True)
-        self.restart = properties.get('restart', False)
-
         # Check the properties
-        fu.check_properties(self, properties)
+        self.check_properties(properties)
 
     @launchlogger
     def launch(self) -> int:
         """Execute the :class:`ExtractAtoms <utils.extract_atoms.ExtractAtoms>` utils.extract_atoms.ExtractAtoms object."""
-        
-        tmp_files = []
 
-        # Get local loggers from launchlogger decorator
-        out_log = getattr(self, 'out_log', None)
-        err_log = getattr(self, 'err_log', None)
+        # Setup Biobb
+        if self.check_restart(): return 0
+        self.stage_files()
 
-        #Restart if needed
-        if self.restart:
-            output_file_list = [self.output_structure_path]
-            if fu.check_complete_files(output_file_list):
-                fu.log('Restart is enabled, this step: %s will the skipped' % self.step,  out_log, self.global_log)
-                return 0
-
-        extension = Path(self.input_structure_path).suffix.lower()
+        # Business code
+        extension = Path(self.io_dict['in']['input_structure_path']).suffix.lower()
         if extension.lower() == '.gro':
-            fu.log('GRO format detected, extracting all atoms matching %s' % self.regular_expression_pattern, out_log)
+            fu.log('GRO format detected, extracting all atoms matching %s' % self.regular_expression_pattern, self.out_log)
             gro_st = Gro()
-            gro_st.read_gro_file(self.input_structure_path)
+            gro_st.read_gro_file(self.io_dict['in']['input_structure_path'])
             gro_st.select_atoms(self.regular_expression_pattern)
             if gro_st.num_of_atoms:
-                fu.log('%d atoms found writting GRO file' % gro_st.num_of_atoms, out_log, self.global_log)
-                gro_st.write_gro_file(self.output_structure_path)
+                fu.log('%d atoms found writting GRO file' % gro_st.num_of_atoms, self.out_log, self.global_log)
+                gro_st.write_gro_file(self.io_dict['out']['output_structure_path'])
             else:
-                fu.log('No matching atoms found writting empty GRO file', out_log, self.global_log)
-                open(self.output_structure_path, 'w').close()
+                fu.log('No matching atoms found writting empty GRO file', self.out_log, self.global_log)
+                open(self.io_dict['out']['output_structure_path'], 'w').close()
 
         else:
-            fu.log('PDB format detected, extracting all atoms matching %s' % self.regular_expression_pattern, out_log)
-            # Direct aproach solution implemented to avoid the issues presented in commit message (c92aab9604a6a31d13f4170ff47b231df0a588ef)
+            fu.log('PDB format detected, extracting all atoms matching %s' % self.regular_expression_pattern, self.out_log)
+            # Direct aproach solution implemented to avoid the
+            # issues presented in commit message (c92aab9604a6a31d13f4170ff47b231df0a588ef)
             # with the Biopython library
             atoms_match_cont = 0
-            with open(self.input_structure_path, "r") as input_pdb, open(self.output_structure_path, "w") as output_pdb:
+            with open(self.io_dict['in']['input_structure_path'], "r") as input_pdb, open(self.io_dict['out']['output_structure_path'], "w") as output_pdb:
                 for line in input_pdb:
                     record = line[:6].upper().strip()
                     if len(line) > 10 and record in PDB_SERIAL_RECORDS: #Avoid MODEL, ENDMDL records and empty lines
@@ -110,29 +98,37 @@ class ExtractAtoms():
                             atoms_match_cont += 1
                             output_pdb.write(line)
             if atoms_match_cont:
-                fu.log('%d atoms found writting PDB file' % atoms_match_cont, out_log, self.global_log)
+                fu.log('%d atoms found writting PDB file' % atoms_match_cont, self.out_log, self.global_log)
             else:
-                fu.log('No matching atoms found writting empty PDB file', out_log, self.global_log)
+                fu.log('No matching atoms found writting empty PDB file', self.out_log, self.global_log)
+        self.return_code = 0
+        ##########
 
-        if self.remove_tmp:
-            fu.rm_file_list(tmp_files)
+        # Copy files to host
+        self.copy_to_host()
 
-        return 0
+        # Remove temporal files
+        self.tmp_files.append(self.stage_io_dict.get("unique_dir"))
+        self.remove_tmp_files()
+
+        return self.return_code
+
 
 def extract_atoms(input_structure_path: str, output_structure_path: str, properties: dict = None, **kwargs) -> int:
     """Execute the :class:`ExtractAtoms <utils.extract_atoms.ExtractAtoms>` class and
     execute the :meth:`launch() <utils.extract_atoms.ExtractAtoms.launch>` method."""
 
     return ExtractAtoms(input_structure_path=input_structure_path, 
-                    output_structure_path=output_structure_path,
-                    properties=properties, **kwargs).launch()
+                        output_structure_path=output_structure_path,
+                        properties=properties, **kwargs).launch()
+
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
     parser = argparse.ArgumentParser(description="Remove the selected ligand atoms from a 3D structure.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
     parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
 
-    #Specific args of each building block
+    # Specific args of each building block
     required_args = parser.add_argument_group('required arguments')
     required_args.add_argument('-i', '--input_structure_path', required=True, help="Input structure file name")
     required_args.add_argument('-o', '--output_structure_path', required=True, help="Output structure file name")
@@ -141,10 +137,11 @@ def main():
     config = args.config if args.config else None
     properties = settings.ConfReader(config=config).get_prop_dic()
 
-    #Specific call of each building block
+    # Specific call of each building block
     extract_atoms(input_structure_path=args.input_structure_path, 
-                output_structure_path=args.output_structure_path, 
-                properties=properties)
+                  output_structure_path=args.output_structure_path,
+                  properties=properties)
+
 
 if __name__ == '__main__':
     main()

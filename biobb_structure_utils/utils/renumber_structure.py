@@ -1,18 +1,16 @@
 #!/usr/bin/env python3
 
 """Module containing the RenumberStructure class and the command line interface."""
-import os
 import json
 import argparse
 from biobb_common.configuration import settings
-from biobb_common.tools import file_utils as fu
+from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
-from biobb_common.command_wrapper import cmd_wrapper
 from biobb_structure_utils.gro_lib.gro import Gro
 from biobb_structure_utils.utils.common import *
 
 
-class RenumberStructure:
+class RenumberStructure(BiobbObject):
     """
     | biobb_structure_utils RenumberStructure
     | Class to renumber atomic indexes from a 3D structure.
@@ -50,14 +48,18 @@ class RenumberStructure:
 
     """
 
-    def __init__(self, input_structure_path, output_structure_path, output_mapping_json_path, 
-                properties=None, **kwargs) -> None:
+    def __init__(self, input_structure_path, output_structure_path, output_mapping_json_path, properties=None, **kwargs) -> None:
         properties = properties or {}
 
+        # Call parent class constructor
+        super().__init__(properties)
+
         # Input/Output files
-        self.input_structure_path = str(input_structure_path)
-        self.output_structure_path = str(output_structure_path)
-        self.output_mapping_json_path = str(output_mapping_json_path)
+        self.io_dict = {
+            "in": {"input_structure_path": input_structure_path},
+            "out": {"output_structure_path": output_structure_path,
+                    "output_mapping_json_path": output_mapping_json_path}
+        }
 
         # Properties specific for BB
         self.renumber_residues = properties.get('renumber_residues', True)
@@ -79,34 +81,26 @@ class RenumberStructure:
     def launch(self) -> int:
         """Execute the :class:`RenumberStructure <utils.renumber_structure.RenumberStructure>` utils.renumber_structure.RenumberStructure object."""
 
-        tmp_files = []
+        # Setup Biobb
+        if self.check_restart(): return 0
+        self.stage_files()
 
-        # Get local loggers from launchlogger decorator
-        out_log = getattr(self, 'out_log', None)
-        err_log = getattr(self, 'err_log', None)
-
-        # Restart if needed
-        if self.restart:
-            output_file_list = [self.output_structure_path, self.output_mapping_json_path]
-            if fu.check_complete_files(output_file_list):
-                fu.log('Restart is enabled, this step: %s will the skipped' % self.step, out_log, self.global_log)
-                return 0
-
-        extension = Path(self.input_structure_path).suffix.lower()
+        # Business code
+        extension = Path(self.stage_io_dict['in']['input_structure_path']).suffix.lower()
         if extension.lower() == '.gro':
-            fu.log('GRO format detected, reenumerating atoms', out_log)
+            fu.log('GRO format detected, reenumerating atoms', self.out_log)
             gro_st = Gro()
-            gro_st.read_gro_file(self.input_structure_path)
+            gro_st.read_gro_file(self.stage_io_dict['in']['input_structure_path'])
             residue_mapping, atom_mapping = gro_st.renumber_atoms(renumber_residues=self.renumber_residues, renumber_residues_per_chain=self.renumber_residues_per_chain)
-            gro_st.write_gro_file(self.output_structure_path)
+            gro_st.write_gro_file(self.stage_io_dict['out']['output_structure_path'])
 
         else:
-            fu.log('PDB format detected, reenumerating atoms', out_log)
+            fu.log('PDB format detected, reenumerating atoms', self.out_log)
             atom_mapping = {}
             atom_count = 0
             residue_mapping = {}
             residue_count = 0
-            with open(self.input_structure_path, "r") as input_pdb, open(self.output_structure_path, "w") as output_pdb:
+            with open(self.stage_io_dict['in']['input_structure_path'], "r") as input_pdb, open(self.stage_io_dict['out']['output_structure_path'], "w") as output_pdb:
                 for line in input_pdb:
                     record = line[:6].upper().strip()
                     if len(line) > 10 and record in PDB_SERIAL_RECORDS:  # Avoid MODEL, ENDMDL records and empty lines
@@ -130,29 +124,38 @@ class RenumberStructure:
                             line = line[:22] + '{: >4d}'.format(residue_count) + line[26:]
                     output_pdb.write(line)
 
-        with open(self.output_mapping_json_path, "w") as output_json:
+        with open(self.stage_io_dict['out']['output_mapping_json_path'], "w") as output_json:
             output_json.write(json.dumps({'residues': residue_mapping, 'atoms': atom_mapping}))
 
-        if self.remove_tmp:
-            fu.rm_file_list(tmp_files)
+        self.return_code = 0
+        ##########
 
-        return 0
+        # Copy files to host
+        self.copy_to_host()
+
+        # Remove temporal files
+        self.tmp_files.append(self.stage_io_dict.get("unique_dir"))
+        self.remove_tmp_files()
+
+        return self.return_code
+
 
 def renumber_structure(input_structure_path: str, output_structure_path: str, output_mapping_json_path: str, properties: dict = None, **kwargs) -> int:
     """Execute the :class:`RenumberStructure <utils.renumber_structure.RenumberStructure>` class and
     execute the :meth:`launch() <utils.renumber_structure.RenumberStructure.launch>` method."""
 
     return RenumberStructure(input_structure_path=input_structure_path, 
-                        output_structure_path=output_structure_path,
-                        output_mapping_json_path=output_mapping_json_path,
-                        properties=properties, **kwargs).launch()
+                             output_structure_path=output_structure_path,
+                             output_mapping_json_path=output_mapping_json_path,
+                             properties=properties, **kwargs).launch()
+
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
     parser = argparse.ArgumentParser(description="Renumber atoms and residues from a 3D structure.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
     parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
 
-    #Specific args of each building block
+    # Specific args of each building block
     required_args = parser.add_argument_group('required arguments')
     required_args.add_argument('-i', '--input_structure_path', required=True, help="Input structure file name")
     required_args.add_argument('-o', '--output_structure_path', required=True, help="Output structure file name")
@@ -162,11 +165,12 @@ def main():
     config = args.config if args.config else None
     properties = settings.ConfReader(config=config).get_prop_dic()
 
-    #Specific call of each building block
+    # Specific call of each building block
     renumber_structure(input_structure_path=args.input_structure_path, 
                         output_structure_path=args.output_structure_path, 
                         output_mapping_json_path=args.output_mapping_json_path, 
                         properties=properties)
+
 
 if __name__ == '__main__':
     main()
