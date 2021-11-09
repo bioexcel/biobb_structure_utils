@@ -64,14 +64,15 @@ class ExtractChain(BiobbObject):
 
         # Check the properties
         self.check_properties(properties)
-        self.io_dict['in']['input_structure_path'] = check_input_path(self.io_dict['in']['input_structure_path'],
-                                                                      self.out_log, self.__class__.__name__)
-        self.io_dict['out']['output_structure_path'] = check_output_path(self.io_dict['out']['output_structure_path'],
-                                                                         self.out_log, self.__class__.__name__)
 
     @launchlogger
     def launch(self) -> int:
         """Execute the :class:`ExtractChain <utils.extract_chain.ExtractChain>` utils.extract_chain.ExtractChain object."""
+
+        self.io_dict['in']['input_structure_path'] = check_input_path(self.io_dict['in']['input_structure_path'],
+                                                                      self.out_log, self.__class__.__name__)
+        self.io_dict['out']['output_structure_path'] = check_output_path(self.io_dict['out']['output_structure_path'],
+                                                                         self.out_log, self.__class__.__name__)
 
         # Setup Biobb
         if self.check_restart(): return 0

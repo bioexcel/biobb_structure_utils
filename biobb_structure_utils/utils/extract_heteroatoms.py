@@ -71,14 +71,15 @@ class ExtractHeteroAtoms(BiobbObject):
 
         # Check the properties
         self.check_properties(properties)
-        self.io_dict['in']['input_structure_path'] = check_input_path(self.io_dict['in']['input_structure_path'],
-                                                                      self.out_log, self.__class__.__name__)
-        self.io_dict['out']['output_heteroatom_path'] = check_output_path(self.io_dict['out']['output_heteroatom_path'],
-                                                                          self.out_log, self.__class__.__name__)
 
     @launchlogger
     def launch(self) -> int:
         """Execute the :class:`ExtractHeteroAtoms <utils.extract_heteroatoms.ExtractHeteroAtoms>` utils.extract_heteroatoms.ExtractHeteroAtoms object."""
+
+        self.io_dict['in']['input_structure_path'] = check_input_path(self.io_dict['in']['input_structure_path'],
+                                                                      self.out_log, self.__class__.__name__)
+        self.io_dict['out']['output_heteroatom_path'] = check_output_path(self.io_dict['out']['output_heteroatom_path'],
+                                                                          self.out_log, self.__class__.__name__)
 
         # Setup Biobb
         if self.check_restart(): return 0

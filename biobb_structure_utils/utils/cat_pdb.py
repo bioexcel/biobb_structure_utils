@@ -58,16 +58,17 @@ class CatPDB(BiobbObject):
 
         # Check the properties
         self.check_properties(properties)
+
+    @launchlogger
+    def launch(self) -> int:
+        """Execute the :class:`CatPDB <utils.cat_pdb.CatPDB>` utils.cat_pdb.CatPDB object."""
+
         self.io_dict['in']['input_structure1'] = check_input_path(self.io_dict['in']['input_structure1'],
                                                                   self.out_log, self.__class__.__name__)
         self.io_dict['in']['input_structure2'] = check_input_path(self.io_dict['in']['input_structure2'],
                                                                   self.out_log, self.__class__.__name__)
         self.io_dict['out']['output_structure_path'] = check_output_path(self.io_dict['out']['output_structure_path'],
                                                                          self.out_log, self.__class__.__name__)
-
-    @launchlogger
-    def launch(self) -> int:
-        """Execute the :class:`CatPDB <utils.cat_pdb.CatPDB>` utils.cat_pdb.CatPDB object."""
 
         # Setup Biobb
         if self.check_restart(): return 0

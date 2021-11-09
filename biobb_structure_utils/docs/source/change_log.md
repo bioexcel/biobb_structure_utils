@@ -1,5 +1,18 @@
 # Biobb Structure Utils changelog
 
+## What's new in version [3.7.1](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v3.7.1)?
+In version 3.7.1 some minor bugs have been fixed.
+
+### Other changes
+
+* Minor bug fixes in CatPDB
+* Minor bug fixes in ExtractChain
+* Minor bug fixes in ExtractHeteroAtoms
+* Minor bug fixes in ExtractModel
+* Minor bug fixes in ExtractMolecule
+* Minor bug fixes in StrCheckAddHydrogens
+* Minor bug fixes in StructureCheck
+
 ## What's new in version [3.7.0](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v3.7.0)?
 In version 3.7.0 the dependency biobb_common has been updated to 3.7.0 version.
 

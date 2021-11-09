@@ -67,8 +67,6 @@ class ExtractMolecule(BiobbObject):
 
         # Check the properties
         self.check_properties(properties)
-        self.io_dict['in']['input_structure_path'] = check_input_path(self.io_dict['in']['input_structure_path'], self.out_log, self.__class__.__name__)
-        self.io_dict['out']['output_molecule_path'] = check_output_path(self.io_dict['out']['output_molecule_path'], self.out_log, self.__class__.__name__)
 
     def create_command_list(self, command_list_path):
         """ Creates a command list file as a input for structure checking """
@@ -89,6 +87,9 @@ class ExtractMolecule(BiobbObject):
     @launchlogger
     def launch(self) -> int:
         """Execute the :class:`ExtractMolecule <utils.extract_molecule.ExtractMolecule>` utils.extract_molecule.ExtractMolecule object."""
+
+        self.io_dict['in']['input_structure_path'] = check_input_path(self.io_dict['in']['input_structure_path'], self.out_log, self.__class__.__name__)
+        self.io_dict['out']['output_molecule_path'] = check_output_path(self.io_dict['out']['output_molecule_path'], self.out_log, self.__class__.__name__)
 
         # Setup Biobb
         if self.check_restart(): return 0
