@@ -1,5 +1,12 @@
 # Biobb Structure Utils changelog
 
+## What's new in version [3.7.2](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v3.7.2)?
+In version 3.7.2 some minor bugs have been fixed.
+
+### Other changes
+
+* Minor bug fixes in StrCheckAddHydrogens
+
 ## What's new in version [3.7.1](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v3.7.1)?
 In version 3.7.1 some minor bugs have been fixed.
 
