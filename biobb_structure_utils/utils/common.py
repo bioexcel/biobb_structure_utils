@@ -68,3 +68,19 @@ def is_valid_json(ext):
 	""" Checks if is a valid JSON file """
 	formats = ['json']
 	return ext in formats
+
+def check_output_end(structure, out_log):
+	""" if structure ends with END, remove last line """
+	lines_new = []
+	with open(structure, 'r') as f:
+	    lines = f.read().splitlines()
+	    for item in lines:
+	        #if not item.startswith('END'):
+	        if not item.strip() == 'END':
+	            lines_new.append(item)
+	        else:
+	        	fu.log('%s file ends with END, cleaning' % structure, out_log)
+	        
+	with open(structure, 'w') as f:
+	    for item in lines_new:
+	        f.write("%s\n" % item)

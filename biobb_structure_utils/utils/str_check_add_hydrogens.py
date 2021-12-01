@@ -107,6 +107,8 @@ class StrCheckAddHydrogens(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
+        check_output_end(self.io_dict["out"]["output_structure_path"], self.out_log)
+
         # Copy files to host
         self.copy_to_host()
 
