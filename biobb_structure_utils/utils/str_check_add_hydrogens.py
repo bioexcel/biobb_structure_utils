@@ -86,14 +86,25 @@ class StrCheckAddHydrogens(BiobbObject):
         self.stage_files()
 
         # Create command line
+        # check_structure
+        # -i /Users/pau/projects/biobb_structure_utils/biobb_structure_utils/test/data/utils/str_no_H.pdb
+        # -o /private/tmp/biobb/unitests_38/str_check_add_hydrogens/output_structure_path.pdb
+        # --non_interactive
+        # --force_save add_hydrogen
+        # --add_charges
+        # --add_mode auto
+
+        # check_structure -v -i 2vgb.pdb -o 2vgb_cmip2.pdb --output_format cmip --non_interactive command_list --list 'water --remove yes; backbone --fix_atoms All --add_caps breaks --fix_chain none; fixside --fix All; add_hydrogen --add_mode auto --add_charges CMIP'
         self.cmd = [self.check_structure_path,
                     '-i', self.stage_io_dict['in']['input_structure_path'],
                     '-o', self.stage_io_dict['out']['output_structure_path'],
+                    '--non_interactive',
                     '--force_save',
                     'add_hydrogen']
 
         if self.charges:
             self.cmd.append('--add_charges')
+            self.cmd.append('ADT')
 
         if self.mode:
             self.cmd.extend(['--add_mode', self.mode])
