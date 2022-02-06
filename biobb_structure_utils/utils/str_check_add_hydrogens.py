@@ -18,10 +18,11 @@ class StrCheckAddHydrogens(BiobbObject):
         input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/str_no_H.pdb>`_. Accepted formats: pdb (edam:format_1476).
         output_structure_path (str): Output structure file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_str_H.pdbqt>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
-            * **charges** (*bool*) - (False) Wether or not to add charges to the output file. If True the output is in PDBQT format.
-            * **mode** (*string*) - (None) Selection mode. Values: auto, list, ph
+            * **charges** (*bool*) - (False) Whether or not to add charges to the output file. If True the output is in PDBQT format.
+            * **mode** (*string*) - (auto) Selection mode. Values: auto, list, ph
             * **ph** (*float*) - (7.4) [0~14|0.1] Add hydrogens appropriate for pH. Only in case mode ph selected.
             * **list** (*string*) - ("") List of residues to modify separated by commas (i.e HISA234HID,HISB33HIE). Only in case mode list selected.
+            * **keep_canonical_resnames** (*bool*) - (False) Whether or not keep canonical residue names
             * **check_structure_path** (*string*) - ("check_structure") path to the check_structure application
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
@@ -64,9 +65,10 @@ class StrCheckAddHydrogens(BiobbObject):
         # Properties specific for BB
         self.check_structure_path = properties.get('check_structure_path', 'check_structure')
         self.charges = properties.get('charges', False)
-        self.mode = properties.get('mode', None)
+        self.mode = properties.get('mode', 'auto')
         self.ph = properties.get('ph', 7.4)
         self.list = properties.get('list', '')
+        self.keep_canonical_resnames = properties.get('keep_canonical_resnames', False)
         self.properties = properties
 
         # Check the properties
@@ -85,22 +87,16 @@ class StrCheckAddHydrogens(BiobbObject):
         if self.check_restart(): return 0
         self.stage_files()
 
-        # Create command line
-        # check_structure
-        # -i /Users/pau/projects/biobb_structure_utils/biobb_structure_utils/test/data/utils/str_no_H.pdb
-        # -o /private/tmp/biobb/unitests_38/str_check_add_hydrogens/output_structure_path.pdb
-        # --non_interactive
-        # --force_save add_hydrogen
-        # --add_charges
-        # --add_mode auto
-
-        # check_structure -v -i 2vgb.pdb -o 2vgb_cmip2.pdb --output_format cmip --non_interactive command_list --list 'water --remove yes; backbone --fix_atoms All --add_caps breaks --fix_chain none; fixside --fix All; add_hydrogen --add_mode auto --add_charges CMIP'
         self.cmd = [self.check_structure_path,
                     '-i', self.stage_io_dict['in']['input_structure_path'],
                     '-o', self.stage_io_dict['out']['output_structure_path'],
                     '--non_interactive',
-                    '--force_save',
-                    'add_hydrogen']
+                    '--force_save']
+
+        if self.keep_canonical_resnames:
+            self.cmd.append('--keep_canonical_resnames')
+
+        self.cmd.extend(['command_list', '--list', "'add_hydrogen"])
 
         if self.charges:
             self.cmd.append('--add_charges')
@@ -115,6 +111,7 @@ class StrCheckAddHydrogens(BiobbObject):
         else:
             self.cmd.extend(['--add_mode', 'None'])
 
+        self.cmd.append("'")
         # Run Biobb block
         self.run_biobb()
 

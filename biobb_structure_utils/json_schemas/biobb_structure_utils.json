@@ -42,6 +42,14 @@
             "rest": true
         },
         {
+            "block" : "ExtractResidues",
+            "tool" : "in house using biopython",
+            "desc" : "Class to extract residues from a 3D structure.",
+            "exec" : "extract_residues",
+            "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.extract_residues",
+            "rest": true
+        },
+        {
             "block" : "ExtractModel",
             "tool" : "Structure Checking from MDWeb",
             "desc" : "This class is a wrapper of the Structure Checking tool to extract a model from a 3D structure.",

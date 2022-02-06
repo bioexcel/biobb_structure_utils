@@ -164,10 +164,11 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **charges** (*boolean*): (False) Wether or not to add charges to the output file. If True the output is in PDBQT format..
-* **mode** (*string*): (None) Selection mode. .
+* **charges** (*boolean*): (False) Whether or not to add charges to the output file. If True the output is in PDBQT format..
+* **mode** (*string*): (auto) Selection mode. .
 * **ph** (*number*): (7.4) Add hydrogens appropriate for pH. Only in case mode ph selected..
 * **list** (*string*): () List of residues to modify separated by commas (i.e HISA234HID,HISB33HIE). Only in case mode list selected..
+* **keep_canonical_resnames** (*boolean*): (False) Whether or not keep canonical residue names.
 * **check_structure_path** (*string*): (check_structure) path to the check_structure application.
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
@@ -176,6 +177,7 @@ Config parameters for this building block:
 ```python
 properties:
   charges: true
+  keep_canonical_resnames: true
   mode: auto
 
 ```
@@ -188,8 +190,9 @@ str_check_add_hydrogens --config config_str_check_add_hydrogens.yml --input_stru
 ```python
 {
   "properties": {
+    "mode": "auto",
     "charges": true,
-    "mode": "auto"
+    "keep_canonical_resnames": true
   }
 }
 ```
@@ -353,6 +356,61 @@ structure_check --config config_structure_check.yml --input_structure_path 2vgb.
 #### Command line
 ```python
 structure_check --config config_structure_check.json --input_structure_path 2vgb.pdb --output_summary_path summary.json
+```
+
+## Extract_residues
+Class to extract residues from a 3D structure using Biopython.
+### Get help
+Command:
+```python
+extract_residues -h
+```
+    /bin/sh: extract_residues: command not found
+### I / O Arguments
+Syntax: input_argument (datatype) : Definition
+
+Config input / output arguments for this building block:
+* **input_structure_path** (*string*): Input structure file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_heteroatom.pdb). Accepted formats: PDB
+* **output_residues_path** (*string*): Output residues file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_residues.pdb). Accepted formats: PDB
+### Config
+Syntax: input_parameter (datatype) - (default_value) Definition
+
+Config parameters for this building block:
+* **residues** (*array*): (None) List of comma separated res_id (will extract all residues that match the res_id) or list of dictionaries with the name | res_id  | chain | model of the heteroatoms to be extracted. Format: [{"name": "HIS", "res_id": "72", "chain": "A", "model": "1"}]..
+* **remove_tmp** (*boolean*): (True) Remove temporal files..
+* **restart** (*boolean*): (False) Do not execute if output files exist..
+### YAML
+#### [Common config file](https://github.com/bioexcel/biobb_structure_utils/blob/master/biobb_structure_utils/test/data/config/config_extract_residues.yml)
+```python
+properties:
+  residues:
+  - model: '1'
+    name: HIS
+  - 61
+
+```
+#### Command line
+```python
+extract_residues --config config_extract_residues.yml --input_structure_path extract_heteroatom.pdb --output_residues_path ref_extract_residues.pdb
+```
+### JSON
+#### [Common config file](https://github.com/bioexcel/biobb_structure_utils/blob/master/biobb_structure_utils/test/data/config/config_extract_residues.json)
+```python
+{
+  "properties": {
+    "residues": [
+      {
+        "name": "HIS",
+        "model": "1"
+      },
+      61
+    ]
+  }
+}
+```
+#### Command line
+```python
+extract_residues --config config_extract_residues.json --input_structure_path extract_heteroatom.pdb --output_residues_path ref_extract_residues.pdb
 ```
 
 ## Remove_ligand

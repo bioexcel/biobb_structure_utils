@@ -36,6 +36,14 @@ utils.extract_heteroatoms module
     :undoc-members:
     :show-inheritance:
 
+utils.extract_residues module
+---------------------------------
+
+.. automodule:: utils.extract_residues
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 utils.extract_model module
 -----------------------------
 

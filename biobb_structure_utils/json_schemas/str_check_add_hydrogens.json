@@ -66,11 +66,11 @@
                     "type": "boolean",
                     "default": false,
                     "wf_prop": false,
-                    "description": "Wether or not to add charges to the output file. If True the output is in PDBQT format."
+                    "description": "Whether or not to add charges to the output file. If True the output is in PDBQT format."
                 },
                 "mode": {
                     "type": "string",
-                    "default": null,
+                    "default": "auto",
                     "wf_prop": false,
                     "description": "Selection mode. ",
                     "enum": [
@@ -107,6 +107,12 @@
                     "default": "",
                     "wf_prop": false,
                     "description": "List of residues to modify separated by commas (i.e HISA234HID,HISB33HIE). Only in case mode list selected."
+                },
+                "keep_canonical_resnames": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": false,
+                    "description": "Whether or not keep canonical residue names"
                 },
                 "check_structure_path": {
                     "type": "string",

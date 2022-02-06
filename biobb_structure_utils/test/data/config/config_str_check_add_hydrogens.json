@@ -1,6 +1,7 @@
 {
   "properties": {
+    "mode": "auto",
     "charges": true,
-    "mode": "auto"
+    "keep_canonical_resnames": true
   }
 }

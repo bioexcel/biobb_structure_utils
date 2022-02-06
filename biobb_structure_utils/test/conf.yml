@@ -104,6 +104,17 @@ extract_heteroatoms:
       "name": "ADP"
     }]
 
+extract_residues:
+  paths:
+    input_structure_path: file:test_data_dir/utils/2vgb.pdb
+    output_residues_path: output_residues_path.pdb
+    reference_output_residues_path: file:test_reference_dir/utils/ref_extract_residues.pdb
+  properties:
+    residues: [{
+      "name": "HIS",
+      "model": "1"
+    }, 61]
+
 extract_molecule:
   paths:
     input_structure_path: file:test_data_dir/utils/extract_molecule.pdb
@@ -140,11 +151,12 @@ extract_model:
 str_check_add_hydrogens:
   paths:
     input_structure_path: file:test_data_dir/utils/str_no_H.pdb
-    output_structure_path: output_structure_path.pdb
+    output_structure_path: output_structure_path.pdbqt
     reference_output_structure_path: file:test_reference_dir/utils/ref_str_H.pdbqt
   properties:
-    charges: true
     mode: auto
+    charges: True
+    keep_canonical_resnames: True
 
 structure_check:
   paths:
