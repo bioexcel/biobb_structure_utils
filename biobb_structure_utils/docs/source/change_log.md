@@ -1,5 +1,12 @@
 # Biobb Structure Utils changelog
 
+## What's new in version [3.7.4](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v3.7.4)?
+In version 3.7.4 ExtractResidues block has been added.
+
+### Other changes
+
+* Add keep_canonical_resnames option added to StrCheckAddHydrogens
+
 ## What's new in version [3.7.3](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v3.7.3)?
 In version 3.7.3 some minor bugs have been fixed.
 
