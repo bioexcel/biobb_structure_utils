@@ -2,6 +2,7 @@
 
 """Module containing the ExtractChain class and the command line interface."""
 import argparse
+import shutil
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
@@ -19,6 +20,7 @@ class ExtractChain(BiobbObject):
         output_structure_path (str): Output structure file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_chain.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **chains** (*list*) - (None) List of chains to be extracted from the input_structure_path file. If empty, all the chains of the structure will be returned.
+            * **permissive** (*bool*) - (False) Use non standard PDB files.
             * **check_structure_path** (*string*) - ("check_structure") path to the check_structure application
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
@@ -60,6 +62,7 @@ class ExtractChain(BiobbObject):
         # Properties specific for BB
         self.check_structure_path = properties.get('check_structure_path', 'check_structure')
         self.chains = properties.get('chains', [])
+        self.permissive = properties.get('permissive', False)
         self.properties = properties
 
         # Check the properties
@@ -80,16 +83,29 @@ class ExtractChain(BiobbObject):
 
         # check if user has passed chains properly
         chains = check_format_chains(self.chains, self.out_log)
+        fu.log(f"Selected Chains: {chains}", self.out_log, self.global_log)
 
-        # run command line
-        self.cmd = [self.check_structure_path,
-                    '-i', self.io_dict['in']['input_structure_path'],
-                    '-o', self.io_dict['out']['output_structure_path'],
-                    '--force_save',
-                    'chains', '--select', chains]
+        if self.permissive:
+            fu.log('Warning: Use permissive=True is a risky option use it under your own responsability', self.out_log, self.global_log)
+            if chains.upper() == 'ALL':
+                shutil.copyfile(self.io_dict['in']['input_structure_path'], self.io_dict['out']['output_structure_path'])
+            else:
+                chain_list = chains.upper().replace(" ","").split(",")
+                with open(self.io_dict['in']['input_structure_path']) as structure_in, open(self.io_dict['out']['output_structure_path'], 'w') as structure_out:
+                    for line in structure_in:
+                        if line.strip().upper().startswith(('ATOM','HETATM')) and line.strip().upper()[21] in chain_list:
+                            structure_out.write(line)
 
-        # Run Biobb block
-        self.run_biobb()
+        else:
+            # run command line
+            self.cmd = [self.check_structure_path,
+                        '-i', self.io_dict['in']['input_structure_path'],
+                        '-o', self.io_dict['out']['output_structure_path'],
+                        '--force_save',
+                        'chains', '--select', chains]
+
+            # Run Biobb block
+            self.run_biobb()
 
         # Copy files to host
         self.copy_to_host()

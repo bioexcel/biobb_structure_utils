@@ -138,6 +138,7 @@ extract_chain:
     output_structure_path: output_structure_path.pdb
     reference_output_structure_path: file:test_reference_dir/utils/ref_extract_chain.pdb
   properties:
+    permissive: true
     chains: [B,C]
 
 extract_model:
