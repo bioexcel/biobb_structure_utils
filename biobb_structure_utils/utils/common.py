@@ -13,7 +13,7 @@ def check_input_path(path, out_log, classname):
 		fu.log(classname + ': Unexisting input file, exiting', out_log)
 		raise SystemExit(classname + ': Unexisting input file')
 	file_extension = PurePath(path).suffix
-	if not is_valid_pdb(file_extension[1:]):
+	if not is_valid_pdb(file_extension[1:]) and not is_valid_pdbqt(file_extension[1:]):
 		fu.log(classname + ': Format %s in input file is not compatible' % file_extension[1:], out_log)
 		raise SystemExit(classname + ': Format %s in input file is not compatible' % file_extension[1:])
 	# if file input has no path, add cwd because execution is launched on tmp folder
@@ -27,7 +27,7 @@ def check_output_path(path, out_log, classname):
 		fu.log(classname + ': Unexisting output folder, exiting', out_log)
 		raise SystemExit(classname + ': Unexisting output folder')
 	file_extension = PurePath(path).suffix
-	if not is_valid_pdb(file_extension[1:]):
+	if not is_valid_pdb(file_extension[1:]) and not is_valid_pdbqt(file_extension[1:]):
 		fu.log(classname + ': Format %s in output file is not compatible' % file_extension[1:], out_log)
 		raise SystemExit(classname + ': Format %s in output file is not compatible' % file_extension[1:])
 	return path
@@ -73,13 +73,13 @@ def check_output_end(structure, out_log):
 	""" if structure ends with END, remove last line """
 	lines_new = []
 	with open(structure, 'r') as f:
-	    lines = f.read().splitlines()
-	    for item in lines:
+		lines = f.read().splitlines()
+		for item in lines:
 	        #if not item.startswith('END'):
-	        if not item.strip() == 'END':
-	            lines_new.append(item)
-	        else:
-	        	fu.log('%s file ends with END, cleaning' % structure, out_log)
+			if not item.strip() == 'END':
+				lines_new.append(item)
+			else:
+				fu.log('%s file ends with END, cleaning' % structure, out_log)
 	        
 	with open(structure, 'w') as f:
 	    for item in lines_new:
