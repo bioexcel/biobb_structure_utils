@@ -23,7 +23,7 @@ class StrCheckAddHydrogens(BiobbObject):
             * **ph** (*float*) - (7.4) [0~14|0.1] Add hydrogens appropriate for pH. Only in case mode ph selected.
             * **list** (*string*) - ("") List of residues to modify separated by commas (i.e HISA234HID,HISB33HIE). Only in case mode list selected.
             * **keep_canonical_resnames** (*bool*) - (False) Whether or not keep canonical residue names
-            * **check_structure_path** (*string*) - ("check_structure") path to the check_structure application
+            * **binary_path** (*string*) - ("check_structure") path to the check_structure application
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -63,7 +63,7 @@ class StrCheckAddHydrogens(BiobbObject):
         }
 
         # Properties specific for BB
-        self.check_structure_path = properties.get('check_structure_path', 'check_structure')
+        self.binary_path = properties.get('binary_path', 'check_structure')
         self.charges = properties.get('charges', False)
         self.mode = properties.get('mode', 'auto')
         self.ph = properties.get('ph', 7.4)
@@ -87,7 +87,7 @@ class StrCheckAddHydrogens(BiobbObject):
         if self.check_restart(): return 0
         self.stage_files()
 
-        self.cmd = [self.check_structure_path,
+        self.cmd = [self.binary_path,
                     '-i', self.stage_io_dict['in']['input_structure_path'],
                     '-o', self.stage_io_dict['out']['output_structure_path'],
                     '--non_interactive',

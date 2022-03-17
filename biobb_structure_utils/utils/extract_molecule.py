@@ -20,7 +20,7 @@ class ExtractMolecule(BiobbObject):
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **molecule_type** (*string*) - ("all") type of molecule to be extracted. If all, only waters and ligands will be removed from the original structure. Values: all, protein, na, dna, rna, chains.
             * **chains** (*list*) - (None) if chains selected in **molecule_type**, specify them here, e.g: ["A", "C", "N"].
-            * **check_structure_path** (*string*) - ("check_structure") path to the check_structure application
+            * **binary_path** (*string*) - ("check_structure") path to the check_structure application
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -62,7 +62,7 @@ class ExtractMolecule(BiobbObject):
         # Properties specific for BB
         self.molecule_type = properties.get('molecule_type', 'all')
         self.chains = properties.get('chains', [])
-        self.check_structure_path = properties.get('check_structure_path', 'check_structure')
+        self.binary_path = properties.get('binary_path', 'check_structure')
         self.properties = properties
 
         # Check the properties
@@ -103,7 +103,7 @@ class ExtractMolecule(BiobbObject):
         command_list_file = self.create_command_list(tmp_folder + '/extract_prot.lst')
         
         # run command line
-        cmd = [self.check_structure_path,
+        cmd = [self.binary_path,
                '-i', self.io_dict['in']['input_structure_path'],
                '-o', self.io_dict['out']['output_molecule_path'],
                '--force_save',

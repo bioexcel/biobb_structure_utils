@@ -20,7 +20,7 @@ class ExtractModel(BiobbObject):
         output_structure_path (str): Output structure file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_model.pdb>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **models** (*list*) - (None) List of models to be extracted from the input_structure_path file. If empty, all the models of the structure will be returned.
-            * **check_structure_path** (*string*) - ("check_structure") path to the check_structure application
+            * **binary_path** (*string*) - ("check_structure") path to the check_structure application
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -59,7 +59,7 @@ class ExtractModel(BiobbObject):
         }
 
         # Properties specific for BB
-        self.check_structure_path = properties.get('check_structure_path', 'check_structure')
+        self.binary_path = properties.get('binary_path', 'check_structure')
         self.models = properties.get('models', [])
         self.properties = properties
 
@@ -95,7 +95,7 @@ class ExtractModel(BiobbObject):
 
                 tmp_file = tmp_folder + '/model' + str(model) + '.pdb'
 
-                self.cmd = [self.check_structure_path,
+                self.cmd = [self.binary_path,
                             '-i', self.stage_io_dict['in']['input_structure_path'],
                             '-o', tmp_file,
                             '--force_save',

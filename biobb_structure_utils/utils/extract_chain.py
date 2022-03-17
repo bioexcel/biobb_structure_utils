@@ -21,7 +21,7 @@ class ExtractChain(BiobbObject):
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **chains** (*list*) - (None) List of chains to be extracted from the input_structure_path file. If empty, all the chains of the structure will be returned.
             * **permissive** (*bool*) - (False) Use non standard PDB files.
-            * **check_structure_path** (*string*) - ("check_structure") path to the check_structure application
+            * **binary_path** (*string*) - ("check_structure") path to the check_structure application
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -60,7 +60,7 @@ class ExtractChain(BiobbObject):
         }
 
         # Properties specific for BB
-        self.check_structure_path = properties.get('check_structure_path', 'check_structure')
+        self.binary_path = properties.get('binary_path', 'check_structure')
         self.chains = properties.get('chains', [])
         self.permissive = properties.get('permissive', False)
         self.properties = properties
@@ -98,7 +98,7 @@ class ExtractChain(BiobbObject):
 
         else:
             # run command line
-            self.cmd = [self.check_structure_path,
+            self.cmd = [self.binary_path,
                         '-i', self.io_dict['in']['input_structure_path'],
                         '-o', self.io_dict['out']['output_structure_path'],
                         '--force_save',

@@ -4,7 +4,7 @@
     "github" : "https://github.com/bioexcel/biobb_structure_utils",
     "readthedocs" : "https://biobb-structure-utils.readthedocs.io/en/latest/",
     "conda" : "https://anaconda.org/bioconda/biobb_structure_utils",
-    "docker" : "https://quay.io/biocontainers/biobb_structure_utils:3.7.2--pyhdfd78af_0",
+    "docker" : "https://quay.io/biocontainers/biobb_structure_utils:3.7.4--pyhdfd78af_0",
     "singularity" : "https://singularity-hub.org/collections/3836/usage",
     "version" : "3.7.4",
     "rest": true,

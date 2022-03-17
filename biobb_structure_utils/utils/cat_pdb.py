@@ -94,7 +94,6 @@ class CatPDB(BiobbObject):
                     if not newline[idx]:
                         outfile.write("\n")
         self.return_code = 0
-        ##########
 
         # Copy files to host
         self.copy_to_host()

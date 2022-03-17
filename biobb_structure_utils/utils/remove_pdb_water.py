@@ -18,7 +18,7 @@ class RemovePdbWater(BiobbObject):
         input_pdb_path (str): Input PDB file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/WT_aq4_md_WAT.pdb>`_. Accepted formats: pdb (edam:format_1476).
         output_pdb_path (str): Output PDB file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/WT_apo_no_wat.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
-            * **check_structure_path** (*string*) - ("check_structure") path to the check_structure application
+            * **binary_path** (*string*) - ("check_structure") path to the check_structure application
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -55,7 +55,7 @@ class RemovePdbWater(BiobbObject):
         }
 
         # Properties specific for BB
-        self.check_structure_path = properties.get('check_structure_path', 'check_structure')
+        self.binary_path = properties.get('binary_path', 'check_structure')
 
         # Check the properties
         fu.check_properties(self, properties)
@@ -68,7 +68,7 @@ class RemovePdbWater(BiobbObject):
         if self.check_restart(): return 0
         self.stage_files()
 
-        self.cmd = [self.check_structure_path,
+        self.cmd = [self.binary_path,
                     '-i', self.stage_io_dict['in']['input_pdb_path'],
                     '-o', self.stage_io_dict['out']['output_pdb_path'],
                     '--force_save',
