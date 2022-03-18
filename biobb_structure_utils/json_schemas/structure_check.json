@@ -27,11 +27,17 @@
             "filetype": "input",
             "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/2vgb.pdb",
             "enum": [
-                ".*\\.pdb$"
+                ".*\\.pdb$",
+                ".*\\.pdbqt$"
             ],
             "file_formats": [
                 {
                     "extension": ".*\\.pdb$",
+                    "description": "Input structure file path",
+                    "edam": "format_1476"
+                },
+                {
+                    "extension": ".*\\.pdbqt$",
                     "description": "Input structure file path",
                     "edam": "format_1476"
                 }
@@ -121,7 +127,7 @@
                         }
                     ]
                 },
-                "check_structure_path": {
+                "binary_path": {
                     "type": "string",
                     "default": "check_structure",
                     "wf_prop": false,

@@ -56,7 +56,7 @@
         "properties": {
             "type": "object",
             "properties": {
-                "check_structure_path": {
+                "binary_path": {
                     "type": "string",
                     "default": "check_structure",
                     "wf_prop": false,

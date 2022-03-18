@@ -1,5 +1,9 @@
 # Biobb Structure Utils changelog
 
+## What's new in version [3.7.5](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v3.7.5)?
+In version 3.7.5 compatibility PDBQT
+
+
 ## What's new in version [3.7.4](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v3.7.4)?
 In version 3.7.4 ExtractResidues block has been added.
 

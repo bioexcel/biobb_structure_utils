@@ -114,7 +114,7 @@
                     "wf_prop": false,
                     "description": "Whether or not keep canonical residue names"
                 },
-                "check_structure_path": {
+                "binary_path": {
                     "type": "string",
                     "default": "check_structure",
                     "wf_prop": false,

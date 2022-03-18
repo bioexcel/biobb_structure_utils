@@ -27,11 +27,17 @@
             "filetype": "input",
             "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/cat_protein.pdb",
             "enum": [
-                ".*\\.pdb$"
+                ".*\\.pdb$",
+                ".*\\.pdbqt$"
             ],
             "file_formats": [
                 {
                     "extension": ".*\\.pdb$",
+                    "description": "Input structure 1 file path",
+                    "edam": "format_1476"
+                },
+                {
+                    "extension": ".*\\.pdbqt$",
                     "description": "Input structure 1 file path",
                     "edam": "format_1476"
                 }
@@ -43,11 +49,17 @@
             "filetype": "input",
             "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/cat_ligand.pdb",
             "enum": [
-                ".*\\.pdb$"
+                ".*\\.pdb$",
+                ".*\\.pdbqt$"
             ],
             "file_formats": [
                 {
                     "extension": ".*\\.pdb$",
+                    "description": "Input structure 2 file path",
+                    "edam": "format_1476"
+                },
+                {
+                    "extension": ".*\\.pdbqt$",
                     "description": "Input structure 2 file path",
                     "edam": "format_1476"
                 }
@@ -59,11 +71,17 @@
             "filetype": "output",
             "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_cat_pdb.pdb",
             "enum": [
-                ".*\\.pdb$"
+                ".*\\.pdb$",
+                ".*\\.pdbqt$"
             ],
             "file_formats": [
                 {
                     "extension": ".*\\.pdb$",
+                    "description": "Output protein file path",
+                    "edam": "format_1476"
+                },
+                {
+                    "extension": ".*\\.pdbqt$",
                     "description": "Output protein file path",
                     "edam": "format_1476"
                 }

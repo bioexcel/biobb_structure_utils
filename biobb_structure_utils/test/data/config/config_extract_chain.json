@@ -1,5 +1,6 @@
 {
   "properties": {
+    "permissive": true,
     "chains": [
       "B",
       "C"

@@ -27,11 +27,17 @@
             "filetype": "input",
             "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_molecule.pdb",
             "enum": [
-                ".*\\.pdb$"
+                ".*\\.pdb$",
+                ".*\\.pdbqt$"
             ],
             "file_formats": [
                 {
                     "extension": ".*\\.pdb$",
+                    "description": "Input structure file path",
+                    "edam": "format_1476"
+                },
+                {
+                    "extension": ".*\\.pdbqt$",
                     "description": "Input structure file path",
                     "edam": "format_1476"
                 }
@@ -43,11 +49,17 @@
             "filetype": "output",
             "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_molecule.pdb",
             "enum": [
-                ".*\\.pdb$"
+                ".*\\.pdb$",
+                ".*\\.pdbqt$"
             ],
             "file_formats": [
                 {
                     "extension": ".*\\.pdb$",
+                    "description": "Output molecule file path",
+                    "edam": "format_1476"
+                },
+                {
+                    "extension": ".*\\.pdbqt$",
                     "description": "Output molecule file path",
                     "edam": "format_1476"
                 }
@@ -102,7 +114,7 @@
                     "wf_prop": false,
                     "description": "if chains selected in **molecule_type**, specify them here, e.g: [\"A\", \"C\", \"N\"]."
                 },
-                "check_structure_path": {
+                "binary_path": {
                     "type": "string",
                     "default": "check_structure",
                     "wf_prop": false,

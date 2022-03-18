@@ -18,9 +18,9 @@ cat_pdb -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_structure1** (*string*): Input structure 1 file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/cat_protein.pdb). Accepted formats: PDB
-* **input_structure2** (*string*): Input structure 2 file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/cat_ligand.pdb). Accepted formats: PDB
-* **output_structure_path** (*string*): Output protein file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_cat_pdb.pdb). Accepted formats: PDB
+* **input_structure1** (*string*): Input structure 1 file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/cat_protein.pdb). Accepted formats: PDB, PDBQT
+* **input_structure2** (*string*): Input structure 2 file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/cat_ligand.pdb). Accepted formats: PDB, PDBQT
+* **output_structure_path** (*string*): Output protein file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_cat_pdb.pdb). Accepted formats: PDB, PDBQT
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
@@ -64,15 +64,15 @@ extract_molecule -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_structure_path** (*string*): Input structure file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_molecule.pdb). Accepted formats: PDB
-* **output_molecule_path** (*string*): Output molecule file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_molecule.pdb). Accepted formats: PDB
+* **input_structure_path** (*string*): Input structure file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_molecule.pdb). Accepted formats: PDB, PDBQT
+* **output_molecule_path** (*string*): Output molecule file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_molecule.pdb). Accepted formats: PDB, PDBQT
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
 * **molecule_type** (*string*): (all) type of molecule to be extracted. If all, only waters and ligands will be removed from the original structure. .
 * **chains** (*array*): (None) if chains selected in **molecule_type**, specify them here, e.g: ["A", "C", "N"]..
-* **check_structure_path** (*string*): (check_structure) path to the check_structure application.
+* **binary_path** (*string*): (check_structure) path to the check_structure application.
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
 ### YAML
@@ -169,7 +169,7 @@ Config parameters for this building block:
 * **ph** (*number*): (7.4) Add hydrogens appropriate for pH. Only in case mode ph selected..
 * **list** (*string*): () List of residues to modify separated by commas (i.e HISA234HID,HISB33HIE). Only in case mode list selected..
 * **keep_canonical_resnames** (*boolean*): (False) Whether or not keep canonical residue names.
-* **check_structure_path** (*string*): (check_structure) path to the check_structure application.
+* **binary_path** (*string*): (check_structure) path to the check_structure application.
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
 ### YAML
@@ -266,14 +266,15 @@ extract_chain -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_structure_path** (*string*): Input structure file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_chain.pdb). Accepted formats: PDB
-* **output_structure_path** (*string*): Output structure file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_chain.pdb). Accepted formats: PDB
+* **input_structure_path** (*string*): Input structure file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_chain.pdb). Accepted formats: PDB, PDBQT
+* **output_structure_path** (*string*): Output structure file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_chain.pdb). Accepted formats: PDB, PDBQT
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
 * **chains** (*array*): (None) List of chains to be extracted from the input_structure_path file. If empty, all the chains of the structure will be returned..
-* **check_structure_path** (*string*): (check_structure) path to the check_structure application.
+* **permissive** (*boolean*): (False) Use non standard PDB files..
+* **binary_path** (*string*): (check_structure) path to the check_structure application.
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
 ### YAML
@@ -283,6 +284,7 @@ properties:
   chains:
   - B
   - C
+  permissive: true
 
 ```
 #### Command line
@@ -294,6 +296,7 @@ extract_chain --config config_extract_chain.yml --input_structure_path extract_c
 ```python
 {
   "properties": {
+    "permissive": true,
     "chains": [
       "B",
       "C"
@@ -318,14 +321,14 @@ structure_check -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_structure_path** (*string*): Input structure file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/2vgb.pdb). Accepted formats: PDB
+* **input_structure_path** (*string*): Input structure file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/2vgb.pdb). Accepted formats: PDB, PDBQT
 * **output_summary_path** (*string*): Output summary checking results. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/summary.json). Accepted formats: JSON
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
 * **features** (*array*): (None) Features to summarize. If None, all the features will be computed. .
-* **check_structure_path** (*string*): (check_structure) path to the check_structure application.
+* **binary_path** (*string*): (check_structure) path to the check_structure application.
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
 ### YAML
@@ -370,8 +373,8 @@ extract_residues -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_structure_path** (*string*): Input structure file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_heteroatom.pdb). Accepted formats: PDB
-* **output_residues_path** (*string*): Output residues file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_residues.pdb). Accepted formats: PDB
+* **input_structure_path** (*string*): Input structure file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_heteroatom.pdb). Accepted formats: PDB, PDBQT
+* **output_residues_path** (*string*): Output residues file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_residues.pdb). Accepted formats: PDB, PDBQT
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
@@ -525,7 +528,7 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **check_structure_path** (*string*): (check_structure) path to the check_structure application.
+* **binary_path** (*string*): (check_structure) path to the check_structure application.
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
 ### YAML
@@ -565,8 +568,8 @@ extract_heteroatoms -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_structure_path** (*string*): Input structure file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_heteroatom.pdb). Accepted formats: PDB
-* **output_heteroatom_path** (*string*): Output heteroatom file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_heteroatom.pdb). Accepted formats: PDB
+* **input_structure_path** (*string*): Input structure file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_heteroatom.pdb). Accepted formats: PDB, PDBQT
+* **output_heteroatom_path** (*string*): Output heteroatom file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_heteroatom.pdb). Accepted formats: PDB, PDBQT
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
@@ -623,14 +626,14 @@ extract_model -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_structure_path** (*string*): Input structure file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_model.pdb). Accepted formats: PDB
-* **output_structure_path** (*string*): Output structure file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_model.pdb). Accepted formats: PDB
+* **input_structure_path** (*string*): Input structure file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_model.pdb). Accepted formats: PDB, PDBQT
+* **output_structure_path** (*string*): Output structure file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_model.pdb). Accepted formats: PDB, PDBQT
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
 * **models** (*array*): (None) List of models to be extracted from the input_structure_path file. If empty, all the models of the structure will be returned..
-* **check_structure_path** (*string*): (check_structure) path to the check_structure application.
+* **binary_path** (*string*): (check_structure) path to the check_structure application.
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
 ### YAML
