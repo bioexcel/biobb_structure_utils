@@ -37,7 +37,7 @@ class ExtractHeteroAtoms(BiobbObject):
                     }
                 ] 
             }
-            extract_heteroatoms(input_structure_path='/path/to/myStructure.pdb, 
+            extract_heteroatoms(input_structure_path='/path/to/myStructure.pdb', 
                                 output_heteroatom_path='/path/to/newHeteroatom.pdb', 
                                 properties=prop)
 

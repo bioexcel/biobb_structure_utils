@@ -25,8 +25,8 @@ class CatPDB(BiobbObject):
 
             from biobb_structure_utils.utils.cat_pdb import cat_pdb
             prop = { }
-            cat_pdb(input_structure1='/path/to/myInputStr1.pdb, 
-                    input_structure2='/path/to/myInputStr2.pdb, 
+            cat_pdb(input_structure1='/path/to/myInputStr1.pdb', 
+                    input_structure2='/path/to/myInputStr2.pdb', 
                     output_structure_path='/path/to/newStructure.pdb', 
                     properties=prop)
 

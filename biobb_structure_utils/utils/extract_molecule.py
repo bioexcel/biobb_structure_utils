@@ -32,7 +32,7 @@ class ExtractMolecule(BiobbObject):
                 'molecule_type': 'chains',
                 'chains': ['A', 'N', 'F']
             }
-            extract_molecule(input_structure_path='/path/to/myStructure.pdb, 
+            extract_molecule(input_structure_path='/path/to/myStructure.pdb', 
                             output_molecule_path='/path/to/newMolecule.pdb', 
                             properties=prop)
 

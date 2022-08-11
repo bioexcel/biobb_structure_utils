@@ -37,7 +37,7 @@ class ExtractResidues(BiobbObject):
                     }
                 ] 
             }
-            extract_residues(input_structure_path='/path/to/myStructure.pdb,
+            extract_residues(input_structure_path='/path/to/myStructure.pdb',
                              output_residues_path='/path/to/newResidues.pdb',
                              properties=prop)
 

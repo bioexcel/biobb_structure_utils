@@ -30,7 +30,7 @@ class StructureCheck(BiobbObject):
             prop = { 
                 'features': ['models', 'chains', 'ligands']
             }
-            structure_check(input_structure_path='/path/to/myInputStr.pdb, 
+            structure_check(input_structure_path='/path/to/myInputStr.pdb', 
                             output_summary_path='/path/to/newSummary.json', 
                             properties=prop)
 
@@ -78,31 +78,36 @@ class StructureCheck(BiobbObject):
         if self.check_restart(): return 0
         self.stage_files()
 
-        if not self.features:
+        if not self.features or self.features == None or self.features == 'None':
             fu.log('No features provided, all features will be computed: %s' % 'models, chains, altloc, metals, ligands, chiral, getss, cistransbck, backbone, amide, clashes', self.out_log)
-            self.features = ['models', 'chains', 'altloc', 'metals', 'ligands', 'chiral', 'getss', 'cistransbck', 'backbone', 'amide', 'clashes']
+
+            self.cmd = [self.binary_path,
+                        '-i', self.stage_io_dict['in']['input_structure_path'],
+                        '--json', self.stage_io_dict['out']['output_summary_path'],
+                        '--check_only',
+                        '--non_interactive',
+                        'checkall']
         else: 
             fu.log('Computing features: %s' % ', '.join(self.features), self.out_log)
 
-        # create temporary folder
-        tmp_folder = fu.create_unique_dir()
-        fu.log('Creating %s temporary folder' % tmp_folder, self.out_log)
+            # create temporary folder
+            tmp_folder = fu.create_unique_dir()
+            fu.log('Creating %s temporary folder' % tmp_folder, self.out_log)
 
-        command_list = tmp_folder + '/command_list.lst'
+            command_list = tmp_folder + '/command_list.lst'
 
-        with open(command_list, 'w') as f:
-            for item in self.features:
-                f.write("%s\n" % item)
+            with open(command_list, 'w') as f:
+                for item in self.features:
+                    f.write("%s\n" % item)
 
-        # run command line
-        self.cmd = [self.binary_path,
-                    '-i', self.stage_io_dict['in']['input_structure_path'],
-                    '--json', self.stage_io_dict['out']['output_summary_path'],
-                    '--check_only',
-                    '--non_interactive',
-                    'command_list',
-                    '--list',
-                    command_list]
+            self.cmd = [self.binary_path,
+                        '-i', self.stage_io_dict['in']['input_structure_path'],
+                        '--json', self.stage_io_dict['out']['output_summary_path'],
+                        '--check_only',
+                        '--non_interactive',
+                        'command_list',
+                        '--list',
+                        command_list]
 
         # Run Biobb block
         self.run_biobb()
@@ -111,8 +116,10 @@ class StructureCheck(BiobbObject):
         self.copy_to_host()
 
         # Remove temporal files
-        self.tmp_files.append(self.stage_io_dict.get("unique_dir"))
-        self.remove_tmp_files()
+        #self.tmp_files.append(self.stage_io_dict.get("unique_dir"))
+        if 'tmp_folder' in locals():
+            self.tmp_files.append(tmp_folder)
+            self.remove_tmp_files()
 
         return self.return_code
 

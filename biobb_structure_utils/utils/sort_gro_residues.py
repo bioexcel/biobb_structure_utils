@@ -29,7 +29,7 @@ class SortGroResidues(BiobbObject):
             prop = { 
                 'residue_name_list': ['NA', 'CL', 'SOL'] 
             }
-            sort_gro_residues(input_gro_path='/path/to/myInputStr.gro, 
+            sort_gro_residues(input_gro_path='/path/to/myInputStr.gro', 
                             output_gro_path='/path/to/newStructure.gro', 
                             properties=prop)
 

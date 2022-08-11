@@ -32,7 +32,7 @@ class ExtractChain(BiobbObject):
             prop = { 
                 'chains': [ 'A', 'B' ] 
             }
-            extract_chain(input_structure_path='/path/to/myStructure.pdb, 
+            extract_chain(input_structure_path='/path/to/myStructure.pdb', 
                         output_structure_path='/path/to/newStructure.pdb', 
                         properties=prop)
 

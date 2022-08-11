@@ -31,7 +31,7 @@ class ExtractModel(BiobbObject):
             prop = { 
                 'models': [ 1, 2, 3 ] 
             }
-            extract_model(input_structure_path='/path/to/myStructure.pdb, 
+            extract_model(input_structure_path='/path/to/myStructure.pdb', 
                         output_structure_path='/path/to/newStructure.pdb', 
                         properties=prop)
 

@@ -35,7 +35,7 @@ class StrCheckAddHydrogens(BiobbObject):
                 'charges': False, 
                 'mode': 'auto'
             }
-            str_check_add_hydrogens(input_structure_path='/path/to/myInputStr.pdb, 
+            str_check_add_hydrogens(input_structure_path='/path/to/myInputStr.pdb', 
                                     output_structure_path='/path/to/newStructure.pdb', 
                                     properties=prop)
 

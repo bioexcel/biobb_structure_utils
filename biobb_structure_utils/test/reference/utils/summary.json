@@ -34,6 +34,7 @@
   "num_wat": 65,
   "res_hetats": 81,
   "res_insc": 0,
-  "res_ligands": 16
+  "res_ligands": 16,
+  "total_charge": null
  }
 }

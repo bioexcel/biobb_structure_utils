@@ -29,7 +29,7 @@ class ExtractAtoms(BiobbObject):
             prop = { 
                 'regular_expression_pattern': '^D' 
             }
-            extract_atoms(input_structure_path='/path/to/myStructure.pdb, 
+            extract_atoms(input_structure_path='/path/to/myStructure.pdb', 
                         output_structure_path='/path/to/newStructure.pdb', 
                         properties=prop)
 

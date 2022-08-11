@@ -27,7 +27,7 @@ class RemovePdbWater(BiobbObject):
 
             from biobb_structure_utils.utils.remove_pdb_water import remove_pdb_water
             prop = { }
-            remove_pdb_water(input_pdb_path='/path/to/myStructure.pdb, 
+            remove_pdb_water(input_pdb_path='/path/to/myStructure.pdb', 
                             output_pdb_path='/path/to/newStructure.pdb', 
                             properties=prop)
 

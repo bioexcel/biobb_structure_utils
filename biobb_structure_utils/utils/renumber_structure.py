@@ -33,7 +33,7 @@ class RenumberStructure(BiobbObject):
                 'renumber_residues': True, 
                 'renumber_residues_per_chain': True 
             }
-            renumber_structure(input_structure_path='/path/to/myInputStr.pdb, 
+            renumber_structure(input_structure_path='/path/to/myInputStr.pdb', 
                                 output_structure_path='/path/to/newStructure.pdb', 
                                 output_mapping_json_path='/path/to/newMapping.json', 
                                 properties=prop)

@@ -29,7 +29,7 @@ class RemoveLigand(BiobbObject):
             prop = { 
                 'ligand': 'AQ4'
             }
-            remove_ligand(input_structure_path='/path/to/myStructure.pdb, 
+            remove_ligand(input_structure_path='/path/to/myStructure.pdb', 
                         output_structure_path='/path/to/newStructure.pdb',
                         properties=prop)
 
