@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Module containing the ExtractResidues class and the command line interface."""
+"""Module containing the RemoveMolecules class and the command line interface."""
 import argparse
 from collections.abc import Mapping
 from biobb_common.configuration import settings
@@ -10,25 +10,25 @@ from Bio.PDB.PDBParser import PDBParser
 from biobb_structure_utils.utils.common import *
 
 
-class ExtractResidues(BiobbObject):
+class RemoveMolecules(BiobbObject):
     """
-    | biobb_structure_utils ExtractResidues
-    | Class to extract residues from a 3D structure using Biopython.
+    | biobb_structure_utils RemoveMolecules
+    | Class to remove molecules from a 3D structure using Biopython.
 
     Args:
-        input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_heteroatom.pdb>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).
-        output_residues_path (str): Output residues file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_residues.pdb>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).
+        input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/2vgb.pdb>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).
+        output_molecules_path (str): Output molcules file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_remove_molecules.pdb>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
-            * **residues** (*list*) - (None) List of comma separated res_id (will extract all residues that match the res_id) or list of dictionaries with the name | res_id  | chain | model of the residues to be extracted. Format: [{"name": "HIS", "res_id": "72", "chain": "A", "model": "1"}].
+            * **molecules** (*list*) - (None) List of comma separated res_id (will extract all molecules that match the res_id) or list of dictionaries with the name | res_id  | chain | model of the molecules to be extracted. Format: [{"name": "HIS", "res_id": "72", "chain": "A", "model": "1"}].
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
     Examples:
         This is a use example of how to use the building block from Python::
 
-            from biobb_structure_utils.utils.extract_residues import extract_residues
+            from biobb_structure_utils.utils.remove_molecules import remove_molecules
             prop = { 
-                'residues': [
+                'molecules': [
                     {
                         'name': 'HIS',
                         'res_id': '72',
@@ -37,8 +37,8 @@ class ExtractResidues(BiobbObject):
                     }
                 ] 
             }
-            extract_residues(input_structure_path='/path/to/myStructure.pdb',
-                             output_residues_path='/path/to/newResidues.pdb',
+            remove_molecules(input_structure_path='/path/to/myStructure.pdb',
+                             output_molecules_path='/path/to/newResidues.pdb',
                              properties=prop)
 
     Info:
@@ -52,7 +52,7 @@ class ExtractResidues(BiobbObject):
 
     """
 
-    def __init__(self, input_structure_path, output_residues_path, properties=None, **kwargs) -> None:
+    def __init__(self, input_structure_path, output_molecules_path, properties=None, **kwargs) -> None:
         properties = properties or {}
 
         # Call parent class constructor
@@ -61,11 +61,11 @@ class ExtractResidues(BiobbObject):
         # Input/Output files
         self.io_dict = {
             "in": {"input_structure_path": input_structure_path},
-            "out": {"output_residues_path": output_residues_path}
+            "out": {"output_molecules_path": output_molecules_path}
         }
 
         # Properties specific for BB
-        self.residues = properties.get('residues', [])
+        self.molecules = properties.get('molecules', [])
         self.properties = properties
 
         # Check the properties
@@ -73,11 +73,11 @@ class ExtractResidues(BiobbObject):
 
     @launchlogger
     def launch(self) -> int:
-        """Execute the :class:`ExtractResidues <utils.extract_residues.ExtractResidues>` utils.extract_residues.ExtractResidues object."""
+        """Execute the :class:`RemoveMolecules <utils.remove_molecules.RemoveMolecules>` utils.remove_molecules.RemoveMolecules object."""
 
         self.io_dict['in']['input_structure_path'] = check_input_path(self.io_dict['in']['input_structure_path'],
                                                                       self.out_log, self.__class__.__name__)
-        self.io_dict['out']['output_residues_path'] = check_output_path(self.io_dict['out']['output_residues_path'],
+        self.io_dict['out']['output_molecules_path'] = check_output_path(self.io_dict['out']['output_molecules_path'],
                                                                           self.out_log, self.__class__.__name__)
 
         # Setup Biobb
@@ -86,12 +86,13 @@ class ExtractResidues(BiobbObject):
 
         # Business code
         # get list of Residues from properties
-        list_residues = create_residues_list(self.residues, self.out_log)
+        list_residues = create_residues_list(self.molecules, self.out_log)
 
         # load input into BioPython structure
         structure = PDBParser(QUIET=True).get_structure('structure', self.stage_io_dict['in']['input_structure_path'])
 
-        new_structure = []
+        remove_structure = []
+        whole_structure = []
         # get desired residues
         for residue in structure.get_residues():
             r = {
@@ -100,6 +101,7 @@ class ExtractResidues(BiobbObject):
                 'name': residue.get_resname(),
                 'res_id': str(residue.get_id()[1])
             }
+            whole_structure.append(r)
             if list_residues:
                 for res in list_residues:
                     match = True
@@ -108,14 +110,17 @@ class ExtractResidues(BiobbObject):
                             match = False
                             break
                     if match:
-                        new_structure.append(r)
+                        remove_structure.append(r)
             else:
-                new_structure.append(r)
+                remove_structure.append(r)
 
         # if not residues found in structure, raise exit
-        if not new_structure:
+        if not remove_structure:
             fu.log(self.__class__.__name__ + ': The residues given by user were not found in input structure', self.out_log)
             raise SystemExit(self.__class__.__name__ + ': The residues given by user were not found in input structure')
+
+        # substract residues (remove_structure) from whole_structure
+        new_structure = [x for x in whole_structure if x not in remove_structure]
 
         # parse PDB file and get residues line by line
         new_file_lines = []
@@ -126,7 +131,7 @@ class ExtractResidues(BiobbObject):
                     curr_model = line.rstrip()[-1]
                     if int(curr_model) > 1: new_file_lines.append('ENDMDL\n')
                     new_file_lines.append('MODEL     ' +  "{:>4}".format(curr_model) + '\n')
-                if line.startswith("ATOM"):
+                if line.startswith("ATOM") or line.startswith("HETATM"):
                     name = line[17:20].strip()
                     chain = line[21:22].strip()
                     res_id = line[22:27].strip()
@@ -141,7 +146,7 @@ class ExtractResidues(BiobbObject):
         if int(curr_model) > 0: new_file_lines.append('ENDMDL\n')
 
         # save new file with heteroatoms
-        with open(self.stage_io_dict['out']['output_residues_path'], 'w') as outfile:
+        with open(self.stage_io_dict['out']['output_molecules_path'], 'w') as outfile:
             for line in new_file_lines:
                 outfile.write(line)
         self.return_code = 0
@@ -182,12 +187,12 @@ def create_residues_list(residues, out_log):
     return list_residues
 
 
-def extract_residues(input_structure_path: str, output_residues_path: str, properties: dict = None, **kwargs) -> int:
-    """Execute the :class:`ExtractResidues <utils.extract_residues.ExtractResidues>` class and
-    execute the :meth:`launch() <utils.extract_residues.ExtractResidues.launch>` method."""
+def remove_molecules(input_structure_path: str, output_molecules_path: str, properties: dict = None, **kwargs) -> int:
+    """Execute the :class:`RemoveMolecules <utils.remove_molecules.RemoveMolecules>` class and
+    execute the :meth:`launch() <utils.remove_molecules.RemoveMolecules.launch>` method."""
 
-    return ExtractResidues(input_structure_path=input_structure_path,
-                              output_residues_path=output_residues_path,
+    return RemoveMolecules(input_structure_path=input_structure_path,
+                              output_molecules_path=output_molecules_path,
                               properties=properties, **kwargs).launch()
 
 
@@ -199,15 +204,15 @@ def main():
     # Specific args of each building block
     required_args = parser.add_argument_group('required arguments')
     required_args.add_argument('-i', '--input_structure_path', required=True, help="Input structure file path. Accepted formats: pdb.")
-    required_args.add_argument('-o', '--output_residues_path', required=True, help="Output residues file path. Accepted formats: pdb.")
+    required_args.add_argument('-o', '--output_molecules_path', required=True, help="Output residues file path. Accepted formats: pdb.")
 
     args = parser.parse_args()
     config = args.config if args.config else None
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    extract_residues(input_structure_path=args.input_structure_path,
-                     output_residues_path=args.output_residues_path,
+    remove_molecules(input_structure_path=args.input_structure_path,
+                     output_molecules_path=args.output_molecules_path,
                      properties=properties)
 
 

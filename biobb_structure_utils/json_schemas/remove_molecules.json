@@ -1,8 +1,8 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://bioexcel.eu/biobb_structure_utils/json_schemas/1.0/extract_residues",
-    "name": "biobb_structure_utils ExtractResidues",
-    "title": "Class to extract residues from a 3D structure using Biopython.",
+    "$id": "http://bioexcel.eu/biobb_structure_utils/json_schemas/1.0/remove_molecules",
+    "name": "biobb_structure_utils RemoveMolecules",
+    "title": "Class to remove molecules from a 3D structure using Biopython.",
     "description": null,
     "type": "object",
     "info": {
@@ -18,14 +18,14 @@
     },
     "required": [
         "input_structure_path",
-        "output_residues_path"
+        "output_molecules_path"
     ],
     "properties": {
         "input_structure_path": {
             "type": "string",
             "description": "Input structure file path",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_heteroatom.pdb",
+            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/2vgb.pdb",
             "enum": [
                 ".*\\.pdb$",
                 ".*\\.pdbqt$"
@@ -43,11 +43,11 @@
                 }
             ]
         },
-        "output_residues_path": {
+        "output_molecules_path": {
             "type": "string",
-            "description": "Output residues file path",
+            "description": "Output molcules file path",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_residues.pdb",
+            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_remove_molecules.pdb",
             "enum": [
                 ".*\\.pdb$",
                 ".*\\.pdbqt$"
@@ -55,12 +55,12 @@
             "file_formats": [
                 {
                     "extension": ".*\\.pdb$",
-                    "description": "Output residues file path",
+                    "description": "Output molcules file path",
                     "edam": "format_1476"
                 },
                 {
                     "extension": ".*\\.pdbqt$",
-                    "description": "Output residues file path",
+                    "description": "Output molcules file path",
                     "edam": "format_1476"
                 }
             ]
@@ -68,11 +68,11 @@
         "properties": {
             "type": "object",
             "properties": {
-                "residues": {
+                "molecules": {
                     "type": "array",
                     "default": null,
                     "wf_prop": false,
-                    "description": "List of comma separated res_id (will extract all residues that match the res_id) or list of dictionaries with the name | res_id  | chain | model of the residues to be extracted. Format: [{\"name\": \"HIS\", \"res_id\": \"72\", \"chain\": \"A\", \"model\": \"1\"}]."
+                    "description": "List of comma separated res_id (will extract all molecules that match the res_id) or list of dictionaries with the name | res_id  | chain | model of the molecules to be extracted. Format: [{\"name\": \"HIS\", \"res_id\": \"72\", \"chain\": \"A\", \"model\": \"1\"}]."
                 },
                 "remove_tmp": {
                     "type": "boolean",

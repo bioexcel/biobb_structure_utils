@@ -50,6 +50,14 @@
             "rest": true
         },
         {
+            "block" : "RemoveMolecules",
+            "tool" : "in house using biopython",
+            "desc" : "Class to remove molecules from a 3D structure using Biopython.",
+            "exec" : "remove_molecules",
+            "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.remove_molecules",
+            "rest": false
+        },
+        {
             "block" : "ExtractModel",
             "tool" : "Structure Checking from MDWeb",
             "desc" : "This class is a wrapper of the Structure Checking tool to extract a model from a 3D structure.",

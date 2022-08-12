@@ -44,6 +44,14 @@ utils.extract_residues module
     :undoc-members:
     :show-inheritance:
 
+utils.remove_molecules module
+---------------------------------
+
+.. automodule:: utils.remove_molecules
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 utils.extract_model module
 -----------------------------
 

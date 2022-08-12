@@ -13,7 +13,22 @@ Command:
 ```python
 cat_pdb -h
 ```
-    /bin/sh: cat_pdb: command not found
+    usage: cat_pdb [-h] [-c CONFIG] -i1 INPUT_STRUCTURE1 -i2 INPUT_STRUCTURE2 -o OUTPUT_STRUCTURE_PATH
+    
+    Concat two PDB structures in a single PDB file.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      -i1 INPUT_STRUCTURE1, --input_structure1 INPUT_STRUCTURE1
+                            Input structure 1 file path. Accepted formats: pdb.
+      -i2 INPUT_STRUCTURE2, --input_structure2 INPUT_STRUCTURE2
+                            Input structure 2 file path. Accepted formats: pdb.
+      -o OUTPUT_STRUCTURE_PATH, --output_structure_path OUTPUT_STRUCTURE_PATH
+                            Output structure file path. Accepted formats: pdb.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -59,7 +74,20 @@ Command:
 ```python
 extract_molecule -h
 ```
-    /bin/sh: extract_molecule: command not found
+    usage: extract_molecule [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_MOLECULE_PATH
+    
+    Extract a molecule from a 3D structure.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
+                            Input structure file path. Accepted formats: pdb.
+      -o OUTPUT_MOLECULE_PATH, --output_molecule_path OUTPUT_MOLECULE_PATH
+                            Output heteroatom file path. Accepted formats: pdb.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -107,7 +135,20 @@ Command:
 ```python
 extract_atoms -h
 ```
-    /bin/sh: extract_atoms: command not found
+    usage: extract_atoms [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_STRUCTURE_PATH
+    
+    Remove the selected ligand atoms from a 3D structure.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
+                            Input structure file name
+      -o OUTPUT_STRUCTURE_PATH, --output_structure_path OUTPUT_STRUCTURE_PATH
+                            Output structure file name
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -153,7 +194,20 @@ Command:
 ```python
 str_check_add_hydrogens -h
 ```
-    /bin/sh: str_check_add_hydrogens: command not found
+    usage: str_check_add_hydrogens [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_STRUCTURE_PATH
+    
+    Class to add hydrogens to a 3D structure.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
+                            Input structure file path. Accepted formats: pdb.
+      -o OUTPUT_STRUCTURE_PATH, --output_structure_path OUTPUT_STRUCTURE_PATH
+                            Output structure file path. Accepted formats: pdb, pdbqt.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -208,7 +262,20 @@ Command:
 ```python
 sort_gro_residues -h
 ```
-    /bin/sh: sort_gro_residues: command not found
+    usage: sort_gro_residues [-h] [-c CONFIG] -i INPUT_GRO_PATH -o OUTPUT_GRO_PATH
+    
+    Renumber atoms and residues from a 3D structure.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      -i INPUT_GRO_PATH, --input_gro_path INPUT_GRO_PATH
+                            Input GRO file name
+      -o OUTPUT_GRO_PATH, --output_gro_path OUTPUT_GRO_PATH
+                            Output sorted GRO file name
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -261,7 +328,20 @@ Command:
 ```python
 extract_chain -h
 ```
-    /bin/sh: extract_chain: command not found
+    usage: extract_chain [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_STRUCTURE_PATH
+    
+    Extract a chain from a 3D structure.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
+                            Input structure file path. Accepted formats: pdb.
+      -o OUTPUT_STRUCTURE_PATH, --output_structure_path OUTPUT_STRUCTURE_PATH
+                            Output structure file path. Accepted formats: pdb.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -309,6 +389,74 @@ extract_chain --config config_extract_chain.yml --input_structure_path extract_c
 extract_chain --config config_extract_chain.json --input_structure_path extract_chain.pdb --output_structure_path ref_extract_chain.pdb
 ```
 
+## Remove_molecules
+Class to remove molecules from a 3D structure using Biopython.
+### Get help
+Command:
+```python
+remove_molecules -h
+```
+    usage: remove_molecules [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_MOLECULES_PATH
+    
+    Extract a list of residues from a 3D structure.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
+                            Input structure file path. Accepted formats: pdb.
+      -o OUTPUT_MOLECULES_PATH, --output_molecules_path OUTPUT_MOLECULES_PATH
+                            Output residues file path. Accepted formats: pdb.
+### I / O Arguments
+Syntax: input_argument (datatype) : Definition
+
+Config input / output arguments for this building block:
+* **input_structure_path** (*string*): Input structure file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/2vgb.pdb). Accepted formats: PDB, PDBQT
+* **output_molecules_path** (*string*): Output molcules file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_remove_molecules.pdb). Accepted formats: PDB, PDBQT
+### Config
+Syntax: input_parameter (datatype) - (default_value) Definition
+
+Config parameters for this building block:
+* **molecules** (*array*): (None) List of comma separated res_id (will extract all molecules that match the res_id) or list of dictionaries with the name | res_id  | chain | model of the molecules to be extracted. Format: [{"name": "HIS", "res_id": "72", "chain": "A", "model": "1"}]..
+* **remove_tmp** (*boolean*): (True) Remove temporal files..
+* **restart** (*boolean*): (False) Do not execute if output files exist..
+### YAML
+#### [Common config file](https://github.com/bioexcel/biobb_structure_utils/blob/master/biobb_structure_utils/test/data/config/config_remove_molecules.yml)
+```python
+properties:
+  molecules:
+  - model: '1'
+    name: HIS
+  - 61
+
+```
+#### Command line
+```python
+remove_molecules --config config_remove_molecules.yml --input_structure_path 2vgb.pdb --output_molecules_path ref_remove_molecules.pdb
+```
+### JSON
+#### [Common config file](https://github.com/bioexcel/biobb_structure_utils/blob/master/biobb_structure_utils/test/data/config/config_remove_molecules.json)
+```python
+{
+  "properties": {
+    "molecules": [
+      {
+        "name": "HIS",
+        "model": "1"
+      },
+      61
+    ]
+  }
+}
+```
+#### Command line
+```python
+remove_molecules --config config_remove_molecules.json --input_structure_path 2vgb.pdb --output_molecules_path ref_remove_molecules.pdb
+```
+
 ## Structure_check
 This class is a wrapper of the Structure Checking tool to generate summary checking results on a json file.
 ### Get help
@@ -316,7 +464,20 @@ Command:
 ```python
 structure_check -h
 ```
-    /bin/sh: structure_check: command not found
+    usage: structure_check [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_SUMMARY_PATH
+    
+    This class is a wrapper of the Structure Checking tool to generate summary checking results on a json file.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
+                            Input structure file path. Accepted formats: pdb.
+      -o OUTPUT_SUMMARY_PATH, --output_summary_path OUTPUT_SUMMARY_PATH
+                            Output summary checking results. Accepted formats: json.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -368,7 +529,20 @@ Command:
 ```python
 extract_residues -h
 ```
-    /bin/sh: extract_residues: command not found
+    usage: extract_residues [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_RESIDUES_PATH
+    
+    Extract a list of residues from a 3D structure.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
+                            Input structure file path. Accepted formats: pdb.
+      -o OUTPUT_RESIDUES_PATH, --output_residues_path OUTPUT_RESIDUES_PATH
+                            Output residues file path. Accepted formats: pdb.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -379,7 +553,7 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **residues** (*array*): (None) List of comma separated res_id (will extract all residues that match the res_id) or list of dictionaries with the name | res_id  | chain | model of the heteroatoms to be extracted. Format: [{"name": "HIS", "res_id": "72", "chain": "A", "model": "1"}]..
+* **residues** (*array*): (None) List of comma separated res_id (will extract all residues that match the res_id) or list of dictionaries with the name | res_id  | chain | model of the residues to be extracted. Format: [{"name": "HIS", "res_id": "72", "chain": "A", "model": "1"}]..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
 ### YAML
@@ -423,7 +597,20 @@ Command:
 ```python
 remove_ligand -h
 ```
-    /bin/sh: remove_ligand: command not found
+    usage: remove_ligand [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_STRUCTURE_PATH
+    
+    Remove the selected ligand atoms from a 3D structure.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
+                            Input structure file name
+      -o OUTPUT_STRUCTURE_PATH, --output_structure_path OUTPUT_STRUCTURE_PATH
+                            Output structure file name
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -469,7 +656,22 @@ Command:
 ```python
 renumber_structure -h
 ```
-    /bin/sh: renumber_structure: command not found
+    usage: renumber_structure [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_STRUCTURE_PATH -j OUTPUT_MAPPING_JSON_PATH
+    
+    Renumber atoms and residues from a 3D structure.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
+                            Input structure file name
+      -o OUTPUT_STRUCTURE_PATH, --output_structure_path OUTPUT_STRUCTURE_PATH
+                            Output structure file name
+      -j OUTPUT_MAPPING_JSON_PATH, --output_mapping_json_path OUTPUT_MAPPING_JSON_PATH
+                            Output mapping json file name
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -517,7 +719,20 @@ Command:
 ```python
 remove_pdb_water -h
 ```
-    /bin/sh: remove_pdb_water: command not found
+    usage: remove_pdb_water [-h] [-c CONFIG] -i INPUT_PDB_PATH -o OUTPUT_PDB_PATH
+    
+    Remove the water molecules from a PDB 3D structure.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      -i INPUT_PDB_PATH, --input_pdb_path INPUT_PDB_PATH
+                            Input pdb file name
+      -o OUTPUT_PDB_PATH, --output_pdb_path OUTPUT_PDB_PATH
+                            Output pdb file name
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -563,7 +778,20 @@ Command:
 ```python
 extract_heteroatoms -h
 ```
-    /bin/sh: extract_heteroatoms: command not found
+    usage: extract_heteroatoms [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_HETEROATOM_PATH
+    
+    Extract a list of heteroatoms from a 3D structure.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
+                            Input structure file path. Accepted formats: pdb.
+      -o OUTPUT_HETEROATOM_PATH, --output_heteroatom_path OUTPUT_HETEROATOM_PATH
+                            Output heteroatom file path. Accepted formats: pdb.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -621,7 +849,20 @@ Command:
 ```python
 extract_model -h
 ```
-    /bin/sh: extract_model: command not found
+    usage: extract_model [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_STRUCTURE_PATH
+    
+    Extract a model from a 3D structure.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
+                            Input structure file path. Accepted formats: pdb.
+      -o OUTPUT_STRUCTURE_PATH, --output_structure_path OUTPUT_STRUCTURE_PATH
+                            Output structure file path. Accepted formats: pdb.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
