@@ -398,7 +398,7 @@ remove_molecules -h
 ```
     usage: remove_molecules [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_MOLECULES_PATH
     
-    Extract a list of residues from a 3D structure.
+    Removes a list of molecules from a 3D structure.
     
     optional arguments:
       -h, --help            show this help message and exit
@@ -409,7 +409,7 @@ remove_molecules -h
       -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
                             Input structure file path. Accepted formats: pdb.
       -o OUTPUT_MOLECULES_PATH, --output_molecules_path OUTPUT_MOLECULES_PATH
-                            Output residues file path. Accepted formats: pdb.
+                            Output molecules file path. Accepted formats: pdb.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -420,7 +420,7 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **molecules** (*array*): (None) List of comma separated res_id (will extract all molecules that match the res_id) or list of dictionaries with the name | res_id  | chain | model of the molecules to be extracted. Format: [{"name": "HIS", "res_id": "72", "chain": "A", "model": "1"}]..
+* **molecules** (*array*): (None) List of comma separated res_id (will remove all molecules that match the res_id) or list of dictionaries with the name | res_id  | chain | model of the molecules to be removed. Format: [{"name": "HIS", "res_id": "72", "chain": "A", "model": "1"}]..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
 ### YAML
@@ -840,6 +840,80 @@ extract_heteroatoms --config config_extract_heteroatoms.yml --input_structure_pa
 #### Command line
 ```python
 extract_heteroatoms --config config_extract_heteroatoms.json --input_structure_path extract_heteroatom.pdb --output_heteroatom_path ref_extract_heteroatom.pdb
+```
+
+## Closest_residues
+Class to search closest residues from a 3D structure using Biopython.
+### Get help
+Command:
+```python
+closest_residues -h
+```
+    usage: closest_residues [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_RESIDUES_PATH
+    
+    Search closest residues to a list of given residues.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
+                            Input structure file path. Accepted formats: pdb.
+      -o OUTPUT_RESIDUES_PATH, --output_residues_path OUTPUT_RESIDUES_PATH
+                            Output residues file path. Accepted formats: pdb.
+### I / O Arguments
+Syntax: input_argument (datatype) : Definition
+
+Config input / output arguments for this building block:
+* **input_structure_path** (*string*): Input structure file path. File type: input. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/2vgb.pdb). Accepted formats: PDB, PDBQT
+* **output_residues_path** (*string*): Output molcules file path. File type: output. [Sample file](https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_closest_residues.pdb). Accepted formats: PDB, PDBQT
+### Config
+Syntax: input_parameter (datatype) - (default_value) Definition
+
+Config parameters for this building block:
+* **residues** (*array*): (None) List of comma separated res_id or list of dictionaries with the name | res_id  | chain | model of the residues to find the closest neighbours. Format: [{"name": "HIS", "res_id": "72", "chain": "A", "model": "1"}]..
+* **radius** (*number*): (5.0) Distance in Ångströms to neighbours of the given list of residues..
+* **preserve_residues** (*boolean*): (True) Whether or not to preserve the given residues in the output structure..
+* **remove_tmp** (*boolean*): (True) Remove temporal files..
+* **restart** (*boolean*): (False) Do not execute if output files exist..
+### YAML
+#### [Common config file](https://github.com/bioexcel/biobb_structure_utils/blob/master/biobb_structure_utils/test/data/config/config_closest_residues.yml)
+```python
+properties:
+  radius: 5
+  residues:
+  - model: '1'
+    name: HIS
+  - 580
+  - 61
+
+```
+#### Command line
+```python
+closest_residues --config config_closest_residues.yml --input_structure_path 2vgb.pdb --output_residues_path ref_closest_residues.pdb
+```
+### JSON
+#### [Common config file](https://github.com/bioexcel/biobb_structure_utils/blob/master/biobb_structure_utils/test/data/config/config_closest_residues.json)
+```python
+{
+  "properties": {
+    "residues": [
+      {
+        "name": "HIS",
+        "model": "1"
+      },
+      580,
+      61
+    ],
+    "radius": 5
+  }
+}
+```
+#### Command line
+```python
+closest_residues --config config_closest_residues.json --input_structure_path 2vgb.pdb --output_residues_path ref_closest_residues.pdb
 ```
 
 ## Extract_model

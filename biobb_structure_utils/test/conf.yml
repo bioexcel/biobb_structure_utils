@@ -126,6 +126,18 @@ remove_molecules:
       "model": "1"
     }, 61]
 
+closest_residues:
+  paths:
+    input_structure_path: file:test_data_dir/utils/2vgb.pdb
+    output_residues_path: output_residues_path.pdb
+    reference_output_residues_path: file:test_reference_dir/utils/ref_closest_residues.pdb
+  properties:
+    residues: [{
+    "name": "HIS",
+    "model": "1"
+    }, 580, 61]
+    radius: 5
+
 extract_molecule:
   paths:
     input_structure_path: file:test_data_dir/utils/extract_molecule.pdb

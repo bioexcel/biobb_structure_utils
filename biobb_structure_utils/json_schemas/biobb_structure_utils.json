@@ -50,6 +50,14 @@
             "rest": true
         },
         {
+            "block" : "ClosestResidues",
+            "tool" : "in house using biopython",
+            "desc" : "Class to search closest residues from a 3D structure using Biopython.",
+            "exec" : "closest_residues",
+            "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.closest_residues",
+            "rest": false
+        },
+        {
             "block" : "RemoveMolecules",
             "tool" : "in house using biopython",
             "desc" : "Class to remove molecules from a 3D structure using Biopython.",

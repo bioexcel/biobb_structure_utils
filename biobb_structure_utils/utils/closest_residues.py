@@ -1,44 +1,48 @@
 #!/usr/bin/env python3
 
-"""Module containing the RemoveMolecules class and the command line interface."""
+"""Module containing the ClosestResidues class and the command line interface."""
 import argparse
+import Bio.PDB
 from collections.abc import Mapping
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
-from Bio.PDB.PDBParser import PDBParser
 from biobb_structure_utils.utils.common import *
 
 
-class RemoveMolecules(BiobbObject):
+class ClosestResidues(BiobbObject):
     """
-    | biobb_structure_utils RemoveMolecules
-    | Class to remove molecules from a 3D structure using Biopython.
+    | biobb_structure_utils ClosestResidues
+    | Class to search closest residues from a 3D structure using Biopython.
+    | Return all residues that have at least one atom within radius of center from a list of given residues.
 
     Args:
         input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/2vgb.pdb>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).
-        output_molecules_path (str): Output molcules file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_remove_molecules.pdb>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).
+        output_residues_path (str): Output molcules file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_closest_residues.pdb>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
-            * **molecules** (*list*) - (None) List of comma separated res_id (will remove all molecules that match the res_id) or list of dictionaries with the name | res_id  | chain | model of the molecules to be removed. Format: [{"name": "HIS", "res_id": "72", "chain": "A", "model": "1"}].
+            * **residues** (*list*) - (None) List of comma separated res_id or list of dictionaries with the name | res_id  | chain | model of the residues to find the closest neighbours. Format: [{"name": "HIS", "res_id": "72", "chain": "A", "model": "1"}].
+            * **radius** (*float*) - (5) Distance in Ångströms to neighbours of the given list of residues.
+            * **preserve_residues** (*bool*) - (True) Whether or not to preserve the given residues in the output structure.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
     Examples:
         This is a use example of how to use the building block from Python::
 
-            from biobb_structure_utils.utils.remove_molecules import remove_molecules
+            from biobb_structure_utils.utils.closest_residues import closest_residues
             prop = { 
-                'molecules': [
+                'residues': [
                     {
                         'name': 'HIS',
                         'res_id': '72',
                         'chain': 'A',
                         'model': '1'
                     }
-                ] 
+                ],
+                'radius': 5
             }
-            remove_molecules(input_structure_path='/path/to/myStructure.pdb',
-                             output_molecules_path='/path/to/newMolecules.pdb',
+            closest_residues(input_structure_path='/path/to/myStructure.pdb',
+                             output_residues_path='/path/to/newResidues.pdb',
                              properties=prop)
 
     Info:
@@ -52,7 +56,7 @@ class RemoveMolecules(BiobbObject):
 
     """
 
-    def __init__(self, input_structure_path, output_molecules_path, properties=None, **kwargs) -> None:
+    def __init__(self, input_structure_path, output_residues_path, properties=None, **kwargs) -> None:
         properties = properties or {}
 
         # Call parent class constructor
@@ -61,11 +65,13 @@ class RemoveMolecules(BiobbObject):
         # Input/Output files
         self.io_dict = {
             "in": {"input_structure_path": input_structure_path},
-            "out": {"output_molecules_path": output_molecules_path}
+            "out": {"output_residues_path": output_residues_path}
         }
 
         # Properties specific for BB
-        self.molecules = properties.get('molecules', [])
+        self.residues = properties.get('residues', [])
+        self.radius = properties.get('radius', 5)
+        self.preserve_residues = properties.get('preserve_residues', True)
         self.properties = properties
 
         # Check the properties
@@ -73,11 +79,11 @@ class RemoveMolecules(BiobbObject):
 
     @launchlogger
     def launch(self) -> int:
-        """Execute the :class:`RemoveMolecules <utils.remove_molecules.RemoveMolecules>` utils.remove_molecules.RemoveMolecules object."""
+        """Execute the :class:`ClosestResidues <utils.closest_residues.ClosestResidues>` utils.closest_residues.ClosestResidues object."""
 
         self.io_dict['in']['input_structure_path'] = check_input_path(self.io_dict['in']['input_structure_path'],
                                                                       self.out_log, self.__class__.__name__)
-        self.io_dict['out']['output_molecules_path'] = check_output_path(self.io_dict['out']['output_molecules_path'],
+        self.io_dict['out']['output_residues_path'] = check_output_path(self.io_dict['out']['output_residues_path'],
                                                                           self.out_log, self.__class__.__name__)
 
         # Setup Biobb
@@ -86,14 +92,13 @@ class RemoveMolecules(BiobbObject):
 
         # Business code
         # get list of Residues from properties
-        list_residues = create_residues_list(self.molecules, self.out_log)
+        list_residues = create_residues_list(self.residues, self.out_log)
 
         # load input into BioPython structure
-        structure = PDBParser(QUIET=True).get_structure('structure', self.stage_io_dict['in']['input_structure_path'])
+        structure = Bio.PDB.PDBParser(QUIET=True).get_structure('structure', self.stage_io_dict['in']['input_structure_path'])
 
-        remove_structure = []
-        whole_structure = []
-        # get desired residues
+        str_residues = []
+        # format selected residues
         for residue in structure.get_residues():
             r = {
                 'model': str(residue.get_parent().get_parent().get_id() + 1),
@@ -101,7 +106,6 @@ class RemoveMolecules(BiobbObject):
                 'name': residue.get_resname(),
                 'res_id': str(residue.get_id()[1])
             }
-            whole_structure.append(r)
             if list_residues:
                 for res in list_residues:
                     match = True
@@ -110,17 +114,53 @@ class RemoveMolecules(BiobbObject):
                             match = False
                             break
                     if match:
-                        remove_structure.append(r)
+                        str_residues.append(r)
             else:
-                remove_structure.append(r)
+                str_residues.append(r)
 
-        # if not residues found in structure, raise exit
-        if not remove_structure:
-            fu.log(self.__class__.__name__ + ': The residues given by user were not found in input structure', self.out_log)
-            raise SystemExit(self.__class__.__name__ + ': The residues given by user were not found in input structure')
+        #print(len(str_residues))
 
-        # substract residues (remove_structure) from whole_structure
-        new_structure = [x for x in whole_structure if x not in remove_structure]
+        # get target residues in BioPython format
+        target_residues = []
+        for sr in str_residues:
+            # try for residues, if exception, try as HETATM
+            try:
+                target_residues.append(structure[int(sr['model']) - 1][sr['chain']][int(sr['res_id'])])
+            except KeyError:
+                target_residues.append(structure[int(sr['model']) - 1][sr['chain']]['H_' + sr['name'], int(sr['res_id']), ' '])
+            except:
+                fu.log(self.__class__.__name__ + ': Unable to find residue %s', sr['res_id'], self.out_log)
+
+        # get all atoms from target_residues
+        target_atoms = Bio.PDB.Selection.unfold_entities(target_residues, 'A')
+        # get all atoms of input structure
+        all_atoms  = Bio.PDB.Selection.unfold_entities(structure, 'A')
+        # generate NeighborSearch object
+        ns = Bio.PDB.NeighborSearch(all_atoms)
+        # set comprehension list
+        nearby_residues = {res for center_atom in target_atoms
+                   for res in ns.search(center_atom.coord, self.radius, 'R')}
+
+        # format nearby residues to pure python objects
+        neighbor_residues = []
+        for residue in nearby_residues:
+            r = {
+                'model': str(residue.get_parent().get_parent().get_id() + 1),
+                'chain': residue.get_parent().get_id(),
+                'name': residue.get_resname(),
+                'res_id': str(residue.get_id()[1])
+            }
+            neighbor_residues.append(r)
+
+        # if preserve_residues == False, don't add the residues of self.residues to the final structure
+        if not self.preserve_residues:
+            neighbor_residues = [x for x in neighbor_residues if x not in str_residues]
+
+        fu.log('Found %d nearby residues' % len(neighbor_residues), self.out_log)
+
+        if len(neighbor_residues) == 0:
+            fu.log(self.__class__.__name__  + ': No neighbour residues found, exiting', self.out_log)
+            raise SystemExit(self.__class__.__name__  + ': No neighbour residues found, exiting')
 
         # parse PDB file and get residues line by line
         new_file_lines = []
@@ -139,14 +179,16 @@ class RemoveMolecules(BiobbObject):
                     else: model = "1"
                     if chain == "": chain = " "
 
-                    for nstr in new_structure:
+                    for nstr in neighbor_residues:
                         if nstr['res_id'] == res_id and nstr['name'] == name and  nstr['chain'] == chain and nstr['model'] == model:
                             new_file_lines.append(line)
 
         if int(curr_model) > 0: new_file_lines.append('ENDMDL\n')
 
+        fu.log("Writting pdb to: %s" % (self.stage_io_dict['out']['output_residues_path']), self.out_log)
+
         # save new file with heteroatoms
-        with open(self.stage_io_dict['out']['output_molecules_path'], 'w') as outfile:
+        with open(self.stage_io_dict['out']['output_residues_path'], 'w') as outfile:
             for line in new_file_lines:
                 outfile.write(line)
         self.return_code = 0
@@ -187,32 +229,32 @@ def create_residues_list(residues, out_log):
     return list_residues
 
 
-def remove_molecules(input_structure_path: str, output_molecules_path: str, properties: dict = None, **kwargs) -> int:
-    """Execute the :class:`RemoveMolecules <utils.remove_molecules.RemoveMolecules>` class and
-    execute the :meth:`launch() <utils.remove_molecules.RemoveMolecules.launch>` method."""
+def closest_residues(input_structure_path: str, output_residues_path: str, properties: dict = None, **kwargs) -> int:
+    """Execute the :class:`ClosestResidues <utils.closest_residues.ClosestResidues>` class and
+    execute the :meth:`launch() <utils.closest_residues.ClosestResidues.launch>` method."""
 
-    return RemoveMolecules(input_structure_path=input_structure_path,
-                              output_molecules_path=output_molecules_path,
+    return ClosestResidues(input_structure_path=input_structure_path,
+                              output_residues_path=output_residues_path,
                               properties=properties, **kwargs).launch()
 
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
-    parser = argparse.ArgumentParser(description="Removes a list of molecules from a 3D structure.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
+    parser = argparse.ArgumentParser(description="Search closest residues to a list of given residues.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
     parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
 
     # Specific args of each building block
     required_args = parser.add_argument_group('required arguments')
     required_args.add_argument('-i', '--input_structure_path', required=True, help="Input structure file path. Accepted formats: pdb.")
-    required_args.add_argument('-o', '--output_molecules_path', required=True, help="Output molecules file path. Accepted formats: pdb.")
+    required_args.add_argument('-o', '--output_residues_path', required=True, help="Output residues file path. Accepted formats: pdb.")
 
     args = parser.parse_args()
     config = args.config if args.config else None
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    remove_molecules(input_structure_path=args.input_structure_path,
-                     output_molecules_path=args.output_molecules_path,
+    closest_residues(input_structure_path=args.input_structure_path,
+                     output_residues_path=args.output_residues_path,
                      properties=properties)
 
 

@@ -1,9 +1,9 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://bioexcel.eu/biobb_structure_utils/json_schemas/1.0/remove_molecules",
-    "name": "biobb_structure_utils RemoveMolecules",
-    "title": "Class to remove molecules from a 3D structure using Biopython.",
-    "description": null,
+    "$id": "http://bioexcel.eu/biobb_structure_utils/json_schemas/1.0/closest_residues",
+    "name": "biobb_structure_utils ClosestResidues",
+    "title": "Class to search closest residues from a 3D structure using Biopython.",
+    "description": "Return all residues that have at least one atom within radius of center from a list of given residues.",
     "type": "object",
     "info": {
         "wrapped_software": {
@@ -18,7 +18,7 @@
     },
     "required": [
         "input_structure_path",
-        "output_molecules_path"
+        "output_residues_path"
     ],
     "properties": {
         "input_structure_path": {
@@ -43,11 +43,11 @@
                 }
             ]
         },
-        "output_molecules_path": {
+        "output_residues_path": {
             "type": "string",
             "description": "Output molcules file path",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_remove_molecules.pdb",
+            "sample": "https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_closest_residues.pdb",
             "enum": [
                 ".*\\.pdb$",
                 ".*\\.pdbqt$"
@@ -68,11 +68,23 @@
         "properties": {
             "type": "object",
             "properties": {
-                "molecules": {
+                "residues": {
                     "type": "array",
                     "default": null,
                     "wf_prop": false,
-                    "description": "List of comma separated res_id (will remove all molecules that match the res_id) or list of dictionaries with the name | res_id  | chain | model of the molecules to be removed. Format: [{\"name\": \"HIS\", \"res_id\": \"72\", \"chain\": \"A\", \"model\": \"1\"}]."
+                    "description": "List of comma separated res_id or list of dictionaries with the name | res_id  | chain | model of the residues to find the closest neighbours. Format: [{\"name\": \"HIS\", \"res_id\": \"72\", \"chain\": \"A\", \"model\": \"1\"}]."
+                },
+                "radius": {
+                    "type": "number",
+                    "default": 5.0,
+                    "wf_prop": false,
+                    "description": "Distance in \u00c5ngstr\u00f6ms to neighbours of the given list of residues."
+                },
+                "preserve_residues": {
+                    "type": "boolean",
+                    "default": true,
+                    "wf_prop": false,
+                    "description": "Whether or not to preserve the given residues in the output structure."
                 },
                 "remove_tmp": {
                     "type": "boolean",
