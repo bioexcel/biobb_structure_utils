@@ -12,6 +12,14 @@ utils.cat_pdb module
     :undoc-members:
     :show-inheritance:
 
+utils.closest_residues module
+------------------------------
+
+.. automodule:: utils.closest_residues
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 utils.extract_atoms module
 -----------------------------
 
