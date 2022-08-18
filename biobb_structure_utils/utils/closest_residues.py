@@ -22,7 +22,7 @@ class ClosestResidues(BiobbObject):
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **residues** (*list*) - (None) List of comma separated res_id or list of dictionaries with the name | res_id  | chain | model of the residues to find the closest neighbours. Format: [{"name": "HIS", "res_id": "72", "chain": "A", "model": "1"}].
             * **radius** (*float*) - (5) Distance in Ångströms to neighbours of the given list of residues.
-            * **preserve_residues** (*bool*) - (True) Whether or not to preserve the given residues in the output structure.
+            * **preserve_target** (*bool*) - (True) Whether or not to preserve the target residues in the output structure.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -39,7 +39,8 @@ class ClosestResidues(BiobbObject):
                         'model': '1'
                     }
                 ],
-                'radius': 5
+                'radius': 5,
+                'preserve_target': False
             }
             closest_residues(input_structure_path='/path/to/myStructure.pdb',
                              output_residues_path='/path/to/newResidues.pdb',
@@ -71,7 +72,7 @@ class ClosestResidues(BiobbObject):
         # Properties specific for BB
         self.residues = properties.get('residues', [])
         self.radius = properties.get('radius', 5)
-        self.preserve_residues = properties.get('preserve_residues', True)
+        self.preserve_target = properties.get('preserve_target', True)
         self.properties = properties
 
         # Check the properties
@@ -118,8 +119,6 @@ class ClosestResidues(BiobbObject):
             else:
                 str_residues.append(r)
 
-        #print(len(str_residues))
-
         # get target residues in BioPython format
         target_residues = []
         for sr in str_residues:
@@ -152,8 +151,8 @@ class ClosestResidues(BiobbObject):
             }
             neighbor_residues.append(r)
 
-        # if preserve_residues == False, don't add the residues of self.residues to the final structure
-        if not self.preserve_residues:
+        # if preserve_target == False, don't add the residues of self.residues to the final structure
+        if not self.preserve_target:
             neighbor_residues = [x for x in neighbor_residues if x not in str_residues]
 
         fu.log('Found %d nearby residues' % len(neighbor_residues), self.out_log)
