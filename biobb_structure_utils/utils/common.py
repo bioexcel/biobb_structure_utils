@@ -1,6 +1,7 @@
 """ Common functions and constants for package biobb_structure_utils.utils """
 from pathlib import Path, PurePath
 import re, sys
+from collections.abc import Mapping
 from biobb_common.tools import file_utils as fu
 
 PDB_COORD_RECORDS = ['MODEL', 'ANISOU', 'HETATM', 'ATOM', 'TER', 'ENDMDL']
@@ -84,3 +85,89 @@ def check_output_end(structure, out_log):
 	with open(structure, 'w') as f:
 	    for item in lines_new:
 	        f.write("%s\n" % item)
+
+def create_output_file(type, input, residues, output, out_log):
+	# parse PDB file and get residues line by line
+	new_file_lines = []
+	curr_model = 0
+	with open(input) as infile:
+		for line in infile:
+			if line.startswith("MODEL   "): 
+				curr_model = line.rstrip()[-1]
+				if int(curr_model) > 1: new_file_lines.append('ENDMDL\n')
+				new_file_lines.append('MODEL     ' +  "{:>4}".format(curr_model) + '\n')
+
+			conditional_atoms = [(line.startswith("ATOM") or line.startswith("HETATM")), line.startswith("HETATM"), line.startswith("ATOM")]
+
+			if conditional_atoms[type]:
+				name = line[17:20].strip()
+				chain = line[21:22].strip()
+				res_id = line[22:27].strip()
+				if curr_model != 0: model = curr_model.strip()
+				else: model = "1"
+				if chain == "": chain = " "
+
+				for nstr in residues:
+					if nstr['res_id'] == res_id and nstr['name'] == name and  nstr['chain'] == chain and nstr['model'] == model:
+						new_file_lines.append(line)
+
+	if int(curr_model) > 0: new_file_lines.append('ENDMDL\n')
+
+	fu.log("Writting pdb to: %s" % (output), out_log)
+
+	# save new file with heteroatoms
+	with open(output, 'w') as outfile:
+		for line in new_file_lines:
+			outfile.write(line)
+
+def create_biopython_residue(residue) :
+	return {
+			'model': str(residue.get_parent().get_parent().get_id() + 1),
+			'chain': residue.get_parent().get_id(),
+			'name': residue.get_resname(),
+			'res_id': str(residue.get_id()[1])
+		}
+
+def create_residues_list(residues, out_log):
+    """ Check format of residues list """
+    if not residues:
+        return None
+
+    list_residues = []
+
+    for residue in residues:
+        d = residue
+        code = []
+        if isinstance(residue, Mapping):
+            if 'name' in residue: code.append('name')
+            if 'res_id' in residue: code.append('res_id')
+            if 'chain' in residue: code.append('chain')
+            if 'model' in residue: code.append('model')
+        else:
+            d = {'res_id': str(residue)}
+            code.append('res_id')
+
+        d['code'] = code
+        list_residues.append(d)
+
+    return list_residues
+
+def check_format_heteroatoms(hets, out_log):
+    """ Check format of heteroatoms list """
+    if not hets:
+        return 0
+
+    listh = []
+
+    for het in hets:
+        d = het
+        code = []
+        if 'name' in het: code.append('name')
+        if 'res_id' in het: code.append('res_id')
+        if 'chain' in het: code.append('chain')
+        if 'model' in het: code.append('model')
+
+        d['code'] = code
+        listh.append(d)
+
+    return listh

@@ -95,12 +95,7 @@ class ExtractHeteroAtoms(BiobbObject):
         new_structure = []
         # get desired heteroatoms
         for residue in structure.get_residues():
-            r = {
-                'model': str(residue.get_parent().get_parent().get_id() + 1),
-                'chain': residue.get_parent().get_id(),
-                'name': residue.get_resname(),
-                'res_id': str(residue.get_id()[1])
-            }
+            r = create_biopython_residue(residue)
             if list_heteroatoms:
                 for het in list_heteroatoms:
                     match = True
@@ -125,35 +120,9 @@ class ExtractHeteroAtoms(BiobbObject):
             fu.log(self.__class__.__name__ + ': The heteroatoms given by user were not found in input structure', self.out_log)
             raise SystemExit(self.__class__.__name__ + ': The heteroatoms given by user were not found in input structure')
 
-        # parse PDB file and get heteroatoms line by line
-        new_file_lines = []
-        curr_model = 0
-        with open(self.stage_io_dict['in']['input_structure_path']) as infile:
-            for line in infile:
-                if line.startswith("MODEL   "): 
-                    curr_model = line.rstrip()[-1]
-                    if int(curr_model) > 1: new_file_lines.append('ENDMDL\n')
-                    new_file_lines.append('MODEL     ' +  "{:>4}".format(curr_model) + '\n')
-                if line.startswith("HETATM"): 
-                    name = line[17:20].strip()
-                    chain = line[21:22].strip()
-                    res_id = line[22:27].strip()
-                    if curr_model != 0: model = curr_model.strip()
-                    else: model = "1"
-                    if chain == "": chain = " "
+        create_output_file(1, self.stage_io_dict['in']['input_structure_path'], new_structure, self.stage_io_dict['out']['output_heteroatom_path'], self.out_log)
 
-                    for nstr in new_structure:
-                        if nstr['res_id'] == res_id and nstr['name'] == name and  nstr['chain'] == chain and nstr['model'] == model:
-                            new_file_lines.append(line)
-
-        if int(curr_model) > 0: new_file_lines.append('ENDMDL\n')
-
-        # save new file with heteroatoms
-        with open(self.stage_io_dict['out']['output_heteroatom_path'], 'w') as outfile:
-            for line in new_file_lines:
-                outfile.write(line)
         self.return_code = 0
-        ##########
 
         # Copy files to host
         self.copy_to_host()
@@ -163,27 +132,6 @@ class ExtractHeteroAtoms(BiobbObject):
         self.remove_tmp_files()
 
         return self.return_code
-
-
-def check_format_heteroatoms(hets, out_log):
-    """ Check format of heteroatoms list """
-    if not hets:
-        return 0
-
-    listh = []
-
-    for het in hets:
-        d = het
-        code = []
-        if 'name' in het: code.append('name')
-        if 'res_id' in het: code.append('res_id')
-        if 'chain' in het: code.append('chain')
-        if 'model' in het: code.append('model')
-
-        d['code'] = code
-        listh.append(d)
-
-    return listh
 
 
 def extract_heteroatoms(input_structure_path: str, output_heteroatom_path: str, properties: dict = None, **kwargs) -> int:
