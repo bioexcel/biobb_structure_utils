@@ -1,5 +1,13 @@
 # Biobb Structure Utils changelog
 
+## What's new in version [3.8.0](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v3.8.0)?
+In version 3.8.0 the dependency biobb_common has been updated to 3.8.1 version. Also biobb_structure_checking has been updated from 3.9.11 to 3.10.1.
+
+### New features
+
+* Update to biobb_common 3.8.1 (general)
+* Update to biobb_structure_checking 3.10.1 (utils module)
+
 ## What's new in version [3.7.6](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v3.7.6)?
 In version 3.7.6 compatibility PDBQT
 
