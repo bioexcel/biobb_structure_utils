@@ -3,10 +3,10 @@ from biobb_structure_utils.utils.extract_model import extract_model
 
 
 class TestExtractModel():
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'extract_model')
 
-    def tearDown(self):
+    def teardown_class(self):
         fx.test_teardown(self)
         pass
 

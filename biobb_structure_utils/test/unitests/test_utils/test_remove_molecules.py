@@ -3,10 +3,10 @@ from biobb_structure_utils.utils.remove_molecules import remove_molecules
 
 
 class TestRemoveMolecules:
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'remove_molecules')
 
-    def tearDown(self):
+    def teardown_class(self):
         fx.test_teardown(self)
         #pass
 

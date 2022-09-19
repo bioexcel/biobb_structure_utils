@@ -3,10 +3,10 @@ from biobb_structure_utils.utils.structure_check import structure_check
 
 
 class TestStructureCheck():
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'structure_check')
 
-    def tearDown(self):
+    def teardown_class(self):
         fx.test_teardown(self)
         pass
 

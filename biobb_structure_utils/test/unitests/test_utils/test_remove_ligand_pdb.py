@@ -3,10 +3,10 @@ from biobb_structure_utils.utils.remove_ligand import remove_ligand
 
 
 class TestRemoveLigandPDB():
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'remove_ligand')
 
-    def tearDown(self):
+    def teardown_class(self):
         fx.test_teardown(self)
         pass
 

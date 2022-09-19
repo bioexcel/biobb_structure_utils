@@ -3,10 +3,10 @@ from biobb_structure_utils.utils.remove_pdb_water import remove_pdb_water
 
 
 class TestRemovePDBWater():
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'remove_pdb_water')
 
-    def tearDown(self):
+    def teardown_class(self):
         #fx.test_teardown(self)
         pass
 

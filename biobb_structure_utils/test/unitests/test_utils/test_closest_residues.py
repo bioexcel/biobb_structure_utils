@@ -2,10 +2,10 @@ from biobb_common.tools import test_fixtures as fx
 from biobb_structure_utils.utils.closest_residues import closest_residues
 
 class TestClosestResidues():
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'closest_residues')
 
-    def tearDown(self):
+    def teardown_class(self):
         fx.test_teardown(self)
         pass
 

@@ -3,10 +3,10 @@ from biobb_structure_utils.utils.extract_residues import extract_residues
 
 
 class TestExtractResidues:
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'extract_residues')
 
-    def tearDown(self):
+    def teardown_class(self):
         fx.test_teardown(self)
         #pass
 

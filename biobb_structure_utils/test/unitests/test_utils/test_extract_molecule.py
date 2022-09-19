@@ -3,10 +3,10 @@ from biobb_structure_utils.utils.extract_molecule import extract_molecule
 
 
 class TestExtractMolecule():
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'extract_molecule')
 
-    def tearDown(self):
+    def teardown_class(self):
         fx.test_teardown(self)
         pass
 

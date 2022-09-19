@@ -3,10 +3,10 @@ from biobb_structure_utils.utils.renumber_structure import renumber_structure
 
 
 class TestRenumberStructure2VGB():
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'renumber_structure_2vgb')
 
-    def tearDown(self):
+    def teardown_class(self):
         fx.test_teardown(self)
         pass
 

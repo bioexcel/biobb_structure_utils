@@ -3,10 +3,10 @@ from biobb_structure_utils.utils.extract_atoms import extract_atoms
 
 
 class TestExtractAtomsGRO():
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'extract_atoms_gro')
 
-    def tearDown(self):
+    def teardown_class(self):
         fx.test_teardown(self)
         pass
 

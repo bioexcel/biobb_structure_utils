@@ -3,10 +3,10 @@ from biobb_structure_utils.utils.extract_chain import extract_chain
 
 
 class TestExtractChain():
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'extract_chain')
 
-    def tearDown(self):
+    def teardown_class(self):
         fx.test_teardown(self)
         pass
 

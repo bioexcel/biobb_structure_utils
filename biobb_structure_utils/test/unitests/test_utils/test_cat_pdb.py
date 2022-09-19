@@ -3,10 +3,10 @@ from biobb_structure_utils.utils.cat_pdb import cat_pdb
 
 
 class TestCatPDB():
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'cat_pdb')
 
-    def tearDown(self):
+    def teardown_class(self):
         fx.test_teardown(self)
         pass
 

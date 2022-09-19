@@ -3,10 +3,10 @@ from biobb_structure_utils.utils.extract_heteroatoms import extract_heteroatoms
 
 
 class TestExtractHeteroAtoms():
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'extract_heteroatoms')
 
-    def tearDown(self):
+    def teardown_class(self):
         fx.test_teardown(self)
         pass
 

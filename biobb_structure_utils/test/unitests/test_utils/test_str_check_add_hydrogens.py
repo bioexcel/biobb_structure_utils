@@ -3,10 +3,10 @@ from biobb_structure_utils.utils.str_check_add_hydrogens import str_check_add_hy
 
 
 class TestStrCheckAddHydrogens():
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'str_check_add_hydrogens')
 
-    def tearDown(self):
+    def teardown_class(self):
         fx.test_teardown(self)
         #pass
 

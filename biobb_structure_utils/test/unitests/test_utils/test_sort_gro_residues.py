@@ -3,10 +3,10 @@ from biobb_structure_utils.utils.sort_gro_residues import sort_gro_residues
 
 
 class TestSortGroResidues():
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'sort_gro_residues')
 
-    def tearDown(self):
+    def teardown_class(self):
         fx.test_teardown(self)
         pass
         
