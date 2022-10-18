@@ -1,6 +1,7 @@
 [![](https://readthedocs.org/projects/biobb-structure-utils/badge/?version=latest)](https://biobb-structure-utils.readthedocs.io/en/latest/?badge=latest)
 [![](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat)](https://anaconda.org/bioconda/biobb_structure_utils)
-[![](https://img.shields.io/badge/docker-Quay.io-blue)](https://quay.io/repository/biocontainers/biobb_structure_utils)
+[![](https://img.shields.io/badge/docker-Quay.io-blue)](https://quay.io/repository/biocontainers/biobb_structure_utils?tab=tags)
+[![](https://img.shields.io/badge/singularity-GalaxyProject-blue)](https://depot.galaxyproject.org/singularity/biobb_structure_utils:3.8.0--pyhdfd78af_0)
 [![](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 
@@ -57,7 +58,7 @@ Using SINGULARITY:
 * Installation:
 
 
-        singularity pull --name biobb_structure_utils.sif shub://bioexcel/biobb_structure_utils
+        singularity pull --name biobb_structure_utils.sif https://depot.galaxyproject.org/singularity/biobb_structure_utils:3.8.0--pyhdfd78af_0
 
 
 * Usage:
