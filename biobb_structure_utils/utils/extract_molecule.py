@@ -120,6 +120,7 @@ class ExtractMolecule(BiobbObject):
 
         # Remove temporal files
         self.tmp_files.append(self.stage_io_dict.get("unique_dir"))
+        self.tmp_files.append(tmp_folder)
         self.remove_tmp_files()
 
         return self.return_code
