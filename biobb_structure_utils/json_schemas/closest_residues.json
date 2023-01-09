@@ -80,11 +80,11 @@
                     "wf_prop": false,
                     "description": "Distance in \u00c5ngstr\u00f6ms to neighbours of the given list of residues."
                 },
-                "preserve_residues": {
+                "preserve_target": {
                     "type": "boolean",
                     "default": true,
                     "wf_prop": false,
-                    "description": "Whether or not to preserve the given residues in the output structure."
+                    "description": "Whether or not to preserve the target residues in the output structure."
                 },
                 "remove_tmp": {
                     "type": "boolean",

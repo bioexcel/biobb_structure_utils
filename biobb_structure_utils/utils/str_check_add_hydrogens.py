@@ -115,10 +115,10 @@ class StrCheckAddHydrogens(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
-        check_output_end(self.io_dict["out"]["output_structure_path"], self.out_log)
-
         # Copy files to host
         self.copy_to_host()
+
+        check_output_end(self.io_dict["out"]["output_structure_path"], self.out_log)
 
         # Remove temporal files
         self.tmp_files.append(self.stage_io_dict.get("unique_dir"))
