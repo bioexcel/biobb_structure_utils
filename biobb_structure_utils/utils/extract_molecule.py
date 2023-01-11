@@ -52,6 +52,7 @@ class ExtractMolecule(BiobbObject):
 
         # Call parent class constructor
         super().__init__(properties)
+        self.locals_var_dict = locals().copy()
 
         # Input/Output files
         self.io_dict = {
@@ -67,6 +68,7 @@ class ExtractMolecule(BiobbObject):
 
         # Check the properties
         self.check_properties(properties)
+        self.check_arguments()
 
     def create_command_list(self, command_list_path):
         """ Creates a command list file as a input for structure checking """
@@ -119,9 +121,13 @@ class ExtractMolecule(BiobbObject):
         self.copy_to_host()
 
         # Remove temporal files
-        self.tmp_files.append(self.stage_io_dict.get("unique_dir"))
-        self.tmp_files.append(tmp_folder)
+        self.tmp_files.extend([
+            self.stage_io_dict.get("unique_dir"),
+            tmp_folder
+        ])
         self.remove_tmp_files()
+
+        self.check_arguments(output_files_created=True, raise_exception=False)
 
         return self.return_code
 

@@ -51,6 +51,7 @@ class ExtractModel(BiobbObject):
 
         # Call parent class constructor
         super().__init__(properties)
+        self.locals_var_dict = locals().copy()
 
         # Input/Output files
         self.io_dict = {
@@ -65,6 +66,7 @@ class ExtractModel(BiobbObject):
 
         # Check the properties
         self.check_properties(properties)
+        self.check_arguments()
 
     @launchlogger
     def launch(self) -> int:
@@ -84,6 +86,8 @@ class ExtractModel(BiobbObject):
 
         if models == 'All':
             shutil.copyfile(self.io_dict['in']['input_structure_path'], self.io_dict['out']['output_structure_path'])
+
+            return 0
         else:
             # create temporary folder
             tmp_folder = fu.create_unique_dir()
@@ -123,6 +127,8 @@ class ExtractModel(BiobbObject):
             # Remove temporal files
             self.tmp_files.extend([self.stage_io_dict.get("unique_dir"), tmp_folder])
             self.remove_tmp_files()
+
+            self.check_arguments(output_files_created=True, raise_exception=False)
 
             return self.return_code
 

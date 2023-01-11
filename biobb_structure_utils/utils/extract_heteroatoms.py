@@ -57,6 +57,7 @@ class ExtractHeteroAtoms(BiobbObject):
 
         # Call parent class constructor
         super().__init__(properties)
+        self.locals_var_dict = locals().copy()
 
         # Input/Output files
         self.io_dict = {
@@ -71,6 +72,7 @@ class ExtractHeteroAtoms(BiobbObject):
 
         # Check the properties
         self.check_properties(properties)
+        self.check_arguments()
 
     @launchlogger
     def launch(self) -> int:
@@ -130,6 +132,8 @@ class ExtractHeteroAtoms(BiobbObject):
         # Remove temporal files
         self.tmp_files.append(self.stage_io_dict.get("unique_dir"))
         self.remove_tmp_files()
+
+        self.check_arguments(output_files_created=True, raise_exception=False)
 
         return self.return_code
 
