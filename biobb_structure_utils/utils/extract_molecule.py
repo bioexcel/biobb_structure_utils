@@ -105,14 +105,12 @@ class ExtractMolecule(BiobbObject):
         command_list_file = self.create_command_list(tmp_folder + '/extract_prot.lst')
         
         # run command line
-        cmd = [self.binary_path,
+        self.cmd = [self.binary_path,
                '-i', self.io_dict['in']['input_structure_path'],
                '-o', self.io_dict['out']['output_molecule_path'],
                '--force_save',
                '--non_interactive',
                'command_list', '--list', command_list_file]
-
-        returncode: int = cmd_wrapper.CmdWrapper(cmd, self.out_log, self.err_log, self.global_log).launch()
 
         # Run Biobb block
         self.run_biobb()
