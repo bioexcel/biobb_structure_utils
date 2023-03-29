@@ -80,6 +80,8 @@ class StructureCheck(BiobbObject):
         if self.check_restart(): return 0
         self.stage_files()
 
+        tmp_folder = None
+
         if not self.features or self.features == None or self.features == 'None':
             fu.log('No features provided, all features will be computed: %s' % 'models, chains, altloc, metals, ligands, chiral, getss, cistransbck, backbone, amide, clashes', self.out_log)
 

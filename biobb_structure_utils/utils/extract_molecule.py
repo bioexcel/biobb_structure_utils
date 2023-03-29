@@ -112,7 +112,7 @@ class ExtractMolecule(BiobbObject):
                '--non_interactive',
                'command_list', '--list', command_list_file]
 
-        returncode: int = cmd_wrapper.CmdWrapper(cmd, self.out_log, self.err_log, self.global_log).launch()
+        returncode: int = cmd_wrapper.CmdWrapper(cmd, self.shell_path, self.out_log, self.err_log, self.global_log).launch()
 
         # Run Biobb block
         self.run_biobb()
