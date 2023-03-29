@@ -5,7 +5,8 @@ import argparse
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
-from biobb_structure_utils.utils.common import *
+from biobb_common.tools import file_utils as fu
+from biobb_structure_utils.utils.common import check_input_path, check_output_path_json
 
 
 class StructureCheck(BiobbObject):
@@ -27,11 +28,11 @@ class StructureCheck(BiobbObject):
         This is a use example of how to use the building block from Python::
 
             from biobb_structure_utils.utils.structure_check import structure_check
-            prop = { 
+            prop = {
                 'features': ['models', 'chains', 'ligands']
             }
-            structure_check(input_structure_path='/path/to/myInputStr.pdb', 
-                            output_summary_path='/path/to/newSummary.json', 
+            structure_check(input_structure_path='/path/to/myInputStr.pdb',
+                            output_summary_path='/path/to/newSummary.json',
                             properties=prop)
 
     Info:
@@ -42,7 +43,7 @@ class StructureCheck(BiobbObject):
         * ontology:
             * name: EDAM
             * schema: http://edamontology.org/EDAM.owl
-            
+
     """
 
     def __init__(self, input_structure_path, output_summary_path, properties=None, **kwargs) -> None:
@@ -77,12 +78,13 @@ class StructureCheck(BiobbObject):
                                                                             self.out_log, self.__class__.__name__)
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         tmp_folder = None
 
-        if not self.features or self.features == None or self.features == 'None':
+        if not self.features or self.features is None or self.features == 'None':
             fu.log('No features provided, all features will be computed: %s' % 'models, chains, altloc, metals, ligands, chiral, getss, cistransbck, backbone, amide, clashes', self.out_log)
 
             self.cmd = [self.binary_path,
@@ -91,7 +93,7 @@ class StructureCheck(BiobbObject):
                         '--check_only',
                         '--non_interactive',
                         'checkall']
-        else: 
+        else:
             fu.log('Computing features: %s' % ', '.join(self.features), self.out_log)
 
             # create temporary folder
@@ -135,7 +137,7 @@ def structure_check(input_structure_path: str, output_summary_path: str, propert
     """Execute the :class:`StructureCheck <utils.structure_check.StructureCheck>` class and
     execute the :meth:`launch() <utils.structure_check.StructureCheck.launch>` method."""
 
-    return StructureCheck(input_structure_path=input_structure_path, 
+    return StructureCheck(input_structure_path=input_structure_path,
                           output_summary_path=output_summary_path,
                           properties=properties, **kwargs).launch()
 
@@ -155,7 +157,7 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    structure_check(input_structure_path=args.input_structure_path, 
+    structure_check(input_structure_path=args.input_structure_path,
                     output_summary_path=args.output_summary_path,
                     properties=properties)
 

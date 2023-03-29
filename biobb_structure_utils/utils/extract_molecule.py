@@ -5,8 +5,9 @@ import argparse
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
-from biobb_common.command_wrapper import cmd_wrapper
-from biobb_structure_utils.utils.common import *
+from biobb_common.tools import file_utils as fu
+from biobb_structure_utils.utils.common import check_input_path, check_output_path
+
 
 class ExtractMolecule(BiobbObject):
     """
@@ -28,12 +29,12 @@ class ExtractMolecule(BiobbObject):
         This is a use example of how to use the building block from Python::
 
             from biobb_structure_utils.utils.extract_molecule import extract_molecule
-            prop = { 
+            prop = {
                 'molecule_type': 'chains',
                 'chains': ['A', 'N', 'F']
             }
-            extract_molecule(input_structure_path='/path/to/myStructure.pdb', 
-                            output_molecule_path='/path/to/newMolecule.pdb', 
+            extract_molecule(input_structure_path='/path/to/myStructure.pdb',
+                            output_molecule_path='/path/to/newMolecule.pdb',
                             properties=prop)
 
     Info:
@@ -44,7 +45,7 @@ class ExtractMolecule(BiobbObject):
         * ontology:
             * name: EDAM
             * schema: http://edamontology.org/EDAM.owl
-            
+
     """
 
     def __init__(self, input_structure_path, output_molecule_path, properties=None, **kwargs) -> None:
@@ -94,7 +95,8 @@ class ExtractMolecule(BiobbObject):
         self.io_dict['out']['output_molecule_path'] = check_output_path(self.io_dict['out']['output_molecule_path'], self.out_log, self.__class__.__name__)
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # create temporary folder
@@ -103,16 +105,14 @@ class ExtractMolecule(BiobbObject):
 
         # create command list file
         command_list_file = self.create_command_list(tmp_folder + '/extract_prot.lst')
-        
-        # run command line
-        cmd = [self.binary_path,
-               '-i', self.io_dict['in']['input_structure_path'],
-               '-o', self.io_dict['out']['output_molecule_path'],
-               '--force_save',
-               '--non_interactive',
-               'command_list', '--list', command_list_file]
 
-        returncode: int = cmd_wrapper.CmdWrapper(cmd, self.shell_path, self.out_log, self.err_log, self.global_log).launch()
+        # run command line
+        self.cmd = [self.binary_path,
+                    '-i', self.io_dict['in']['input_structure_path'],
+                    '-o', self.io_dict['out']['output_molecule_path'],
+                    '--force_save',
+                    '--non_interactive',
+                    'command_list', '--list', command_list_file]
 
         # Run Biobb block
         self.run_biobb()
@@ -136,7 +136,7 @@ def extract_molecule(input_structure_path: str, output_molecule_path: str, prope
     """Execute the :class:`ExtractMolecule <utils.extract_molecule.ExtractMolecule>` class and
     execute the :meth:`launch() <utils.extract_molecule.ExtractMolecule.launch>` method."""
 
-    return ExtractMolecule(input_structure_path=input_structure_path, 
+    return ExtractMolecule(input_structure_path=input_structure_path,
                            output_molecule_path=output_molecule_path,
                            properties=properties, **kwargs).launch()
 
@@ -156,7 +156,7 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    extract_molecule(input_structure_path=args.input_structure_path, 
+    extract_molecule(input_structure_path=args.input_structure_path,
                      output_molecule_path=args.output_molecule_path,
                      properties=properties)
 
