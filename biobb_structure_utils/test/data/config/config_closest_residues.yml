@@ -1,7 +1,0 @@
-properties:
-  radius: 5
-  residues:
-  - model: '1'
-    name: HIS
-  - 580
-  - 61

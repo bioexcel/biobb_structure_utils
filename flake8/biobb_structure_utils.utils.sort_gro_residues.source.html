@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>biobb_structure_utils/utils/sort_gro_residues.py - flake8 annotated source</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+   </head>
+   <body>
+      <div id="masthead" class="sev-1"></div>
+      <div id="page">
+         <h1>
+            <a href="biobb_structure_utils.utils.sort_gro_residues.report.html">
+               <img src="back.svg" alt="&#x2B05;">
+               biobb_structure_utils/utils/sort_gro_residues.py source
+            </a>
+         </h1>
+
+         <div id="doc">
+            <div id="l1"
+               class="code sev- "><tt><i>1</i> <span class="ch">#!/usr/bin/env python3</span></tt>
+            </div>
+            <div id="l2"
+               class="code sev- "><tt><i>2</i> &nbsp;</tt>
+            </div>
+            <div id="l3"
+               class="code sev- "><tt><i>3</i> <span class="sd">&quot;&quot;&quot;Module containing the SortGroResidues class and the command line interface.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l4"
+               class="code sev- "><tt><i>4</i> <span class="kn">import</span> <span class="nn">argparse</span></tt>
+            </div>
+            <div id="l5"
+               class="code sev- "><tt><i>5</i> <span class="kn">from</span> <span class="nn">biobb_common.configuration</span> <span class="kn">import</span> <span class="n">settings</span></tt>
+            </div>
+            <div id="l6"
+               class="code sev- "><tt><i>6</i> <span class="kn">from</span> <span class="nn">biobb_common.generic.biobb_object</span> <span class="kn">import</span> <span class="n">BiobbObject</span></tt>
+            </div>
+            <div id="l7"
+               class="code sev- "><tt><i>7</i> <span class="kn">from</span> <span class="nn">biobb_common.tools.file_utils</span> <span class="kn">import</span> <span class="n">launchlogger</span></tt>
+            </div>
+            <div id="l8"
+               class="code sev- "><tt><i>8</i> <span class="kn">from</span> <span class="nn">biobb_structure_utils.gro_lib.gro</span> <span class="kn">import</span> <span class="n">Gro</span></tt>
+            </div>
+            <div id="l9"
+               class="code sev-1  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-1">
+                        F403
+                     </span>
+                     'from biobb_structure_utils.utils.common import *' used; unable to detect undefined names</li>
+               
+                  <li>
+                     <span class="count sev-1">
+                        F401
+                     </span>
+                     'biobb_structure_utils.utils.common.*' imported but unused</li>
+               
+               </ul><tt><i>9</i> <span class="kn">from</span> <span class="nn">biobb_structure_utils.utils.common</span> <span class="kn">import</span> <span class="o">*</span></tt>
+            </div>
+            <div id="l10"
+               class="code sev- "><tt><i>10</i> &nbsp;</tt>
+            </div>
+            <div id="l11"
+               class="code sev- "><tt><i>11</i> &nbsp;</tt>
+            </div>
+            <div id="l12"
+               class="code sev- "><tt><i>12</i> <span class="k">class</span> <span class="nc">SortGroResidues</span><span class="p">(</span><span class="n">BiobbObject</span><span class="p">):</span></tt>
+            </div>
+            <div id="l13"
+               class="code sev- "><tt><i>13</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l14"
+               class="code sev- "><tt><i>14</i> <span class="sd">    | biobb_structure_utils SortGroResidues</span></tt>
+            </div>
+            <div id="l15"
+               class="code sev- "><tt><i>15</i> <span class="sd">    | Class to sort the selected residues from a GRO 3D structure.</span></tt>
+            </div>
+            <div id="l16"
+               class="code sev- "><tt><i>16</i> &nbsp;</tt>
+            </div>
+            <div id="l17"
+               class="code sev- "><tt><i>17</i> <span class="sd">    Args:</span></tt>
+            </div>
+            <div id="l18"
+               class="code sev- "><tt><i>18</i> <span class="sd">        input_gro_path (str): Input GRO file path. File type: input. `Sample file &lt;https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/WT_aq4_md_1.gro&gt;`_. Accepted formats: gro (edam:format_2033).</span></tt>
+            </div>
+            <div id="l19"
+               class="code sev- "><tt><i>19</i> <span class="sd">        output_gro_path (str): Output sorted GRO file path. File type: output. `Sample file &lt;https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/WT_aq4_md_sorted.gro&gt;`_. Accepted formats: gro (edam:format_2033).</span></tt>
+            </div>
+            <div id="l20"
+               class="code sev- "><tt><i>20</i> <span class="sd">        properties (dic - Python dictionary object containing the tool parameters, not input/output files):</span></tt>
+            </div>
+            <div id="l21"
+               class="code sev- "><tt><i>21</i> <span class="sd">            * **residue_name_list** (*list*) - ([&quot;NA&quot;, &quot;CL&quot;, &quot;SOL&quot;]) Ordered residue name list.</span></tt>
+            </div>
+            <div id="l22"
+               class="code sev- "><tt><i>22</i> <span class="sd">            * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.</span></tt>
+            </div>
+            <div id="l23"
+               class="code sev- "><tt><i>23</i> <span class="sd">            * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.</span></tt>
+            </div>
+            <div id="l24"
+               class="code sev- "><tt><i>24</i> &nbsp;</tt>
+            </div>
+            <div id="l25"
+               class="code sev- "><tt><i>25</i> <span class="sd">    Examples:</span></tt>
+            </div>
+            <div id="l26"
+               class="code sev- "><tt><i>26</i> <span class="sd">        This is a use example of how to use the building block from Python::</span></tt>
+            </div>
+            <div id="l27"
+               class="code sev- "><tt><i>27</i> &nbsp;</tt>
+            </div>
+            <div id="l28"
+               class="code sev- "><tt><i>28</i> <span class="sd">            from biobb_structure_utils.utils.sort_gro_residues import sort_gro_residues</span></tt>
+            </div>
+            <div id="l29"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        W291
+                     </span>
+                     Trailing whitespace</li>
+               
+               </ul><tt><i>29</i> <span class="sd">            prop = { </span></tt>
+            </div>
+            <div id="l30"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        W291
+                     </span>
+                     Trailing whitespace</li>
+               
+               </ul><tt><i>30</i> <span class="sd">                &#39;residue_name_list&#39;: [&#39;NA&#39;, &#39;CL&#39;, &#39;SOL&#39;] </span></tt>
+            </div>
+            <div id="l31"
+               class="code sev- "><tt><i>31</i> <span class="sd">            }</span></tt>
+            </div>
+            <div id="l32"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        W291
+                     </span>
+                     Trailing whitespace</li>
+               
+               </ul><tt><i>32</i> <span class="sd">            sort_gro_residues(input_gro_path=&#39;/path/to/myInputStr.gro&#39;, </span></tt>
+            </div>
+            <div id="l33"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        W291
+                     </span>
+                     Trailing whitespace</li>
+               
+               </ul><tt><i>33</i> <span class="sd">                            output_gro_path=&#39;/path/to/newStructure.gro&#39;, </span></tt>
+            </div>
+            <div id="l34"
+               class="code sev- "><tt><i>34</i> <span class="sd">                            properties=prop)</span></tt>
+            </div>
+            <div id="l35"
+               class="code sev- "><tt><i>35</i> &nbsp;</tt>
+            </div>
+            <div id="l36"
+               class="code sev- "><tt><i>36</i> <span class="sd">    Info:</span></tt>
+            </div>
+            <div id="l37"
+               class="code sev- "><tt><i>37</i> <span class="sd">        * wrapped_software:</span></tt>
+            </div>
+            <div id="l38"
+               class="code sev- "><tt><i>38</i> <span class="sd">            * name: In house</span></tt>
+            </div>
+            <div id="l39"
+               class="code sev- "><tt><i>39</i> <span class="sd">            * license: Apache-2.0</span></tt>
+            </div>
+            <div id="l40"
+               class="code sev- "><tt><i>40</i> <span class="sd">        * ontology:</span></tt>
+            </div>
+            <div id="l41"
+               class="code sev- "><tt><i>41</i> <span class="sd">            * name: EDAM</span></tt>
+            </div>
+            <div id="l42"
+               class="code sev- "><tt><i>42</i> <span class="sd">            * schema: http://edamontology.org/EDAM.owl</span></tt>
+            </div>
+            <div id="l43"
+               class="code sev- "><tt><i>43</i> &nbsp;</tt>
+            </div>
+            <div id="l44"
+               class="code sev- "><tt><i>44</i> <span class="sd">    &quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l45"
+               class="code sev- "><tt><i>45</i> &nbsp;</tt>
+            </div>
+            <div id="l46"
+               class="code sev- "><tt><i>46</i>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_gro_path</span><span class="p">,</span> <span class="n">output_gro_path</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span></tt>
+            </div>
+            <div id="l47"
+               class="code sev- "><tt><i>47</i>         <span class="n">properties</span> <span class="o">=</span> <span class="n">properties</span> <span class="ow">or</span> <span class="p">{}</span></tt>
+            </div>
+            <div id="l48"
+               class="code sev- "><tt><i>48</i> &nbsp;</tt>
+            </div>
+            <div id="l49"
+               class="code sev- "><tt><i>49</i>         <span class="c1"># Call parent class constructor</span></tt>
+            </div>
+            <div id="l50"
+               class="code sev- "><tt><i>50</i>         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span></tt>
+            </div>
+            <div id="l51"
+               class="code sev- "><tt><i>51</i>         <span class="bp">self</span><span class="o">.</span><span class="n">locals_var_dict</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></tt>
+            </div>
+            <div id="l52"
+               class="code sev- "><tt><i>52</i> &nbsp;</tt>
+            </div>
+            <div id="l53"
+               class="code sev- "><tt><i>53</i>         <span class="c1"># Input/Output files</span></tt>
+            </div>
+            <div id="l54"
+               class="code sev- "><tt><i>54</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span> <span class="o">=</span> <span class="p">{</span></tt>
+            </div>
+            <div id="l55"
+               class="code sev- "><tt><i>55</i>             <span class="s2">&quot;in&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;input_gro_path&quot;</span><span class="p">:</span> <span class="n">input_gro_path</span><span class="p">},</span></tt>
+            </div>
+            <div id="l56"
+               class="code sev- "><tt><i>56</i>             <span class="s2">&quot;out&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;output_gro_path&quot;</span><span class="p">:</span> <span class="n">output_gro_path</span><span class="p">}</span></tt>
+            </div>
+            <div id="l57"
+               class="code sev- "><tt><i>57</i>         <span class="p">}</span></tt>
+            </div>
+            <div id="l58"
+               class="code sev- "><tt><i>58</i> &nbsp;</tt>
+            </div>
+            <div id="l59"
+               class="code sev- "><tt><i>59</i>         <span class="c1"># Properties specific for BB</span></tt>
+            </div>
+            <div id="l60"
+               class="code sev- "><tt><i>60</i>         <span class="bp">self</span><span class="o">.</span><span class="n">residue_name_list</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;residue_name_list&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;NA&quot;</span><span class="p">,</span> <span class="s2">&quot;CL&quot;</span><span class="p">,</span> <span class="s2">&quot;SOL&quot;</span><span class="p">])</span></tt>
+            </div>
+            <div id="l61"
+               class="code sev- "><tt><i>61</i> &nbsp;</tt>
+            </div>
+            <div id="l62"
+               class="code sev- "><tt><i>62</i>         <span class="c1"># Check the properties</span></tt>
+            </div>
+            <div id="l63"
+               class="code sev- "><tt><i>63</i>         <span class="bp">self</span><span class="o">.</span><span class="n">check_properties</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span></tt>
+            </div>
+            <div id="l64"
+               class="code sev- "><tt><i>64</i>         <span class="bp">self</span><span class="o">.</span><span class="n">check_arguments</span><span class="p">()</span></tt>
+            </div>
+            <div id="l65"
+               class="code sev- "><tt><i>65</i> &nbsp;</tt>
+            </div>
+            <div id="l66"
+               class="code sev- "><tt><i>66</i>     <span class="nd">@launchlogger</span></tt>
+            </div>
+            <div id="l67"
+               class="code sev- "><tt><i>67</i>     <span class="k">def</span> <span class="nf">launch</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span></tt>
+            </div>
+            <div id="l68"
+               class="code sev- "><tt><i>68</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute the :class:`SortGroResidues &lt;utils.sort_gro_residues.SortGroResidues&gt;` utils.sort_gro_residues.SortGroResidues object.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l69"
+               class="code sev- "><tt><i>69</i> &nbsp;</tt>
+            </div>
+            <div id="l70"
+               class="code sev- "><tt><i>70</i>         <span class="c1"># Setup Biobb</span></tt>
+            </div>
+            <div id="l71"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E701
+                     </span>
+                     Multiple statements on one line (colon)</li>
+               
+               </ul><tt><i>71</i>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_restart</span><span class="p">():</span> <span class="k">return</span> <span class="mi">0</span></tt>
+            </div>
+            <div id="l72"
+               class="code sev- "><tt><i>72</i>         <span class="bp">self</span><span class="o">.</span><span class="n">stage_files</span><span class="p">()</span></tt>
+            </div>
+            <div id="l73"
+               class="code sev- "><tt><i>73</i> &nbsp;</tt>
+            </div>
+            <div id="l74"
+               class="code sev- "><tt><i>74</i>         <span class="c1"># Business code</span></tt>
+            </div>
+            <div id="l75"
+               class="code sev- "><tt><i>75</i>         <span class="n">in_gro</span> <span class="o">=</span> <span class="n">Gro</span><span class="p">()</span></tt>
+            </div>
+            <div id="l76"
+               class="code sev- "><tt><i>76</i>         <span class="n">in_gro</span><span class="o">.</span><span class="n">read_gro_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_io_dict</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">][</span><span class="s1">&#39;input_gro_path&#39;</span><span class="p">])</span></tt>
+            </div>
+            <div id="l77"
+               class="code sev- "><tt><i>77</i>         <span class="n">in_gro</span><span class="o">.</span><span class="n">sort_residues2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">residue_name_list</span><span class="p">)</span></tt>
+            </div>
+            <div id="l78"
+               class="code sev- "><tt><i>78</i>         <span class="n">in_gro</span><span class="o">.</span><span class="n">write_gro_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_io_dict</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">][</span><span class="s1">&#39;output_gro_path&#39;</span><span class="p">])</span></tt>
+            </div>
+            <div id="l79"
+               class="code sev- "><tt><i>79</i>         <span class="bp">self</span><span class="o">.</span><span class="n">return_code</span> <span class="o">=</span> <span class="mi">0</span></tt>
+            </div>
+            <div id="l80"
+               class="code sev- "><tt><i>80</i>         <span class="c1">##########</span></tt>
+            </div>
+            <div id="l81"
+               class="code sev- "><tt><i>81</i> &nbsp;</tt>
+            </div>
+            <div id="l82"
+               class="code sev- "><tt><i>82</i>         <span class="c1"># Copy files to host</span></tt>
+            </div>
+            <div id="l83"
+               class="code sev- "><tt><i>83</i>         <span class="bp">self</span><span class="o">.</span><span class="n">copy_to_host</span><span class="p">()</span></tt>
+            </div>
+            <div id="l84"
+               class="code sev- "><tt><i>84</i> &nbsp;</tt>
+            </div>
+            <div id="l85"
+               class="code sev- "><tt><i>85</i>         <span class="c1"># Remove temporal files</span></tt>
+            </div>
+            <div id="l86"
+               class="code sev- "><tt><i>86</i>         <span class="bp">self</span><span class="o">.</span><span class="n">tmp_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_io_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;unique_dir&quot;</span><span class="p">))</span></tt>
+            </div>
+            <div id="l87"
+               class="code sev- "><tt><i>87</i>         <span class="bp">self</span><span class="o">.</span><span class="n">remove_tmp_files</span><span class="p">()</span></tt>
+            </div>
+            <div id="l88"
+               class="code sev- "><tt><i>88</i> &nbsp;</tt>
+            </div>
+            <div id="l89"
+               class="code sev- "><tt><i>89</i>         <span class="bp">self</span><span class="o">.</span><span class="n">check_arguments</span><span class="p">(</span><span class="n">output_files_created</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">raise_exception</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></tt>
+            </div>
+            <div id="l90"
+               class="code sev- "><tt><i>90</i> &nbsp;</tt>
+            </div>
+            <div id="l91"
+               class="code sev- "><tt><i>91</i>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_code</span></tt>
+            </div>
+            <div id="l92"
+               class="code sev- "><tt><i>92</i> &nbsp;</tt>
+            </div>
+            <div id="l93"
+               class="code sev- "><tt><i>93</i> &nbsp;</tt>
+            </div>
+            <div id="l94"
+               class="code sev- "><tt><i>94</i> <span class="k">def</span> <span class="nf">sort_gro_residues</span><span class="p">(</span><span class="n">input_gro_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_gro_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">properties</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span></tt>
+            </div>
+            <div id="l95"
+               class="code sev- "><tt><i>95</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute the :class:`SortGroResidues &lt;utils.sort_gro_residues.SortGroResidues&gt;` class and</span></tt>
+            </div>
+            <div id="l96"
+               class="code sev- "><tt><i>96</i> <span class="sd">    execute the :meth:`launch() &lt;utils.sort_gro_residues.SortGroResidues.launch&gt;` method.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l97"
+               class="code sev- "><tt><i>97</i> &nbsp;</tt>
+            </div>
+            <div id="l98"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        W291
+                     </span>
+                     Trailing whitespace</li>
+               
+               </ul><tt><i>98</i>     <span class="k">return</span> <span class="n">SortGroResidues</span><span class="p">(</span><span class="n">input_gro_path</span><span class="o">=</span><span class="n">input_gro_path</span><span class="p">,</span> </tt>
+            </div>
+            <div id="l99"
+               class="code sev- "><tt><i>99</i>                            <span class="n">output_gro_path</span><span class="o">=</span><span class="n">output_gro_path</span><span class="p">,</span></tt>
+            </div>
+            <div id="l100"
+               class="code sev- "><tt><i>100</i>                            <span class="n">properties</span><span class="o">=</span><span class="n">properties</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">launch</span><span class="p">()</span></tt>
+            </div>
+            <div id="l101"
+               class="code sev- "><tt><i>101</i> &nbsp;</tt>
+            </div>
+            <div id="l102"
+               class="code sev- "><tt><i>102</i> &nbsp;</tt>
+            </div>
+            <div id="l103"
+               class="code sev- "><tt><i>103</i> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span></tt>
+            </div>
+            <div id="l104"
+               class="code sev- "><tt><i>104</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Command line execution of this building block. Please check the command line documentation.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l105"
+               class="code sev- "><tt><i>105</i>     <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Renumber atoms and residues from a 3D structure.&quot;</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="k">lambda</span> <span class="n">prog</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">RawTextHelpFormatter</span><span class="p">(</span><span class="n">prog</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">99999</span><span class="p">))</span></tt>
+            </div>
+            <div id="l106"
+               class="code sev- "><tt><i>106</i>     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39;--config&#39;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;This file can be a YAML file, JSON file or JSON string&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l107"
+               class="code sev- "><tt><i>107</i> &nbsp;</tt>
+            </div>
+            <div id="l108"
+               class="code sev- "><tt><i>108</i>     <span class="c1"># Specific args of each building block</span></tt>
+            </div>
+            <div id="l109"
+               class="code sev- "><tt><i>109</i>     <span class="n">required_args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s1">&#39;required arguments&#39;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l110"
+               class="code sev- "><tt><i>110</i>     <span class="n">required_args</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-i&#39;</span><span class="p">,</span> <span class="s1">&#39;--input_gro_path&#39;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Input GRO file name&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l111"
+               class="code sev- "><tt><i>111</i>     <span class="n">required_args</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="s1">&#39;--output_gro_path&#39;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Output sorted GRO file name&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l112"
+               class="code sev- "><tt><i>112</i> &nbsp;</tt>
+            </div>
+            <div id="l113"
+               class="code sev- "><tt><i>113</i>     <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span></tt>
+            </div>
+            <div id="l114"
+               class="code sev- "><tt><i>114</i>     <span class="n">config</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">config</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">config</span> <span class="k">else</span> <span class="kc">None</span></tt>
+            </div>
+            <div id="l115"
+               class="code sev- "><tt><i>115</i>     <span class="n">properties</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">ConfReader</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span><span class="o">.</span><span class="n">get_prop_dic</span><span class="p">()</span></tt>
+            </div>
+            <div id="l116"
+               class="code sev- "><tt><i>116</i> &nbsp;</tt>
+            </div>
+            <div id="l117"
+               class="code sev- "><tt><i>117</i>     <span class="c1"># Specific call of each building block</span></tt>
+            </div>
+            <div id="l118"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        W291
+                     </span>
+                     Trailing whitespace</li>
+               
+               </ul><tt><i>118</i>     <span class="n">sort_gro_residues</span><span class="p">(</span><span class="n">input_gro_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">input_gro_path</span><span class="p">,</span> </tt>
+            </div>
+            <div id="l119"
+               class="code sev- "><tt><i>119</i>                       <span class="n">output_gro_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output_gro_path</span><span class="p">,</span></tt>
+            </div>
+            <div id="l120"
+               class="code sev- "><tt><i>120</i>                       <span class="n">properties</span><span class="o">=</span><span class="n">properties</span><span class="p">)</span></tt>
+            </div>
+            <div id="l121"
+               class="code sev- "><tt><i>121</i> &nbsp;</tt>
+            </div>
+            <div id="l122"
+               class="code sev- "><tt><i>122</i> &nbsp;</tt>
+            </div>
+            <div id="l123"
+               class="code sev- "><tt><i>123</i> <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span></tt>
+            </div>
+            <div id="l124"
+               class="code sev- "><tt><i>124</i>     <span class="n">main</span><span class="p">()</span></tt>
+            </div>
+            
+         </div>
+      </div>
+   </body>
+</html>
