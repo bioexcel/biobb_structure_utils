@@ -253,7 +253,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
 }
 </script>
     <h1>report.html</h1>
-    <p>Report generated on 05-Apr-2023 at 16:01:43 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.2.0</p>
+    <p>Report generated on 13-Apr-2023 at 12:42:16 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.2.0</p>
     <h2>Environment</h2>
     <table id="environment">
       <tr>
@@ -261,7 +261,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <td>true</td></tr>
       <tr>
         <td>Packages</td>
-        <td>{"pluggy": "1.0.0", "pytest": "7.2.2"}</td></tr>
+        <td>{"pluggy": "1.0.0", "pytest": "7.3.0"}</td></tr>
       <tr>
         <td>Platform</td>
         <td>Linux-5.4.0-139-generic-x86_64-with-glibc2.31</td></tr>
@@ -272,7 +272,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <td>Python</td>
         <td>3.9.16</td></tr></table>
     <h2>Summary</h2>
-    <p>20 tests ran in 37.39 seconds. </p>
+    <p>20 tests ran in 37.83 seconds. </p>
     <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">20 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
     <h2>Results</h2>
     <table id="results-table">
@@ -292,13 +292,13 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-05 16:01:06,845 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.cat_pdb Version: 4.0.0
-2023-04-05 16:01:06,846 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/cat_protein.pdb to /tmp/biobb/unitests_26/cat_pdb/a98acd22-0e49-4fce-a8d0-49a61e710ae2
-2023-04-05 16:01:06,846 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/cat_ligand.pdb to /tmp/biobb/unitests_26/cat_pdb/a98acd22-0e49-4fce-a8d0-49a61e710ae2
-2023-04-05 16:01:06,848 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_26/cat_pdb/a98acd22-0e49-4fce-a8d0-49a61e710ae2&#x27;]
-Checking if empty file: /tmp/biobb/unitests_26/cat_pdb/output_structure_path.pdb
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-13 12:41:39,219 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.cat_pdb Version: 4.0.0
+2023-04-13 12:41:39,219 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/cat_protein.pdb to /tmp/biobb/unitests_40/cat_pdb/d963f62e-ef94-45d7-b6c4-6f273060ecc8
+2023-04-13 12:41:39,220 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/cat_ligand.pdb to /tmp/biobb/unitests_40/cat_pdb/d963f62e-ef94-45d7-b6c4-6f273060ecc8
+2023-04-13 12:41:39,221 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_40/cat_pdb/d963f62e-ef94-45d7-b6c4-6f273060ecc8&#x27;]
+Checking if empty file: /tmp/biobb/unitests_40/cat_pdb/output_structure_path.pdb
 Checking RMSD between:
-     PDB_A: /tmp/biobb/unitests_26/cat_pdb/output_structure_path.pdb
+     PDB_A: /tmp/biobb/unitests_40/cat_pdb/output_structure_path.pdb
      PDB_B: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/reference/utils/ref_cat_pdb.pdb
      Ignoring HETAMT in RMSD
      Ignoring Hydrogen atoms in RMSD
@@ -306,28 +306,28 @@ Checking RMSD between:
      Atoms ALIGNED in PDB_B: 2058
      RMS: 9.899882112728267e-15
      RMS_CUTOFF: 1
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_26/cat_pdb/cat_pdb_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.cat_pdb Version: 4.0.0
-INFO     /tmp/biobb/unitests_26/cat_pdb/cat_pdb_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/cat_protein.pdb to /tmp/biobb/unitests_26/cat_pdb/a98acd22-0e49-4fce-a8d0-49a61e710ae2
-INFO     /tmp/biobb/unitests_26/cat_pdb/cat_pdb_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/cat_ligand.pdb to /tmp/biobb/unitests_26/cat_pdb/a98acd22-0e49-4fce-a8d0-49a61e710ae2
-INFO     /tmp/biobb/unitests_26/cat_pdb/cat_pdb_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_26/cat_pdb/a98acd22-0e49-4fce-a8d0-49a61e710ae2&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
-Removing: /tmp/biobb/unitests_26
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_40/cat_pdb/cat_pdb_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.cat_pdb Version: 4.0.0
+INFO     /tmp/biobb/unitests_40/cat_pdb/cat_pdb_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/cat_protein.pdb to /tmp/biobb/unitests_40/cat_pdb/d963f62e-ef94-45d7-b6c4-6f273060ecc8
+INFO     /tmp/biobb/unitests_40/cat_pdb/cat_pdb_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/cat_ligand.pdb to /tmp/biobb/unitests_40/cat_pdb/d963f62e-ef94-45d7-b6c4-6f273060ecc8
+INFO     /tmp/biobb/unitests_40/cat_pdb/cat_pdb_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_40/cat_pdb/d963f62e-ef94-45d7-b6c4-6f273060ecc8&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+Removing: /tmp/biobb/unitests_40
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_structure_utils/test/unitests/test_utils/test_closest_residues.py::TestClosestResidues::test_launch</td>
-          <td class="col-duration">2.17</td>
+          <td class="col-duration">2.29</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-05 16:01:07,010 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.closest_residues Version: 4.0.0
-2023-04-05 16:01:07,011 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_26/closest_residues/1f722b0c-8481-4ed8-a19e-7a8b6824d09b
-2023-04-05 16:01:07,443 [MainThread  ] [INFO ]  Found 548 nearby residues
-2023-04-05 16:01:08,908 [MainThread  ] [INFO ]  Writting pdb to: /tmp/biobb/unitests_26/closest_residues/1f722b0c-8481-4ed8-a19e-7a8b6824d09b/output_residues_path.pdb
-2023-04-05 16:01:08,910 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_26/closest_residues/1f722b0c-8481-4ed8-a19e-7a8b6824d09b&#x27;]
-Checking if empty file: /tmp/biobb/unitests_26/closest_residues/output_residues_path.pdb
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-13 12:41:39,383 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.closest_residues Version: 4.0.0
+2023-04-13 12:41:39,385 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_40/closest_residues/d753a3b0-9e42-42cc-9198-d17a176a4d65
+2023-04-13 12:41:39,818 [MainThread  ] [INFO ]  Found 548 nearby residues
+2023-04-13 12:41:41,394 [MainThread  ] [INFO ]  Writting pdb to: /tmp/biobb/unitests_40/closest_residues/d753a3b0-9e42-42cc-9198-d17a176a4d65/output_residues_path.pdb
+2023-04-13 12:41:41,398 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_40/closest_residues/d753a3b0-9e42-42cc-9198-d17a176a4d65&#x27;]
+Checking if empty file: /tmp/biobb/unitests_40/closest_residues/output_residues_path.pdb
 Checking RMSD between:
-     PDB_A: /tmp/biobb/unitests_26/closest_residues/output_residues_path.pdb
+     PDB_A: /tmp/biobb/unitests_40/closest_residues/output_residues_path.pdb
      PDB_B: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/reference/utils/ref_closest_residues.pdb
      Ignoring HETAMT in RMSD
      Ignoring Hydrogen atoms in RMSD
@@ -335,53 +335,53 @@ Checking RMSD between:
      Atoms ALIGNED in PDB_B: 4251
      RMS: 1.844146167402491e-14
      RMS_CUTOFF: 1
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_26/closest_residues/closest_residues_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.closest_residues Version: 4.0.0
-INFO     /tmp/biobb/unitests_26/closest_residues/closest_residues_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_26/closest_residues/1f722b0c-8481-4ed8-a19e-7a8b6824d09b
-INFO     /tmp/biobb/unitests_26/closest_residues/closest_residues_log.out:file_utils.py:346 Found 548 nearby residues
-INFO     /tmp/biobb/unitests_26/closest_residues/closest_residues_log.out:file_utils.py:346 Writting pdb to: /tmp/biobb/unitests_26/closest_residues/1f722b0c-8481-4ed8-a19e-7a8b6824d09b/output_residues_path.pdb
-INFO     /tmp/biobb/unitests_26/closest_residues/closest_residues_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_26/closest_residues/1f722b0c-8481-4ed8-a19e-7a8b6824d09b&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
-Removing: /tmp/biobb/unitests_26
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_40/closest_residues/closest_residues_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.closest_residues Version: 4.0.0
+INFO     /tmp/biobb/unitests_40/closest_residues/closest_residues_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_40/closest_residues/d753a3b0-9e42-42cc-9198-d17a176a4d65
+INFO     /tmp/biobb/unitests_40/closest_residues/closest_residues_log.out:file_utils.py:346 Found 548 nearby residues
+INFO     /tmp/biobb/unitests_40/closest_residues/closest_residues_log.out:file_utils.py:346 Writting pdb to: /tmp/biobb/unitests_40/closest_residues/d753a3b0-9e42-42cc-9198-d17a176a4d65/output_residues_path.pdb
+INFO     /tmp/biobb/unitests_40/closest_residues/closest_residues_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_40/closest_residues/d753a3b0-9e42-42cc-9198-d17a176a4d65&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+Removing: /tmp/biobb/unitests_40
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_structure_utils/test/unitests/test_utils/test_extract_atoms_gro.py::TestExtractAtomsGRO::test_launch</td>
-          <td class="col-duration">5.07</td>
+          <td class="col-duration">5.10</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-05 16:01:09,187 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.extract_atoms Version: 4.0.0
-2023-04-05 16:01:09,190 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/G2S_stateA_frame92.sorted.gro to /tmp/biobb/unitests_26/extract_atoms_gro/3c6700f6-5ebc-4403-92e0-2bc9c77e1996
-2023-04-05 16:01:09,190 [MainThread  ] [INFO ]  GRO format detected, extracting all atoms matching ^D
-2023-04-05 16:01:14,192 [MainThread  ] [INFO ]  4 atoms found writting GRO file
-2023-04-05 16:01:14,223 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_26/extract_atoms_gro/3c6700f6-5ebc-4403-92e0-2bc9c77e1996&#x27;]
-Checking if empty file: /tmp/biobb/unitests_26/extract_atoms_gro/output_structure_path.gro
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-13 12:41:41,689 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.extract_atoms Version: 4.0.0
+2023-04-13 12:41:41,693 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/G2S_stateA_frame92.sorted.gro to /tmp/biobb/unitests_40/extract_atoms_gro/1eed5133-692d-4d1a-937d-b6c5223cf8b8
+2023-04-13 12:41:41,693 [MainThread  ] [INFO ]  GRO format detected, extracting all atoms matching ^D
+2023-04-13 12:41:46,753 [MainThread  ] [INFO ]  4 atoms found writting GRO file
+2023-04-13 12:41:46,757 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_40/extract_atoms_gro/1eed5133-692d-4d1a-937d-b6c5223cf8b8&#x27;]
+Checking if empty file: /tmp/biobb/unitests_40/extract_atoms_gro/output_structure_path.gro
 Comparing ignoring first line of both files:
-     FILE_A: /tmp/biobb/unitests_26/extract_atoms_gro/output_structure_path.gro
+     FILE_A: /tmp/biobb/unitests_40/extract_atoms_gro/output_structure_path.gro
      FILE_B: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/reference/utils/dummy_atoms.gro
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_26/extract_atoms_gro/extract_atoms_gro_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.extract_atoms Version: 4.0.0
-INFO     /tmp/biobb/unitests_26/extract_atoms_gro/extract_atoms_gro_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/G2S_stateA_frame92.sorted.gro to /tmp/biobb/unitests_26/extract_atoms_gro/3c6700f6-5ebc-4403-92e0-2bc9c77e1996
-INFO     /tmp/biobb/unitests_26/extract_atoms_gro/extract_atoms_gro_log.out:file_utils.py:346 GRO format detected, extracting all atoms matching ^D
-INFO     /tmp/biobb/unitests_26/extract_atoms_gro/extract_atoms_gro_log.out:file_utils.py:346 4 atoms found writting GRO file
-INFO     /tmp/biobb/unitests_26/extract_atoms_gro/extract_atoms_gro_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_26/extract_atoms_gro/3c6700f6-5ebc-4403-92e0-2bc9c77e1996&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
-Removing: /tmp/biobb/unitests_26
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_40/extract_atoms_gro/extract_atoms_gro_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.extract_atoms Version: 4.0.0
+INFO     /tmp/biobb/unitests_40/extract_atoms_gro/extract_atoms_gro_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/G2S_stateA_frame92.sorted.gro to /tmp/biobb/unitests_40/extract_atoms_gro/1eed5133-692d-4d1a-937d-b6c5223cf8b8
+INFO     /tmp/biobb/unitests_40/extract_atoms_gro/extract_atoms_gro_log.out:file_utils.py:346 GRO format detected, extracting all atoms matching ^D
+INFO     /tmp/biobb/unitests_40/extract_atoms_gro/extract_atoms_gro_log.out:file_utils.py:346 4 atoms found writting GRO file
+INFO     /tmp/biobb/unitests_40/extract_atoms_gro/extract_atoms_gro_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_40/extract_atoms_gro/1eed5133-692d-4d1a-937d-b6c5223cf8b8&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+Removing: /tmp/biobb/unitests_40
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_structure_utils/test/unitests/test_utils/test_extract_atoms_pdb.py::TestExtractAtomsPDB::test_launch</td>
-          <td class="col-duration">0.08</td>
+          <td class="col-duration">0.07</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-05 16:01:14,271 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.extract_atoms Version: 4.0.0
-2023-04-05 16:01:14,272 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_26/extract_atoms/9417fd3d-19e9-4c34-9932-8b08d44b3ed1
-2023-04-05 16:01:14,273 [MainThread  ] [INFO ]  PDB format detected, extracting all atoms matching OE2
-2023-04-05 16:01:14,302 [MainThread  ] [INFO ]  141 atoms found writting PDB file
-2023-04-05 16:01:14,302 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_26/extract_atoms/9417fd3d-19e9-4c34-9932-8b08d44b3ed1&#x27;]
-Checking if empty file: /tmp/biobb/unitests_26/extract_atoms/output_structure_path.pdb
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-13 12:41:46,793 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.extract_atoms Version: 4.0.0
+2023-04-13 12:41:46,794 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_40/extract_atoms/52234bf2-ac96-4216-95a7-d6b0823099bc
+2023-04-13 12:41:46,795 [MainThread  ] [INFO ]  PDB format detected, extracting all atoms matching OE2
+2023-04-13 12:41:46,823 [MainThread  ] [INFO ]  141 atoms found writting PDB file
+2023-04-13 12:41:46,823 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_40/extract_atoms/52234bf2-ac96-4216-95a7-d6b0823099bc&#x27;]
+Checking if empty file: /tmp/biobb/unitests_40/extract_atoms/output_structure_path.pdb
 Checking RMSD between:
-     PDB_A: /tmp/biobb/unitests_26/extract_atoms/output_structure_path.pdb
+     PDB_A: /tmp/biobb/unitests_40/extract_atoms/output_structure_path.pdb
      PDB_B: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/reference/utils/OE2_atoms.pdb
      Ignoring HETAMT in RMSD
      Ignoring Hydrogen atoms in RMSD
@@ -389,29 +389,29 @@ Checking RMSD between:
      Atoms ALIGNED in PDB_B: 141
      RMS: 1.5257678459642423e-14
      RMS_CUTOFF: 1
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_26/extract_atoms/extract_atoms_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.extract_atoms Version: 4.0.0
-INFO     /tmp/biobb/unitests_26/extract_atoms/extract_atoms_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_26/extract_atoms/9417fd3d-19e9-4c34-9932-8b08d44b3ed1
-INFO     /tmp/biobb/unitests_26/extract_atoms/extract_atoms_log.out:file_utils.py:346 PDB format detected, extracting all atoms matching OE2
-INFO     /tmp/biobb/unitests_26/extract_atoms/extract_atoms_log.out:file_utils.py:346 141 atoms found writting PDB file
-INFO     /tmp/biobb/unitests_26/extract_atoms/extract_atoms_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_26/extract_atoms/9417fd3d-19e9-4c34-9932-8b08d44b3ed1&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
-Removing: /tmp/biobb/unitests_26
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_40/extract_atoms/extract_atoms_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.extract_atoms Version: 4.0.0
+INFO     /tmp/biobb/unitests_40/extract_atoms/extract_atoms_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_40/extract_atoms/52234bf2-ac96-4216-95a7-d6b0823099bc
+INFO     /tmp/biobb/unitests_40/extract_atoms/extract_atoms_log.out:file_utils.py:346 PDB format detected, extracting all atoms matching OE2
+INFO     /tmp/biobb/unitests_40/extract_atoms/extract_atoms_log.out:file_utils.py:346 141 atoms found writting PDB file
+INFO     /tmp/biobb/unitests_40/extract_atoms/extract_atoms_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_40/extract_atoms/52234bf2-ac96-4216-95a7-d6b0823099bc&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+Removing: /tmp/biobb/unitests_40
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_structure_utils/test/unitests/test_utils/test_extract_chain.py::TestExtractChain::test_launch</td>
-          <td class="col-duration">0.46</td>
+          <td class="col-duration">0.45</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-05 16:01:14,348 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.extract_chain Version: 4.0.0
-2023-04-05 16:01:14,350 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/extract_chain.pdb to /tmp/biobb/unitests_26/extract_chain/e26c69ac-d43f-4af9-9172-4db24167c1da
-2023-04-05 16:01:14,350 [MainThread  ] [INFO ]  Selected Chains: B,C
-2023-04-05 16:01:14,350 [MainThread  ] [INFO ]  Warning: Use permissive=True is a risky option use it under your own responsability
-2023-04-05 16:01:14,363 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_26/extract_chain/e26c69ac-d43f-4af9-9172-4db24167c1da&#x27;]
-Checking if empty file: /tmp/biobb/unitests_26/extract_chain/output_structure_path.pdb
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-13 12:41:46,869 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.extract_chain Version: 4.0.0
+2023-04-13 12:41:46,870 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/extract_chain.pdb to /tmp/biobb/unitests_40/extract_chain/e6fc0ef1-ebcc-4df5-bed3-18ee0c599bee
+2023-04-13 12:41:46,870 [MainThread  ] [INFO ]  Selected Chains: B,C
+2023-04-13 12:41:46,871 [MainThread  ] [INFO ]  Warning: Use permissive=True is a risky option use it under your own responsability
+2023-04-13 12:41:46,884 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_40/extract_chain/e6fc0ef1-ebcc-4df5-bed3-18ee0c599bee&#x27;]
+Checking if empty file: /tmp/biobb/unitests_40/extract_chain/output_structure_path.pdb
 Checking RMSD between:
-     PDB_A: /tmp/biobb/unitests_26/extract_chain/output_structure_path.pdb
+     PDB_A: /tmp/biobb/unitests_40/extract_chain/output_structure_path.pdb
      PDB_B: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/reference/utils/ref_extract_chain.pdb
      Ignoring HETAMT in RMSD
      Ignoring Hydrogen atoms in RMSD
@@ -419,59 +419,59 @@ Checking RMSD between:
      Atoms ALIGNED in PDB_B: 7893
      RMS: 2.124760477089552e-14
      RMS_CUTOFF: 1
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_26/extract_chain/extract_chain_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.extract_chain Version: 4.0.0
-INFO     /tmp/biobb/unitests_26/extract_chain/extract_chain_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/extract_chain.pdb to /tmp/biobb/unitests_26/extract_chain/e26c69ac-d43f-4af9-9172-4db24167c1da
-INFO     /tmp/biobb/unitests_26/extract_chain/extract_chain_log.out:file_utils.py:346 Selected Chains: B,C
-INFO     /tmp/biobb/unitests_26/extract_chain/extract_chain_log.out:file_utils.py:346 Warning: Use permissive=True is a risky option use it under your own responsability
-INFO     /tmp/biobb/unitests_26/extract_chain/extract_chain_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_26/extract_chain/e26c69ac-d43f-4af9-9172-4db24167c1da&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
-Removing: /tmp/biobb/unitests_26
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_40/extract_chain/extract_chain_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.extract_chain Version: 4.0.0
+INFO     /tmp/biobb/unitests_40/extract_chain/extract_chain_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/extract_chain.pdb to /tmp/biobb/unitests_40/extract_chain/e6fc0ef1-ebcc-4df5-bed3-18ee0c599bee
+INFO     /tmp/biobb/unitests_40/extract_chain/extract_chain_log.out:file_utils.py:346 Selected Chains: B,C
+INFO     /tmp/biobb/unitests_40/extract_chain/extract_chain_log.out:file_utils.py:346 Warning: Use permissive=True is a risky option use it under your own responsability
+INFO     /tmp/biobb/unitests_40/extract_chain/extract_chain_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_40/extract_chain/e6fc0ef1-ebcc-4df5-bed3-18ee0c599bee&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+Removing: /tmp/biobb/unitests_40
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_structure_utils/test/unitests/test_utils/test_extract_heteroatom.py::TestExtractHeteroAtoms::test_launch</td>
-          <td class="col-duration">1.29</td>
+          <td class="col-duration">1.22</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-05 16:01:14,819 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.extract_heteroatoms Version: 4.0.0
-2023-04-05 16:01:14,822 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/extract_heteroatom.pdb to /tmp/biobb/unitests_26/extract_heteroatoms/878f5aa9-8346-4e64-b339-1bcfac9218f6
-2023-04-05 16:01:16,074 [MainThread  ] [INFO ]  Writting pdb to: /tmp/biobb/unitests_26/extract_heteroatoms/878f5aa9-8346-4e64-b339-1bcfac9218f6/output_heteroatom_path.pdb
-2023-04-05 16:01:16,076 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_26/extract_heteroatoms/878f5aa9-8346-4e64-b339-1bcfac9218f6&#x27;]
-Checking if empty file: /tmp/biobb/unitests_26/extract_heteroatoms/output_heteroatom_path.pdb
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-13 12:41:47,327 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.extract_heteroatoms Version: 4.0.0
+2023-04-13 12:41:47,330 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/extract_heteroatom.pdb to /tmp/biobb/unitests_40/extract_heteroatoms/9c9cc616-9bc5-4bc4-8f56-e9af669de1f5
+2023-04-13 12:41:48,520 [MainThread  ] [INFO ]  Writting pdb to: /tmp/biobb/unitests_40/extract_heteroatoms/9c9cc616-9bc5-4bc4-8f56-e9af669de1f5/output_heteroatom_path.pdb
+2023-04-13 12:41:48,521 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_40/extract_heteroatoms/9c9cc616-9bc5-4bc4-8f56-e9af669de1f5&#x27;]
+Checking if empty file: /tmp/biobb/unitests_40/extract_heteroatoms/output_heteroatom_path.pdb
 Comparing: 
-        File_A: /tmp/biobb/unitests_26/extract_heteroatoms/output_heteroatom_path.pdb
+        File_A: /tmp/biobb/unitests_40/extract_heteroatoms/output_heteroatom_path.pdb
         File_B: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/reference/utils/ref_extract_heteroatom.pdb
         File_A hash: b&#x27;\x1e\x83\x13\xbd\xed\xd0\xcb0J\xed\x0eCp\xe8\xe2\x91\xf0w~x\xd5\x95\xfc^9\x83J\x00\x0f!^\x04&#x27;
         File_B hash: b&#x27;\x1e\x83\x13\xbd\xed\xd0\xcb0J\xed\x0eCp\xe8\xe2\x91\xf0w~x\xd5\x95\xfc^9\x83J\x00\x0f!^\x04&#x27;
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_26/extract_heteroatoms/extract_heteroatoms_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.extract_heteroatoms Version: 4.0.0
-INFO     /tmp/biobb/unitests_26/extract_heteroatoms/extract_heteroatoms_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/extract_heteroatom.pdb to /tmp/biobb/unitests_26/extract_heteroatoms/878f5aa9-8346-4e64-b339-1bcfac9218f6
-INFO     /tmp/biobb/unitests_26/extract_heteroatoms/extract_heteroatoms_log.out:file_utils.py:346 Writting pdb to: /tmp/biobb/unitests_26/extract_heteroatoms/878f5aa9-8346-4e64-b339-1bcfac9218f6/output_heteroatom_path.pdb
-INFO     /tmp/biobb/unitests_26/extract_heteroatoms/extract_heteroatoms_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_26/extract_heteroatoms/878f5aa9-8346-4e64-b339-1bcfac9218f6&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
-Removing: /tmp/biobb/unitests_26
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_40/extract_heteroatoms/extract_heteroatoms_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.extract_heteroatoms Version: 4.0.0
+INFO     /tmp/biobb/unitests_40/extract_heteroatoms/extract_heteroatoms_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/extract_heteroatom.pdb to /tmp/biobb/unitests_40/extract_heteroatoms/9c9cc616-9bc5-4bc4-8f56-e9af669de1f5
+INFO     /tmp/biobb/unitests_40/extract_heteroatoms/extract_heteroatoms_log.out:file_utils.py:346 Writting pdb to: /tmp/biobb/unitests_40/extract_heteroatoms/9c9cc616-9bc5-4bc4-8f56-e9af669de1f5/output_heteroatom_path.pdb
+INFO     /tmp/biobb/unitests_40/extract_heteroatoms/extract_heteroatoms_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_40/extract_heteroatoms/9c9cc616-9bc5-4bc4-8f56-e9af669de1f5&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+Removing: /tmp/biobb/unitests_40
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_structure_utils/test/unitests/test_utils/test_extract_model.py::TestExtractModel::test_launch</td>
-          <td class="col-duration">7.07</td>
+          <td class="col-duration">7.44</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-05 16:01:16,112 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.extract_model Version: 4.0.0
-2023-04-05 16:01:16,116 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/extract_model.pdb to /tmp/biobb/unitests_26/extract_model/c6895b98-274e-4145-8cd1-0921a355f911
-2023-04-05 16:01:16,116 [MainThread  ] [INFO ]  Creating 1b6d6c58-118a-4cc1-bcee-320174e231ed temporary folder
-2023-04-05 16:01:16,116 [MainThread  ] [INFO ]  check_structure -i /tmp/biobb/unitests_26/extract_model/c6895b98-274e-4145-8cd1-0921a355f911/extract_model.pdb -o 1b6d6c58-118a-4cc1-bcee-320174e231ed/model1.pdb --force_save models --select 1
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-13 12:41:48,558 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.extract_model Version: 4.0.0
+2023-04-13 12:41:48,561 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/extract_model.pdb to /tmp/biobb/unitests_40/extract_model/8511bb15-d9ac-461f-ae75-2b3f3cfea088
+2023-04-13 12:41:48,561 [MainThread  ] [INFO ]  Creating cc68268d-2dce-4369-8885-7115c00a1e5e temporary folder
+2023-04-13 12:41:48,561 [MainThread  ] [INFO ]  check_structure -i /tmp/biobb/unitests_40/extract_model/8511bb15-d9ac-461f-ae75-2b3f3cfea088/extract_model.pdb -o cc68268d-2dce-4369-8885-7115c00a1e5e/model1.pdb --force_save models --select 1
 
-2023-04-05 16:01:19,137 [MainThread  ] [INFO ]  Exit code 0
+2023-04-13 12:41:51,667 [MainThread  ] [INFO ]  Exit code 0
 
-2023-04-05 16:01:19,137 [MainThread  ] [INFO ]  ================================================================================
+2023-04-13 12:41:51,667 [MainThread  ] [INFO ]  ================================================================================
 =                   BioBB structure checking utility v3.12.1                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
 
 Warning: sequence features only available in mmCIF format or with external fasta input
-Structure /tmp/biobb/unitests_26/extract_model/c6895b98-274e-4145-8cd1-0921a355f911/extract_model.pdb loaded
+Structure /tmp/biobb/unitests_40/extract_model/8511bb15-d9ac-461f-ae75-2b3f3cfea088/extract_model.pdb loaded
  PDB id: 5ND2
  Title: microtubule-bound mklp2 motor domain in the presence of adp
  Experimental method: electron microscopy
@@ -540,19 +540,19 @@ ADP C601
 GTP A500
 GDP B600
 TA1 B601
-Structure saved on 1b6d6c58-118a-4cc1-bcee-320174e231ed/model1.pdb
+Structure saved on cc68268d-2dce-4369-8885-7115c00a1e5e/model1.pdb
 
-2023-04-05 16:01:19,137 [MainThread  ] [INFO ]  check_structure -i /tmp/biobb/unitests_26/extract_model/c6895b98-274e-4145-8cd1-0921a355f911/extract_model.pdb -o 1b6d6c58-118a-4cc1-bcee-320174e231ed/model4.pdb --force_save models --select 4
+2023-04-13 12:41:51,668 [MainThread  ] [INFO ]  check_structure -i /tmp/biobb/unitests_40/extract_model/8511bb15-d9ac-461f-ae75-2b3f3cfea088/extract_model.pdb -o cc68268d-2dce-4369-8885-7115c00a1e5e/model4.pdb --force_save models --select 4
 
-2023-04-05 16:01:22,156 [MainThread  ] [INFO ]  Exit code 0
+2023-04-13 12:41:54,863 [MainThread  ] [INFO ]  Exit code 0
 
-2023-04-05 16:01:22,157 [MainThread  ] [INFO ]  ================================================================================
+2023-04-13 12:41:54,863 [MainThread  ] [INFO ]  ================================================================================
 =                   BioBB structure checking utility v3.12.1                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
 
 Warning: sequence features only available in mmCIF format or with external fasta input
-Structure /tmp/biobb/unitests_26/extract_model/c6895b98-274e-4145-8cd1-0921a355f911/extract_model.pdb loaded
+Structure /tmp/biobb/unitests_40/extract_model/8511bb15-d9ac-461f-ae75-2b3f3cfea088/extract_model.pdb loaded
  PDB id: 5ND2
  Title: microtubule-bound mklp2 motor domain in the presence of adp
  Experimental method: electron microscopy
@@ -621,12 +621,12 @@ ADP C601
 GTP A500
 GDP B600
 TA1 B601
-Structure saved on 1b6d6c58-118a-4cc1-bcee-320174e231ed/model4.pdb
+Structure saved on cc68268d-2dce-4369-8885-7115c00a1e5e/model4.pdb
 
-2023-04-05 16:01:22,171 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_26/extract_model/c6895b98-274e-4145-8cd1-0921a355f911&#x27;, &#x27;1b6d6c58-118a-4cc1-bcee-320174e231ed&#x27;]
-Checking if empty file: /tmp/biobb/unitests_26/extract_model/output_structure_path.pdb
+2023-04-13 12:41:54,957 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_40/extract_model/8511bb15-d9ac-461f-ae75-2b3f3cfea088&#x27;, &#x27;cc68268d-2dce-4369-8885-7115c00a1e5e&#x27;]
+Checking if empty file: /tmp/biobb/unitests_40/extract_model/output_structure_path.pdb
 Checking RMSD between:
-     PDB_A: /tmp/biobb/unitests_26/extract_model/output_structure_path.pdb
+     PDB_A: /tmp/biobb/unitests_40/extract_model/output_structure_path.pdb
      PDB_B: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/reference/utils/ref_extract_model.pdb
      Ignoring HETAMT in RMSD
      Ignoring Hydrogen atoms in RMSD
@@ -634,20 +634,20 @@ Checking RMSD between:
      Atoms ALIGNED in PDB_B: 8822
      RMS: 1.7970882235503547e-14
      RMS_CUTOFF: 1
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_26/extract_model/extract_model_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.extract_model Version: 4.0.0
-INFO     /tmp/biobb/unitests_26/extract_model/extract_model_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/extract_model.pdb to /tmp/biobb/unitests_26/extract_model/c6895b98-274e-4145-8cd1-0921a355f911
-INFO     /tmp/biobb/unitests_26/extract_model/extract_model_log.out:file_utils.py:346 Creating 1b6d6c58-118a-4cc1-bcee-320174e231ed temporary folder
-INFO     /tmp/biobb/unitests_26/extract_model/extract_model_log.out:cmd_wrapper.py:32 check_structure -i /tmp/biobb/unitests_26/extract_model/c6895b98-274e-4145-8cd1-0921a355f911/extract_model.pdb -o 1b6d6c58-118a-4cc1-bcee-320174e231ed/model1.pdb --force_save models --select 1
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_40/extract_model/extract_model_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.extract_model Version: 4.0.0
+INFO     /tmp/biobb/unitests_40/extract_model/extract_model_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/extract_model.pdb to /tmp/biobb/unitests_40/extract_model/8511bb15-d9ac-461f-ae75-2b3f3cfea088
+INFO     /tmp/biobb/unitests_40/extract_model/extract_model_log.out:file_utils.py:346 Creating cc68268d-2dce-4369-8885-7115c00a1e5e temporary folder
+INFO     /tmp/biobb/unitests_40/extract_model/extract_model_log.out:cmd_wrapper.py:32 check_structure -i /tmp/biobb/unitests_40/extract_model/8511bb15-d9ac-461f-ae75-2b3f3cfea088/extract_model.pdb -o cc68268d-2dce-4369-8885-7115c00a1e5e/model1.pdb --force_save models --select 1
 
-INFO     /tmp/biobb/unitests_26/extract_model/extract_model_log.out:cmd_wrapper.py:49 Exit code 0
+INFO     /tmp/biobb/unitests_40/extract_model/extract_model_log.out:cmd_wrapper.py:49 Exit code 0
 
-INFO     /tmp/biobb/unitests_26/extract_model/extract_model_log.out:cmd_wrapper.py:51 ================================================================================
+INFO     /tmp/biobb/unitests_40/extract_model/extract_model_log.out:cmd_wrapper.py:51 ================================================================================
 =                   BioBB structure checking utility v3.12.1                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
 
 Warning: sequence features only available in mmCIF format or with external fasta input
-Structure /tmp/biobb/unitests_26/extract_model/c6895b98-274e-4145-8cd1-0921a355f911/extract_model.pdb loaded
+Structure /tmp/biobb/unitests_40/extract_model/8511bb15-d9ac-461f-ae75-2b3f3cfea088/extract_model.pdb loaded
  PDB id: 5ND2
  Title: microtubule-bound mklp2 motor domain in the presence of adp
  Experimental method: electron microscopy
@@ -716,19 +716,19 @@ ADP C601
 GTP A500
 GDP B600
 TA1 B601
-Structure saved on 1b6d6c58-118a-4cc1-bcee-320174e231ed/model1.pdb
+Structure saved on cc68268d-2dce-4369-8885-7115c00a1e5e/model1.pdb
 
-INFO     /tmp/biobb/unitests_26/extract_model/extract_model_log.out:cmd_wrapper.py:32 check_structure -i /tmp/biobb/unitests_26/extract_model/c6895b98-274e-4145-8cd1-0921a355f911/extract_model.pdb -o 1b6d6c58-118a-4cc1-bcee-320174e231ed/model4.pdb --force_save models --select 4
+INFO     /tmp/biobb/unitests_40/extract_model/extract_model_log.out:cmd_wrapper.py:32 check_structure -i /tmp/biobb/unitests_40/extract_model/8511bb15-d9ac-461f-ae75-2b3f3cfea088/extract_model.pdb -o cc68268d-2dce-4369-8885-7115c00a1e5e/model4.pdb --force_save models --select 4
 
-INFO     /tmp/biobb/unitests_26/extract_model/extract_model_log.out:cmd_wrapper.py:49 Exit code 0
+INFO     /tmp/biobb/unitests_40/extract_model/extract_model_log.out:cmd_wrapper.py:49 Exit code 0
 
-INFO     /tmp/biobb/unitests_26/extract_model/extract_model_log.out:cmd_wrapper.py:51 ================================================================================
+INFO     /tmp/biobb/unitests_40/extract_model/extract_model_log.out:cmd_wrapper.py:51 ================================================================================
 =                   BioBB structure checking utility v3.12.1                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
 
 Warning: sequence features only available in mmCIF format or with external fasta input
-Structure /tmp/biobb/unitests_26/extract_model/c6895b98-274e-4145-8cd1-0921a355f911/extract_model.pdb loaded
+Structure /tmp/biobb/unitests_40/extract_model/8511bb15-d9ac-461f-ae75-2b3f3cfea088/extract_model.pdb loaded
  PDB id: 5ND2
  Title: microtubule-bound mklp2 motor domain in the presence of adp
  Experimental method: electron microscopy
@@ -797,27 +797,27 @@ ADP C601
 GTP A500
 GDP B600
 TA1 B601
-Structure saved on 1b6d6c58-118a-4cc1-bcee-320174e231ed/model4.pdb
+Structure saved on cc68268d-2dce-4369-8885-7115c00a1e5e/model4.pdb
 
-INFO     /tmp/biobb/unitests_26/extract_model/extract_model_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_26/extract_model/c6895b98-274e-4145-8cd1-0921a355f911&#x27;, &#x27;1b6d6c58-118a-4cc1-bcee-320174e231ed&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
-Removing: /tmp/biobb/unitests_26
+INFO     /tmp/biobb/unitests_40/extract_model/extract_model_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_40/extract_model/8511bb15-d9ac-461f-ae75-2b3f3cfea088&#x27;, &#x27;cc68268d-2dce-4369-8885-7115c00a1e5e&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+Removing: /tmp/biobb/unitests_40
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_structure_utils/test/unitests/test_utils/test_extract_molecule.py::TestExtractMolecule::test_launch</td>
-          <td class="col-duration">0.79</td>
+          <td class="col-duration">0.85</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-05 16:01:23,192 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.extract_molecule Version: 4.0.0
-2023-04-05 16:01:23,193 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/extract_molecule.pdb to /tmp/biobb/unitests_26/extract_molecule/10ee134f-70d0-4d90-81f0-b588f186dafd
-2023-04-05 16:01:23,193 [MainThread  ] [INFO ]  Creating 2466a5a2-e201-44b0-9890-5432ec7773e1 temporary folder
-2023-04-05 16:01:23,193 [MainThread  ] [INFO ]  check_structure -i /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/extract_molecule.pdb -o /tmp/biobb/unitests_26/extract_molecule/output_molecule_path.pdb --force_save --non_interactive command_list --list 2466a5a2-e201-44b0-9890-5432ec7773e1/extract_prot.lst
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-13 12:41:56,004 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.extract_molecule Version: 4.0.0
+2023-04-13 12:41:56,005 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/extract_molecule.pdb to /tmp/biobb/unitests_40/extract_molecule/96bbc3a1-2efe-4355-8855-338a45c89a5c
+2023-04-13 12:41:56,005 [MainThread  ] [INFO ]  Creating fd93efe1-0093-46ad-a43f-509125781c1f temporary folder
+2023-04-13 12:41:56,005 [MainThread  ] [INFO ]  check_structure -i /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/extract_molecule.pdb -o /tmp/biobb/unitests_40/extract_molecule/output_molecule_path.pdb --force_save --non_interactive command_list --list fd93efe1-0093-46ad-a43f-509125781c1f/extract_prot.lst
 
-2023-04-05 16:01:23,761 [MainThread  ] [INFO ]  Exit code 0
+2023-04-13 12:41:56,619 [MainThread  ] [INFO ]  Exit code 0
 
-2023-04-05 16:01:23,761 [MainThread  ] [INFO ]  ================================================================================
+2023-04-13 12:41:56,619 [MainThread  ] [INFO ]  ================================================================================
 =                   BioBB structure checking utility v3.12.1                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
@@ -869,12 +869,12 @@ Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
 Final Num. atoms:  2058
-Structure saved on /tmp/biobb/unitests_26/extract_molecule/output_molecule_path.pdb
+Structure saved on /tmp/biobb/unitests_40/extract_molecule/output_molecule_path.pdb
 
-2023-04-05 16:01:23,762 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_26/extract_molecule/10ee134f-70d0-4d90-81f0-b588f186dafd&#x27;, &#x27;2466a5a2-e201-44b0-9890-5432ec7773e1&#x27;]
-Checking if empty file: /tmp/biobb/unitests_26/extract_molecule/output_molecule_path.pdb
+2023-04-13 12:41:56,620 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_40/extract_molecule/96bbc3a1-2efe-4355-8855-338a45c89a5c&#x27;, &#x27;fd93efe1-0093-46ad-a43f-509125781c1f&#x27;]
+Checking if empty file: /tmp/biobb/unitests_40/extract_molecule/output_molecule_path.pdb
 Checking RMSD between:
-     PDB_A: /tmp/biobb/unitests_26/extract_molecule/output_molecule_path.pdb
+     PDB_A: /tmp/biobb/unitests_40/extract_molecule/output_molecule_path.pdb
      PDB_B: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/reference/utils/ref_extract_molecule.pdb
      Ignoring HETAMT in RMSD
      Ignoring Hydrogen atoms in RMSD
@@ -882,14 +882,14 @@ Checking RMSD between:
      Atoms ALIGNED in PDB_B: 2058
      RMS: 9.899882112728267e-15
      RMS_CUTOFF: 1
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_26/extract_molecule/extract_molecule_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.extract_molecule Version: 4.0.0
-INFO     /tmp/biobb/unitests_26/extract_molecule/extract_molecule_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/extract_molecule.pdb to /tmp/biobb/unitests_26/extract_molecule/10ee134f-70d0-4d90-81f0-b588f186dafd
-INFO     /tmp/biobb/unitests_26/extract_molecule/extract_molecule_log.out:file_utils.py:346 Creating 2466a5a2-e201-44b0-9890-5432ec7773e1 temporary folder
-INFO     /tmp/biobb/unitests_26/extract_molecule/extract_molecule_log.out:cmd_wrapper.py:32 check_structure -i /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/extract_molecule.pdb -o /tmp/biobb/unitests_26/extract_molecule/output_molecule_path.pdb --force_save --non_interactive command_list --list 2466a5a2-e201-44b0-9890-5432ec7773e1/extract_prot.lst
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_40/extract_molecule/extract_molecule_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.extract_molecule Version: 4.0.0
+INFO     /tmp/biobb/unitests_40/extract_molecule/extract_molecule_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/extract_molecule.pdb to /tmp/biobb/unitests_40/extract_molecule/96bbc3a1-2efe-4355-8855-338a45c89a5c
+INFO     /tmp/biobb/unitests_40/extract_molecule/extract_molecule_log.out:file_utils.py:346 Creating fd93efe1-0093-46ad-a43f-509125781c1f temporary folder
+INFO     /tmp/biobb/unitests_40/extract_molecule/extract_molecule_log.out:cmd_wrapper.py:32 check_structure -i /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/extract_molecule.pdb -o /tmp/biobb/unitests_40/extract_molecule/output_molecule_path.pdb --force_save --non_interactive command_list --list fd93efe1-0093-46ad-a43f-509125781c1f/extract_prot.lst
 
-INFO     /tmp/biobb/unitests_26/extract_molecule/extract_molecule_log.out:cmd_wrapper.py:49 Exit code 0
+INFO     /tmp/biobb/unitests_40/extract_molecule/extract_molecule_log.out:cmd_wrapper.py:49 Exit code 0
 
-INFO     /tmp/biobb/unitests_26/extract_molecule/extract_molecule_log.out:cmd_wrapper.py:51 ================================================================================
+INFO     /tmp/biobb/unitests_40/extract_molecule/extract_molecule_log.out:cmd_wrapper.py:51 ================================================================================
 =                   BioBB structure checking utility v3.12.1                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
@@ -941,72 +941,72 @@ Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
 Final Num. atoms:  2058
-Structure saved on /tmp/biobb/unitests_26/extract_molecule/output_molecule_path.pdb
+Structure saved on /tmp/biobb/unitests_40/extract_molecule/output_molecule_path.pdb
 
-INFO     /tmp/biobb/unitests_26/extract_molecule/extract_molecule_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_26/extract_molecule/10ee134f-70d0-4d90-81f0-b588f186dafd&#x27;, &#x27;2466a5a2-e201-44b0-9890-5432ec7773e1&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
-Removing: /tmp/biobb/unitests_26
+INFO     /tmp/biobb/unitests_40/extract_molecule/extract_molecule_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_40/extract_molecule/96bbc3a1-2efe-4355-8855-338a45c89a5c&#x27;, &#x27;fd93efe1-0093-46ad-a43f-509125781c1f&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+Removing: /tmp/biobb/unitests_40
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_structure_utils/test/unitests/test_utils/test_extract_residues.py::TestExtractResidues::test_launch</td>
-          <td class="col-duration">0.56</td>
+          <td class="col-duration">0.58</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-05 16:01:23,987 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.extract_residues Version: 4.0.0
-2023-04-05 16:01:23,988 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_26/extract_residues/8e7f3fa5-b188-47c3-9131-89aa24110faf
-2023-04-05 16:01:24,520 [MainThread  ] [INFO ]  Writting pdb to: /tmp/biobb/unitests_26/extract_residues/8e7f3fa5-b188-47c3-9131-89aa24110faf/output_residues_path.pdb
-2023-04-05 16:01:24,521 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_26/extract_residues/8e7f3fa5-b188-47c3-9131-89aa24110faf&#x27;]
-Checking if empty file: /tmp/biobb/unitests_26/extract_residues/output_residues_path.pdb
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-13 12:41:56,860 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.extract_residues Version: 4.0.0
+2023-04-13 12:41:56,862 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_40/extract_residues/ad1c2a67-7c12-413b-a3ba-d52eb0e62188
+2023-04-13 12:41:57,408 [MainThread  ] [INFO ]  Writting pdb to: /tmp/biobb/unitests_40/extract_residues/ad1c2a67-7c12-413b-a3ba-d52eb0e62188/output_residues_path.pdb
+2023-04-13 12:41:57,409 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_40/extract_residues/ad1c2a67-7c12-413b-a3ba-d52eb0e62188&#x27;]
+Checking if empty file: /tmp/biobb/unitests_40/extract_residues/output_residues_path.pdb
 Comparing: 
-        File_A: /tmp/biobb/unitests_26/extract_residues/output_residues_path.pdb
+        File_A: /tmp/biobb/unitests_40/extract_residues/output_residues_path.pdb
         File_B: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/reference/utils/ref_extract_residues.pdb
         File_A hash: b&#x27;\xf0\x84\xb8D\x90whe\xc3T\xe2\xf3\\\xd72\xfaT\x9d\x19\x88\xab\x03\xbe\xf6\x9a\x81\xec\x15tx`D&#x27;
         File_B hash: b&#x27;\xf0\x84\xb8D\x90whe\xc3T\xe2\xf3\\\xd72\xfaT\x9d\x19\x88\xab\x03\xbe\xf6\x9a\x81\xec\x15tx`D&#x27;
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_26/extract_residues/extract_residues_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.extract_residues Version: 4.0.0
-INFO     /tmp/biobb/unitests_26/extract_residues/extract_residues_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_26/extract_residues/8e7f3fa5-b188-47c3-9131-89aa24110faf
-INFO     /tmp/biobb/unitests_26/extract_residues/extract_residues_log.out:file_utils.py:346 Writting pdb to: /tmp/biobb/unitests_26/extract_residues/8e7f3fa5-b188-47c3-9131-89aa24110faf/output_residues_path.pdb
-INFO     /tmp/biobb/unitests_26/extract_residues/extract_residues_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_26/extract_residues/8e7f3fa5-b188-47c3-9131-89aa24110faf&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
-Removing: /tmp/biobb/unitests_26
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_40/extract_residues/extract_residues_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.extract_residues Version: 4.0.0
+INFO     /tmp/biobb/unitests_40/extract_residues/extract_residues_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_40/extract_residues/ad1c2a67-7c12-413b-a3ba-d52eb0e62188
+INFO     /tmp/biobb/unitests_40/extract_residues/extract_residues_log.out:file_utils.py:346 Writting pdb to: /tmp/biobb/unitests_40/extract_residues/ad1c2a67-7c12-413b-a3ba-d52eb0e62188/output_residues_path.pdb
+INFO     /tmp/biobb/unitests_40/extract_residues/extract_residues_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_40/extract_residues/ad1c2a67-7c12-413b-a3ba-d52eb0e62188&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+Removing: /tmp/biobb/unitests_40
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_structure_utils/test/unitests/test_utils/test_remove_ligand_gro.py::TestRemoveLigandGro::test_launch</td>
-          <td class="col-duration">0.47</td>
+          <td class="col-duration">0.48</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-05 16:01:24,557 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.remove_ligand Version: 4.0.0
-2023-04-05 16:01:24,560 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/WT_aq4_md_1.gro to /tmp/biobb/unitests_26/remove_ligand_gro/be04a24b-ca1d-4c43-a447-09e5ff4f95c9
-2023-04-05 16:01:24,560 [MainThread  ] [INFO ]  GRO format detected, removing all atoms from residues named AQ4
-2023-04-05 16:01:24,954 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_26/remove_ligand_gro/be04a24b-ca1d-4c43-a447-09e5ff4f95c9&#x27;]
-Checking if empty file: /tmp/biobb/unitests_26/remove_ligand_gro/output_structure_path.gro
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-13 12:41:57,449 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.remove_ligand Version: 4.0.0
+2023-04-13 12:41:57,452 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/WT_aq4_md_1.gro to /tmp/biobb/unitests_40/remove_ligand_gro/144b008a-519e-41ce-ae65-6589a064fef6
+2023-04-13 12:41:57,452 [MainThread  ] [INFO ]  GRO format detected, removing all atoms from residues named AQ4
+2023-04-13 12:41:57,855 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_40/remove_ligand_gro/144b008a-519e-41ce-ae65-6589a064fef6&#x27;]
+Checking if empty file: /tmp/biobb/unitests_40/remove_ligand_gro/output_structure_path.gro
 Comparing ignoring first line of both files:
-     FILE_A: /tmp/biobb/unitests_26/remove_ligand_gro/output_structure_path.gro
+     FILE_A: /tmp/biobb/unitests_40/remove_ligand_gro/output_structure_path.gro
      FILE_B: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/reference/utils/WT_apo_md_1.gro
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_26/remove_ligand_gro/remove_ligand_gro_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.remove_ligand Version: 4.0.0
-INFO     /tmp/biobb/unitests_26/remove_ligand_gro/remove_ligand_gro_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/WT_aq4_md_1.gro to /tmp/biobb/unitests_26/remove_ligand_gro/be04a24b-ca1d-4c43-a447-09e5ff4f95c9
-INFO     /tmp/biobb/unitests_26/remove_ligand_gro/remove_ligand_gro_log.out:file_utils.py:346 GRO format detected, removing all atoms from residues named AQ4
-INFO     /tmp/biobb/unitests_26/remove_ligand_gro/remove_ligand_gro_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_26/remove_ligand_gro/be04a24b-ca1d-4c43-a447-09e5ff4f95c9&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
-Removing: /tmp/biobb/unitests_26
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_40/remove_ligand_gro/remove_ligand_gro_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.remove_ligand Version: 4.0.0
+INFO     /tmp/biobb/unitests_40/remove_ligand_gro/remove_ligand_gro_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/WT_aq4_md_1.gro to /tmp/biobb/unitests_40/remove_ligand_gro/144b008a-519e-41ce-ae65-6589a064fef6
+INFO     /tmp/biobb/unitests_40/remove_ligand_gro/remove_ligand_gro_log.out:file_utils.py:346 GRO format detected, removing all atoms from residues named AQ4
+INFO     /tmp/biobb/unitests_40/remove_ligand_gro/remove_ligand_gro_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_40/remove_ligand_gro/144b008a-519e-41ce-ae65-6589a064fef6&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+Removing: /tmp/biobb/unitests_40
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_structure_utils/test/unitests/test_utils/test_remove_ligand_pdb.py::TestRemoveLigandPDB::test_launch</td>
-          <td class="col-duration">3.05</td>
+          <td class="col-duration">3.13</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-05 16:01:25,029 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.remove_ligand Version: 4.0.0
-2023-04-05 16:01:25,032 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/WT_aq4_md_1.pdb to /tmp/biobb/unitests_26/remove_ligand/36f6d307-de4f-492c-867c-6cc4e3ac6366
-2023-04-05 16:01:25,033 [MainThread  ] [INFO ]  PDB format detected, removing all atoms from residues named AQ4
-2023-04-05 16:01:25,078 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_26/remove_ligand/36f6d307-de4f-492c-867c-6cc4e3ac6366&#x27;]
-Checking if empty file: /tmp/biobb/unitests_26/remove_ligand/output_structure_path.pdb
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-13 12:41:57,938 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.remove_ligand Version: 4.0.0
+2023-04-13 12:41:57,941 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/WT_aq4_md_1.pdb to /tmp/biobb/unitests_40/remove_ligand/0d92f518-f29d-4aea-9b03-3238964e145e
+2023-04-13 12:41:57,941 [MainThread  ] [INFO ]  PDB format detected, removing all atoms from residues named AQ4
+2023-04-13 12:41:57,988 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_40/remove_ligand/0d92f518-f29d-4aea-9b03-3238964e145e&#x27;]
+Checking if empty file: /tmp/biobb/unitests_40/remove_ligand/output_structure_path.pdb
 Checking RMSD between:
-     PDB_A: /tmp/biobb/unitests_26/remove_ligand/output_structure_path.pdb
+     PDB_A: /tmp/biobb/unitests_40/remove_ligand/output_structure_path.pdb
      PDB_B: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/reference/utils/WT_apo_md_1.pdb
      Ignoring HETAMT in RMSD
      Ignoring Hydrogen atoms in RMSD
@@ -1014,57 +1014,57 @@ Checking RMSD between:
      Atoms ALIGNED in PDB_B: 12872
      RMS: 1.7999409219510857e-14
      RMS_CUTOFF: 1
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_26/remove_ligand/remove_ligand_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.remove_ligand Version: 4.0.0
-INFO     /tmp/biobb/unitests_26/remove_ligand/remove_ligand_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/WT_aq4_md_1.pdb to /tmp/biobb/unitests_26/remove_ligand/36f6d307-de4f-492c-867c-6cc4e3ac6366
-INFO     /tmp/biobb/unitests_26/remove_ligand/remove_ligand_log.out:file_utils.py:346 PDB format detected, removing all atoms from residues named AQ4
-INFO     /tmp/biobb/unitests_26/remove_ligand/remove_ligand_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_26/remove_ligand/36f6d307-de4f-492c-867c-6cc4e3ac6366&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
-Removing: /tmp/biobb/unitests_26
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_40/remove_ligand/remove_ligand_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.remove_ligand Version: 4.0.0
+INFO     /tmp/biobb/unitests_40/remove_ligand/remove_ligand_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/WT_aq4_md_1.pdb to /tmp/biobb/unitests_40/remove_ligand/0d92f518-f29d-4aea-9b03-3238964e145e
+INFO     /tmp/biobb/unitests_40/remove_ligand/remove_ligand_log.out:file_utils.py:346 PDB format detected, removing all atoms from residues named AQ4
+INFO     /tmp/biobb/unitests_40/remove_ligand/remove_ligand_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_40/remove_ligand/0d92f518-f29d-4aea-9b03-3238964e145e&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+Removing: /tmp/biobb/unitests_40
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_structure_utils/test/unitests/test_utils/test_remove_molecules.py::TestRemoveMolecules::test_launch</td>
-          <td class="col-duration">5.99</td>
+          <td class="col-duration">6.34</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-05 16:01:28,083 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.remove_molecules Version: 4.0.0
-2023-04-05 16:01:28,084 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_26/remove_molecules/f7c6e517-b91b-438f-9751-2f349b8009a6
-2023-04-05 16:01:34,032 [MainThread  ] [INFO ]  Writting pdb to: /tmp/biobb/unitests_26/remove_molecules/f7c6e517-b91b-438f-9751-2f349b8009a6/output_molecules_path.pdb
-2023-04-05 16:01:34,039 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_26/remove_molecules/f7c6e517-b91b-438f-9751-2f349b8009a6&#x27;]
-Checking if empty file: /tmp/biobb/unitests_26/remove_molecules/output_molecules_path.pdb
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-13 12:42:01,077 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.remove_molecules Version: 4.0.0
+2023-04-13 12:42:01,078 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_40/remove_molecules/931bc2d4-5475-4384-a796-a68c69c3b106
+2023-04-13 12:42:07,376 [MainThread  ] [INFO ]  Writting pdb to: /tmp/biobb/unitests_40/remove_molecules/931bc2d4-5475-4384-a796-a68c69c3b106/output_molecules_path.pdb
+2023-04-13 12:42:07,385 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_40/remove_molecules/931bc2d4-5475-4384-a796-a68c69c3b106&#x27;]
+Checking if empty file: /tmp/biobb/unitests_40/remove_molecules/output_molecules_path.pdb
 Comparing: 
-        File_A: /tmp/biobb/unitests_26/remove_molecules/output_molecules_path.pdb
+        File_A: /tmp/biobb/unitests_40/remove_molecules/output_molecules_path.pdb
         File_B: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/reference/utils/ref_remove_molecules.pdb
         File_A hash: b&#x27;q$\x11\xa5u\xca5\xc0\x90\xd8\x1bB&amp;{\xfcNm\x85\xb5(\x8f\x13\xf0\xef,\xe6\x8c\x0ftV}\x1d&#x27;
         File_B hash: b&#x27;q$\x11\xa5u\xca5\xc0\x90\xd8\x1bB&amp;{\xfcNm\x85\xb5(\x8f\x13\xf0\xef,\xe6\x8c\x0ftV}\x1d&#x27;
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_26/remove_molecules/remove_molecules_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.remove_molecules Version: 4.0.0
-INFO     /tmp/biobb/unitests_26/remove_molecules/remove_molecules_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_26/remove_molecules/f7c6e517-b91b-438f-9751-2f349b8009a6
-INFO     /tmp/biobb/unitests_26/remove_molecules/remove_molecules_log.out:file_utils.py:346 Writting pdb to: /tmp/biobb/unitests_26/remove_molecules/f7c6e517-b91b-438f-9751-2f349b8009a6/output_molecules_path.pdb
-INFO     /tmp/biobb/unitests_26/remove_molecules/remove_molecules_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_26/remove_molecules/f7c6e517-b91b-438f-9751-2f349b8009a6&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
-Removing: /tmp/biobb/unitests_26
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_40/remove_molecules/remove_molecules_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.remove_molecules Version: 4.0.0
+INFO     /tmp/biobb/unitests_40/remove_molecules/remove_molecules_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_40/remove_molecules/931bc2d4-5475-4384-a796-a68c69c3b106
+INFO     /tmp/biobb/unitests_40/remove_molecules/remove_molecules_log.out:file_utils.py:346 Writting pdb to: /tmp/biobb/unitests_40/remove_molecules/931bc2d4-5475-4384-a796-a68c69c3b106/output_molecules_path.pdb
+INFO     /tmp/biobb/unitests_40/remove_molecules/remove_molecules_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_40/remove_molecules/931bc2d4-5475-4384-a796-a68c69c3b106&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+Removing: /tmp/biobb/unitests_40
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_structure_utils/test/unitests/test_utils/test_remove_pdb_water.py::TestRemovePDBWater::test_launch</td>
-          <td class="col-duration">0.90</td>
+          <td class="col-duration">0.87</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-05 16:01:34,082 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.remove_pdb_water Version: 4.0.0
-2023-04-05 16:01:34,082 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/WT_aq4_md_WAT.pdb to /tmp/biobb/unitests_26/remove_pdb_water/5fda71d4-d782-49ac-8e89-54f2d22e53e7
-2023-04-05 16:01:34,083 [MainThread  ] [INFO ]  check_structure -i /tmp/biobb/unitests_26/remove_pdb_water/5fda71d4-d782-49ac-8e89-54f2d22e53e7/WT_aq4_md_WAT.pdb -o /tmp/biobb/unitests_26/remove_pdb_water/5fda71d4-d782-49ac-8e89-54f2d22e53e7/output_pdb_path.pdb --force_save water --remove yes
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-13 12:42:07,428 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.remove_pdb_water Version: 4.0.0
+2023-04-13 12:42:07,428 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/WT_aq4_md_WAT.pdb to /tmp/biobb/unitests_40/remove_pdb_water/7ba5b3b3-ee55-4174-a9f7-dbad526165fd
+2023-04-13 12:42:07,428 [MainThread  ] [INFO ]  check_structure -i /tmp/biobb/unitests_40/remove_pdb_water/7ba5b3b3-ee55-4174-a9f7-dbad526165fd/WT_aq4_md_WAT.pdb -o /tmp/biobb/unitests_40/remove_pdb_water/7ba5b3b3-ee55-4174-a9f7-dbad526165fd/output_pdb_path.pdb --force_save water --remove yes
 
-2023-04-05 16:01:34,682 [MainThread  ] [INFO ]  Exit code 0
+2023-04-13 12:42:08,004 [MainThread  ] [INFO ]  Exit code 0
 
-2023-04-05 16:01:34,683 [MainThread  ] [INFO ]  ================================================================================
+2023-04-13 12:42:08,004 [MainThread  ] [INFO ]  ================================================================================
 =                   BioBB structure checking utility v3.12.1                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
 
 Warning: sequence features only available in mmCIF format or with external fasta input
-Structure /tmp/biobb/unitests_26/remove_pdb_water/5fda71d4-d782-49ac-8e89-54f2d22e53e7/WT_aq4_md_WAT.pdb loaded
+Structure /tmp/biobb/unitests_40/remove_pdb_water/7ba5b3b3-ee55-4174-a9f7-dbad526165fd/WT_aq4_md_WAT.pdb loaded
  PDB id: 
  Title: protein in water
  Experimental method: unknown
@@ -1091,12 +1091,12 @@ Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
 Final Num. atoms:  4853
-Structure saved on /tmp/biobb/unitests_26/remove_pdb_water/5fda71d4-d782-49ac-8e89-54f2d22e53e7/output_pdb_path.pdb
+Structure saved on /tmp/biobb/unitests_40/remove_pdb_water/7ba5b3b3-ee55-4174-a9f7-dbad526165fd/output_pdb_path.pdb
 
-2023-04-05 16:01:34,684 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_26/remove_pdb_water/5fda71d4-d782-49ac-8e89-54f2d22e53e7&#x27;]
-Checking if empty file: /tmp/biobb/unitests_26/remove_pdb_water/output_pdb_path.pdb
+2023-04-13 12:42:08,005 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_40/remove_pdb_water/7ba5b3b3-ee55-4174-a9f7-dbad526165fd&#x27;]
+Checking if empty file: /tmp/biobb/unitests_40/remove_pdb_water/output_pdb_path.pdb
 Checking RMSD between:
-     PDB_A: /tmp/biobb/unitests_26/remove_pdb_water/output_pdb_path.pdb
+     PDB_A: /tmp/biobb/unitests_40/remove_pdb_water/output_pdb_path.pdb
      PDB_B: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/reference/utils/WT_apo_no_wat.pdb
      Ignoring HETAMT in RMSD
      Ignoring Hydrogen atoms in RMSD
@@ -1104,19 +1104,19 @@ Checking RMSD between:
      Atoms ALIGNED in PDB_B: 3004
      RMS: 1.7263005796115736e-14
      RMS_CUTOFF: 1
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_26/remove_pdb_water/remove_pdb_water_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.remove_pdb_water Version: 4.0.0
-INFO     /tmp/biobb/unitests_26/remove_pdb_water/remove_pdb_water_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/WT_aq4_md_WAT.pdb to /tmp/biobb/unitests_26/remove_pdb_water/5fda71d4-d782-49ac-8e89-54f2d22e53e7
-INFO     /tmp/biobb/unitests_26/remove_pdb_water/remove_pdb_water_log.out:cmd_wrapper.py:32 check_structure -i /tmp/biobb/unitests_26/remove_pdb_water/5fda71d4-d782-49ac-8e89-54f2d22e53e7/WT_aq4_md_WAT.pdb -o /tmp/biobb/unitests_26/remove_pdb_water/5fda71d4-d782-49ac-8e89-54f2d22e53e7/output_pdb_path.pdb --force_save water --remove yes
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_40/remove_pdb_water/remove_pdb_water_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.remove_pdb_water Version: 4.0.0
+INFO     /tmp/biobb/unitests_40/remove_pdb_water/remove_pdb_water_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/WT_aq4_md_WAT.pdb to /tmp/biobb/unitests_40/remove_pdb_water/7ba5b3b3-ee55-4174-a9f7-dbad526165fd
+INFO     /tmp/biobb/unitests_40/remove_pdb_water/remove_pdb_water_log.out:cmd_wrapper.py:32 check_structure -i /tmp/biobb/unitests_40/remove_pdb_water/7ba5b3b3-ee55-4174-a9f7-dbad526165fd/WT_aq4_md_WAT.pdb -o /tmp/biobb/unitests_40/remove_pdb_water/7ba5b3b3-ee55-4174-a9f7-dbad526165fd/output_pdb_path.pdb --force_save water --remove yes
 
-INFO     /tmp/biobb/unitests_26/remove_pdb_water/remove_pdb_water_log.out:cmd_wrapper.py:49 Exit code 0
+INFO     /tmp/biobb/unitests_40/remove_pdb_water/remove_pdb_water_log.out:cmd_wrapper.py:49 Exit code 0
 
-INFO     /tmp/biobb/unitests_26/remove_pdb_water/remove_pdb_water_log.out:cmd_wrapper.py:51 ================================================================================
+INFO     /tmp/biobb/unitests_40/remove_pdb_water/remove_pdb_water_log.out:cmd_wrapper.py:51 ================================================================================
 =                   BioBB structure checking utility v3.12.1                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
 
 Warning: sequence features only available in mmCIF format or with external fasta input
-Structure /tmp/biobb/unitests_26/remove_pdb_water/5fda71d4-d782-49ac-8e89-54f2d22e53e7/WT_aq4_md_WAT.pdb loaded
+Structure /tmp/biobb/unitests_40/remove_pdb_water/7ba5b3b3-ee55-4174-a9f7-dbad526165fd/WT_aq4_md_WAT.pdb loaded
  PDB id: 
  Title: protein in water
  Experimental method: unknown
@@ -1143,24 +1143,24 @@ Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
 Final Num. atoms:  4853
-Structure saved on /tmp/biobb/unitests_26/remove_pdb_water/5fda71d4-d782-49ac-8e89-54f2d22e53e7/output_pdb_path.pdb
+Structure saved on /tmp/biobb/unitests_40/remove_pdb_water/7ba5b3b3-ee55-4174-a9f7-dbad526165fd/output_pdb_path.pdb
 
-INFO     /tmp/biobb/unitests_26/remove_pdb_water/remove_pdb_water_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_26/remove_pdb_water/5fda71d4-d782-49ac-8e89-54f2d22e53e7&#x27;]<br/></div></td></tr></tbody>
+INFO     /tmp/biobb/unitests_40/remove_pdb_water/remove_pdb_water_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_40/remove_pdb_water/7ba5b3b3-ee55-4174-a9f7-dbad526165fd&#x27;]<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_structure_utils/test/unitests/test_utils/test_renumber_structure_2vgb.py::TestRenumberStructure2VGB::test_launch</td>
-          <td class="col-duration">1.01</td>
+          <td class="col-duration">0.98</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-05 16:01:34,991 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.renumber_structure Version: 4.0.0
-2023-04-05 16:01:34,992 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_27/renumber_structure_2vgb/97b44300-c90e-429e-9cb6-79db8beb9c4f
-2023-04-05 16:01:34,992 [MainThread  ] [INFO ]  PDB format detected, reenumerating atoms
-2023-04-05 16:01:35,065 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_27/renumber_structure_2vgb/97b44300-c90e-429e-9cb6-79db8beb9c4f&#x27;]
-Checking if empty file: /tmp/biobb/unitests_27/renumber_structure_2vgb/output_structure_path.pdb
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-13 12:42:08,305 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.renumber_structure Version: 4.0.0
+2023-04-13 12:42:08,306 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_41/renumber_structure_2vgb/aa7fd81f-2a67-41e9-9a3e-610bf55153d4
+2023-04-13 12:42:08,306 [MainThread  ] [INFO ]  PDB format detected, reenumerating atoms
+2023-04-13 12:42:08,379 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_41/renumber_structure_2vgb/aa7fd81f-2a67-41e9-9a3e-610bf55153d4&#x27;]
+Checking if empty file: /tmp/biobb/unitests_41/renumber_structure_2vgb/output_structure_path.pdb
 Checking RMSD between:
-     PDB_A: /tmp/biobb/unitests_27/renumber_structure_2vgb/output_structure_path.pdb
+     PDB_A: /tmp/biobb/unitests_41/renumber_structure_2vgb/output_structure_path.pdb
      PDB_B: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/reference/utils/ref_2vgb.pdb
      Ignoring HETAMT in RMSD
      Ignoring Hydrogen atoms in RMSD
@@ -1168,17 +1168,17 @@ Checking RMSD between:
      Atoms ALIGNED in PDB_B: 15488
      RMS: 1.162261645320129e-14
      RMS_CUTOFF: 1
-Checking if empty file: /tmp/biobb/unitests_27/renumber_structure_2vgb/output_mapping_json_path.json
+Checking if empty file: /tmp/biobb/unitests_41/renumber_structure_2vgb/output_mapping_json_path.json
 Comparing: 
-        File_A: /tmp/biobb/unitests_27/renumber_structure_2vgb/output_mapping_json_path.json
+        File_A: /tmp/biobb/unitests_41/renumber_structure_2vgb/output_mapping_json_path.json
         File_B: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/reference/utils/2vgb_output_mapping_json_path.json
         File_A hash: b&#x27;F\xbe!`V\xdb.\x99\xfb\xda\x94\xb1\xa8\xdf6\xbcJ\\\\\xc7k\xb6\xe9\xc1I\nm\xc1\xe4:v\x15&#x27;
         File_B hash: b&#x27;F\xbe!`V\xdb.\x99\xfb\xda\x94\xb1\xa8\xdf6\xbcJ\\\\\xc7k\xb6\xe9\xc1I\nm\xc1\xe4:v\x15&#x27;
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_27/renumber_structure_2vgb/renumber_structure_2vgb_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.renumber_structure Version: 4.0.0
-INFO     /tmp/biobb/unitests_27/renumber_structure_2vgb/renumber_structure_2vgb_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_27/renumber_structure_2vgb/97b44300-c90e-429e-9cb6-79db8beb9c4f
-INFO     /tmp/biobb/unitests_27/renumber_structure_2vgb/renumber_structure_2vgb_log.out:file_utils.py:346 PDB format detected, reenumerating atoms
-INFO     /tmp/biobb/unitests_27/renumber_structure_2vgb/renumber_structure_2vgb_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_27/renumber_structure_2vgb/97b44300-c90e-429e-9cb6-79db8beb9c4f&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
-Removing: /tmp/biobb/unitests_27
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_41/renumber_structure_2vgb/renumber_structure_2vgb_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.renumber_structure Version: 4.0.0
+INFO     /tmp/biobb/unitests_41/renumber_structure_2vgb/renumber_structure_2vgb_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_41/renumber_structure_2vgb/aa7fd81f-2a67-41e9-9a3e-610bf55153d4
+INFO     /tmp/biobb/unitests_41/renumber_structure_2vgb/renumber_structure_2vgb_log.out:file_utils.py:346 PDB format detected, reenumerating atoms
+INFO     /tmp/biobb/unitests_41/renumber_structure_2vgb/renumber_structure_2vgb_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_41/renumber_structure_2vgb/aa7fd81f-2a67-41e9-9a3e-610bf55153d4&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+Removing: /tmp/biobb/unitests_41
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -1188,25 +1188,25 @@ Removing: /tmp/biobb/unitests_27
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-05 16:01:36,008 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.renumber_structure Version: 4.0.0
-2023-04-05 16:01:36,009 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/pyruvate.gro to /tmp/biobb/unitests_27/renumber_structure_gro/896374ba-bcc1-4340-8109-174d1a238563
-2023-04-05 16:01:36,009 [MainThread  ] [INFO ]  GRO format detected, reenumerating atoms
-2023-04-05 16:01:36,123 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_27/renumber_structure_gro/896374ba-bcc1-4340-8109-174d1a238563&#x27;]
-Checking if empty file: /tmp/biobb/unitests_27/renumber_structure_gro/output_structure_path.gro
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-13 12:42:09,290 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.renumber_structure Version: 4.0.0
+2023-04-13 12:42:09,291 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/pyruvate.gro to /tmp/biobb/unitests_41/renumber_structure_gro/32f2a402-3e53-438b-a736-2b1998454c14
+2023-04-13 12:42:09,291 [MainThread  ] [INFO ]  GRO format detected, reenumerating atoms
+2023-04-13 12:42:09,406 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_41/renumber_structure_gro/32f2a402-3e53-438b-a736-2b1998454c14&#x27;]
+Checking if empty file: /tmp/biobb/unitests_41/renumber_structure_gro/output_structure_path.gro
 Comparing ignoring first line of both files:
-     FILE_A: /tmp/biobb/unitests_27/renumber_structure_gro/output_structure_path.gro
+     FILE_A: /tmp/biobb/unitests_41/renumber_structure_gro/output_structure_path.gro
      FILE_B: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/reference/utils/renum_pyruvate.gro
-Checking if empty file: /tmp/biobb/unitests_27/renumber_structure_gro/output_mapping_json_path.json
+Checking if empty file: /tmp/biobb/unitests_41/renumber_structure_gro/output_mapping_json_path.json
 Comparing: 
-        File_A: /tmp/biobb/unitests_27/renumber_structure_gro/output_mapping_json_path.json
+        File_A: /tmp/biobb/unitests_41/renumber_structure_gro/output_mapping_json_path.json
         File_B: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/reference/utils/pyruvate_output_mapping_json_path.json
         File_A hash: b&#x27;/\xa1\xe9\x19X\xe3\xb5\x15R \x81\x02\xc4PX\x11h\x08\x83\xdb\r\xf9j\xebP\xe9\\\x1eT#A\r&#x27;
         File_B hash: b&#x27;/\xa1\xe9\x19X\xe3\xb5\x15R \x81\x02\xc4PX\x11h\x08\x83\xdb\r\xf9j\xebP\xe9\\\x1eT#A\r&#x27;
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_27/renumber_structure_gro/renumber_structure_gro_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.renumber_structure Version: 4.0.0
-INFO     /tmp/biobb/unitests_27/renumber_structure_gro/renumber_structure_gro_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/pyruvate.gro to /tmp/biobb/unitests_27/renumber_structure_gro/896374ba-bcc1-4340-8109-174d1a238563
-INFO     /tmp/biobb/unitests_27/renumber_structure_gro/renumber_structure_gro_log.out:file_utils.py:346 GRO format detected, reenumerating atoms
-INFO     /tmp/biobb/unitests_27/renumber_structure_gro/renumber_structure_gro_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_27/renumber_structure_gro/896374ba-bcc1-4340-8109-174d1a238563&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
-Removing: /tmp/biobb/unitests_27
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_41/renumber_structure_gro/renumber_structure_gro_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.renumber_structure Version: 4.0.0
+INFO     /tmp/biobb/unitests_41/renumber_structure_gro/renumber_structure_gro_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/pyruvate.gro to /tmp/biobb/unitests_41/renumber_structure_gro/32f2a402-3e53-438b-a736-2b1998454c14
+INFO     /tmp/biobb/unitests_41/renumber_structure_gro/renumber_structure_gro_log.out:file_utils.py:346 GRO format detected, reenumerating atoms
+INFO     /tmp/biobb/unitests_41/renumber_structure_gro/renumber_structure_gro_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_41/renumber_structure_gro/32f2a402-3e53-438b-a736-2b1998454c14&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+Removing: /tmp/biobb/unitests_41
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -1216,13 +1216,13 @@ Removing: /tmp/biobb/unitests_27
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-05 16:01:36,168 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.renumber_structure Version: 4.0.0
-2023-04-05 16:01:36,168 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/cl3.noH.pdb to /tmp/biobb/unitests_27/renumber_structure/b545b90f-3e59-4104-9e6f-8bd105505c18
-2023-04-05 16:01:36,168 [MainThread  ] [INFO ]  PDB format detected, reenumerating atoms
-2023-04-05 16:01:36,169 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_27/renumber_structure/b545b90f-3e59-4104-9e6f-8bd105505c18&#x27;]
-Checking if empty file: /tmp/biobb/unitests_27/renumber_structure/output_structure_path.pdb
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-13 12:42:09,450 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.renumber_structure Version: 4.0.0
+2023-04-13 12:42:09,450 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/cl3.noH.pdb to /tmp/biobb/unitests_41/renumber_structure/c71684e3-e46e-49a4-8ea2-33e2369316f4
+2023-04-13 12:42:09,451 [MainThread  ] [INFO ]  PDB format detected, reenumerating atoms
+2023-04-13 12:42:09,451 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_41/renumber_structure/c71684e3-e46e-49a4-8ea2-33e2369316f4&#x27;]
+Checking if empty file: /tmp/biobb/unitests_41/renumber_structure/output_structure_path.pdb
 Checking RMSD between:
-     PDB_A: /tmp/biobb/unitests_27/renumber_structure/output_structure_path.pdb
+     PDB_A: /tmp/biobb/unitests_41/renumber_structure/output_structure_path.pdb
      PDB_B: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/reference/utils/renum_cl3_noH.pdb
      Ignoring HETAMT in RMSD
      Ignoring Hydrogen atoms in RMSD
@@ -1230,17 +1230,17 @@ Checking RMSD between:
      Atoms ALIGNED in PDB_B: 28
      RMS: 5.412998051746279e-15
      RMS_CUTOFF: 1
-Checking if empty file: /tmp/biobb/unitests_27/renumber_structure/output_mapping_json_path.json
+Checking if empty file: /tmp/biobb/unitests_41/renumber_structure/output_mapping_json_path.json
 Comparing: 
-        File_A: /tmp/biobb/unitests_27/renumber_structure/output_mapping_json_path.json
+        File_A: /tmp/biobb/unitests_41/renumber_structure/output_mapping_json_path.json
         File_B: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/reference/utils/cl3_output_mapping_json_path.json
         File_A hash: b&#x27;\xe5\xbc\xaf\xec\xc4\x1a\x14\x1d&gt;\x1f\xe1\x1a\xbe_\xd5g\xb6\xac\xeb\xce\x9a\xa4\x9f\xa7\xf9\x98\xc7\x00\xaa\xa2\t\x13&#x27;
         File_B hash: b&#x27;\xe5\xbc\xaf\xec\xc4\x1a\x14\x1d&gt;\x1f\xe1\x1a\xbe_\xd5g\xb6\xac\xeb\xce\x9a\xa4\x9f\xa7\xf9\x98\xc7\x00\xaa\xa2\t\x13&#x27;
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_27/renumber_structure/renumber_structure_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.renumber_structure Version: 4.0.0
-INFO     /tmp/biobb/unitests_27/renumber_structure/renumber_structure_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/cl3.noH.pdb to /tmp/biobb/unitests_27/renumber_structure/b545b90f-3e59-4104-9e6f-8bd105505c18
-INFO     /tmp/biobb/unitests_27/renumber_structure/renumber_structure_log.out:file_utils.py:346 PDB format detected, reenumerating atoms
-INFO     /tmp/biobb/unitests_27/renumber_structure/renumber_structure_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_27/renumber_structure/b545b90f-3e59-4104-9e6f-8bd105505c18&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
-Removing: /tmp/biobb/unitests_27
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_41/renumber_structure/renumber_structure_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.renumber_structure Version: 4.0.0
+INFO     /tmp/biobb/unitests_41/renumber_structure/renumber_structure_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/cl3.noH.pdb to /tmp/biobb/unitests_41/renumber_structure/c71684e3-e46e-49a4-8ea2-33e2369316f4
+INFO     /tmp/biobb/unitests_41/renumber_structure/renumber_structure_log.out:file_utils.py:346 PDB format detected, reenumerating atoms
+INFO     /tmp/biobb/unitests_41/renumber_structure/renumber_structure_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_41/renumber_structure/c71684e3-e46e-49a4-8ea2-33e2369316f4&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+Removing: /tmp/biobb/unitests_41
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -1250,67 +1250,67 @@ Removing: /tmp/biobb/unitests_27
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-05 16:01:36,206 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.renumber_structure Version: 4.0.0
-2023-04-05 16:01:36,206 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/smallgro.gro to /tmp/biobb/unitests_27/renumber_structure_smallgro/8de365db-6b0f-46cb-9abc-cacc78bc6f13
-2023-04-05 16:01:36,207 [MainThread  ] [INFO ]  GRO format detected, reenumerating atoms
-2023-04-05 16:01:36,208 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_27/renumber_structure_smallgro/8de365db-6b0f-46cb-9abc-cacc78bc6f13&#x27;]
-Checking if empty file: /tmp/biobb/unitests_27/renumber_structure_smallgro/output_structure_path.gro
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-13 12:42:09,489 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.renumber_structure Version: 4.0.0
+2023-04-13 12:42:09,489 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/smallgro.gro to /tmp/biobb/unitests_41/renumber_structure_smallgro/e35a6ad6-b61b-481d-9c86-e4876a6f99a1
+2023-04-13 12:42:09,489 [MainThread  ] [INFO ]  GRO format detected, reenumerating atoms
+2023-04-13 12:42:09,490 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_41/renumber_structure_smallgro/e35a6ad6-b61b-481d-9c86-e4876a6f99a1&#x27;]
+Checking if empty file: /tmp/biobb/unitests_41/renumber_structure_smallgro/output_structure_path.gro
 Comparing ignoring first line of both files:
-     FILE_A: /tmp/biobb/unitests_27/renumber_structure_smallgro/output_structure_path.gro
+     FILE_A: /tmp/biobb/unitests_41/renumber_structure_smallgro/output_structure_path.gro
      FILE_B: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/reference/utils/renum_smallgro.gro
-Checking if empty file: /tmp/biobb/unitests_27/renumber_structure_smallgro/output_mapping_json_path.json
+Checking if empty file: /tmp/biobb/unitests_41/renumber_structure_smallgro/output_mapping_json_path.json
 Comparing: 
-        File_A: /tmp/biobb/unitests_27/renumber_structure_smallgro/output_mapping_json_path.json
+        File_A: /tmp/biobb/unitests_41/renumber_structure_smallgro/output_mapping_json_path.json
         File_B: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/reference/utils/smallgro_output_mapping_json_path.json
         File_A hash: b&#x27;\x8a\t\xfd\xe8\x8f@K\xafz\xd2\x8dO\xed[\xe0\xcchg\xda\xd7\x13\xb4\x0c\xcf3\rNRg,\xaf\xf4&#x27;
         File_B hash: b&#x27;\x8a\t\xfd\xe8\x8f@K\xafz\xd2\x8dO\xed[\xe0\xcchg\xda\xd7\x13\xb4\x0c\xcf3\rNRg,\xaf\xf4&#x27;
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_27/renumber_structure_smallgro/renumber_structure_smallgro_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.renumber_structure Version: 4.0.0
-INFO     /tmp/biobb/unitests_27/renumber_structure_smallgro/renumber_structure_smallgro_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/smallgro.gro to /tmp/biobb/unitests_27/renumber_structure_smallgro/8de365db-6b0f-46cb-9abc-cacc78bc6f13
-INFO     /tmp/biobb/unitests_27/renumber_structure_smallgro/renumber_structure_smallgro_log.out:file_utils.py:346 GRO format detected, reenumerating atoms
-INFO     /tmp/biobb/unitests_27/renumber_structure_smallgro/renumber_structure_smallgro_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_27/renumber_structure_smallgro/8de365db-6b0f-46cb-9abc-cacc78bc6f13&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
-Removing: /tmp/biobb/unitests_27
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_41/renumber_structure_smallgro/renumber_structure_smallgro_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.renumber_structure Version: 4.0.0
+INFO     /tmp/biobb/unitests_41/renumber_structure_smallgro/renumber_structure_smallgro_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/smallgro.gro to /tmp/biobb/unitests_41/renumber_structure_smallgro/e35a6ad6-b61b-481d-9c86-e4876a6f99a1
+INFO     /tmp/biobb/unitests_41/renumber_structure_smallgro/renumber_structure_smallgro_log.out:file_utils.py:346 GRO format detected, reenumerating atoms
+INFO     /tmp/biobb/unitests_41/renumber_structure_smallgro/renumber_structure_smallgro_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_41/renumber_structure_smallgro/e35a6ad6-b61b-481d-9c86-e4876a6f99a1&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+Removing: /tmp/biobb/unitests_41
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_structure_utils/test/unitests/test_utils/test_sort_gro_residues.py::TestSortGroResidues::test_launch</td>
-          <td class="col-duration">5.02</td>
+          <td class="col-duration">4.69</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-05 16:01:36,242 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.sort_gro_residues Version: 4.0.0
-2023-04-05 16:01:36,245 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/WT_aq4_md_1.gro to /tmp/biobb/unitests_27/sort_gro_residues/afe28c8c-03a3-410e-8aa2-963a590947cb
-2023-04-05 16:01:41,190 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_27/sort_gro_residues/afe28c8c-03a3-410e-8aa2-963a590947cb&#x27;]
-Checking if empty file: /tmp/biobb/unitests_27/sort_gro_residues/output_gro_path.gro
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-13 12:42:09,525 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.sort_gro_residues Version: 4.0.0
+2023-04-13 12:42:09,528 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/WT_aq4_md_1.gro to /tmp/biobb/unitests_41/sort_gro_residues/a086cca2-f3ba-4647-9db9-6b0bd2336ec0
+2023-04-13 12:42:14,150 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_41/sort_gro_residues/a086cca2-f3ba-4647-9db9-6b0bd2336ec0&#x27;]
+Checking if empty file: /tmp/biobb/unitests_41/sort_gro_residues/output_gro_path.gro
 Comparing ignoring first line of both files:
-     FILE_A: /tmp/biobb/unitests_27/sort_gro_residues/output_gro_path.gro
+     FILE_A: /tmp/biobb/unitests_41/sort_gro_residues/output_gro_path.gro
      FILE_B: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/reference/utils/WT_aq4_md_sorted.gro
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_27/sort_gro_residues/sort_gro_residues_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.sort_gro_residues Version: 4.0.0
-INFO     /tmp/biobb/unitests_27/sort_gro_residues/sort_gro_residues_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/WT_aq4_md_1.gro to /tmp/biobb/unitests_27/sort_gro_residues/afe28c8c-03a3-410e-8aa2-963a590947cb
-INFO     /tmp/biobb/unitests_27/sort_gro_residues/sort_gro_residues_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_27/sort_gro_residues/afe28c8c-03a3-410e-8aa2-963a590947cb&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
-Removing: /tmp/biobb/unitests_27
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_41/sort_gro_residues/sort_gro_residues_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.sort_gro_residues Version: 4.0.0
+INFO     /tmp/biobb/unitests_41/sort_gro_residues/sort_gro_residues_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/WT_aq4_md_1.gro to /tmp/biobb/unitests_41/sort_gro_residues/a086cca2-f3ba-4647-9db9-6b0bd2336ec0
+INFO     /tmp/biobb/unitests_41/sort_gro_residues/sort_gro_residues_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_41/sort_gro_residues/a086cca2-f3ba-4647-9db9-6b0bd2336ec0&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+Removing: /tmp/biobb/unitests_41
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_structure_utils/test/unitests/test_utils/test_str_check_add_hydrogens.py::TestStrCheckAddHydrogens::test_str_check_add_hydrogens</td>
-          <td class="col-duration">1.05</td>
+          <td class="col-duration">0.99</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-05 16:01:41,265 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.str_check_add_hydrogens Version: 4.0.0
-2023-04-05 16:01:41,266 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/str_no_H.pdb to /tmp/biobb/unitests_27/str_check_add_hydrogens/59a48f32-e3d7-41a4-a87f-9c3d1d9631af
-2023-04-05 16:01:41,266 [MainThread  ] [INFO ]  check_structure -i /tmp/biobb/unitests_27/str_check_add_hydrogens/59a48f32-e3d7-41a4-a87f-9c3d1d9631af/str_no_H.pdb -o /tmp/biobb/unitests_27/str_check_add_hydrogens/59a48f32-e3d7-41a4-a87f-9c3d1d9631af/output_structure_path.pdbqt --non_interactive --force_save --keep_canonical_resnames command_list --list &#x27;add_hydrogen --add_charges ADT --add_mode auto &#x27;
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-13 12:42:14,222 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.str_check_add_hydrogens Version: 4.0.0
+2023-04-13 12:42:14,223 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/str_no_H.pdb to /tmp/biobb/unitests_41/str_check_add_hydrogens/10bc7a2f-0d43-4bb5-a4e2-8e7b1f4f7e0e
+2023-04-13 12:42:14,223 [MainThread  ] [INFO ]  check_structure -i /tmp/biobb/unitests_41/str_check_add_hydrogens/10bc7a2f-0d43-4bb5-a4e2-8e7b1f4f7e0e/str_no_H.pdb -o /tmp/biobb/unitests_41/str_check_add_hydrogens/10bc7a2f-0d43-4bb5-a4e2-8e7b1f4f7e0e/output_structure_path.pdbqt --non_interactive --force_save --keep_canonical_resnames command_list --list &#x27;add_hydrogen --add_charges ADT --add_mode auto &#x27;
 
-2023-04-05 16:01:42,247 [MainThread  ] [INFO ]  Exit code 0
+2023-04-13 12:42:15,147 [MainThread  ] [INFO ]  Exit code 0
 
-2023-04-05 16:01:42,247 [MainThread  ] [INFO ]  ================================================================================
+2023-04-13 12:42:15,147 [MainThread  ] [INFO ]  ================================================================================
 =                   BioBB structure checking utility v3.12.1                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
 
 Warning: sequence features only available in mmCIF format or with external fasta input
-Structure /tmp/biobb/unitests_27/str_check_add_hydrogens/59a48f32-e3d7-41a4-a87f-9c3d1d9631af/str_no_H.pdb loaded
+Structure /tmp/biobb/unitests_41/str_check_add_hydrogens/10bc7a2f-0d43-4bb5-a4e2-8e7b1f4f7e0e/str_no_H.pdb loaded
  PDB id: 
  Title: 
  Experimental method: unknown
@@ -1389,29 +1389,29 @@ Metal/Ion residues found
 Small mol ligands found
 FBP A580
 Warning: reverting residue names to canonical on output
-Structure saved on /tmp/biobb/unitests_27/str_check_add_hydrogens/59a48f32-e3d7-41a4-a87f-9c3d1d9631af/output_structure_path.pdbqt
+Structure saved on /tmp/biobb/unitests_41/str_check_add_hydrogens/10bc7a2f-0d43-4bb5-a4e2-8e7b1f4f7e0e/output_structure_path.pdbqt
 
-2023-04-05 16:01:42,252 [MainThread  ] [INFO ]  /tmp/biobb/unitests_27/str_check_add_hydrogens/output_structure_path.pdbqt file ends with END, cleaning
-2023-04-05 16:01:42,256 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_27/str_check_add_hydrogens/59a48f32-e3d7-41a4-a87f-9c3d1d9631af&#x27;]
-Checking if empty file: /tmp/biobb/unitests_27/str_check_add_hydrogens/output_structure_path.pdbqt
+2023-04-13 12:42:15,152 [MainThread  ] [INFO ]  /tmp/biobb/unitests_41/str_check_add_hydrogens/output_structure_path.pdbqt file ends with END, cleaning
+2023-04-13 12:42:15,156 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_41/str_check_add_hydrogens/10bc7a2f-0d43-4bb5-a4e2-8e7b1f4f7e0e&#x27;]
+Checking if empty file: /tmp/biobb/unitests_41/str_check_add_hydrogens/output_structure_path.pdbqt
 Comparing: 
-        File_A: /tmp/biobb/unitests_27/str_check_add_hydrogens/output_structure_path.pdbqt
+        File_A: /tmp/biobb/unitests_41/str_check_add_hydrogens/output_structure_path.pdbqt
         File_B: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/reference/utils/ref_str_H.pdbqt
         File_A hash: b&quot;U\xd1\xc0c\xb8\xe3(\xac\xf0&#x27;\xc0\xc4P\xd6\x1f\x08\xd1\xa2\xd5j\xa5\xef\xc9&amp;\xedoq\x9fM\xa0\x88F&quot;
         File_B hash: b&quot;U\xd1\xc0c\xb8\xe3(\xac\xf0&#x27;\xc0\xc4P\xd6\x1f\x08\xd1\xa2\xd5j\xa5\xef\xc9&amp;\xedoq\x9fM\xa0\x88F&quot;
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_27/str_check_add_hydrogens/str_check_add_hydrogens_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.str_check_add_hydrogens Version: 4.0.0
-INFO     /tmp/biobb/unitests_27/str_check_add_hydrogens/str_check_add_hydrogens_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/str_no_H.pdb to /tmp/biobb/unitests_27/str_check_add_hydrogens/59a48f32-e3d7-41a4-a87f-9c3d1d9631af
-INFO     /tmp/biobb/unitests_27/str_check_add_hydrogens/str_check_add_hydrogens_log.out:cmd_wrapper.py:32 check_structure -i /tmp/biobb/unitests_27/str_check_add_hydrogens/59a48f32-e3d7-41a4-a87f-9c3d1d9631af/str_no_H.pdb -o /tmp/biobb/unitests_27/str_check_add_hydrogens/59a48f32-e3d7-41a4-a87f-9c3d1d9631af/output_structure_path.pdbqt --non_interactive --force_save --keep_canonical_resnames command_list --list &#x27;add_hydrogen --add_charges ADT --add_mode auto &#x27;
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_41/str_check_add_hydrogens/str_check_add_hydrogens_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.str_check_add_hydrogens Version: 4.0.0
+INFO     /tmp/biobb/unitests_41/str_check_add_hydrogens/str_check_add_hydrogens_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/str_no_H.pdb to /tmp/biobb/unitests_41/str_check_add_hydrogens/10bc7a2f-0d43-4bb5-a4e2-8e7b1f4f7e0e
+INFO     /tmp/biobb/unitests_41/str_check_add_hydrogens/str_check_add_hydrogens_log.out:cmd_wrapper.py:32 check_structure -i /tmp/biobb/unitests_41/str_check_add_hydrogens/10bc7a2f-0d43-4bb5-a4e2-8e7b1f4f7e0e/str_no_H.pdb -o /tmp/biobb/unitests_41/str_check_add_hydrogens/10bc7a2f-0d43-4bb5-a4e2-8e7b1f4f7e0e/output_structure_path.pdbqt --non_interactive --force_save --keep_canonical_resnames command_list --list &#x27;add_hydrogen --add_charges ADT --add_mode auto &#x27;
 
-INFO     /tmp/biobb/unitests_27/str_check_add_hydrogens/str_check_add_hydrogens_log.out:cmd_wrapper.py:49 Exit code 0
+INFO     /tmp/biobb/unitests_41/str_check_add_hydrogens/str_check_add_hydrogens_log.out:cmd_wrapper.py:49 Exit code 0
 
-INFO     /tmp/biobb/unitests_27/str_check_add_hydrogens/str_check_add_hydrogens_log.out:cmd_wrapper.py:51 ================================================================================
+INFO     /tmp/biobb/unitests_41/str_check_add_hydrogens/str_check_add_hydrogens_log.out:cmd_wrapper.py:51 ================================================================================
 =                   BioBB structure checking utility v3.12.1                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
 
 Warning: sequence features only available in mmCIF format or with external fasta input
-Structure /tmp/biobb/unitests_27/str_check_add_hydrogens/59a48f32-e3d7-41a4-a87f-9c3d1d9631af/str_no_H.pdb loaded
+Structure /tmp/biobb/unitests_41/str_check_add_hydrogens/10bc7a2f-0d43-4bb5-a4e2-8e7b1f4f7e0e/str_no_H.pdb loaded
  PDB id: 
  Title: 
  Experimental method: unknown
@@ -1490,35 +1490,35 @@ Metal/Ion residues found
 Small mol ligands found
 FBP A580
 Warning: reverting residue names to canonical on output
-Structure saved on /tmp/biobb/unitests_27/str_check_add_hydrogens/59a48f32-e3d7-41a4-a87f-9c3d1d9631af/output_structure_path.pdbqt
+Structure saved on /tmp/biobb/unitests_41/str_check_add_hydrogens/10bc7a2f-0d43-4bb5-a4e2-8e7b1f4f7e0e/output_structure_path.pdbqt
 
-INFO     /tmp/biobb/unitests_27/str_check_add_hydrogens/str_check_add_hydrogens_log.out:file_utils.py:346 /tmp/biobb/unitests_27/str_check_add_hydrogens/output_structure_path.pdbqt file ends with END, cleaning
-INFO     /tmp/biobb/unitests_27/str_check_add_hydrogens/str_check_add_hydrogens_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_27/str_check_add_hydrogens/59a48f32-e3d7-41a4-a87f-9c3d1d9631af&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
-Removing: /tmp/biobb/unitests_27
+INFO     /tmp/biobb/unitests_41/str_check_add_hydrogens/str_check_add_hydrogens_log.out:file_utils.py:346 /tmp/biobb/unitests_41/str_check_add_hydrogens/output_structure_path.pdbqt file ends with END, cleaning
+INFO     /tmp/biobb/unitests_41/str_check_add_hydrogens/str_check_add_hydrogens_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_41/str_check_add_hydrogens/10bc7a2f-0d43-4bb5-a4e2-8e7b1f4f7e0e&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+Removing: /tmp/biobb/unitests_41
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_structure_utils/test/unitests/test_utils/test_structure_check.py::TestStructureCheck::test_launch</td>
-          <td class="col-duration">1.24</td>
+          <td class="col-duration">1.18</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-05 16:01:42,325 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.structure_check Version: 4.0.0
-2023-04-05 16:01:42,327 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_27/structure_check/fcb83678-ad5b-42b3-b419-f14dca83f129
-2023-04-05 16:01:42,327 [MainThread  ] [INFO ]  Computing features: chains, models
-2023-04-05 16:01:42,327 [MainThread  ] [INFO ]  Creating dd54b525-5b3d-432d-ae10-39c3baa8660b temporary folder
-2023-04-05 16:01:42,327 [MainThread  ] [INFO ]  check_structure -i /tmp/biobb/unitests_27/structure_check/fcb83678-ad5b-42b3-b419-f14dca83f129/2vgb.pdb --json /tmp/biobb/unitests_27/structure_check/fcb83678-ad5b-42b3-b419-f14dca83f129/output_summary_path.json --check_only --non_interactive command_list --list dd54b525-5b3d-432d-ae10-39c3baa8660b/command_list.lst
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-04-13 12:42:15,219 [MainThread  ] [INFO ]  Executing biobb_structure_utils.utils.structure_check Version: 4.0.0
+2023-04-13 12:42:15,221 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_41/structure_check/8cd8deff-396b-4e29-9bb7-911b287dd445
+2023-04-13 12:42:15,221 [MainThread  ] [INFO ]  Computing features: chains, models
+2023-04-13 12:42:15,221 [MainThread  ] [INFO ]  Creating 79864ecc-e3e7-4bf6-b8d0-0e03d673aea5 temporary folder
+2023-04-13 12:42:15,221 [MainThread  ] [INFO ]  check_structure -i /tmp/biobb/unitests_41/structure_check/8cd8deff-396b-4e29-9bb7-911b287dd445/2vgb.pdb --json /tmp/biobb/unitests_41/structure_check/8cd8deff-396b-4e29-9bb7-911b287dd445/output_summary_path.json --check_only --non_interactive command_list --list 79864ecc-e3e7-4bf6-b8d0-0e03d673aea5/command_list.lst
 
-2023-04-05 16:01:43,534 [MainThread  ] [INFO ]  Exit code 0
+2023-04-13 12:42:16,366 [MainThread  ] [INFO ]  Exit code 0
 
-2023-04-05 16:01:43,535 [MainThread  ] [INFO ]  ================================================================================
+2023-04-13 12:42:16,367 [MainThread  ] [INFO ]  ================================================================================
 =                   BioBB structure checking utility v3.12.1                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
 
 Warning: sequence features only available in mmCIF format or with external fasta input
-Structure /tmp/biobb/unitests_27/structure_check/fcb83678-ad5b-42b3-b419-f14dca83f129/2vgb.pdb loaded
+Structure /tmp/biobb/unitests_41/structure_check/8cd8deff-396b-4e29-9bb7-911b287dd445/2vgb.pdb loaded
  PDB id: 2VGB
  Title: human erythrocyte pyruvate kinase
  Experimental method: x-ray diffraction
@@ -1568,25 +1568,25 @@ Running models.
 1 Model(s) detected
 Single model found
 Command list completed
-Summary data saved on /tmp/biobb/unitests_27/structure_check/fcb83678-ad5b-42b3-b419-f14dca83f129/output_summary_path.json
+Summary data saved on /tmp/biobb/unitests_41/structure_check/8cd8deff-396b-4e29-9bb7-911b287dd445/output_summary_path.json
 
-2023-04-05 16:01:43,536 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_27/structure_check/fcb83678-ad5b-42b3-b419-f14dca83f129&#x27;, &#x27;dd54b525-5b3d-432d-ae10-39c3baa8660b&#x27;]
-Checking if empty file: /tmp/biobb/unitests_27/structure_check/output_summary_path.json
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_27/structure_check/structure_check_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.structure_check Version: 4.0.0
-INFO     /tmp/biobb/unitests_27/structure_check/structure_check_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_27/structure_check/fcb83678-ad5b-42b3-b419-f14dca83f129
-INFO     /tmp/biobb/unitests_27/structure_check/structure_check_log.out:file_utils.py:346 Computing features: chains, models
-INFO     /tmp/biobb/unitests_27/structure_check/structure_check_log.out:file_utils.py:346 Creating dd54b525-5b3d-432d-ae10-39c3baa8660b temporary folder
-INFO     /tmp/biobb/unitests_27/structure_check/structure_check_log.out:cmd_wrapper.py:32 check_structure -i /tmp/biobb/unitests_27/structure_check/fcb83678-ad5b-42b3-b419-f14dca83f129/2vgb.pdb --json /tmp/biobb/unitests_27/structure_check/fcb83678-ad5b-42b3-b419-f14dca83f129/output_summary_path.json --check_only --non_interactive command_list --list dd54b525-5b3d-432d-ae10-39c3baa8660b/command_list.lst
+2023-04-13 12:42:16,368 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests_41/structure_check/8cd8deff-396b-4e29-9bb7-911b287dd445&#x27;, &#x27;79864ecc-e3e7-4bf6-b8d0-0e03d673aea5&#x27;]
+Checking if empty file: /tmp/biobb/unitests_41/structure_check/output_summary_path.json
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests_41/structure_check/structure_check_log.out:file_utils.py:346 Executing biobb_structure_utils.utils.structure_check Version: 4.0.0
+INFO     /tmp/biobb/unitests_41/structure_check/structure_check_log.out:file_utils.py:346 Copy: /home/user/actions-runner/_work/biobb_structure_utils/biobb_structure_utils/biobb_structure_utils/test/data/utils/2vgb.pdb to /tmp/biobb/unitests_41/structure_check/8cd8deff-396b-4e29-9bb7-911b287dd445
+INFO     /tmp/biobb/unitests_41/structure_check/structure_check_log.out:file_utils.py:346 Computing features: chains, models
+INFO     /tmp/biobb/unitests_41/structure_check/structure_check_log.out:file_utils.py:346 Creating 79864ecc-e3e7-4bf6-b8d0-0e03d673aea5 temporary folder
+INFO     /tmp/biobb/unitests_41/structure_check/structure_check_log.out:cmd_wrapper.py:32 check_structure -i /tmp/biobb/unitests_41/structure_check/8cd8deff-396b-4e29-9bb7-911b287dd445/2vgb.pdb --json /tmp/biobb/unitests_41/structure_check/8cd8deff-396b-4e29-9bb7-911b287dd445/output_summary_path.json --check_only --non_interactive command_list --list 79864ecc-e3e7-4bf6-b8d0-0e03d673aea5/command_list.lst
 
-INFO     /tmp/biobb/unitests_27/structure_check/structure_check_log.out:cmd_wrapper.py:49 Exit code 0
+INFO     /tmp/biobb/unitests_41/structure_check/structure_check_log.out:cmd_wrapper.py:49 Exit code 0
 
-INFO     /tmp/biobb/unitests_27/structure_check/structure_check_log.out:cmd_wrapper.py:51 ================================================================================
+INFO     /tmp/biobb/unitests_41/structure_check/structure_check_log.out:cmd_wrapper.py:51 ================================================================================
 =                   BioBB structure checking utility v3.12.1                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
 
 Warning: sequence features only available in mmCIF format or with external fasta input
-Structure /tmp/biobb/unitests_27/structure_check/fcb83678-ad5b-42b3-b419-f14dca83f129/2vgb.pdb loaded
+Structure /tmp/biobb/unitests_41/structure_check/8cd8deff-396b-4e29-9bb7-911b287dd445/2vgb.pdb loaded
  PDB id: 2VGB
  Title: human erythrocyte pyruvate kinase
  Experimental method: x-ray diffraction
@@ -1636,8 +1636,8 @@ Running models.
 1 Model(s) detected
 Single model found
 Command list completed
-Summary data saved on /tmp/biobb/unitests_27/structure_check/fcb83678-ad5b-42b3-b419-f14dca83f129/output_summary_path.json
+Summary data saved on /tmp/biobb/unitests_41/structure_check/8cd8deff-396b-4e29-9bb7-911b287dd445/output_summary_path.json
 
-INFO     /tmp/biobb/unitests_27/structure_check/structure_check_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_27/structure_check/fcb83678-ad5b-42b3-b419-f14dca83f129&#x27;, &#x27;dd54b525-5b3d-432d-ae10-39c3baa8660b&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
-Removing: /tmp/biobb/unitests_27
+INFO     /tmp/biobb/unitests_41/structure_check/structure_check_log.out:file_utils.py:346 Removed: [&#x27;/tmp/biobb/unitests_41/structure_check/8cd8deff-396b-4e29-9bb7-911b287dd445&#x27;, &#x27;79864ecc-e3e7-4bf6-b8d0-0e03d673aea5&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+Removing: /tmp/biobb/unitests_41
 <br/></div></td></tr></tbody></table></body></html>
