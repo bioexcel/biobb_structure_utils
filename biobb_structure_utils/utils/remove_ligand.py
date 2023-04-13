@@ -2,11 +2,12 @@
 
 """Module containing the RemoveLigand class and the command line interface."""
 import argparse
+from pathlib import Path
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
 from biobb_structure_utils.gro_lib.gro import Gro
-from biobb_structure_utils.utils.common import *
 
 
 class RemoveLigand(BiobbObject):
@@ -26,10 +27,10 @@ class RemoveLigand(BiobbObject):
         This is a use example of how to use the building block from Python::
 
             from biobb_structure_utils.utils.remove_ligand import remove_ligand
-            prop = { 
+            prop = {
                 'ligand': 'AQ4'
             }
-            remove_ligand(input_structure_path='/path/to/myStructure.pdb', 
+            remove_ligand(input_structure_path='/path/to/myStructure.pdb',
                         output_structure_path='/path/to/newStructure.pdb',
                         properties=prop)
 
@@ -68,7 +69,8 @@ class RemoveLigand(BiobbObject):
         """Execute the :class:`RemoveLigand <utils.remove_ligand.RemoveLigand>` utils.remove_ligand.RemoveLigand object."""
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # Business code
@@ -110,9 +112,10 @@ def remove_ligand(input_structure_path: str, output_structure_path: str, propert
     """Execute the :class:`RemoveLigand <utils.remove_ligand.RemoveLigand>` class and
     execute the :meth:`launch() <utils.remove_ligand.RemoveLigand.launch>` method."""
 
-    return RemoveLigand(input_structure_path=input_structure_path, 
+    return RemoveLigand(input_structure_path=input_structure_path,
                         output_structure_path=output_structure_path,
                         properties=properties, **kwargs).launch()
+
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
@@ -129,9 +132,10 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    remove_ligand(input_structure_path=args.input_structure_path, 
+    remove_ligand(input_structure_path=args.input_structure_path,
                   output_structure_path=args.output_structure_path,
                   properties=properties)
+
 
 if __name__ == '__main__':
     main()

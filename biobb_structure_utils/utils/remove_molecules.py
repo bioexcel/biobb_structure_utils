@@ -4,9 +4,10 @@
 import argparse
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
 from Bio.PDB.PDBParser import PDBParser
-from biobb_structure_utils.utils.common import *
+from biobb_structure_utils.utils.common import check_input_path, check_output_path, create_residues_list, create_biopython_residue, create_output_file
 
 
 class RemoveMolecules(BiobbObject):
@@ -26,7 +27,7 @@ class RemoveMolecules(BiobbObject):
         This is a use example of how to use the building block from Python::
 
             from biobb_structure_utils.utils.remove_molecules import remove_molecules
-            prop = { 
+            prop = {
                 'molecules': [
                     {
                         'name': 'HIS',
@@ -34,7 +35,7 @@ class RemoveMolecules(BiobbObject):
                         'chain': 'A',
                         'model': '1'
                     }
-                ] 
+                ]
             }
             remove_molecules(input_structure_path='/path/to/myStructure.pdb',
                              output_molecules_path='/path/to/newMolecules.pdb',
@@ -79,10 +80,11 @@ class RemoveMolecules(BiobbObject):
         self.io_dict['in']['input_structure_path'] = check_input_path(self.io_dict['in']['input_structure_path'],
                                                                       self.out_log, self.__class__.__name__)
         self.io_dict['out']['output_molecules_path'] = check_output_path(self.io_dict['out']['output_molecules_path'],
-                                                                          self.out_log, self.__class__.__name__)
+                                                                         self.out_log, self.__class__.__name__)
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # Business code
@@ -139,8 +141,8 @@ def remove_molecules(input_structure_path: str, output_molecules_path: str, prop
     execute the :meth:`launch() <utils.remove_molecules.RemoveMolecules.launch>` method."""
 
     return RemoveMolecules(input_structure_path=input_structure_path,
-                              output_molecules_path=output_molecules_path,
-                              properties=properties, **kwargs).launch()
+                           output_molecules_path=output_molecules_path,
+                           properties=properties, **kwargs).launch()
 
 
 def main():

@@ -3,11 +3,13 @@
 """Module containing the RenumberStructure class and the command line interface."""
 import json
 import argparse
+from pathlib import Path
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
 from biobb_structure_utils.gro_lib.gro import Gro
-from biobb_structure_utils.utils.common import *
+from biobb_structure_utils.utils.common import PDB_SERIAL_RECORDS
 
 
 class RenumberStructure(BiobbObject):
@@ -29,15 +31,15 @@ class RenumberStructure(BiobbObject):
         This is a use example of how to use the building block from Python::
 
             from biobb_structure_utils.utils.renumber_structure import renumber_structure
-            prop = { 
-                'renumber_residues': True, 
-                'renumber_residues_per_chain': True 
+            prop = {
+                'renumber_residues': True,
+                'renumber_residues_per_chain': True
             }
-            renumber_structure(input_structure_path='/path/to/myInputStr.pdb', 
-                                output_structure_path='/path/to/newStructure.pdb', 
-                                output_mapping_json_path='/path/to/newMapping.json', 
+            renumber_structure(input_structure_path='/path/to/myInputStr.pdb',
+                                output_structure_path='/path/to/newStructure.pdb',
+                                output_mapping_json_path='/path/to/newMapping.json',
                                 properties=prop)
-    
+
     Info:
         * wrapped_software:
             * name: In house
@@ -84,7 +86,8 @@ class RenumberStructure(BiobbObject):
         """Execute the :class:`RenumberStructure <utils.renumber_structure.RenumberStructure>` utils.renumber_structure.RenumberStructure object."""
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # Business code
@@ -108,7 +111,7 @@ class RenumberStructure(BiobbObject):
                     if len(line) > 10 and record in PDB_SERIAL_RECORDS:  # Avoid MODEL, ENDMDL records and empty lines
                         # Renumbering atoms
                         pdb_atom_number = line[6:11].strip()
-                        if not atom_mapping.get(pdb_atom_number): # ANISOU records should have the same numeration as ATOM records
+                        if not atom_mapping.get(pdb_atom_number):  # ANISOU records should have the same numeration as ATOM records
                             atom_count += 1
                             atom_mapping[pdb_atom_number] = str(atom_count)
                         line = line[:6]+'{: >5d}'.format(atom_count)+line[11:]
@@ -148,7 +151,7 @@ def renumber_structure(input_structure_path: str, output_structure_path: str, ou
     """Execute the :class:`RenumberStructure <utils.renumber_structure.RenumberStructure>` class and
     execute the :meth:`launch() <utils.renumber_structure.RenumberStructure.launch>` method."""
 
-    return RenumberStructure(input_structure_path=input_structure_path, 
+    return RenumberStructure(input_structure_path=input_structure_path,
                              output_structure_path=output_structure_path,
                              output_mapping_json_path=output_mapping_json_path,
                              properties=properties, **kwargs).launch()
@@ -170,10 +173,10 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    renumber_structure(input_structure_path=args.input_structure_path, 
-                        output_structure_path=args.output_structure_path, 
-                        output_mapping_json_path=args.output_mapping_json_path, 
-                        properties=properties)
+    renumber_structure(input_structure_path=args.input_structure_path,
+                       output_structure_path=args.output_structure_path,
+                       output_mapping_json_path=args.output_mapping_json_path,
+                       properties=properties)
 
 
 if __name__ == '__main__':

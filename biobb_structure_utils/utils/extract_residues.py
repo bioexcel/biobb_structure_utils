@@ -4,9 +4,10 @@
 import argparse
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
 from Bio.PDB.PDBParser import PDBParser
-from biobb_structure_utils.utils.common import *
+from biobb_structure_utils.utils.common import check_input_path, check_output_path, create_residues_list, create_biopython_residue, create_output_file
 
 
 class ExtractResidues(BiobbObject):
@@ -26,7 +27,7 @@ class ExtractResidues(BiobbObject):
         This is a use example of how to use the building block from Python::
 
             from biobb_structure_utils.utils.extract_residues import extract_residues
-            prop = { 
+            prop = {
                 'residues': [
                     {
                         'name': 'HIS',
@@ -34,7 +35,7 @@ class ExtractResidues(BiobbObject):
                         'chain': 'A',
                         'model': '1'
                     }
-                ] 
+                ]
             }
             extract_residues(input_structure_path='/path/to/myStructure.pdb',
                              output_residues_path='/path/to/newResidues.pdb',
@@ -79,10 +80,11 @@ class ExtractResidues(BiobbObject):
         self.io_dict['in']['input_structure_path'] = check_input_path(self.io_dict['in']['input_structure_path'],
                                                                       self.out_log, self.__class__.__name__)
         self.io_dict['out']['output_residues_path'] = check_output_path(self.io_dict['out']['output_residues_path'],
-                                                                          self.out_log, self.__class__.__name__)
+                                                                        self.out_log, self.__class__.__name__)
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # Business code
@@ -123,7 +125,7 @@ class ExtractResidues(BiobbObject):
         # Remove temporal files
         self.tmp_files.append(self.stage_io_dict.get("unique_dir"))
         self.remove_tmp_files()
-        
+
         self.check_arguments(output_files_created=True, raise_exception=False)
 
         return self.return_code
@@ -134,8 +136,8 @@ def extract_residues(input_structure_path: str, output_residues_path: str, prope
     execute the :meth:`launch() <utils.extract_residues.ExtractResidues.launch>` method."""
 
     return ExtractResidues(input_structure_path=input_structure_path,
-                              output_residues_path=output_residues_path,
-                              properties=properties, **kwargs).launch()
+                           output_residues_path=output_residues_path,
+                           properties=properties, **kwargs).launch()
 
 
 def main():

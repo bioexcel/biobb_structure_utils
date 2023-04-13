@@ -5,7 +5,6 @@ import argparse
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
-from biobb_structure_utils.utils.common import *
 
 
 class RemovePdbWater(BiobbObject):
@@ -27,8 +26,8 @@ class RemovePdbWater(BiobbObject):
 
             from biobb_structure_utils.utils.remove_pdb_water import remove_pdb_water
             prop = { }
-            remove_pdb_water(input_pdb_path='/path/to/myStructure.pdb', 
-                            output_pdb_path='/path/to/newStructure.pdb', 
+            remove_pdb_water(input_pdb_path='/path/to/myStructure.pdb',
+                            output_pdb_path='/path/to/newStructure.pdb',
                             properties=prop)
 
     Info:
@@ -67,7 +66,8 @@ class RemovePdbWater(BiobbObject):
         """Execute the :class:`RemovePdbWater <utils.remove_pdb_water.RemovePdbWater>` utils.remove_pdb_water.RemovePdbWater object."""
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         self.cmd = [self.binary_path,
@@ -95,7 +95,7 @@ def remove_pdb_water(input_pdb_path: str, output_pdb_path: str, properties: dict
     """Execute the :class:`RemovePdbWater <utils.remove_pdb_water.RemovePdbWater>` class and
     execute the :meth:`launch() <utils.remove_pdb_water.RemovePdbWater.launch>` method."""
 
-    return RemovePdbWater(input_pdb_path=input_pdb_path, 
+    return RemovePdbWater(input_pdb_path=input_pdb_path,
                           output_pdb_path=output_pdb_path,
                           properties=properties, **kwargs).launch()
 
@@ -116,7 +116,7 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    remove_pdb_water(input_pdb_path=args.input_pdb_path, 
+    remove_pdb_water(input_pdb_path=args.input_pdb_path,
                      output_pdb_path=args.output_pdb_path,
                      properties=properties)
 

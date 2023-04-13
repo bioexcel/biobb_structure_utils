@@ -5,7 +5,7 @@ import argparse
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
-from biobb_structure_utils.utils.common import *
+from biobb_structure_utils.utils.common import check_input_path, check_output_path_pdbqt, check_output_end
 
 
 class StrCheckAddHydrogens(BiobbObject):
@@ -31,12 +31,12 @@ class StrCheckAddHydrogens(BiobbObject):
         This is a use example of how to use the building block from Python::
 
             from biobb_structure_utils.utils.str_check_add_hydrogens import str_check_add_hydrogens
-            prop = { 
-                'charges': False, 
+            prop = {
+                'charges': False,
                 'mode': 'auto'
             }
-            str_check_add_hydrogens(input_structure_path='/path/to/myInputStr.pdb', 
-                                    output_structure_path='/path/to/newStructure.pdb', 
+            str_check_add_hydrogens(input_structure_path='/path/to/myInputStr.pdb',
+                                    output_structure_path='/path/to/newStructure.pdb',
                                     properties=prop)
 
     Info:
@@ -47,7 +47,7 @@ class StrCheckAddHydrogens(BiobbObject):
         * ontology:
             * name: EDAM
             * schema: http://edamontology.org/EDAM.owl
-            
+
     """
 
     def __init__(self, input_structure_path, output_structure_path, properties=None, **kwargs) -> None:
@@ -86,7 +86,8 @@ class StrCheckAddHydrogens(BiobbObject):
                                                                                self.out_log, self.__class__.__name__)
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         self.cmd = [self.binary_path,
@@ -135,7 +136,7 @@ def str_check_add_hydrogens(input_structure_path: str, output_structure_path: st
     """Execute the :class:`StrCheckAddHydrogens <utils.str_check_add_hydrogens.StrCheckAddHydrogens>` class and
     execute the :meth:`launch() <utils.str_check_add_hydrogens.StrCheckAddHydrogens.launch>` method."""
 
-    return StrCheckAddHydrogens(input_structure_path=input_structure_path, 
+    return StrCheckAddHydrogens(input_structure_path=input_structure_path,
                                 output_structure_path=output_structure_path,
                                 properties=properties, **kwargs).launch()
 
@@ -155,7 +156,7 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    str_check_add_hydrogens(input_structure_path=args.input_structure_path, 
+    str_check_add_hydrogens(input_structure_path=args.input_structure_path,
                             output_structure_path=args.output_structure_path,
                             properties=properties)
 

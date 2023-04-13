@@ -5,7 +5,8 @@ import argparse
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
-from biobb_structure_utils.utils.common import *
+from biobb_structure_utils.utils.common import check_input_path, check_output_path
+
 
 class CatPDB(BiobbObject):
     """
@@ -25,9 +26,9 @@ class CatPDB(BiobbObject):
 
             from biobb_structure_utils.utils.cat_pdb import cat_pdb
             prop = { }
-            cat_pdb(input_structure1='/path/to/myInputStr1.pdb', 
-                    input_structure2='/path/to/myInputStr2.pdb', 
-                    output_structure_path='/path/to/newStructure.pdb', 
+            cat_pdb(input_structure1='/path/to/myInputStr1.pdb',
+                    input_structure2='/path/to/myInputStr2.pdb',
+                    output_structure_path='/path/to/newStructure.pdb',
                     properties=prop)
 
     Info:
@@ -37,7 +38,7 @@ class CatPDB(BiobbObject):
         * ontology:
             * name: EDAM
             * schema: http://edamontology.org/EDAM.owl
-            
+
     """
 
     def __init__(self, input_structure1, input_structure2, output_structure_path, properties=None, **kwargs) -> None:
@@ -73,7 +74,8 @@ class CatPDB(BiobbObject):
                                                                          self.out_log, self.__class__.__name__)
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # Business code
@@ -91,7 +93,8 @@ class CatPDB(BiobbObject):
             for idx, fname in enumerate(filenames):
                 with open(fname) as infile:
                     for line in infile:
-                        if not line.startswith("END"): outfile.write(line)
+                        if not line.startswith("END"):
+                            outfile.write(line)
                     # if not ends in newline, add it
                     if not newline[idx]:
                         outfile.write("\n")
@@ -113,7 +116,7 @@ def cat_pdb(input_structure1: str, input_structure2: str, output_structure_path:
     """Execute the :class:`CatPDB <utils.cat_pdb.CatPDB>` class and
     execute the :meth:`launch() <utils.cat_pdb.CatPDB.launch>` method."""
 
-    return CatPDB(input_structure1=input_structure1, 
+    return CatPDB(input_structure1=input_structure1,
                   input_structure2=input_structure2,
                   output_structure_path=output_structure_path,
                   properties=properties, **kwargs).launch()
@@ -135,9 +138,9 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    cat_pdb(input_structure1=args.input_structure1, 
-            input_structure2=args.input_structure2, 
-            output_structure_path=args.output_structure_path, 
+    cat_pdb(input_structure1=args.input_structure1,
+            input_structure2=args.input_structure2,
+            output_structure_path=args.output_structure_path,
             properties=properties)
 
 

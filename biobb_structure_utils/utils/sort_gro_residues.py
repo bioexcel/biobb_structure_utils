@@ -6,7 +6,6 @@ from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
 from biobb_structure_utils.gro_lib.gro import Gro
-from biobb_structure_utils.utils.common import *
 
 
 class SortGroResidues(BiobbObject):
@@ -26,11 +25,11 @@ class SortGroResidues(BiobbObject):
         This is a use example of how to use the building block from Python::
 
             from biobb_structure_utils.utils.sort_gro_residues import sort_gro_residues
-            prop = { 
-                'residue_name_list': ['NA', 'CL', 'SOL'] 
+            prop = {
+                'residue_name_list': ['NA', 'CL', 'SOL']
             }
-            sort_gro_residues(input_gro_path='/path/to/myInputStr.gro', 
-                            output_gro_path='/path/to/newStructure.gro', 
+            sort_gro_residues(input_gro_path='/path/to/myInputStr.gro',
+                            output_gro_path='/path/to/newStructure.gro',
                             properties=prop)
 
     Info:
@@ -68,7 +67,8 @@ class SortGroResidues(BiobbObject):
         """Execute the :class:`SortGroResidues <utils.sort_gro_residues.SortGroResidues>` utils.sort_gro_residues.SortGroResidues object."""
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # Business code
@@ -95,7 +95,7 @@ def sort_gro_residues(input_gro_path: str, output_gro_path: str, properties: dic
     """Execute the :class:`SortGroResidues <utils.sort_gro_residues.SortGroResidues>` class and
     execute the :meth:`launch() <utils.sort_gro_residues.SortGroResidues.launch>` method."""
 
-    return SortGroResidues(input_gro_path=input_gro_path, 
+    return SortGroResidues(input_gro_path=input_gro_path,
                            output_gro_path=output_gro_path,
                            properties=properties, **kwargs).launch()
 
@@ -115,7 +115,7 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    sort_gro_residues(input_gro_path=args.input_gro_path, 
+    sort_gro_residues(input_gro_path=args.input_gro_path,
                       output_gro_path=args.output_gro_path,
                       properties=properties)
 

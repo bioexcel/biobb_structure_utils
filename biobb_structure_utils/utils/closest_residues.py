@@ -5,8 +5,9 @@ import argparse
 import Bio.PDB
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_structure_utils.utils.common import *
+from biobb_structure_utils.utils.common import check_input_path, check_output_path, create_residues_list, create_biopython_residue, create_output_file
 
 
 class ClosestResidues(BiobbObject):
@@ -29,7 +30,7 @@ class ClosestResidues(BiobbObject):
         This is a use example of how to use the building block from Python::
 
             from biobb_structure_utils.utils.closest_residues import closest_residues
-            prop = { 
+            prop = {
                 'residues': [
                     {
                         'name': 'HIS',
@@ -86,10 +87,11 @@ class ClosestResidues(BiobbObject):
         self.io_dict['in']['input_structure_path'] = check_input_path(self.io_dict['in']['input_structure_path'],
                                                                       self.out_log, self.__class__.__name__)
         self.io_dict['out']['output_residues_path'] = check_output_path(self.io_dict['out']['output_residues_path'],
-                                                                          self.out_log, self.__class__.__name__)
+                                                                        self.out_log, self.__class__.__name__)
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # Business code
@@ -123,18 +125,18 @@ class ClosestResidues(BiobbObject):
                 target_residues.append(structure[int(sr['model']) - 1][sr['chain']][int(sr['res_id'])])
             except KeyError:
                 target_residues.append(structure[int(sr['model']) - 1][sr['chain']]['H_' + sr['name'], int(sr['res_id']), ' '])
-            except:
+            except Exception:
                 fu.log(self.__class__.__name__ + ': Unable to find residue %s', sr['res_id'], self.out_log)
 
         # get all atoms from target_residues
         target_atoms = Bio.PDB.Selection.unfold_entities(target_residues, 'A')
         # get all atoms of input structure
-        all_atoms  = Bio.PDB.Selection.unfold_entities(structure, 'A')
+        all_atoms = Bio.PDB.Selection.unfold_entities(structure, 'A')
         # generate NeighborSearch object
         ns = Bio.PDB.NeighborSearch(all_atoms)
         # set comprehension list
         nearby_residues = {res for center_atom in target_atoms
-                   for res in ns.search(center_atom.coord, self.radius, 'R')}
+                           for res in ns.search(center_atom.coord, self.radius, 'R')}
 
         # format nearby residues to pure python objects
         neighbor_residues = []
@@ -149,8 +151,8 @@ class ClosestResidues(BiobbObject):
         fu.log('Found %d nearby residues' % len(neighbor_residues), self.out_log)
 
         if len(neighbor_residues) == 0:
-            fu.log(self.__class__.__name__  + ': No neighbour residues found, exiting', self.out_log)
-            raise SystemExit(self.__class__.__name__  + ': No neighbour residues found, exiting')
+            fu.log(self.__class__.__name__ + ': No neighbour residues found, exiting', self.out_log)
+            raise SystemExit(self.__class__.__name__ + ': No neighbour residues found, exiting')
 
         create_output_file(0, self.stage_io_dict['in']['input_structure_path'], neighbor_residues, self.stage_io_dict['out']['output_residues_path'], self.out_log)
 
@@ -173,8 +175,8 @@ def closest_residues(input_structure_path: str, output_residues_path: str, prope
     execute the :meth:`launch() <utils.closest_residues.ClosestResidues.launch>` method."""
 
     return ClosestResidues(input_structure_path=input_structure_path,
-                              output_residues_path=output_residues_path,
-                              properties=properties, **kwargs).launch()
+                           output_residues_path=output_residues_path,
+                           properties=properties, **kwargs).launch()
 
 
 def main():

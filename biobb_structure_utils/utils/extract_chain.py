@@ -5,8 +5,9 @@ import argparse
 import shutil
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_structure_utils.utils.common import *
+from biobb_structure_utils.utils.common import check_input_path, check_output_path
 
 
 class ExtractChain(BiobbObject):
@@ -29,11 +30,11 @@ class ExtractChain(BiobbObject):
         This is a use example of how to use the building block from Python::
 
             from biobb_structure_utils.utils.extract_chain import extract_chain
-            prop = { 
-                'chains': [ 'A', 'B' ] 
+            prop = {
+                'chains': [ 'A', 'B' ]
             }
-            extract_chain(input_structure_path='/path/to/myStructure.pdb', 
-                        output_structure_path='/path/to/newStructure.pdb', 
+            extract_chain(input_structure_path='/path/to/myStructure.pdb',
+                        output_structure_path='/path/to/newStructure.pdb',
                         properties=prop)
 
     Info:
@@ -80,7 +81,8 @@ class ExtractChain(BiobbObject):
                                                                          self.out_log, self.__class__.__name__)
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # check if user has passed chains properly
@@ -92,10 +94,10 @@ class ExtractChain(BiobbObject):
             if chains.upper() == 'ALL':
                 shutil.copyfile(self.io_dict['in']['input_structure_path'], self.io_dict['out']['output_structure_path'])
             else:
-                chain_list = chains.upper().replace(" ","").split(",")
+                chain_list = chains.upper().replace(" ", "").split(",")
                 with open(self.io_dict['in']['input_structure_path']) as structure_in, open(self.io_dict['out']['output_structure_path'], 'w') as structure_out:
                     for line in structure_in:
-                        if line.strip().upper().startswith(('ATOM','HETATM')) and line.strip().upper()[21] in chain_list:
+                        if line.strip().upper().startswith(('ATOM', 'HETATM')) and line.strip().upper()[21] in chain_list:
                             structure_out.write(line)
 
         else:
@@ -138,7 +140,7 @@ def extract_chain(input_structure_path: str, output_structure_path: str, propert
     """Execute the :class:`ExtractChain <utils.extract_chain.ExtractChain>` class and
     execute the :meth:`launch() <utils.extract_chain.ExtractChain.launch>` method."""
 
-    return ExtractChain(input_structure_path=input_structure_path, 
+    return ExtractChain(input_structure_path=input_structure_path,
                         output_structure_path=output_structure_path,
                         properties=properties, **kwargs).launch()
 
@@ -158,7 +160,7 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    extract_chain(input_structure_path=args.input_structure_path, 
+    extract_chain(input_structure_path=args.input_structure_path,
                   output_structure_path=args.output_structure_path,
                   properties=properties)
 

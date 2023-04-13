@@ -2,11 +2,14 @@
 
 """Module containing the ExtractAtoms class and the command line interface."""
 import argparse
+import re
+from pathlib import Path
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
 from biobb_structure_utils.gro_lib.gro import Gro
-from biobb_structure_utils.utils.common import *
+from biobb_structure_utils.utils.common import PDB_SERIAL_RECORDS
 
 
 class ExtractAtoms(BiobbObject):
@@ -26,11 +29,11 @@ class ExtractAtoms(BiobbObject):
         This is a use example of how to use the building block from Python::
 
             from biobb_structure_utils.utils.extract_atoms import extract_atoms
-            prop = { 
-                'regular_expression_pattern': '^D' 
+            prop = {
+                'regular_expression_pattern': '^D'
             }
-            extract_atoms(input_structure_path='/path/to/myStructure.pdb', 
-                        output_structure_path='/path/to/newStructure.pdb', 
+            extract_atoms(input_structure_path='/path/to/myStructure.pdb',
+                        output_structure_path='/path/to/newStructure.pdb',
                         properties=prop)
 
     Info:
@@ -40,7 +43,7 @@ class ExtractAtoms(BiobbObject):
         * ontology:
             * name: EDAM
             * schema: http://edamontology.org/EDAM.owl
-            
+
     """
 
     def __init__(self, input_structure_path, output_structure_path, properties=None, **kwargs) -> None:
@@ -68,7 +71,8 @@ class ExtractAtoms(BiobbObject):
         """Execute the :class:`ExtractAtoms <utils.extract_atoms.ExtractAtoms>` utils.extract_atoms.ExtractAtoms object."""
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # Business code
@@ -94,7 +98,7 @@ class ExtractAtoms(BiobbObject):
             with open(self.io_dict['in']['input_structure_path'], "r") as input_pdb, open(self.io_dict['out']['output_structure_path'], "w") as output_pdb:
                 for line in input_pdb:
                     record = line[:6].upper().strip()
-                    if len(line) > 10 and record in PDB_SERIAL_RECORDS: #Avoid MODEL, ENDMDL records and empty lines
+                    if len(line) > 10 and record in PDB_SERIAL_RECORDS:  # Avoid MODEL, ENDMDL records and empty lines
                         pdb_atom_name = line[12:16].strip()
                         if re.search(self.regular_expression_pattern, pdb_atom_name):
                             atoms_match_cont += 1
@@ -122,7 +126,7 @@ def extract_atoms(input_structure_path: str, output_structure_path: str, propert
     """Execute the :class:`ExtractAtoms <utils.extract_atoms.ExtractAtoms>` class and
     execute the :meth:`launch() <utils.extract_atoms.ExtractAtoms.launch>` method."""
 
-    return ExtractAtoms(input_structure_path=input_structure_path, 
+    return ExtractAtoms(input_structure_path=input_structure_path,
                         output_structure_path=output_structure_path,
                         properties=properties, **kwargs).launch()
 
@@ -142,7 +146,7 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    extract_atoms(input_structure_path=args.input_structure_path, 
+    extract_atoms(input_structure_path=args.input_structure_path,
                   output_structure_path=args.output_structure_path,
                   properties=properties)
 

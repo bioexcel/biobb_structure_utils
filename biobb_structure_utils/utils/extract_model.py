@@ -5,8 +5,9 @@ import argparse
 import shutil
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_structure_utils.utils.common import *
+from biobb_structure_utils.utils.common import check_input_path, check_output_path
 
 
 class ExtractModel(BiobbObject):
@@ -28,11 +29,11 @@ class ExtractModel(BiobbObject):
         This is a use example of how to use the building block from Python::
 
             from biobb_structure_utils.utils.extract_model import extract_model
-            prop = { 
-                'models': [ 1, 2, 3 ] 
+            prop = {
+                'models': [ 1, 2, 3 ]
             }
-            extract_model(input_structure_path='/path/to/myStructure.pdb', 
-                        output_structure_path='/path/to/newStructure.pdb', 
+            extract_model(input_structure_path='/path/to/myStructure.pdb',
+                        output_structure_path='/path/to/newStructure.pdb',
                         properties=prop)
 
     Info:
@@ -78,7 +79,8 @@ class ExtractModel(BiobbObject):
                                                                          self.out_log, self.__class__.__name__)
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # check if user has passed models properly
@@ -109,14 +111,14 @@ class ExtractModel(BiobbObject):
                 self.run_biobb()
 
                 filenames.append(tmp_file)
-     
+
             # concat tmp_file and save them into output file
             with open(self.io_dict['out']['output_structure_path'], 'w') as outfile:
                 for i, fname in enumerate(filenames):
                     with open(fname) as infile:
-                        outfile.write('MODEL     ' +  "{:>4}".format(str(i + 1)) + '\n')
+                        outfile.write('MODEL     ' + "{:>4}".format(str(i + 1)) + '\n')
                         for line in infile:
-                            if not line.startswith("END"): 
+                            if not line.startswith("END"):
                                 outfile.write(line)
                             else:
                                 outfile.write('ENDMDL\n')
@@ -136,11 +138,11 @@ class ExtractModel(BiobbObject):
 def check_format_models(models, out_log):
     """ Check format of models list """
     if not models:
-        fu.log('Empty models parameter, all models will be returned.', self.out_log, self.global_log)
+        fu.log('Empty models parameter, all models will be returned.', out_log)
         return 'All'
 
     if not isinstance(models, list):
-        fu.log('Incorrect format of models parameter, all models will be returned.', out_log, self.global_log)
+        fu.log('Incorrect format of models parameter, all models will be returned.', out_log)
         return 'All'
 
     return models
@@ -150,7 +152,7 @@ def extract_model(input_structure_path: str, output_structure_path: str, propert
     """Execute the :class:`ExtractModel <utils.extract_model.ExtractModel>` class and
     execute the :meth:`launch() <utils.extract_model.ExtractModel.launch>` method."""
 
-    return ExtractModel(input_structure_path=input_structure_path, 
+    return ExtractModel(input_structure_path=input_structure_path,
                         output_structure_path=output_structure_path,
                         properties=properties, **kwargs).launch()
 
@@ -170,7 +172,7 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    extract_model(input_structure_path=args.input_structure_path, 
+    extract_model(input_structure_path=args.input_structure_path,
                   output_structure_path=args.output_structure_path,
                   properties=properties)
 

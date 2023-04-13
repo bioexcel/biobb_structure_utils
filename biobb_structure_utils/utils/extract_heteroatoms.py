@@ -4,9 +4,10 @@
 import argparse
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
 from Bio.PDB.PDBParser import PDBParser
-from biobb_structure_utils.utils.common import *
+from biobb_structure_utils.utils.common import check_input_path, check_format_heteroatoms, check_output_path, create_biopython_residue, create_output_file
 
 
 class ExtractHeteroAtoms(BiobbObject):
@@ -27,18 +28,18 @@ class ExtractHeteroAtoms(BiobbObject):
         This is a use example of how to use the building block from Python::
 
             from biobb_structure_utils.utils.extract_heteroatoms import extract_heteroatoms
-            prop = { 
+            prop = {
                 'heteroatoms': [
                     {
-                        'name': 'ZZ7', 
-                        'res_id': '302', 
-                        'chain': 'B', 
+                        'name': 'ZZ7',
+                        'res_id': '302',
+                        'chain': 'B',
                         'model': '1'
                     }
-                ] 
+                ]
             }
-            extract_heteroatoms(input_structure_path='/path/to/myStructure.pdb', 
-                                output_heteroatom_path='/path/to/newHeteroatom.pdb', 
+            extract_heteroatoms(input_structure_path='/path/to/myStructure.pdb',
+                                output_heteroatom_path='/path/to/newHeteroatom.pdb',
                                 properties=prop)
 
     Info:
@@ -84,7 +85,8 @@ class ExtractHeteroAtoms(BiobbObject):
                                                                           self.out_log, self.__class__.__name__)
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # Business code
@@ -142,7 +144,7 @@ def extract_heteroatoms(input_structure_path: str, output_heteroatom_path: str, 
     """Execute the :class:`ExtractHeteroAtoms <utils.extract_heteroatoms.ExtractHeteroAtoms>` class and
     execute the :meth:`launch() <utils.extract_heteroatoms.ExtractHeteroAtoms.launch>` method."""
 
-    return ExtractHeteroAtoms(input_structure_path=input_structure_path, 
+    return ExtractHeteroAtoms(input_structure_path=input_structure_path,
                               output_heteroatom_path=output_heteroatom_path,
                               properties=properties, **kwargs).launch()
 
@@ -162,8 +164,8 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    extract_heteroatoms(input_structure_path=args.input_structure_path, 
-                        output_heteroatom_path=args.output_heteroatom_path, 
+    extract_heteroatoms(input_structure_path=args.input_structure_path,
+                        output_heteroatom_path=args.output_heteroatom_path,
                         properties=properties)
 
 
