@@ -7,7 +7,7 @@ class TestRemovePDBWater():
         fx.test_setup(self, 'remove_pdb_water')
 
     def teardown_class(self):
-        #fx.test_teardown(self)
+        fx.test_teardown(self)
         pass
 
     def test_launch(self):

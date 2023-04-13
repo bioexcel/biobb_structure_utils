@@ -8,7 +8,7 @@ class TestStructureCheck():
 
     def teardown_class(self):
         fx.test_teardown(self)
-        # pass
+        pass
 
     def test_launch(self):
         structure_check(properties=self.properties, **self.paths)

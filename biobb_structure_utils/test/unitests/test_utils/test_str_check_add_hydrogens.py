@@ -8,7 +8,7 @@ class TestStrCheckAddHydrogens():
 
     def teardown_class(self):
         fx.test_teardown(self)
-        # pass
+        pass
 
     def test_str_check_add_hydrogens(self):
         str_check_add_hydrogens(properties=self.properties, **self.paths)

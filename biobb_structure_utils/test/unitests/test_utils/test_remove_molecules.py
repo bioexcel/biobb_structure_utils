@@ -8,7 +8,7 @@ class TestRemoveMolecules:
 
     def teardown_class(self):
         fx.test_teardown(self)
-        #pass
+        pass
 
     def test_launch(self):
         remove_molecules(properties=self.properties, **self.paths)
