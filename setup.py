@@ -19,7 +19,7 @@ setuptools.setup(
     },
     packages=setuptools.find_packages(exclude=['docs', 'test']),
     install_requires=['biobb_common==4.0.0', 'biobb_structure_checking==3.12.1'],
-    python_requires='>=3.7,<=3.10',
+    python_requires='>=3.7,<3.10',
     entry_points={
         "console_scripts": [
             "cat_pdb = biobb_structure_utils.utils.cat_pdb:main",
@@ -44,7 +44,6 @@ setuptools.setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
-        "Programming Language :: Python :: 3.10",
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: MacOS :: MacOS X",
         "Operating System :: POSIX",
