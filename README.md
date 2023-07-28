@@ -3,7 +3,7 @@
 [![](https://img.shields.io/conda/vn/bioconda/biobb_structure_utils?label=Conda)](https://anaconda.org/bioconda/biobb_structure_utils)
 [![](https://img.shields.io/conda/dn/bioconda/biobb_structure_utils?label=Conda%20Downloads)](https://anaconda.org/bioconda/biobb_structure_utils)
 [![](https://img.shields.io/badge/Docker-Quay.io-blue)](https://quay.io/repository/biocontainers/biobb_structure_utils?tab=tags)
-[![](https://img.shields.io/badge/Singularity-GalaxyProject-blue)](https://depot.galaxyproject.org/singularity/biobb_structure_utils:4.0.0--pyhdfd78af_0)
+[![](https://img.shields.io/badge/Singularity-GalaxyProject-blue)](https://depot.galaxyproject.org/singularity/biobb_structure_utils:4.0.0--pyhdfd78af_1)
 
 [![](https://img.shields.io/badge/OS-Unix%20%7C%20MacOS-blue)](https://github.com/bioexcel/biobb_structure_utils)
 [![](https://img.shields.io/pypi/pyversions/biobb-structure-utils.svg?label=Python%20Versions)](https://pypi.org/project/biobb-structure-utils/)
@@ -61,13 +61,13 @@ Using DOCKER:
 * Installation:
 
 
-        docker pull quay.io/biocontainers/biobb_structure_utils:4.0.0--pyhdfd78af_0
+        docker pull quay.io/biocontainers/biobb_structure_utils:4.0.0--pyhdfd78af_1
 
 
 * Usage:
 
 
-        docker run quay.io/biocontainers/biobb_structure_utils:4.0.0--pyhdfd78af_0 <command>
+        docker run quay.io/biocontainers/biobb_structure_utils:4.0.0--pyhdfd78af_1 <command>
 
 Using SINGULARITY:
 
@@ -76,7 +76,7 @@ Using SINGULARITY:
 * Installation:
 
 
-        singularity pull --name biobb_structure_utils.sif https://depot.galaxyproject.org/singularity/biobb_structure_utils:4.0.0--pyhdfd78af_0
+        singularity pull --name biobb_structure_utils.sif https://depot.galaxyproject.org/singularity/biobb_structure_utils:4.0.0--pyhdfd78af_1
 
 
 * Usage:
