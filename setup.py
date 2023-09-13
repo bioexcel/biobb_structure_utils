@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="biobb_structure_utils",
-    version="4.0.0",
+    version="4.1.0",
     author="Biobb developers",
     author_email="pau.andrio@bsc.es",
     description="biobb_structure_utils is the Biobb module collection to perform basic manipulations on 3d structures.",
@@ -18,8 +18,8 @@ setuptools.setup(
         "Bioexcel": "https://bioexcel.eu/"
     },
     packages=setuptools.find_packages(exclude=['docs', 'test']),
-    install_requires=['biobb_common==4.0.0', 'biobb_structure_checking==3.13.0'],
-    python_requires='>=3.7,<3.10',
+    install_requires=['biobb_common==4.1.0', 'biobb_structure_checking==3.13.4'],
+    python_requires='>=3.8',
     entry_points={
         "console_scripts": [
             "cat_pdb = biobb_structure_utils.utils.cat_pdb:main",
@@ -41,9 +41,9 @@ setuptools.setup(
     },
     classifiers=(
         "Development Status :: 5 - Production/Stable",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: MacOS :: MacOS X",
         "Operating System :: POSIX",
