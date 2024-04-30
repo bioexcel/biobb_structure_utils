@@ -65,7 +65,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'biobb_structure_utils'
-copyright = u'2022, Bioexcel Project'
+copyright = u'2024, Bioexcel Project'
 author = u'Bioexcel Project'
 
 # The version info for the project you're documenting, acts as replacement for
