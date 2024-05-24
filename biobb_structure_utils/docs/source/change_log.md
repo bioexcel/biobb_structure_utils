@@ -1,5 +1,12 @@
 # Biobb Structure Utils changelog
 
+## What's new in version [4.2.0](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v4.2.0)?
+In version 4.2.0 the dependency biobb_common has been updated to 4.2.0 version.
+
+### New features
+
+* Update to biobb_common 4.2.0 (general)
+
 ## What's new in version [4.1.0](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v4.1.0)?
 In version 4.1.0 the dependency biobb_common has been updated to 4.1.0 version. Also biobb_structure_checking has been updated from 3.12.1 to 3.13.4.
 
