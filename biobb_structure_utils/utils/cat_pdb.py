@@ -12,6 +12,7 @@ class CatPDB(BiobbObject):
     """
     | biobb_structure_utils CatPDB
     | Class to concat two PDB structures in a single PDB file.
+    | Class to concat two PDB structures in a single PDB file.
 
     Args:
         input_structure1 (str): Input structure 1 file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/cat_protein.pdb>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).

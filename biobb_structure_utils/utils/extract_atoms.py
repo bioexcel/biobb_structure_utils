@@ -16,6 +16,7 @@ class ExtractAtoms(BiobbObject):
     """
     | biobb_structure_utils ExtractAtoms
     | Class to extract atoms from a 3D structure.
+    | Extracts all atoms from a 3D structure that match a regular expression pattern.
 
     Args:
         input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/2vgb.pdb>`_. Accepted formats: pdb (edam:format_1476), gro (edam:format_2033).
