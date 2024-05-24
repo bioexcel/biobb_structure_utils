@@ -3,7 +3,7 @@
     "$id": "http://bioexcel.eu/biobb_structure_utils/json_schemas/1.0/extract_heteroatoms",
     "name": "biobb_structure_utils ExtractHeteroAtoms",
     "title": "Class to extract hetero-atoms from a 3D structure using Biopython.",
-    "description": null,
+    "description": "Extracts a list of heteroatoms from a 3D structure using Biopython.",
     "type": "object",
     "info": {
         "wrapped_software": {

@@ -16,6 +16,7 @@ class RenumberStructure(BiobbObject):
     """
     | biobb_structure_utils RenumberStructure
     | Class to renumber atomic indexes from a 3D structure.
+    | Renumber atomic indexes from a 3D structure.
 
     Args:
         input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/cl3.noH.pdb>`_. Accepted formats: pdb (edam:format_1476), gro (edam:format_2033).

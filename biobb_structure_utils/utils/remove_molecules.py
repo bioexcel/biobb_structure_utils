@@ -14,6 +14,7 @@ class RemoveMolecules(BiobbObject):
     """
     | biobb_structure_utils RemoveMolecules
     | Class to remove molecules from a 3D structure using Biopython.
+    | Remove a list of molecules from a 3D structure using Biopython.
 
     Args:
         input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/2vgb.pdb>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).

@@ -14,6 +14,7 @@ class ExtractResidues(BiobbObject):
     """
     | biobb_structure_utils ExtractResidues
     | Class to extract residues from a 3D structure using Biopython.
+    | Extracts a list of residues from a 3D structure using Biopython.
 
     Args:
         input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_heteroatom.pdb>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).

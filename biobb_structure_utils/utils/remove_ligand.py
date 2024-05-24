@@ -14,6 +14,7 @@ class RemoveLigand(BiobbObject):
     """
     | biobb_structure_utils RemoveLigand
     | Class to remove the selected ligand atoms from a 3D structure.
+    | Remove the selected ligand atoms from a 3D structure.
 
     Args:
         input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/WT_aq4_md_1.pdb>`_. Accepted formats: pdb (edam:format_1476), gro (edam:format_2033).

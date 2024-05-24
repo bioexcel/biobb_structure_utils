@@ -14,6 +14,7 @@ class ExtractHeteroAtoms(BiobbObject):
     """
     | biobb_structure_utils ExtractHeteroAtoms
     | Class to extract hetero-atoms from a 3D structure using Biopython.
+    | Extracts a list of heteroatoms from a 3D structure using Biopython.
 
     Args:
         input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_heteroatom.pdb>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).

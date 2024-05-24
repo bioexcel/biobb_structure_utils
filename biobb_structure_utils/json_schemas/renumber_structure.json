@@ -3,7 +3,7 @@
     "$id": "http://bioexcel.eu/biobb_structure_utils/json_schemas/1.0/renumber_structure",
     "name": "biobb_structure_utils RenumberStructure",
     "title": "Class to renumber atomic indexes from a 3D structure.",
-    "description": null,
+    "description": "Renumber atomic indexes from a 3D structure.",
     "type": "object",
     "info": {
         "wrapped_software": {

@@ -12,6 +12,7 @@ class SortGroResidues(BiobbObject):
     """
     | biobb_structure_utils SortGroResidues
     | Class to sort the selected residues from a GRO 3D structure.
+    | Sorts the selected residues from a GRO 3D structure.
 
     Args:
         input_gro_path (str): Input GRO file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/WT_aq4_md_1.gro>`_. Accepted formats: gro (edam:format_2033).
