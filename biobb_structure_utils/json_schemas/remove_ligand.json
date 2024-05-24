@@ -3,7 +3,7 @@
     "$id": "http://bioexcel.eu/biobb_structure_utils/json_schemas/1.0/remove_ligand",
     "name": "biobb_structure_utils RemoveLigand",
     "title": "Class to remove the selected ligand atoms from a 3D structure.",
-    "description": null,
+    "description": "Remove the selected ligand atoms from a 3D structure.",
     "type": "object",
     "info": {
         "wrapped_software": {

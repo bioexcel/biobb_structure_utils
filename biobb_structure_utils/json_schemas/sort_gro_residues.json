@@ -3,7 +3,7 @@
     "$id": "http://bioexcel.eu/biobb_structure_utils/json_schemas/1.0/sort_gro_residues",
     "name": "biobb_structure_utils SortGroResidues",
     "title": "Class to sort the selected residues from a GRO 3D structure.",
-    "description": null,
+    "description": "Sorts the selected residues from a GRO 3D structure.",
     "type": "object",
     "info": {
         "wrapped_software": {

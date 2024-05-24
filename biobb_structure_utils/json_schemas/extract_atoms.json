@@ -3,7 +3,7 @@
     "$id": "http://bioexcel.eu/biobb_structure_utils/json_schemas/1.0/extract_atoms",
     "name": "biobb_structure_utils ExtractAtoms",
     "title": "Class to extract atoms from a 3D structure.",
-    "description": null,
+    "description": "Extracts all atoms from a 3D structure that match a regular expression pattern.",
     "type": "object",
     "info": {
         "wrapped_software": {

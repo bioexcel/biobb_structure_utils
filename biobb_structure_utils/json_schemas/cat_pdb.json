@@ -3,7 +3,7 @@
     "$id": "http://bioexcel.eu/biobb_structure_utils/json_schemas/1.0/cat_pdb",
     "name": "biobb_structure_utils CatPDB",
     "title": "Class to concat two PDB structures in a single PDB file.",
-    "description": null,
+    "description": "Class to concat two PDB structures in a single PDB file.",
     "type": "object",
     "info": {
         "wrapped_software": {
