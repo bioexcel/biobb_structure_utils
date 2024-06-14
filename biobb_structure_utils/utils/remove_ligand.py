@@ -23,6 +23,7 @@ class RemoveLigand(BiobbObject):
             * **ligand** (*str*) - ("AQ4") Residue code of the ligand to be removed.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+            * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
 
     Examples:
         This is a use example of how to use the building block from Python::

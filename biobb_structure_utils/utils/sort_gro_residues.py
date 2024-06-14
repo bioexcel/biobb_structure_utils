@@ -21,6 +21,7 @@ class SortGroResidues(BiobbObject):
             * **residue_name_list** (*list*) - (["NA", "CL", "SOL"]) Ordered residue name list.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+            * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
 
     Examples:
         This is a use example of how to use the building block from Python::
