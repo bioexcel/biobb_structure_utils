@@ -1,3 +1,4 @@
+# type: ignore
 from biobb_common.tools import test_fixtures as fx
 from biobb_structure_utils.utils.str_check_add_hydrogens import str_check_add_hydrogens
 

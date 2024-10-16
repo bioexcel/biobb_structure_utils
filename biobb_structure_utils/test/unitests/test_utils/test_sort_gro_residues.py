@@ -1,3 +1,4 @@
+# type: ignore
 from biobb_common.tools import test_fixtures as fx
 from biobb_structure_utils.utils.sort_gro_residues import sort_gro_residues
 
