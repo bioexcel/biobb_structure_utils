@@ -2,6 +2,7 @@
 
 """Module containing the ExtractAtoms class and the command line interface."""
 import argparse
+from typing import Optional
 import re
 from pathlib import Path
 from biobb_common.configuration import settings
@@ -124,7 +125,7 @@ class ExtractAtoms(BiobbObject):
         return self.return_code
 
 
-def extract_atoms(input_structure_path: str, output_structure_path: str, properties: dict = None, **kwargs) -> int:
+def extract_atoms(input_structure_path: str, output_structure_path: str, properties: Optional[dict] = None, **kwargs) -> int:
     """Execute the :class:`ExtractAtoms <utils.extract_atoms.ExtractAtoms>` class and
     execute the :meth:`launch() <utils.extract_atoms.ExtractAtoms.launch>` method."""
 

@@ -2,6 +2,7 @@
 
 """Module containing the RemovePdbWater class and the command line interface."""
 import argparse
+from typing import Optional
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
@@ -92,7 +93,7 @@ class RemovePdbWater(BiobbObject):
         return self.return_code
 
 
-def remove_pdb_water(input_pdb_path: str, output_pdb_path: str, properties: dict = None, **kwargs) -> int:
+def remove_pdb_water(input_pdb_path: str, output_pdb_path: str, properties: Optional[dict] = None, **kwargs) -> int:
     """Execute the :class:`RemovePdbWater <utils.remove_pdb_water.RemovePdbWater>` class and
     execute the :meth:`launch() <utils.remove_pdb_water.RemovePdbWater.launch>` method."""
 

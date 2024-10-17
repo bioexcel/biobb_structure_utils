@@ -2,6 +2,7 @@
 
 """Module containing the ExtractMolecule class and the command line interface."""
 import argparse
+from typing import Optional
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
@@ -123,7 +124,7 @@ class ExtractMolecule(BiobbObject):
 
         # Remove temporal files
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir"),
+            self.stage_io_dict.get("unique_dir", ""),
             tmp_folder
         ])
         self.remove_tmp_files()
@@ -133,7 +134,7 @@ class ExtractMolecule(BiobbObject):
         return self.return_code
 
 
-def extract_molecule(input_structure_path: str, output_molecule_path: str, properties: dict = None, **kwargs) -> int:
+def extract_molecule(input_structure_path: str, output_molecule_path: str, properties: Optional[dict] = None, **kwargs) -> int:
     """Execute the :class:`ExtractMolecule <utils.extract_molecule.ExtractMolecule>` class and
     execute the :meth:`launch() <utils.extract_molecule.ExtractMolecule.launch>` method."""
 

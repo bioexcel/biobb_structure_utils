@@ -2,6 +2,7 @@
 
 """Module containing the ExtractChain class and the command line interface."""
 import argparse
+from typing import Optional
 import shutil
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
@@ -137,7 +138,7 @@ def check_format_chains(chains, out_log):
     return ','.join(chains)
 
 
-def extract_chain(input_structure_path: str, output_structure_path: str, properties: dict = None, **kwargs) -> int:
+def extract_chain(input_structure_path: str, output_structure_path: str, properties: Optional[dict] = None, **kwargs) -> int:
     """Execute the :class:`ExtractChain <utils.extract_chain.ExtractChain>` class and
     execute the :meth:`launch() <utils.extract_chain.ExtractChain.launch>` method."""
 

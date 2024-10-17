@@ -2,6 +2,7 @@
 
 """Module containing the ExtractResidues class and the command line interface."""
 import argparse
+from typing import Optional
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
@@ -133,7 +134,7 @@ class ExtractResidues(BiobbObject):
         return self.return_code
 
 
-def extract_residues(input_structure_path: str, output_residues_path: str, properties: dict = None, **kwargs) -> int:
+def extract_residues(input_structure_path: str, output_residues_path: str, properties: Optional[dict] = None, **kwargs) -> int:
     """Execute the :class:`ExtractResidues <utils.extract_residues.ExtractResidues>` class and
     execute the :meth:`launch() <utils.extract_residues.ExtractResidues.launch>` method."""
 

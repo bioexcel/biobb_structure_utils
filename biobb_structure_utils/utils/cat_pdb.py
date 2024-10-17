@@ -2,6 +2,7 @@
 
 """Module containing the CatPDB class and the command line interface."""
 import argparse
+from typing import Optional
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
@@ -114,7 +115,7 @@ class CatPDB(BiobbObject):
         return self.return_code
 
 
-def cat_pdb(input_structure1: str, input_structure2: str, output_structure_path: str, properties: dict = None, **kwargs) -> int:
+def cat_pdb(input_structure1: str, input_structure2: str, output_structure_path: str, properties: Optional[dict] = None, **kwargs) -> int:
     """Execute the :class:`CatPDB <utils.cat_pdb.CatPDB>` class and
     execute the :meth:`launch() <utils.cat_pdb.CatPDB.launch>` method."""
 

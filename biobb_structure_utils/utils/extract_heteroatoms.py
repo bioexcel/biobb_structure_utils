@@ -2,6 +2,7 @@
 
 """Module containing the ExtractHeteroAtoms class and the command line interface."""
 import argparse
+from typing import Optional
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
@@ -142,7 +143,7 @@ class ExtractHeteroAtoms(BiobbObject):
         return self.return_code
 
 
-def extract_heteroatoms(input_structure_path: str, output_heteroatom_path: str, properties: dict = None, **kwargs) -> int:
+def extract_heteroatoms(input_structure_path: str, output_heteroatom_path: str, properties: Optional[dict] = None, **kwargs) -> int:
     """Execute the :class:`ExtractHeteroAtoms <utils.extract_heteroatoms.ExtractHeteroAtoms>` class and
     execute the :meth:`launch() <utils.extract_heteroatoms.ExtractHeteroAtoms.launch>` method."""
 

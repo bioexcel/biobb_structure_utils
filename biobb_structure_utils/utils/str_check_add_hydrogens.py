@@ -2,6 +2,7 @@
 
 """Module containing the StrCheckAddHydrogens class and the command line interface."""
 import argparse
+from typing import Optional
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
@@ -133,7 +134,7 @@ class StrCheckAddHydrogens(BiobbObject):
         return self.return_code
 
 
-def str_check_add_hydrogens(input_structure_path: str, output_structure_path: str, properties: dict = None, **kwargs) -> int:
+def str_check_add_hydrogens(input_structure_path: str, output_structure_path: str, properties: Optional[dict] = None, **kwargs) -> int:
     """Execute the :class:`StrCheckAddHydrogens <utils.str_check_add_hydrogens.StrCheckAddHydrogens>` class and
     execute the :meth:`launch() <utils.str_check_add_hydrogens.StrCheckAddHydrogens.launch>` method."""
 

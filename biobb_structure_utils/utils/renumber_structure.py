@@ -3,6 +3,7 @@
 """Module containing the RenumberStructure class and the command line interface."""
 import json
 import argparse
+from typing import Optional
 from pathlib import Path
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
@@ -149,7 +150,7 @@ class RenumberStructure(BiobbObject):
         return self.return_code
 
 
-def renumber_structure(input_structure_path: str, output_structure_path: str, output_mapping_json_path: str, properties: dict = None, **kwargs) -> int:
+def renumber_structure(input_structure_path: str, output_structure_path: str, output_mapping_json_path: str, properties: Optional[dict] = None, **kwargs) -> int:
     """Execute the :class:`RenumberStructure <utils.renumber_structure.RenumberStructure>` class and
     execute the :meth:`launch() <utils.renumber_structure.RenumberStructure.launch>` method."""
 

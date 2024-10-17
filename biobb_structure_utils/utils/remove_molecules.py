@@ -2,6 +2,7 @@
 
 """Module containing the RemoveMolecules class and the command line interface."""
 import argparse
+from typing import Optional
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
@@ -138,7 +139,7 @@ class RemoveMolecules(BiobbObject):
         return self.return_code
 
 
-def remove_molecules(input_structure_path: str, output_molecules_path: str, properties: dict = None, **kwargs) -> int:
+def remove_molecules(input_structure_path: str, output_molecules_path: str, properties: Optional[dict] = None, **kwargs) -> int:
     """Execute the :class:`RemoveMolecules <utils.remove_molecules.RemoveMolecules>` class and
     execute the :meth:`launch() <utils.remove_molecules.RemoveMolecules.launch>` method."""
 

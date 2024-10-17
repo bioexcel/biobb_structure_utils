@@ -2,6 +2,7 @@
 
 """Module containing the RemoveLigand class and the command line interface."""
 import argparse
+from typing import Optional
 from pathlib import Path
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
@@ -110,7 +111,7 @@ class RemoveLigand(BiobbObject):
         return self.return_code
 
 
-def remove_ligand(input_structure_path: str, output_structure_path: str, properties: dict = None, **kwargs) -> int:
+def remove_ligand(input_structure_path: str, output_structure_path: str, properties: Optional[dict] = None, **kwargs) -> int:
     """Execute the :class:`RemoveLigand <utils.remove_ligand.RemoveLigand>` class and
     execute the :meth:`launch() <utils.remove_ligand.RemoveLigand.launch>` method."""
 

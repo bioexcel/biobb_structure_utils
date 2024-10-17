@@ -2,6 +2,7 @@
 
 """Module containing the ExtractModel class and the command line interface."""
 import argparse
+from typing import Optional
 import shutil
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
@@ -149,7 +150,7 @@ def check_format_models(models, out_log):
     return models
 
 
-def extract_model(input_structure_path: str, output_structure_path: str, properties: dict = None, **kwargs) -> int:
+def extract_model(input_structure_path: str, output_structure_path: str, properties: Optional[dict] = None, **kwargs) -> int:
     """Execute the :class:`ExtractModel <utils.extract_model.ExtractModel>` class and
     execute the :meth:`launch() <utils.extract_model.ExtractModel.launch>` method."""
 
