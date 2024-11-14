@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 
 """Module containing the RemoveLigand class and the command line interface."""
+
 import argparse
-from typing import Optional
 from pathlib import Path
+from typing import Optional
+
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
+
 from biobb_structure_utils.gro_lib.gro import Gro
 
 
@@ -47,7 +50,9 @@ class RemoveLigand(BiobbObject):
 
     """
 
-    def __init__(self, input_structure_path, output_structure_path, properties=None, **kwargs) -> None:
+    def __init__(
+        self, input_structure_path, output_structure_path, properties=None, **kwargs
+    ) -> None:
         properties = properties or {}
 
         # Call parent class constructor
@@ -57,11 +62,11 @@ class RemoveLigand(BiobbObject):
         # Input/Output files
         self.io_dict = {
             "in": {"input_structure_path": input_structure_path},
-            "out": {"output_structure_path": output_structure_path}
+            "out": {"output_structure_path": output_structure_path},
         }
 
         # Properties specific for BB
-        self.ligand = properties.get('ligand', 'AQ4')
+        self.ligand = properties.get("ligand", "AQ4")
 
         # Check the properties
         self.check_properties(properties)
@@ -77,20 +82,34 @@ class RemoveLigand(BiobbObject):
         self.stage_files()
 
         # Business code
-        extension = Path(self.stage_io_dict['in']['input_structure_path']).suffix.lower()
-        if extension.lower() == '.gro':
-            fu.log('GRO format detected, removing all atoms from residues named %s' % self.ligand, self.out_log)
+        extension = Path(
+            self.stage_io_dict["in"]["input_structure_path"]
+        ).suffix.lower()
+        if extension.lower() == ".gro":
+            fu.log(
+                "GRO format detected, removing all atoms from residues named %s"
+                % self.ligand,
+                self.out_log,
+            )
             gro_st = Gro()
-            gro_st.read_gro_file(self.stage_io_dict['in']['input_structure_path'])
+            gro_st.read_gro_file(self.stage_io_dict["in"]["input_structure_path"])
             gro_st.remove_residues([self.ligand])
-            gro_st.write_gro_file(self.stage_io_dict['out']['output_structure_path'])
+            gro_st.write_gro_file(self.stage_io_dict["out"]["output_structure_path"])
 
         else:
-            fu.log('PDB format detected, removing all atoms from residues named %s' % self.ligand, self.out_log)
+            fu.log(
+                "PDB format detected, removing all atoms from residues named %s"
+                % self.ligand,
+                self.out_log,
+            )
             # Direct aproach solution implemented to avoid the issues
             # presented in commit message (c92aab9604a6a31d13f4170ff47b231df0a588ef)
             # with the Biopython library
-            with open(self.stage_io_dict['in']['input_structure_path'], "r") as input_pdb, open(self.stage_io_dict['out']['output_structure_path'], "w") as output_pdb:
+            with open(
+                self.stage_io_dict["in"]["input_structure_path"], "r"
+            ) as input_pdb, open(
+                self.stage_io_dict["out"]["output_structure_path"], "w"
+            ) as output_pdb:
                 for line in input_pdb:
                     if len(line) > 19 and self.ligand.lower() in line[17:20].lower():
                         continue
@@ -103,7 +122,7 @@ class RemoveLigand(BiobbObject):
         self.copy_to_host()
 
         # Remove temporal files
-        self.tmp_files.append(self.stage_io_dict.get("unique_dir"))
+        self.tmp_files.append(self.stage_io_dict.get("unique_dir", ""))
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -111,34 +130,59 @@ class RemoveLigand(BiobbObject):
         return self.return_code
 
 
-def remove_ligand(input_structure_path: str, output_structure_path: str, properties: Optional[dict] = None, **kwargs) -> int:
+def remove_ligand(
+    input_structure_path: str,
+    output_structure_path: str,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
     """Execute the :class:`RemoveLigand <utils.remove_ligand.RemoveLigand>` class and
     execute the :meth:`launch() <utils.remove_ligand.RemoveLigand.launch>` method."""
 
-    return RemoveLigand(input_structure_path=input_structure_path,
-                        output_structure_path=output_structure_path,
-                        properties=properties, **kwargs).launch()
+    return RemoveLigand(
+        input_structure_path=input_structure_path,
+        output_structure_path=output_structure_path,
+        properties=properties,
+        **kwargs,
+    ).launch()
 
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
-    parser = argparse.ArgumentParser(description="Remove the selected ligand atoms from a 3D structure.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
+    parser = argparse.ArgumentParser(
+        description="Remove the selected ligand atoms from a 3D structure.",
+        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
+    )
+    parser.add_argument(
+        "-c",
+        "--config",
+        required=False,
+        help="This file can be a YAML file, JSON file or JSON string",
+    )
 
     # Specific args of each building block
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('-i', '--input_structure_path', required=True, help="Input structure file name")
-    required_args.add_argument('-o', '--output_structure_path', required=True, help="Output structure file name")
+    required_args = parser.add_argument_group("required arguments")
+    required_args.add_argument(
+        "-i", "--input_structure_path", required=True, help="Input structure file name"
+    )
+    required_args.add_argument(
+        "-o",
+        "--output_structure_path",
+        required=True,
+        help="Output structure file name",
+    )
 
     args = parser.parse_args()
     config = args.config if args.config else None
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    remove_ligand(input_structure_path=args.input_structure_path,
-                  output_structure_path=args.output_structure_path,
-                  properties=properties)
+    remove_ligand(
+        input_structure_path=args.input_structure_path,
+        output_structure_path=args.output_structure_path,
+        properties=properties,
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

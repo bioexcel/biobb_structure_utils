@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 
 """Module containing the CatPDB class and the command line interface."""
+
 import argparse
 from typing import Optional
+
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
+
 from biobb_structure_utils.utils.common import check_input_path, check_output_path
 
 
@@ -44,7 +47,14 @@ class CatPDB(BiobbObject):
 
     """
 
-    def __init__(self, input_structure1, input_structure2, output_structure_path, properties=None, **kwargs) -> None:
+    def __init__(
+        self,
+        input_structure1,
+        input_structure2,
+        output_structure_path,
+        properties=None,
+        **kwargs,
+    ) -> None:
         properties = properties or {}
 
         # Call parent class constructor
@@ -53,9 +63,11 @@ class CatPDB(BiobbObject):
 
         # Input/Output files
         self.io_dict = {
-            "in": {"input_structure1": input_structure1,
-                   "input_structure2": input_structure2},
-            "out": {"output_structure_path": output_structure_path}
+            "in": {
+                "input_structure1": input_structure1,
+                "input_structure2": input_structure2,
+            },
+            "out": {"output_structure_path": output_structure_path},
         }
 
         # Properties specific for BB
@@ -69,12 +81,21 @@ class CatPDB(BiobbObject):
     def launch(self) -> int:
         """Execute the :class:`CatPDB <utils.cat_pdb.CatPDB>` utils.cat_pdb.CatPDB object."""
 
-        self.io_dict['in']['input_structure1'] = check_input_path(self.io_dict['in']['input_structure1'],
-                                                                  self.out_log, self.__class__.__name__)
-        self.io_dict['in']['input_structure2'] = check_input_path(self.io_dict['in']['input_structure2'],
-                                                                  self.out_log, self.__class__.__name__)
-        self.io_dict['out']['output_structure_path'] = check_output_path(self.io_dict['out']['output_structure_path'],
-                                                                         self.out_log, self.__class__.__name__)
+        self.io_dict["in"]["input_structure1"] = check_input_path(
+            self.io_dict["in"]["input_structure1"],
+            self.out_log,
+            self.__class__.__name__,
+        )
+        self.io_dict["in"]["input_structure2"] = check_input_path(
+            self.io_dict["in"]["input_structure2"],
+            self.out_log,
+            self.__class__.__name__,
+        )
+        self.io_dict["out"]["output_structure_path"] = check_output_path(
+            self.io_dict["out"]["output_structure_path"],
+            self.out_log,
+            self.__class__.__name__,
+        )
 
         # Setup Biobb
         if self.check_restart():
@@ -82,17 +103,20 @@ class CatPDB(BiobbObject):
         self.stage_files()
 
         # Business code
-        filenames = [self.io_dict['in']['input_structure1'], self.io_dict['in']['input_structure2']]
+        filenames = [
+            self.io_dict["in"]["input_structure1"],
+            self.io_dict["in"]["input_structure2"],
+        ]
         # check if self.input_structure1 and self.input_structure2 end with newline
         newline = [False, False]
         for idx, fname in enumerate(filenames):
-            with open(fname, 'rb') as fh:
+            with open(fname, "rb") as fh:
                 fh.seek(-2, 2)
                 last = fh.readlines()[-1].decode()
                 newline[idx] = "\n" in last
 
         # concat both input files and save them into output file
-        with open(self.io_dict['out']['output_structure_path'], 'w') as outfile:
+        with open(self.io_dict["out"]["output_structure_path"], "w") as outfile:
             for idx, fname in enumerate(filenames):
                 with open(fname) as infile:
                     for line in infile:
@@ -107,7 +131,7 @@ class CatPDB(BiobbObject):
         self.copy_to_host()
 
         # Remove temporal files
-        self.tmp_files.append(self.stage_io_dict.get("unique_dir"))
+        self.tmp_files.append(self.stage_io_dict.get("unique_dir", ""))
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -115,37 +139,71 @@ class CatPDB(BiobbObject):
         return self.return_code
 
 
-def cat_pdb(input_structure1: str, input_structure2: str, output_structure_path: str, properties: Optional[dict] = None, **kwargs) -> int:
+def cat_pdb(
+    input_structure1: str,
+    input_structure2: str,
+    output_structure_path: str,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
     """Execute the :class:`CatPDB <utils.cat_pdb.CatPDB>` class and
     execute the :meth:`launch() <utils.cat_pdb.CatPDB.launch>` method."""
 
-    return CatPDB(input_structure1=input_structure1,
-                  input_structure2=input_structure2,
-                  output_structure_path=output_structure_path,
-                  properties=properties, **kwargs).launch()
+    return CatPDB(
+        input_structure1=input_structure1,
+        input_structure2=input_structure2,
+        output_structure_path=output_structure_path,
+        properties=properties,
+        **kwargs,
+    ).launch()
 
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
-    parser = argparse.ArgumentParser(description="Concat two PDB structures in a single PDB file.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
+    parser = argparse.ArgumentParser(
+        description="Concat two PDB structures in a single PDB file.",
+        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
+    )
+    parser.add_argument(
+        "-c",
+        "--config",
+        required=False,
+        help="This file can be a YAML file, JSON file or JSON string",
+    )
 
     # Specific args of each building block
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('-i1', '--input_structure1', required=True, help="Input structure 1 file path. Accepted formats: pdb.")
-    required_args.add_argument('-i2', '--input_structure2', required=True, help="Input structure 2 file path. Accepted formats: pdb.")
-    required_args.add_argument('-o', '--output_structure_path', required=True, help="Output structure file path. Accepted formats: pdb.")
+    required_args = parser.add_argument_group("required arguments")
+    required_args.add_argument(
+        "-i1",
+        "--input_structure1",
+        required=True,
+        help="Input structure 1 file path. Accepted formats: pdb.",
+    )
+    required_args.add_argument(
+        "-i2",
+        "--input_structure2",
+        required=True,
+        help="Input structure 2 file path. Accepted formats: pdb.",
+    )
+    required_args.add_argument(
+        "-o",
+        "--output_structure_path",
+        required=True,
+        help="Output structure file path. Accepted formats: pdb.",
+    )
 
     args = parser.parse_args()
     config = args.config if args.config else None
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    cat_pdb(input_structure1=args.input_structure1,
-            input_structure2=args.input_structure2,
-            output_structure_path=args.output_structure_path,
-            properties=properties)
+    cat_pdb(
+        input_structure1=args.input_structure1,
+        input_structure2=args.input_structure2,
+        output_structure_path=args.output_structure_path,
+        properties=properties,
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

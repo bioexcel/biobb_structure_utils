@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
 """Module containing the RemovePdbWater class and the command line interface."""
+
 import argparse
 from typing import Optional
+
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
@@ -43,7 +45,9 @@ class RemovePdbWater(BiobbObject):
 
     """
 
-    def __init__(self, input_pdb_path, output_pdb_path, properties=None, **kwargs) -> None:
+    def __init__(
+        self, input_pdb_path, output_pdb_path, properties=None, **kwargs
+    ) -> None:
         properties = properties or {}
 
         # Call parent class constructor
@@ -53,11 +57,11 @@ class RemovePdbWater(BiobbObject):
         # Input/Output files
         self.io_dict = {
             "in": {"input_pdb_path": input_pdb_path},
-            "out": {"output_pdb_path": output_pdb_path}
+            "out": {"output_pdb_path": output_pdb_path},
         }
 
         # Properties specific for BB
-        self.binary_path = properties.get('binary_path', 'check_structure')
+        self.binary_path = properties.get("binary_path", "check_structure")
 
         # Check the properties
         self.check_properties(properties)
@@ -72,11 +76,17 @@ class RemovePdbWater(BiobbObject):
             return 0
         self.stage_files()
 
-        self.cmd = [self.binary_path,
-                    '-i', self.stage_io_dict['in']['input_pdb_path'],
-                    '-o', self.stage_io_dict['out']['output_pdb_path'],
-                    '--force_save',
-                    'water', '--remove', 'yes']
+        self.cmd = [
+            self.binary_path,
+            "-i",
+            self.stage_io_dict["in"]["input_pdb_path"],
+            "-o",
+            self.stage_io_dict["out"]["output_pdb_path"],
+            "--force_save",
+            "water",
+            "--remove",
+            "yes",
+        ]
 
         # Run Biobb block
         self.run_biobb()
@@ -85,7 +95,7 @@ class RemovePdbWater(BiobbObject):
         self.copy_to_host()
 
         # Remove temporal files
-        self.tmp_files.append(self.stage_io_dict.get("unique_dir"))
+        self.tmp_files.append(self.stage_io_dict.get("unique_dir", ""))
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -93,35 +103,56 @@ class RemovePdbWater(BiobbObject):
         return self.return_code
 
 
-def remove_pdb_water(input_pdb_path: str, output_pdb_path: str, properties: Optional[dict] = None, **kwargs) -> int:
+def remove_pdb_water(
+    input_pdb_path: str,
+    output_pdb_path: str,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
     """Execute the :class:`RemovePdbWater <utils.remove_pdb_water.RemovePdbWater>` class and
     execute the :meth:`launch() <utils.remove_pdb_water.RemovePdbWater.launch>` method."""
 
-    return RemovePdbWater(input_pdb_path=input_pdb_path,
-                          output_pdb_path=output_pdb_path,
-                          properties=properties, **kwargs).launch()
+    return RemovePdbWater(
+        input_pdb_path=input_pdb_path,
+        output_pdb_path=output_pdb_path,
+        properties=properties,
+        **kwargs,
+    ).launch()
 
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
-    parser = argparse.ArgumentParser(description="Remove the water molecules from a PDB 3D structure.",
-                                     formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
+    parser = argparse.ArgumentParser(
+        description="Remove the water molecules from a PDB 3D structure.",
+        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
+    )
+    parser.add_argument(
+        "-c",
+        "--config",
+        required=False,
+        help="This file can be a YAML file, JSON file or JSON string",
+    )
 
     # Specific args of each building block
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('-i', '--input_pdb_path', required=True, help="Input pdb file name")
-    required_args.add_argument('-o', '--output_pdb_path', required=True, help="Output pdb file name")
+    required_args = parser.add_argument_group("required arguments")
+    required_args.add_argument(
+        "-i", "--input_pdb_path", required=True, help="Input pdb file name"
+    )
+    required_args.add_argument(
+        "-o", "--output_pdb_path", required=True, help="Output pdb file name"
+    )
 
     args = parser.parse_args()
     config = args.config if args.config else None
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    remove_pdb_water(input_pdb_path=args.input_pdb_path,
-                     output_pdb_path=args.output_pdb_path,
-                     properties=properties)
+    remove_pdb_water(
+        input_pdb_path=args.input_pdb_path,
+        output_pdb_path=args.output_pdb_path,
+        properties=properties,
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

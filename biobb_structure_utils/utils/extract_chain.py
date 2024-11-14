@@ -1,14 +1,21 @@
 #!/usr/bin/env python3
 
 """Module containing the ExtractChain class and the command line interface."""
+
 import argparse
-from typing import Optional
 import shutil
+from typing import Optional
+
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_structure_utils.utils.common import check_input_path, check_output_path
+
+from biobb_structure_utils.utils.common import (
+    _from_string_to_list,
+    check_input_path,
+    check_output_path,
+)
 
 
 class ExtractChain(BiobbObject):
@@ -50,7 +57,9 @@ class ExtractChain(BiobbObject):
 
     """
 
-    def __init__(self, input_structure_path, output_structure_path, properties=None, **kwargs) -> None:
+    def __init__(
+        self, input_structure_path, output_structure_path, properties=None, **kwargs
+    ) -> None:
         properties = properties or {}
 
         # Call parent class constructor
@@ -60,13 +69,13 @@ class ExtractChain(BiobbObject):
         # Input/Output files
         self.io_dict = {
             "in": {"input_structure_path": input_structure_path},
-            "out": {"output_structure_path": output_structure_path}
+            "out": {"output_structure_path": output_structure_path},
         }
 
         # Properties specific for BB
-        self.binary_path = properties.get('binary_path', 'check_structure')
-        self.chains = properties.get('chains', [])
-        self.permissive = properties.get('permissive', False)
+        self.binary_path = properties.get("binary_path", "check_structure")
+        self.chains = _from_string_to_list(properties.get("chains", []))
+        self.permissive = properties.get("permissive", False)
         self.properties = properties
 
         # Check the properties
@@ -77,10 +86,16 @@ class ExtractChain(BiobbObject):
     def launch(self) -> int:
         """Execute the :class:`ExtractChain <utils.extract_chain.ExtractChain>` utils.extract_chain.ExtractChain object."""
 
-        self.io_dict['in']['input_structure_path'] = check_input_path(self.io_dict['in']['input_structure_path'],
-                                                                      self.out_log, self.__class__.__name__)
-        self.io_dict['out']['output_structure_path'] = check_output_path(self.io_dict['out']['output_structure_path'],
-                                                                         self.out_log, self.__class__.__name__)
+        self.io_dict["in"]["input_structure_path"] = check_input_path(
+            self.io_dict["in"]["input_structure_path"],
+            self.out_log,
+            self.__class__.__name__,
+        )
+        self.io_dict["out"]["output_structure_path"] = check_output_path(
+            self.io_dict["out"]["output_structure_path"],
+            self.out_log,
+            self.__class__.__name__,
+        )
 
         # Setup Biobb
         if self.check_restart():
@@ -92,23 +107,43 @@ class ExtractChain(BiobbObject):
         fu.log(f"Selected Chains: {chains}", self.out_log, self.global_log)
 
         if self.permissive:
-            fu.log('Warning: Use permissive=True is a risky option use it under your own responsability', self.out_log, self.global_log)
-            if chains.upper() == 'ALL':
-                shutil.copyfile(self.io_dict['in']['input_structure_path'], self.io_dict['out']['output_structure_path'])
+            fu.log(
+                "Warning: Use permissive=True is a risky option use it under your own responsability",
+                self.out_log,
+                self.global_log,
+            )
+            if chains.upper() == "ALL":
+                shutil.copyfile(
+                    self.io_dict["in"]["input_structure_path"],
+                    self.io_dict["out"]["output_structure_path"],
+                )
             else:
                 chain_list = chains.upper().replace(" ", "").split(",")
-                with open(self.io_dict['in']['input_structure_path']) as structure_in, open(self.io_dict['out']['output_structure_path'], 'w') as structure_out:
+                with open(
+                    self.io_dict["in"]["input_structure_path"]
+                ) as structure_in, open(
+                    self.io_dict["out"]["output_structure_path"], "w"
+                ) as structure_out:
                     for line in structure_in:
-                        if line.strip().upper().startswith(('ATOM', 'HETATM')) and line.strip().upper()[21] in chain_list:
+                        if (
+                            line.strip().upper().startswith(("ATOM", "HETATM"))
+                            and line.strip().upper()[21] in chain_list
+                        ):
                             structure_out.write(line)
 
         else:
             # run command line
-            self.cmd = [self.binary_path,
-                        '-i', self.io_dict['in']['input_structure_path'],
-                        '-o', self.io_dict['out']['output_structure_path'],
-                        '--force_save',
-                        'chains', '--select', chains]
+            self.cmd = [
+                self.binary_path,
+                "-i",
+                self.io_dict["in"]["input_structure_path"],
+                "-o",
+                self.io_dict["out"]["output_structure_path"],
+                "--force_save",
+                "chains",
+                "--select",
+                chains,
+            ]
 
             # Run Biobb block
             self.run_biobb()
@@ -117,7 +152,7 @@ class ExtractChain(BiobbObject):
         self.copy_to_host()
 
         # Remove temporal files
-        self.tmp_files.append(self.stage_io_dict.get("unique_dir"))
+        self.tmp_files.append(self.stage_io_dict.get("unique_dir", ""))
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -126,46 +161,77 @@ class ExtractChain(BiobbObject):
 
 
 def check_format_chains(chains, out_log):
-    """ Check format of chains list """
+    """Check format of chains list"""
     if not chains:
-        fu.log('Empty chains parameter, all chains will be returned.', out_log)
-        return 'All'
+        fu.log("Empty chains parameter, all chains will be returned.", out_log)
+        return "All"
 
     if not isinstance(chains, list):
-        fu.log('Incorrect format of chains parameter, all chains will be returned.', out_log)
-        return 'All'
+        fu.log(
+            "Incorrect format of chains parameter, all chains will be returned.",
+            out_log,
+        )
+        return "All"
 
-    return ','.join(chains)
+    return ",".join(chains)
 
 
-def extract_chain(input_structure_path: str, output_structure_path: str, properties: Optional[dict] = None, **kwargs) -> int:
+def extract_chain(
+    input_structure_path: str,
+    output_structure_path: str,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
     """Execute the :class:`ExtractChain <utils.extract_chain.ExtractChain>` class and
     execute the :meth:`launch() <utils.extract_chain.ExtractChain.launch>` method."""
 
-    return ExtractChain(input_structure_path=input_structure_path,
-                        output_structure_path=output_structure_path,
-                        properties=properties, **kwargs).launch()
+    return ExtractChain(
+        input_structure_path=input_structure_path,
+        output_structure_path=output_structure_path,
+        properties=properties,
+        **kwargs,
+    ).launch()
 
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
-    parser = argparse.ArgumentParser(description="Extract a chain from a 3D structure.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
+    parser = argparse.ArgumentParser(
+        description="Extract a chain from a 3D structure.",
+        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
+    )
+    parser.add_argument(
+        "-c",
+        "--config",
+        required=False,
+        help="This file can be a YAML file, JSON file or JSON string",
+    )
 
     # Specific args of each building block
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('-i', '--input_structure_path', required=True, help="Input structure file path. Accepted formats: pdb.")
-    required_args.add_argument('-o', '--output_structure_path', required=True, help="Output structure file path. Accepted formats: pdb.")
+    required_args = parser.add_argument_group("required arguments")
+    required_args.add_argument(
+        "-i",
+        "--input_structure_path",
+        required=True,
+        help="Input structure file path. Accepted formats: pdb.",
+    )
+    required_args.add_argument(
+        "-o",
+        "--output_structure_path",
+        required=True,
+        help="Output structure file path. Accepted formats: pdb.",
+    )
 
     args = parser.parse_args()
     config = args.config if args.config else None
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    extract_chain(input_structure_path=args.input_structure_path,
-                  output_structure_path=args.output_structure_path,
-                  properties=properties)
+    extract_chain(
+        input_structure_path=args.input_structure_path,
+        output_structure_path=args.output_structure_path,
+        properties=properties,
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

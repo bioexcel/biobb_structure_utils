@@ -1,13 +1,20 @@
 #!/usr/bin/env python3
 
 """Module containing the StructureCheck class and the command line interface."""
+
 import argparse
 from typing import Optional
+
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools.file_utils import launchlogger
 from biobb_common.tools import file_utils as fu
-from biobb_structure_utils.utils.common import check_input_path, check_output_path_json
+from biobb_common.tools.file_utils import launchlogger
+
+from biobb_structure_utils.utils.common import (
+    _from_string_to_list,
+    check_input_path,
+    check_output_path_json,
+)
 
 
 class StructureCheck(BiobbObject):
@@ -48,7 +55,9 @@ class StructureCheck(BiobbObject):
 
     """
 
-    def __init__(self, input_structure_path, output_summary_path, properties=None, **kwargs) -> None:
+    def __init__(
+        self, input_structure_path, output_summary_path, properties=None, **kwargs
+    ) -> None:
         properties = properties or {}
 
         # Call parent class constructor
@@ -58,12 +67,12 @@ class StructureCheck(BiobbObject):
         # Input/Output files
         self.io_dict = {
             "in": {"input_structure_path": input_structure_path},
-            "out": {"output_summary_path": output_summary_path}
+            "out": {"output_summary_path": output_summary_path},
         }
 
         # Properties specific for BB
-        self.binary_path = properties.get('binary_path', 'check_structure')
-        self.features = properties.get('features', None)
+        self.binary_path = properties.get("binary_path", "check_structure")
+        self.features = _from_string_to_list(properties.get("features", None))
         self.properties = properties
 
         # Check the properties
@@ -74,10 +83,16 @@ class StructureCheck(BiobbObject):
     def launch(self) -> int:
         """Execute the :class:`StructureCheck <utils.structure_check.StructureCheck>` utils.structure_check.StructureCheck object."""
 
-        self.io_dict['in']['input_structure_path'] = check_input_path(self.io_dict['in']['input_structure_path'],
-                                                                      self.out_log, self.__class__.__name__)
-        self.io_dict['out']['output_summary_path'] = check_output_path_json(self.io_dict['out']['output_summary_path'],
-                                                                            self.out_log, self.__class__.__name__)
+        self.io_dict["in"]["input_structure_path"] = check_input_path(
+            self.io_dict["in"]["input_structure_path"],
+            self.out_log,
+            self.__class__.__name__,
+        )
+        self.io_dict["out"]["output_summary_path"] = check_output_path_json(
+            self.io_dict["out"]["output_summary_path"],
+            self.out_log,
+            self.__class__.__name__,
+        )
 
         # Setup Biobb
         if self.check_restart():
@@ -86,36 +101,48 @@ class StructureCheck(BiobbObject):
 
         tmp_folder = None
 
-        if not self.features or self.features is None or self.features == 'None':
-            fu.log('No features provided, all features will be computed: %s' % 'models, chains, altloc, metals, ligands, chiral, getss, cistransbck, backbone, amide, clashes', self.out_log)
+        if not self.features or self.features is None or self.features == "None":
+            fu.log(
+                "No features provided, all features will be computed: %s"
+                % "models, chains, altloc, metals, ligands, chiral, getss, cistransbck, backbone, amide, clashes",
+                self.out_log,
+            )
 
-            self.cmd = [self.binary_path,
-                        '-i', self.stage_io_dict['in']['input_structure_path'],
-                        '--json', self.stage_io_dict['out']['output_summary_path'],
-                        '--check_only',
-                        '--non_interactive',
-                        'checkall']
+            self.cmd = [
+                self.binary_path,
+                "-i",
+                self.stage_io_dict["in"]["input_structure_path"],
+                "--json",
+                self.stage_io_dict["out"]["output_summary_path"],
+                "--check_only",
+                "--non_interactive",
+                "checkall",
+            ]
         else:
-            fu.log('Computing features: %s' % ', '.join(self.features), self.out_log)
+            fu.log("Computing features: %s" % ", ".join(self.features), self.out_log)
 
             # create temporary folder
             tmp_folder = fu.create_unique_dir()
-            fu.log('Creating %s temporary folder' % tmp_folder, self.out_log)
+            fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
 
-            command_list = tmp_folder + '/command_list.lst'
+            command_list = tmp_folder + "/command_list.lst"
 
-            with open(command_list, 'w') as f:
+            with open(command_list, "w") as f:
                 for item in self.features:
                     f.write("%s\n" % item)
 
-            self.cmd = [self.binary_path,
-                        '-i', self.stage_io_dict['in']['input_structure_path'],
-                        '--json', self.stage_io_dict['out']['output_summary_path'],
-                        '--check_only',
-                        '--non_interactive',
-                        'command_list',
-                        '--list',
-                        command_list]
+            self.cmd = [
+                self.binary_path,
+                "-i",
+                self.stage_io_dict["in"]["input_structure_path"],
+                "--json",
+                self.stage_io_dict["out"]["output_summary_path"],
+                "--check_only",
+                "--non_interactive",
+                "command_list",
+                "--list",
+                command_list,
+            ]
 
         # Run Biobb block
         self.run_biobb()
@@ -124,10 +151,7 @@ class StructureCheck(BiobbObject):
         self.copy_to_host()
 
         # Remove temporal files
-        self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir", ""),
-            tmp_folder
-        ])
+        self.tmp_files.extend([self.stage_io_dict.get("unique_dir", ""), tmp_folder])  # type: ignore
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -135,34 +159,62 @@ class StructureCheck(BiobbObject):
         return self.return_code
 
 
-def structure_check(input_structure_path: str, output_summary_path: str, properties: Optional[dict] = None, **kwargs) -> int:
+def structure_check(
+    input_structure_path: str,
+    output_summary_path: str,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
     """Execute the :class:`StructureCheck <utils.structure_check.StructureCheck>` class and
     execute the :meth:`launch() <utils.structure_check.StructureCheck.launch>` method."""
 
-    return StructureCheck(input_structure_path=input_structure_path,
-                          output_summary_path=output_summary_path,
-                          properties=properties, **kwargs).launch()
+    return StructureCheck(
+        input_structure_path=input_structure_path,
+        output_summary_path=output_summary_path,
+        properties=properties,
+        **kwargs,
+    ).launch()
 
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
-    parser = argparse.ArgumentParser(description="This class is a wrapper of the Structure Checking tool to generate summary checking results on a json file.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
+    parser = argparse.ArgumentParser(
+        description="This class is a wrapper of the Structure Checking tool to generate summary checking results on a json file.",
+        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
+    )
+    parser.add_argument(
+        "-c",
+        "--config",
+        required=False,
+        help="This file can be a YAML file, JSON file or JSON string",
+    )
 
     # Specific args of each building block
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('-i', '--input_structure_path', required=True, help="Input structure file path. Accepted formats: pdb.")
-    required_args.add_argument('-o', '--output_summary_path', required=True, help="Output summary checking results. Accepted formats: json.")
+    required_args = parser.add_argument_group("required arguments")
+    required_args.add_argument(
+        "-i",
+        "--input_structure_path",
+        required=True,
+        help="Input structure file path. Accepted formats: pdb.",
+    )
+    required_args.add_argument(
+        "-o",
+        "--output_summary_path",
+        required=True,
+        help="Output summary checking results. Accepted formats: json.",
+    )
 
     args = parser.parse_args()
     config = args.config if args.config else None
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    structure_check(input_structure_path=args.input_structure_path,
-                    output_summary_path=args.output_summary_path,
-                    properties=properties)
+    structure_check(
+        input_structure_path=args.input_structure_path,
+        output_summary_path=args.output_summary_path,
+        properties=properties,
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

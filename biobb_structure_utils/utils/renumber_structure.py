@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 
 """Module containing the RenumberStructure class and the command line interface."""
-import json
+
 import argparse
-from typing import Optional
+import json
 from pathlib import Path
+from typing import Optional
+
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
+
 from biobb_structure_utils.gro_lib.gro import Gro
 from biobb_structure_utils.utils.common import PDB_SERIAL_RECORDS
 
@@ -53,7 +56,14 @@ class RenumberStructure(BiobbObject):
 
     """
 
-    def __init__(self, input_structure_path, output_structure_path, output_mapping_json_path, properties=None, **kwargs) -> None:
+    def __init__(
+        self,
+        input_structure_path,
+        output_structure_path,
+        output_mapping_json_path,
+        properties=None,
+        **kwargs,
+    ) -> None:
         properties = properties or {}
 
         # Call parent class constructor
@@ -63,22 +73,26 @@ class RenumberStructure(BiobbObject):
         # Input/Output files
         self.io_dict = {
             "in": {"input_structure_path": input_structure_path},
-            "out": {"output_structure_path": output_structure_path,
-                    "output_mapping_json_path": output_mapping_json_path}
+            "out": {
+                "output_structure_path": output_structure_path,
+                "output_mapping_json_path": output_mapping_json_path,
+            },
         }
 
         # Properties specific for BB
-        self.renumber_residues = properties.get('renumber_residues', True)
-        self.renumber_residues_per_chain = properties.get('renumber_residues_per_chain', True)
+        self.renumber_residues = properties.get("renumber_residues", True)
+        self.renumber_residues_per_chain = properties.get(
+            "renumber_residues_per_chain", True
+        )
 
         # Common in all BB
-        self.can_write_console_log = properties.get('can_write_console_log', True)
-        self.global_log = properties.get('global_log', None)
-        self.prefix = properties.get('prefix', None)
-        self.step = properties.get('step', None)
-        self.path = properties.get('path', '')
-        self.remove_tmp = properties.get('remove_tmp', True)
-        self.restart = properties.get('restart', False)
+        self.can_write_console_log = properties.get("can_write_console_log", True)
+        self.global_log = properties.get("global_log", None)
+        self.prefix = properties.get("prefix", None)
+        self.step = properties.get("step", None)
+        self.path = properties.get("path", "")
+        self.remove_tmp = properties.get("remove_tmp", True)
+        self.restart = properties.get("restart", False)
 
         # Check the properties
         self.check_properties(properties)
@@ -94,30 +108,43 @@ class RenumberStructure(BiobbObject):
         self.stage_files()
 
         # Business code
-        extension = Path(self.stage_io_dict['in']['input_structure_path']).suffix.lower()
-        if extension.lower() == '.gro':
-            fu.log('GRO format detected, reenumerating atoms', self.out_log)
+        extension = Path(
+            self.stage_io_dict["in"]["input_structure_path"]
+        ).suffix.lower()
+        if extension.lower() == ".gro":
+            fu.log("GRO format detected, reenumerating atoms", self.out_log)
             gro_st = Gro()
-            gro_st.read_gro_file(self.stage_io_dict['in']['input_structure_path'])
-            residue_mapping, atom_mapping = gro_st.renumber_atoms(renumber_residues=self.renumber_residues, renumber_residues_per_chain=self.renumber_residues_per_chain)
-            gro_st.write_gro_file(self.stage_io_dict['out']['output_structure_path'])
+            gro_st.read_gro_file(self.stage_io_dict["in"]["input_structure_path"])
+            residue_mapping, atom_mapping = gro_st.renumber_atoms(
+                renumber_residues=self.renumber_residues,
+                renumber_residues_per_chain=self.renumber_residues_per_chain,
+            )
+            gro_st.write_gro_file(self.stage_io_dict["out"]["output_structure_path"])
 
         else:
-            fu.log('PDB format detected, reenumerating atoms', self.out_log)
+            fu.log("PDB format detected, reenumerating atoms", self.out_log)
             atom_mapping = {}
             atom_count = 0
             residue_mapping = {}
             residue_count = 0
-            with open(self.stage_io_dict['in']['input_structure_path'], "r") as input_pdb, open(self.stage_io_dict['out']['output_structure_path'], "w") as output_pdb:
+            with open(
+                self.stage_io_dict["in"]["input_structure_path"], "r"
+            ) as input_pdb, open(
+                self.stage_io_dict["out"]["output_structure_path"], "w"
+            ) as output_pdb:
                 for line in input_pdb:
                     record = line[:6].upper().strip()
-                    if len(line) > 10 and record in PDB_SERIAL_RECORDS:  # Avoid MODEL, ENDMDL records and empty lines
+                    if (
+                        len(line) > 10 and record in PDB_SERIAL_RECORDS
+                    ):  # Avoid MODEL, ENDMDL records and empty lines
                         # Renumbering atoms
                         pdb_atom_number = line[6:11].strip()
-                        if not atom_mapping.get(pdb_atom_number):  # ANISOU records should have the same numeration as ATOM records
+                        if not atom_mapping.get(
+                            pdb_atom_number
+                        ):  # ANISOU records should have the same numeration as ATOM records
                             atom_count += 1
                             atom_mapping[pdb_atom_number] = str(atom_count)
-                        line = line[:6]+'{: >5d}'.format(atom_count)+line[11:]
+                        line = line[:6] + "{: >5d}".format(atom_count) + line[11:]
                         # Renumbering residues
                         if self.renumber_residues:
                             chain = line[21]
@@ -128,12 +155,20 @@ class RenumberStructure(BiobbObject):
                                     residue_count = 0
                             if not residue_mapping[chain].get(pdb_residue_number):
                                 residue_count += 1
-                                residue_mapping[chain][pdb_residue_number] = str(residue_count)
-                            line = line[:22] + '{: >4d}'.format(residue_count) + line[26:]
+                                residue_mapping[chain][pdb_residue_number] = str(
+                                    residue_count
+                                )
+                            line = (
+                                line[:22] + "{: >4d}".format(residue_count) + line[26:]
+                            )
                     output_pdb.write(line)
 
-        with open(self.stage_io_dict['out']['output_mapping_json_path'], "w") as output_json:
-            output_json.write(json.dumps({'residues': residue_mapping, 'atoms': atom_mapping}))
+        with open(
+            self.stage_io_dict["out"]["output_mapping_json_path"], "w"
+        ) as output_json:
+            output_json.write(
+                json.dumps({"residues": residue_mapping, "atoms": atom_mapping})
+            )
 
         self.return_code = 0
         ##########
@@ -142,7 +177,7 @@ class RenumberStructure(BiobbObject):
         self.copy_to_host()
 
         # Remove temporal files
-        self.tmp_files.append(self.stage_io_dict.get("unique_dir"))
+        self.tmp_files.append(self.stage_io_dict.get("unique_dir", ""))
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -150,37 +185,68 @@ class RenumberStructure(BiobbObject):
         return self.return_code
 
 
-def renumber_structure(input_structure_path: str, output_structure_path: str, output_mapping_json_path: str, properties: Optional[dict] = None, **kwargs) -> int:
+def renumber_structure(
+    input_structure_path: str,
+    output_structure_path: str,
+    output_mapping_json_path: str,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
     """Execute the :class:`RenumberStructure <utils.renumber_structure.RenumberStructure>` class and
     execute the :meth:`launch() <utils.renumber_structure.RenumberStructure.launch>` method."""
 
-    return RenumberStructure(input_structure_path=input_structure_path,
-                             output_structure_path=output_structure_path,
-                             output_mapping_json_path=output_mapping_json_path,
-                             properties=properties, **kwargs).launch()
+    return RenumberStructure(
+        input_structure_path=input_structure_path,
+        output_structure_path=output_structure_path,
+        output_mapping_json_path=output_mapping_json_path,
+        properties=properties,
+        **kwargs,
+    ).launch()
 
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
-    parser = argparse.ArgumentParser(description="Renumber atoms and residues from a 3D structure.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
+    parser = argparse.ArgumentParser(
+        description="Renumber atoms and residues from a 3D structure.",
+        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
+    )
+    parser.add_argument(
+        "-c",
+        "--config",
+        required=False,
+        help="This file can be a YAML file, JSON file or JSON string",
+    )
 
     # Specific args of each building block
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('-i', '--input_structure_path', required=True, help="Input structure file name")
-    required_args.add_argument('-o', '--output_structure_path', required=True, help="Output structure file name")
-    required_args.add_argument('-j', '--output_mapping_json_path', required=True, help="Output mapping json file name")
+    required_args = parser.add_argument_group("required arguments")
+    required_args.add_argument(
+        "-i", "--input_structure_path", required=True, help="Input structure file name"
+    )
+    required_args.add_argument(
+        "-o",
+        "--output_structure_path",
+        required=True,
+        help="Output structure file name",
+    )
+    required_args.add_argument(
+        "-j",
+        "--output_mapping_json_path",
+        required=True,
+        help="Output mapping json file name",
+    )
 
     args = parser.parse_args()
     config = args.config if args.config else None
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    renumber_structure(input_structure_path=args.input_structure_path,
-                       output_structure_path=args.output_structure_path,
-                       output_mapping_json_path=args.output_mapping_json_path,
-                       properties=properties)
+    renumber_structure(
+        input_structure_path=args.input_structure_path,
+        output_structure_path=args.output_structure_path,
+        output_mapping_json_path=args.output_mapping_json_path,
+        properties=properties,
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

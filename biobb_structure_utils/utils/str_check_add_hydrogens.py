@@ -1,12 +1,19 @@
 #!/usr/bin/env python3
 
 """Module containing the StrCheckAddHydrogens class and the command line interface."""
+
 import argparse
 from typing import Optional
+
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
-from biobb_structure_utils.utils.common import check_input_path, check_output_path_pdbqt, check_output_end
+
+from biobb_structure_utils.utils.common import (
+    check_input_path,
+    check_output_end,
+    check_output_path_pdbqt,
+)
 
 
 class StrCheckAddHydrogens(BiobbObject):
@@ -52,7 +59,9 @@ class StrCheckAddHydrogens(BiobbObject):
 
     """
 
-    def __init__(self, input_structure_path, output_structure_path, properties=None, **kwargs) -> None:
+    def __init__(
+        self, input_structure_path, output_structure_path, properties=None, **kwargs
+    ) -> None:
         properties = properties or {}
 
         # Call parent class constructor
@@ -62,16 +71,16 @@ class StrCheckAddHydrogens(BiobbObject):
         # Input/Output files
         self.io_dict = {
             "in": {"input_structure_path": input_structure_path},
-            "out": {"output_structure_path": output_structure_path}
+            "out": {"output_structure_path": output_structure_path},
         }
 
         # Properties specific for BB
-        self.binary_path = properties.get('binary_path', 'check_structure')
-        self.charges = properties.get('charges', False)
-        self.mode = properties.get('mode', 'auto')
-        self.ph = properties.get('ph', 7.4)
-        self.list = properties.get('list', '')
-        self.keep_canonical_resnames = properties.get('keep_canonical_resnames', False)
+        self.binary_path = properties.get("binary_path", "check_structure")
+        self.charges = properties.get("charges", False)
+        self.mode = properties.get("mode", "auto")
+        self.ph = properties.get("ph", 7.4)
+        self.list = properties.get("list", "")
+        self.keep_canonical_resnames = properties.get("keep_canonical_resnames", False)
         self.properties = properties
 
         # Check the properties
@@ -82,39 +91,49 @@ class StrCheckAddHydrogens(BiobbObject):
     def launch(self) -> int:
         """Execute the :class:`StrCheckAddHydrogens <utils.str_check_add_hydrogens.StrCheckAddHydrogens>` utils.str_check_add_hydrogens.StrCheckAddHydrogens object."""
 
-        self.io_dict['in']['input_structure_path'] = check_input_path(self.io_dict['in']['input_structure_path'],
-                                                                      self.out_log, self.__class__.__name__)
-        self.io_dict['out']['output_structure_path'] = check_output_path_pdbqt(self.io_dict['out']['output_structure_path'],
-                                                                               self.out_log, self.__class__.__name__)
+        self.io_dict["in"]["input_structure_path"] = check_input_path(
+            self.io_dict["in"]["input_structure_path"],
+            self.out_log,
+            self.__class__.__name__,
+        )
+        self.io_dict["out"]["output_structure_path"] = check_output_path_pdbqt(
+            self.io_dict["out"]["output_structure_path"],
+            self.out_log,
+            self.__class__.__name__,
+        )
 
         # Setup Biobb
         if self.check_restart():
             return 0
         self.stage_files()
 
-        self.cmd = [self.binary_path,
-                    '-i', self.stage_io_dict['in']['input_structure_path'],
-                    '-o', self.stage_io_dict['out']['output_structure_path'],
-                    '--non_interactive',
-                    '--force_save']
+        self.cmd = [
+            self.binary_path,
+            "-i",
+            self.stage_io_dict["in"]["input_structure_path"],
+            "-o",
+            self.stage_io_dict["out"]["output_structure_path"],
+            "--non_interactive",
+            "--force_save",
+        ]
 
         if self.keep_canonical_resnames:
-            self.cmd.append('--keep_canonical_resnames')
+            self.cmd.append("--keep_canonical_resnames")
 
-        self.cmd.extend(['command_list', '--list', "'add_hydrogen"])
+        self.cmd.extend(["command_list", "--list", "'add_hydrogen"])
 
         if self.charges:
-            self.cmd.append('--add_charges')
-            self.cmd.append('ADT')
+            self.cmd.append("--add_charges")
+            self.cmd.append("ADT")
 
         if self.mode:
-            self.cmd.extend(['--add_mode', self.mode])
-            if self.mode == 'ph':
-                self.cmd.extend(['--pH', self.ph])
-            if self.mode == 'list':
-                self.cmd.extend(['--list', self.list])
+            self.cmd.extend(["--add_mode", self.mode])
+            if self.mode == "ph":
+                self.cmd.extend(["--pH", self.ph])
+            if self.mode == "list":
+                self.cmd.extend(["--list", self.list])
         else:
-            self.cmd.extend(['--add_mode', 'None'])
+            self.cmd.extend(["--add_mode", "None"])
 
         self.cmd.append("'")
         # Run Biobb block
@@ -126,7 +145,7 @@ class StrCheckAddHydrogens(BiobbObject):
         check_output_end(self.io_dict["out"]["output_structure_path"], self.out_log)
 
         # Remove temporal files
-        self.tmp_files.append(self.stage_io_dict.get("unique_dir"))
+        self.tmp_files.append(self.stage_io_dict.get("unique_dir", ""))
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -134,34 +153,62 @@ class StrCheckAddHydrogens(BiobbObject):
         return self.return_code
 
 
-def str_check_add_hydrogens(input_structure_path: str, output_structure_path: str, properties: Optional[dict] = None, **kwargs) -> int:
+def str_check_add_hydrogens(
+    input_structure_path: str,
+    output_structure_path: str,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
     """Execute the :class:`StrCheckAddHydrogens <utils.str_check_add_hydrogens.StrCheckAddHydrogens>` class and
     execute the :meth:`launch() <utils.str_check_add_hydrogens.StrCheckAddHydrogens.launch>` method."""
 
-    return StrCheckAddHydrogens(input_structure_path=input_structure_path,
-                                output_structure_path=output_structure_path,
-                                properties=properties, **kwargs).launch()
+    return StrCheckAddHydrogens(
+        input_structure_path=input_structure_path,
+        output_structure_path=output_structure_path,
+        properties=properties,
+        **kwargs,
+    ).launch()
 
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
-    parser = argparse.ArgumentParser(description="Class to add hydrogens to a 3D structure.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
+    parser = argparse.ArgumentParser(
+        description="Class to add hydrogens to a 3D structure.",
+        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
+    )
+    parser.add_argument(
+        "-c",
+        "--config",
+        required=False,
+        help="This file can be a YAML file, JSON file or JSON string",
+    )
 
     # Specific args of each building block
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('-i', '--input_structure_path', required=True, help="Input structure file path. Accepted formats: pdb.")
-    required_args.add_argument('-o', '--output_structure_path', required=True, help="Output structure file path. Accepted formats: pdb, pdbqt.")
+    required_args = parser.add_argument_group("required arguments")
+    required_args.add_argument(
+        "-i",
+        "--input_structure_path",
+        required=True,
+        help="Input structure file path. Accepted formats: pdb.",
+    )
+    required_args.add_argument(
+        "-o",
+        "--output_structure_path",
+        required=True,
+        help="Output structure file path. Accepted formats: pdb, pdbqt.",
+    )
 
     args = parser.parse_args()
     config = args.config if args.config else None
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    str_check_add_hydrogens(input_structure_path=args.input_structure_path,
-                            output_structure_path=args.output_structure_path,
-                            properties=properties)
+    str_check_add_hydrogens(
+        input_structure_path=args.input_structure_path,
+        output_structure_path=args.output_structure_path,
+        properties=properties,
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

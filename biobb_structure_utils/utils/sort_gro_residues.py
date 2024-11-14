@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 
 """Module containing the SortGroResidues class and the command line interface."""
+
 import argparse
 from typing import Optional
+
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
+
 from biobb_structure_utils.gro_lib.gro import Gro
+from biobb_structure_utils.utils.common import _from_string_to_list
 
 
 class SortGroResidues(BiobbObject):
@@ -45,7 +49,9 @@ class SortGroResidues(BiobbObject):
 
     """
 
-    def __init__(self, input_gro_path, output_gro_path, properties=None, **kwargs) -> None:
+    def __init__(
+        self, input_gro_path, output_gro_path, properties=None, **kwargs
+    ) -> None:
         properties = properties or {}
 
         # Call parent class constructor
@@ -55,11 +61,13 @@ class SortGroResidues(BiobbObject):
         # Input/Output files
         self.io_dict = {
             "in": {"input_gro_path": input_gro_path},
-            "out": {"output_gro_path": output_gro_path}
+            "out": {"output_gro_path": output_gro_path},
         }
 
         # Properties specific for BB
-        self.residue_name_list = properties.get('residue_name_list', ["NA", "CL", "SOL"])
+        self.residue_name_list = _from_string_to_list(
+            properties.get("residue_name_list", ["NA", "CL", "SOL"])
+        )
 
         # Check the properties
         self.check_properties(properties)
@@ -76,9 +84,9 @@ class SortGroResidues(BiobbObject):
 
         # Business code
         in_gro = Gro()
-        in_gro.read_gro_file(self.stage_io_dict['in']['input_gro_path'])
+        in_gro.read_gro_file(self.stage_io_dict["in"]["input_gro_path"])
         in_gro.sort_residues2(self.residue_name_list)
-        in_gro.write_gro_file(self.stage_io_dict['out']['output_gro_path'])
+        in_gro.write_gro_file(self.stage_io_dict["out"]["output_gro_path"])
         self.return_code = 0
         ##########
 
@@ -86,7 +94,7 @@ class SortGroResidues(BiobbObject):
         self.copy_to_host()
 
         # Remove temporal files
-        self.tmp_files.append(self.stage_io_dict.get("unique_dir"))
+        self.tmp_files.append(self.stage_io_dict.get("unique_dir", ""))
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -94,34 +102,56 @@ class SortGroResidues(BiobbObject):
         return self.return_code
 
 
-def sort_gro_residues(input_gro_path: str, output_gro_path: str, properties: Optional[dict] = None, **kwargs) -> int:
+def sort_gro_residues(
+    input_gro_path: str,
+    output_gro_path: str,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
     """Execute the :class:`SortGroResidues <utils.sort_gro_residues.SortGroResidues>` class and
     execute the :meth:`launch() <utils.sort_gro_residues.SortGroResidues.launch>` method."""
 
-    return SortGroResidues(input_gro_path=input_gro_path,
-                           output_gro_path=output_gro_path,
-                           properties=properties, **kwargs).launch()
+    return SortGroResidues(
+        input_gro_path=input_gro_path,
+        output_gro_path=output_gro_path,
+        properties=properties,
+        **kwargs,
+    ).launch()
 
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
-    parser = argparse.ArgumentParser(description="Renumber atoms and residues from a 3D structure.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
+    parser = argparse.ArgumentParser(
+        description="Renumber atoms and residues from a 3D structure.",
+        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
+    )
+    parser.add_argument(
+        "-c",
+        "--config",
+        required=False,
+        help="This file can be a YAML file, JSON file or JSON string",
+    )
 
     # Specific args of each building block
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('-i', '--input_gro_path', required=True, help="Input GRO file name")
-    required_args.add_argument('-o', '--output_gro_path', required=True, help="Output sorted GRO file name")
+    required_args = parser.add_argument_group("required arguments")
+    required_args.add_argument(
+        "-i", "--input_gro_path", required=True, help="Input GRO file name"
+    )
+    required_args.add_argument(
+        "-o", "--output_gro_path", required=True, help="Output sorted GRO file name"
+    )
 
     args = parser.parse_args()
     config = args.config if args.config else None
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    sort_gro_residues(input_gro_path=args.input_gro_path,
-                      output_gro_path=args.output_gro_path,
-                      properties=properties)
+    sort_gro_residues(
+        input_gro_path=args.input_gro_path,
+        output_gro_path=args.output_gro_path,
+        properties=properties,
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

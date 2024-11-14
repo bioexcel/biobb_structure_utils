@@ -1,14 +1,24 @@
 #!/usr/bin/env python3
 
 """Module containing the ExtractResidues class and the command line interface."""
+
 import argparse
 from typing import Optional
+
+from Bio.PDB.PDBParser import PDBParser
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from Bio.PDB.PDBParser import PDBParser
-from biobb_structure_utils.utils.common import check_input_path, check_output_path, create_residues_list, create_biopython_residue, create_output_file
+
+from biobb_structure_utils.utils.common import (
+    _from_string_to_list,
+    check_input_path,
+    check_output_path,
+    create_biopython_residue,
+    create_output_file,
+    create_residues_list,
+)
 
 
 class ExtractResidues(BiobbObject):
@@ -55,7 +65,9 @@ class ExtractResidues(BiobbObject):
 
     """
 
-    def __init__(self, input_structure_path, output_residues_path, properties=None, **kwargs) -> None:
+    def __init__(
+        self, input_structure_path, output_residues_path, properties=None, **kwargs
+    ) -> None:
         properties = properties or {}
 
         # Call parent class constructor
@@ -65,11 +77,11 @@ class ExtractResidues(BiobbObject):
         # Input/Output files
         self.io_dict = {
             "in": {"input_structure_path": input_structure_path},
-            "out": {"output_residues_path": output_residues_path}
+            "out": {"output_residues_path": output_residues_path},
         }
 
         # Properties specific for BB
-        self.residues = properties.get('residues', [])
+        self.residues = _from_string_to_list(properties.get("residues", []))
         self.properties = properties
 
         # Check the properties
@@ -80,10 +92,16 @@ class ExtractResidues(BiobbObject):
     def launch(self) -> int:
         """Execute the :class:`ExtractResidues <utils.extract_residues.ExtractResidues>` utils.extract_residues.ExtractResidues object."""
 
-        self.io_dict['in']['input_structure_path'] = check_input_path(self.io_dict['in']['input_structure_path'],
-                                                                      self.out_log, self.__class__.__name__)
-        self.io_dict['out']['output_residues_path'] = check_output_path(self.io_dict['out']['output_residues_path'],
-                                                                        self.out_log, self.__class__.__name__)
+        self.io_dict["in"]["input_structure_path"] = check_input_path(
+            self.io_dict["in"]["input_structure_path"],
+            self.out_log,
+            self.__class__.__name__,
+        )
+        self.io_dict["out"]["output_residues_path"] = check_output_path(
+            self.io_dict["out"]["output_residues_path"],
+            self.out_log,
+            self.__class__.__name__,
+        )
 
         # Setup Biobb
         if self.check_restart():
@@ -95,7 +113,9 @@ class ExtractResidues(BiobbObject):
         list_residues = create_residues_list(self.residues, self.out_log)
 
         # load input into BioPython structure
-        structure = PDBParser(QUIET=True).get_structure('structure', self.stage_io_dict['in']['input_structure_path'])
+        structure = PDBParser(QUIET=True).get_structure(
+            "structure", self.stage_io_dict["in"]["input_structure_path"]
+        )
 
         new_structure = []
         # get desired residues
@@ -104,7 +124,7 @@ class ExtractResidues(BiobbObject):
             if list_residues:
                 for res in list_residues:
                     match = True
-                    for code in res['code']:
+                    for code in res["code"]:
                         if res[code].strip() != r[code].strip():
                             match = False
                             break
@@ -115,10 +135,23 @@ class ExtractResidues(BiobbObject):
 
         # if not residues found in structure, raise exit
         if not new_structure:
-            fu.log(self.__class__.__name__ + ': The residues given by user were not found in input structure', self.out_log)
-            raise SystemExit(self.__class__.__name__ + ': The residues given by user were not found in input structure')
+            fu.log(
+                self.__class__.__name__
+                + ": The residues given by user were not found in input structure",
+                self.out_log,
+            )
+            raise SystemExit(
+                self.__class__.__name__
+                + ": The residues given by user were not found in input structure"
+            )
 
-        create_output_file(2, self.stage_io_dict['in']['input_structure_path'], new_structure, self.stage_io_dict['out']['output_residues_path'], self.out_log)
+        create_output_file(
+            2,
+            self.stage_io_dict["in"]["input_structure_path"],
+            new_structure,
+            self.stage_io_dict["out"]["output_residues_path"],
+            self.out_log,
+        )
 
         self.return_code = 0
 
@@ -126,7 +159,7 @@ class ExtractResidues(BiobbObject):
         self.copy_to_host()
 
         # Remove temporal files
-        self.tmp_files.append(self.stage_io_dict.get("unique_dir"))
+        self.tmp_files.append(self.stage_io_dict.get("unique_dir", ""))
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -134,34 +167,62 @@ class ExtractResidues(BiobbObject):
         return self.return_code
 
 
-def extract_residues(input_structure_path: str, output_residues_path: str, properties: Optional[dict] = None, **kwargs) -> int:
+def extract_residues(
+    input_structure_path: str,
+    output_residues_path: str,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
     """Execute the :class:`ExtractResidues <utils.extract_residues.ExtractResidues>` class and
     execute the :meth:`launch() <utils.extract_residues.ExtractResidues.launch>` method."""
 
-    return ExtractResidues(input_structure_path=input_structure_path,
-                           output_residues_path=output_residues_path,
-                           properties=properties, **kwargs).launch()
+    return ExtractResidues(
+        input_structure_path=input_structure_path,
+        output_residues_path=output_residues_path,
+        properties=properties,
+        **kwargs,
+    ).launch()
 
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
-    parser = argparse.ArgumentParser(description="Extract a list of residues from a 3D structure.", formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('-c', '--config', required=False, help="This file can be a YAML file, JSON file or JSON string")
+    parser = argparse.ArgumentParser(
+        description="Extract a list of residues from a 3D structure.",
+        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
+    )
+    parser.add_argument(
+        "-c",
+        "--config",
+        required=False,
+        help="This file can be a YAML file, JSON file or JSON string",
+    )
 
     # Specific args of each building block
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('-i', '--input_structure_path', required=True, help="Input structure file path. Accepted formats: pdb.")
-    required_args.add_argument('-o', '--output_residues_path', required=True, help="Output residues file path. Accepted formats: pdb.")
+    required_args = parser.add_argument_group("required arguments")
+    required_args.add_argument(
+        "-i",
+        "--input_structure_path",
+        required=True,
+        help="Input structure file path. Accepted formats: pdb.",
+    )
+    required_args.add_argument(
+        "-o",
+        "--output_residues_path",
+        required=True,
+        help="Output residues file path. Accepted formats: pdb.",
+    )
 
     args = parser.parse_args()
     config = args.config if args.config else None
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call of each building block
-    extract_residues(input_structure_path=args.input_structure_path,
-                     output_residues_path=args.output_residues_path,
-                     properties=properties)
+    extract_residues(
+        input_structure_path=args.input_structure_path,
+        output_residues_path=args.output_residues_path,
+        properties=properties,
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
