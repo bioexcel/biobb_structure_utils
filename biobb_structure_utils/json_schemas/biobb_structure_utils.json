@@ -1,147 +1,146 @@
 {
     "_id": "biobb_structure_utils",
-    "desc" : "Biobb_structure_utils is the Biobb module collection to modify or extract information from a PDB structure file.",
-    "github" : "https://github.com/bioexcel/biobb_structure_utils",
-    "readthedocs" : "https://biobb-structure-utils.readthedocs.io/en/latest/",
-    "conda" : "https://anaconda.org/bioconda/biobb_structure_utils",
-    "docker" : "https://quay.io/biocontainers/biobb_structure_utils:4.2.0--pyhdfd78af_0",
-    "singularity" : "https://depot.galaxyproject.org/singularity/biobb_structure_utils:4.2.0--pyhdfd78af_0",
-    "version" : "4.2.0",
+    "desc": "Biobb_structure_utils is the Biobb module collection to modify or extract information from a PDB structure file.",
+    "github": "https://github.com/bioexcel/biobb_structure_utils",
+    "readthedocs": "https://biobb-structure-utils.readthedocs.io/en/latest/",
+    "conda": "https://anaconda.org/bioconda/biobb_structure_utils",
+    "docker": "https://quay.io/biocontainers/biobb_structure_utils:5.0.0--pyhdfd78af_0",
+    "singularity": "https://depot.galaxyproject.org/singularity/biobb_structure_utils:5.0.0--pyhdfd78af_0",
+    "version": "5.0.0",
     "rest": true,
-    "tools" : [
+    "tools": [
         {
-            "block" : "CatPDB",
-            "tool" : "in house",
-            "desc" : "Class to concat two PDB structures in a single PDB file.",
-            "exec" : "cat_pdb",
+            "block": "CatPDB",
+            "tool": "in house",
+            "desc": "Class to concat two PDB structures in a single PDB file.",
+            "exec": "cat_pdb",
             "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.cat_pdb",
             "rest": true
         },
         {
-            "block" : "ExtractAtoms",
-            "tool" : "in house",
-            "desc" : "Class to extract atoms from a 3D structure.",
-            "exec" : "extract_atoms",
+            "block": "ExtractAtoms",
+            "tool": "in house",
+            "desc": "Class to extract atoms from a 3D structure.",
+            "exec": "extract_atoms",
             "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.extract_atoms",
             "rest": true
         },
         {
-            "block" : "ExtractChain",
-            "tool" : "Structure Checking from MDWeb",
-            "desc" : "This class is a wrapper of the Structure Checking tool to extract a chain from a 3D structure.",
-            "exec" : "extract_chain",
+            "block": "ExtractChain",
+            "tool": "Structure Checking from MDWeb",
+            "desc": "This class is a wrapper of the Structure Checking tool to extract a chain from a 3D structure.",
+            "exec": "extract_chain",
             "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.extract_chain",
             "rest": true
         },
         {
-            "block" : "ExtractHeteroAtoms",
-            "tool" : "in house using biopython",
-            "desc" : "Class to extract hetero-atoms from a 3D structure.",
-            "exec" : "extract_heteroatoms",
+            "block": "ExtractHeteroAtoms",
+            "tool": "in house using biopython",
+            "desc": "Class to extract hetero-atoms from a 3D structure.",
+            "exec": "extract_heteroatoms",
             "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.extract_heteroatoms",
             "rest": true
         },
         {
-            "block" : "ExtractResidues",
-            "tool" : "in house using biopython",
-            "desc" : "Class to extract residues from a 3D structure.",
-            "exec" : "extract_residues",
+            "block": "ExtractResidues",
+            "tool": "in house using biopython",
+            "desc": "Class to extract residues from a 3D structure.",
+            "exec": "extract_residues",
             "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.extract_residues",
             "rest": true
         },
         {
-            "block" : "ClosestResidues",
-            "tool" : "in house using biopython",
-            "desc" : "Class to search closest residues from a 3D structure using Biopython.",
-            "exec" : "closest_residues",
+            "block": "ClosestResidues",
+            "tool": "in house using biopython",
+            "desc": "Class to search closest residues from a 3D structure using Biopython.",
+            "exec": "closest_residues",
             "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.closest_residues",
             "rest": false
         },
         {
-            "block" : "RemoveMolecules",
-            "tool" : "in house using biopython",
-            "desc" : "Class to remove molecules from a 3D structure using Biopython.",
-            "exec" : "remove_molecules",
+            "block": "RemoveMolecules",
+            "tool": "in house using biopython",
+            "desc": "Class to remove molecules from a 3D structure using Biopython.",
+            "exec": "remove_molecules",
             "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.remove_molecules",
             "rest": false
         },
         {
-            "block" : "ExtractModel",
-            "tool" : "Structure Checking from MDWeb",
-            "desc" : "This class is a wrapper of the Structure Checking tool to extract a model from a 3D structure.",
-            "exec" : "extract_model",
+            "block": "ExtractModel",
+            "tool": "Structure Checking from MDWeb",
+            "desc": "This class is a wrapper of the Structure Checking tool to extract a model from a 3D structure.",
+            "exec": "extract_model",
             "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.extract_model",
             "rest": true
         },
         {
-            "block" : "ExtractMolecule",
-            "tool" : "Structure Checking from MDWeb",
-            "desc" : "This class is a wrapper of the Structure Checking tool to extract a molecule from a 3D structure.",
-            "exec" : "extract_molecule",
+            "block": "ExtractMolecule",
+            "tool": "Structure Checking from MDWeb",
+            "desc": "This class is a wrapper of the Structure Checking tool to extract a molecule from a 3D structure.",
+            "exec": "extract_molecule",
             "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.extract_molecule",
             "rest": true
         },
         {
-            "block" : "RemoveLigand",
-            "tool" : "in house",
-            "desc" : "Class to remove the selected ligand atoms from a 3D structure.",
-            "exec" : "remove_ligand",
+            "block": "RemoveLigand",
+            "tool": "in house",
+            "desc": "Class to remove the selected ligand atoms from a 3D structure.",
+            "exec": "remove_ligand",
             "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.remove_ligand",
             "rest": true
         },
         {
-            "block" : "RemovePdbWater",
-            "tool" : "Structure Checking from MDWeb",
-            "desc" : "This class is a wrapper of the Structure Checking tool to remove water molecules from PDB 3D structures.",
-            "exec" : "remove_pdb_water",
+            "block": "RemovePdbWater",
+            "tool": "Structure Checking from MDWeb",
+            "desc": "This class is a wrapper of the Structure Checking tool to remove water molecules from PDB 3D structures.",
+            "exec": "remove_pdb_water",
             "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.remove_pdb_water",
             "rest": true
         },
         {
-            "block" : "RenumberStructure",
-            "tool" : "in house",
-            "desc" : "Class to renumber atomic indexes from a 3D structure.",
-            "exec" : "renumber_structure",
+            "block": "RenumberStructure",
+            "tool": "in house",
+            "desc": "Class to renumber atomic indexes from a 3D structure.",
+            "exec": "renumber_structure",
             "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.renumber_structure",
             "rest": true
         },
         {
-            "block" : "SortGroResidues",
-            "tool" : "in house",
-            "desc" : "Class to sort the selected residues from a GRO 3D structure.",
-            "exec" : "sort_gro_residues",
+            "block": "SortGroResidues",
+            "tool": "in house",
+            "desc": "Class to sort the selected residues from a GRO 3D structure.",
+            "exec": "sort_gro_residues",
             "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.sort_gro_residues",
             "rest": true
         },
         {
-            "block" : "StrCheckAddHydrogens",
-            "tool" : "Structure Checking from MDWeb",
-            "desc" : "This class is a wrapper of the Structure Checking tool to add hydrogens to a 3D structure.",
-            "exec" : "str_check_add_hydrogens",
+            "block": "StrCheckAddHydrogens",
+            "tool": "Structure Checking from MDWeb",
+            "desc": "This class is a wrapper of the Structure Checking tool to add hydrogens to a 3D structure.",
+            "exec": "str_check_add_hydrogens",
             "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#utils-str-check-add-hydrogens-module",
             "rest": true
         },
         {
-            "block" : "StructureCheck",
-            "tool" : "Structure Checking from MDWeb",
-            "desc" : "This class is a wrapper of the Structure Checking tool to generate summary checking results on a json file.",
-            "exec" : "structure_check",
+            "block": "StructureCheck",
+            "tool": "Structure Checking from MDWeb",
+            "desc": "This class is a wrapper of the Structure Checking tool to generate summary checking results on a json file.",
+            "exec": "structure_check",
             "docs": "https://biobb-structure-utils.readthedocs.io/en/latest/utils.html#module-utils.structure_check",
             "rest": true
         }
     ],
-    "dep_pypi" : [
-        "install_requires=['biobb_common==4.2.0', 'biobb_structure_checking==3.13.4']",
-        "python_requires='>=3.8'"
+    "dep_pypi": [
+        "install_requires=['biobb_common==5.0.0', 'biobb_structure_checking>=3.13.5']",
+        "python_requires='>=3.9'"
     ],
-    "dep_conda" : [
-        "python >=3.8",
-        "biobb_common ==4.2.0",
-        "biobb_structure_checking ==3.13.4"
+    "dep_conda": [
+        "python >=3.9",
+        "biobb_common ==5.0.0",
+        "biobb_structure_checking >=3.13.5"
     ],
-    "dep_conda_extra" : [
-    ],
-    "keywords" : [
+    "dep_conda_extra": [],
+    "keywords": [
         "structure",
         "protein",
         "heteroatom",

@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="biobb_structure_utils",
-    version="4.2.0",
+    version="5.0.0",
     author="Biobb developers",
     author_email="pau.andrio@bsc.es",
     description="biobb_structure_utils is the Biobb module collection to perform basic manipulations on 3d structures.",
@@ -15,12 +15,12 @@ setuptools.setup(
     url="https://github.com/bioexcel/biobb_structure_utils",
     project_urls={
         "Documentation": "http://biobb-structure-utils.readthedocs.io/en/latest/",
-        "Bioexcel": "https://bioexcel.eu/"
+        "Bioexcel": "https://bioexcel.eu/",
     },
-    packages=setuptools.find_packages(exclude=['docs', 'test']),
-    package_data={'biobb_structure_utils': ['py.typed']},
-    install_requires=['biobb_common==4.2.0', 'biobb_structure_checking==3.13.4'],
-    python_requires='>=3.8',
+    packages=setuptools.find_packages(exclude=["docs", "test"]),
+    package_data={"biobb_structure_utils": ["py.typed"]},
+    install_requires=["biobb_common==5.0.0", "biobb_structure_checking>=3.13.5"],
+    python_requires=">=3.9",
     entry_points={
         "console_scripts": [
             "cat_pdb = biobb_structure_utils.utils.cat_pdb:main",
@@ -37,17 +37,15 @@ setuptools.setup(
             "renumber_structure = biobb_structure_utils.utils.renumber_structure:main",
             "sort_gro_residues = biobb_structure_utils.utils.sort_gro_residues:main",
             "str_check_add_hydrogens = biobb_structure_utils.utils.str_check_add_hydrogens:main",
-            "structure_check = biobb_structure_utils.utils.structure_check:main"
+            "structure_check = biobb_structure_utils.utils.structure_check:main",
         ]
     },
-    classifiers=(
+    classifiers=[
         "Development Status :: 5 - Production/Stable",
-        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
-        "Programming Language :: Python :: 3.10",
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: MacOS :: MacOS X",
         "Operating System :: POSIX",
-        "Operating System :: Unix"
-    ),
+        "Operating System :: Unix",
+    ],
 )

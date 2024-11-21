@@ -1,5 +1,18 @@
 # Biobb Structure Utils changelog
 
+## What's new in version [5.0.0](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v5.0.0)?
+
+### Changes
+
+* [FIX](all): Accept lists in different formats on input properties.
+* [CI/CD](linting_and_testing.yml): Update set-up micromamba.
+* [CI/CD](linting_and_testing): Update GA test workflow to Python >3.9
+* [DOCS](.readthedocs.yaml): Updating to Python 3.9
+* [CI/CD](GITIGNORE): Update .gitignore to include the new file extensions to ignore
+* [FEATURE](__init__): Importing submodules when a module is loaded
+* [CI/CD](conf.yml): Change test conf.yml to adapt to new settings configuration
+* [FEATURE] New sandbox_path property
+
 ## What's new in version [4.2.0](https://github.com/bioexcel/biobb_structure_utils/releases/tag/v4.2.0)?
 In version 4.2.0 the dependency biobb_common has been updated to 4.2.0 version.
 
