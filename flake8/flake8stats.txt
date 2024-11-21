@@ -1,1 +1,1 @@
-20    W503 line break before binary operator
+22    W503 line break before binary operator
