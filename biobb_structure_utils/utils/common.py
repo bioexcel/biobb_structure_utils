@@ -176,7 +176,7 @@ def create_output_file(type, input, residues, output, out_log):
 
 def create_biopython_residue(residue):
     return {
-        "model": str(residue.get_parent().get_parent().get_id() + 1),
+        "model": str(residue.get_parent().get_parent().get_id()),
         "chain": residue.get_parent().get_id(),
         "name": residue.get_resname(),
         "res_id": str(residue.get_id()[1]),
