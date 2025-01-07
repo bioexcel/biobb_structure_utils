@@ -19,13 +19,11 @@ def check_input_path(path, out_log, classname):
     file_extension = PurePath(path).suffix
     if not is_valid_pdb(file_extension[1:]) and not is_valid_pdbqt(file_extension[1:]):
         fu.log(
-            classname
-            + ": Format %s in input file is not compatible" % file_extension[1:],
+            classname + ": Format %s in input file is not compatible" % file_extension[1:],
             out_log,
         )
         raise SystemExit(
-            classname
-            + ": Format %s in input file is not compatible" % file_extension[1:]
+            classname + ": Format %s in input file is not compatible" % file_extension[1:]
         )
     # if file input has no path, add cwd because execution is launched on tmp folder
     if PurePath(path).name == path or not PurePath(path).is_absolute():
@@ -41,13 +39,11 @@ def check_output_path(path, out_log, classname):
     file_extension = PurePath(path).suffix
     if not is_valid_pdb(file_extension[1:]) and not is_valid_pdbqt(file_extension[1:]):
         fu.log(
-            classname
-            + ": Format %s in output file is not compatible" % file_extension[1:],
+            classname + ": Format %s in output file is not compatible" % file_extension[1:],
             out_log,
         )
         raise SystemExit(
-            classname
-            + ": Format %s in output file is not compatible" % file_extension[1:]
+            classname + ": Format %s in output file is not compatible" % file_extension[1:]
         )
     return path
 
@@ -60,13 +56,11 @@ def check_output_path_pdbqt(path, out_log, classname):
     file_extension = PurePath(path).suffix
     if not is_valid_pdbqt(file_extension[1:]):
         fu.log(
-            classname
-            + ": Format %s in output file is not compatible" % file_extension[1:],
+            classname + ": Format %s in output file is not compatible" % file_extension[1:],
             out_log,
         )
         raise SystemExit(
-            classname
-            + ": Format %s in output file is not compatible" % file_extension[1:]
+            classname + ": Format %s in output file is not compatible" % file_extension[1:]
         )
     return path
 
@@ -79,13 +73,11 @@ def check_output_path_json(path, out_log, classname):
     file_extension = PurePath(path).suffix
     if not is_valid_json(file_extension[1:]):
         fu.log(
-            classname
-            + ": Format %s in output file is not compatible" % file_extension[1:],
+            classname + ": Format %s in output file is not compatible" % file_extension[1:],
             out_log,
         )
         raise SystemExit(
-            classname
-            + ": Format %s in output file is not compatible" % file_extension[1:]
+            classname + ": Format %s in output file is not compatible" % file_extension[1:]
         )
     return path
 
@@ -156,10 +148,7 @@ def create_output_file(type, input, residues, output, out_log):
 
                 for nstr in residues:
                     if (
-                        nstr["res_id"] == res_id
-                        and nstr["name"] == name
-                        and nstr["chain"] == chain
-                        and nstr["model"] == model
+                        nstr["res_id"] == res_id and nstr["name"] == name and nstr["chain"] == chain and nstr["model"] == model
                     ):
                         new_file_lines.append(line)
 

@@ -133,9 +133,7 @@ class ExtractHeteroAtoms(BiobbObject):
 
                     if match:
                         if not self.water and (
-                            r["name"] == "HOH"
-                            or r["name"] == "SOL"
-                            or r["name"] == "WAT"
+                            r["name"] == "HOH" or r["name"] == "SOL" or r["name"] == "WAT"
                         ):
                             pass
                         else:
@@ -151,13 +149,11 @@ class ExtractHeteroAtoms(BiobbObject):
         # if not heteroatoms found in structure, raise exit
         if not new_structure:
             fu.log(
-                self.__class__.__name__
-                + ": The heteroatoms given by user were not found in input structure",
+                self.__class__.__name__ + ": The heteroatoms given by user were not found in input structure",
                 self.out_log,
             )
             raise SystemExit(
-                self.__class__.__name__
-                + ": The heteroatoms given by user were not found in input structure"
+                self.__class__.__name__ + ": The heteroatoms given by user were not found in input structure"
             )
 
         create_output_file(
