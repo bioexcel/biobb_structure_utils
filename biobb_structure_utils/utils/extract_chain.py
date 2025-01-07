@@ -126,8 +126,7 @@ class ExtractChain(BiobbObject):
                 ) as structure_out:
                     for line in structure_in:
                         if (
-                            line.strip().upper().startswith(("ATOM", "HETATM"))
-                            and line.strip().upper()[21] in chain_list
+                            line.strip().upper().startswith(("ATOM", "HETATM")) and line.strip().upper()[21] in chain_list
                         ):
                             structure_out.write(line)
 

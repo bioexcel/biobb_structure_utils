@@ -289,8 +289,7 @@ class Gro:
         """
         for i_atom in range(another_gro_object.num_of_atoms):
             if (
-                another_gro_object.residue_id[i_atom] == residue_id
-                and another_gro_object.residue_name[i_atom] == residue_name
+                another_gro_object.residue_id[i_atom] == residue_id and another_gro_object.residue_name[i_atom] == residue_name
             ):
                 self.copy_atom_entry(another_gro_object, i_atom)
 
@@ -343,8 +342,7 @@ class Gro:
         atom_indice_to_be_removed = []
         for i_atom in range(self.num_of_atoms):
             if (
-                self.residue_id[i_atom] == residue_id
-                and self.residue_name[i_atom] == residue_name
+                self.residue_id[i_atom] == residue_id and self.residue_name[i_atom] == residue_name
             ):
                 atom_indice_to_be_removed.append(
                     i_atom

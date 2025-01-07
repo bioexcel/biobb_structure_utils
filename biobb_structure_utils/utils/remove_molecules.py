@@ -138,13 +138,11 @@ class RemoveMolecules(BiobbObject):
         # if not residues found in structure, raise exit
         if not remove_structure:
             fu.log(
-                self.__class__.__name__
-                + ": The residues given by user were not found in input structure",
+                self.__class__.__name__ + ": The residues given by user were not found in input structure",
                 self.out_log,
             )
             raise SystemExit(
-                self.__class__.__name__
-                + ": The residues given by user were not found in input structure"
+                self.__class__.__name__ + ": The residues given by user were not found in input structure"
             )
 
         # substract residues (remove_structure) from whole_structure
