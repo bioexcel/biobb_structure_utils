@@ -29,34 +29,34 @@
                class="code sev- "><tt><i>4</i> &nbsp;</tt>
             </div>
             <div id="l5"
-               class="code sev- "><tt><i>5</i> <span class="kn">import</span> <span class="nn">argparse</span></tt>
+               class="code sev- "><tt><i>5</i> <span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span></tt>
             </div>
             <div id="l6"
-               class="code sev- "><tt><i>6</i> <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span></tt>
+               class="code sev- "><tt><i>6</i> <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span></tt>
             </div>
             <div id="l7"
                class="code sev- "><tt><i>7</i> &nbsp;</tt>
             </div>
             <div id="l8"
-               class="code sev- "><tt><i>8</i> <span class="kn">from</span> <span class="nn">Bio.PDB.PDBParser</span> <span class="kn">import</span> <span class="n">PDBParser</span></tt>
+               class="code sev- "><tt><i>8</i> <span class="kn">from</span><span class="w"> </span><span class="nn">Bio.PDB.PDBParser</span><span class="w"> </span><span class="kn">import</span> <span class="n">PDBParser</span></tt>
             </div>
             <div id="l9"
-               class="code sev- "><tt><i>9</i> <span class="kn">from</span> <span class="nn">biobb_common.configuration</span> <span class="kn">import</span> <span class="n">settings</span></tt>
+               class="code sev- "><tt><i>9</i> <span class="kn">from</span><span class="w"> </span><span class="nn">biobb_common.configuration</span><span class="w"> </span><span class="kn">import</span> <span class="n">settings</span></tt>
             </div>
             <div id="l10"
-               class="code sev- "><tt><i>10</i> <span class="kn">from</span> <span class="nn">biobb_common.generic.biobb_object</span> <span class="kn">import</span> <span class="n">BiobbObject</span></tt>
+               class="code sev- "><tt><i>10</i> <span class="kn">from</span><span class="w"> </span><span class="nn">biobb_common.generic.biobb_object</span><span class="w"> </span><span class="kn">import</span> <span class="n">BiobbObject</span></tt>
             </div>
             <div id="l11"
-               class="code sev- "><tt><i>11</i> <span class="kn">from</span> <span class="nn">biobb_common.tools</span> <span class="kn">import</span> <span class="n">file_utils</span> <span class="k">as</span> <span class="n">fu</span></tt>
+               class="code sev- "><tt><i>11</i> <span class="kn">from</span><span class="w"> </span><span class="nn">biobb_common.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">file_utils</span> <span class="k">as</span> <span class="n">fu</span></tt>
             </div>
             <div id="l12"
-               class="code sev- "><tt><i>12</i> <span class="kn">from</span> <span class="nn">biobb_common.tools.file_utils</span> <span class="kn">import</span> <span class="n">launchlogger</span></tt>
+               class="code sev- "><tt><i>12</i> <span class="kn">from</span><span class="w"> </span><span class="nn">biobb_common.tools.file_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">launchlogger</span></tt>
             </div>
             <div id="l13"
                class="code sev- "><tt><i>13</i> &nbsp;</tt>
             </div>
             <div id="l14"
-               class="code sev- "><tt><i>14</i> <span class="kn">from</span> <span class="nn">biobb_structure_utils.utils.common</span> <span class="kn">import</span> <span class="p">(</span></tt>
+               class="code sev- "><tt><i>14</i> <span class="kn">from</span><span class="w"> </span><span class="nn">biobb_structure_utils.utils.common</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span></tt>
             </div>
             <div id="l15"
                class="code sev- "><tt><i>15</i>     <span class="n">_from_string_to_list</span><span class="p">,</span></tt>
@@ -86,7 +86,7 @@
                class="code sev- "><tt><i>23</i> &nbsp;</tt>
             </div>
             <div id="l24"
-               class="code sev- "><tt><i>24</i> <span class="k">class</span> <span class="nc">RemoveMolecules</span><span class="p">(</span><span class="n">BiobbObject</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>24</i> <span class="k">class</span><span class="w"> </span><span class="nc">RemoveMolecules</span><span class="p">(</span><span class="n">BiobbObject</span><span class="p">):</span></tt>
             </div>
             <div id="l25"
                class="code sev- "><tt><i>25</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
@@ -218,7 +218,7 @@
                class="code sev- "><tt><i>67</i> &nbsp;</tt>
             </div>
             <div id="l68"
-               class="code sev- "><tt><i>68</i>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span></tt>
+               class="code sev- "><tt><i>68</i>     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span></tt>
             </div>
             <div id="l69"
                class="code sev- "><tt><i>69</i>         <span class="bp">self</span><span class="p">,</span> <span class="n">input_structure_path</span><span class="p">,</span> <span class="n">output_molecules_path</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span></tt>
@@ -290,7 +290,7 @@
                class="code sev- "><tt><i>91</i>     <span class="nd">@launchlogger</span></tt>
             </div>
             <div id="l92"
-               class="code sev- "><tt><i>92</i>     <span class="k">def</span> <span class="nf">launch</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span></tt>
+               class="code sev- "><tt><i>92</i>     <span class="k">def</span><span class="w"> </span><span class="nf">launch</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span></tt>
             </div>
             <div id="l93"
                class="code sev- "><tt><i>93</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute the :class:`RemoveMolecules &lt;utils.remove_molecules.RemoveMolecules&gt;` utils.remove_molecules.RemoveMolecules object.&quot;&quot;&quot;</span></tt>
@@ -557,7 +557,7 @@
                class="code sev- "><tt><i>174</i> &nbsp;</tt>
             </div>
             <div id="l175"
-               class="code sev- "><tt><i>175</i> <span class="k">def</span> <span class="nf">remove_molecules</span><span class="p">(</span></tt>
+               class="code sev- "><tt><i>175</i> <span class="k">def</span><span class="w"> </span><span class="nf">remove_molecules</span><span class="p">(</span></tt>
             </div>
             <div id="l176"
                class="code sev- "><tt><i>176</i>     <span class="n">input_structure_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span></tt>
@@ -608,7 +608,7 @@
                class="code sev- "><tt><i>191</i> &nbsp;</tt>
             </div>
             <div id="l192"
-               class="code sev- "><tt><i>192</i> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span></tt>
+               class="code sev- "><tt><i>192</i> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span></tt>
             </div>
             <div id="l193"
                class="code sev- "><tt><i>193</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Command line execution of this building block. Please check the command line documentation.&quot;&quot;&quot;</span></tt>
