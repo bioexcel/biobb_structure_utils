@@ -151,7 +151,10 @@ class StructureCheck(BiobbObject):
         self.copy_to_host()
 
         # Remove temporal files
-        self.tmp_files.extend([self.stage_io_dict.get("unique_dir", ""), tmp_folder])  # type: ignore
+        self.tmp_files.extend([
+            # self.stage_io_dict.get("unique_dir", ""),
+            tmp_folder
+        ])
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -174,6 +177,8 @@ def structure_check(
         properties=properties,
         **kwargs,
     ).launch()
+
+    structure_check.__doc__ = StructureCheck.__doc__
 
 
 def main():

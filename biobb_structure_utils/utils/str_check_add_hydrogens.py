@@ -145,7 +145,7 @@ class StrCheckAddHydrogens(BiobbObject):
         check_output_end(self.io_dict["out"]["output_structure_path"], self.out_log)
 
         # Remove temporal files
-        self.tmp_files.append(self.stage_io_dict.get("unique_dir", ""))
+        # self.tmp_files.append(self.stage_io_dict.get("unique_dir", ""))
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -168,6 +168,8 @@ def str_check_add_hydrogens(
         properties=properties,
         **kwargs,
     ).launch()
+
+    str_check_add_hydrogens.__doc__ = StrCheckAddHydrogens.__doc__
 
 
 def main():

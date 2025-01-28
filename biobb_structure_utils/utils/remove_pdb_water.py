@@ -95,7 +95,7 @@ class RemovePdbWater(BiobbObject):
         self.copy_to_host()
 
         # Remove temporal files
-        self.tmp_files.append(self.stage_io_dict.get("unique_dir", ""))
+        # self.tmp_files.append(self.stage_io_dict.get("unique_dir", ""))
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -118,6 +118,8 @@ def remove_pdb_water(
         properties=properties,
         **kwargs,
     ).launch()
+
+    remove_pdb_water.__doc__ = RemovePdbWater.__doc__
 
 
 def main():

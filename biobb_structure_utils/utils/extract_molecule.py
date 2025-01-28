@@ -146,7 +146,10 @@ class ExtractMolecule(BiobbObject):
         self.copy_to_host()
 
         # Remove temporal files
-        self.tmp_files.extend([self.stage_io_dict.get("unique_dir", ""), tmp_folder])
+        self.tmp_files.extend([
+            self.stage_io_dict.get("unique_dir", ""),
+            # tmp_folder
+        ])
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -169,6 +172,8 @@ def extract_molecule(
         properties=properties,
         **kwargs,
     ).launch()
+
+    extract_molecule.__doc__ = ExtractMolecule.__doc__
 
 
 def main():
