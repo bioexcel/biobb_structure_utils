@@ -13,7 +13,7 @@ Command:
 ```python
 cat_pdb -h
 ```
-    usage: cat_pdb [-h] [-c CONFIG] -i1 INPUT_STRUCTURE1 -i2 INPUT_STRUCTURE2 -o OUTPUT_STRUCTURE_PATH
+    usage: cat_pdb [-h] [-c CONFIG] --input_structure1 INPUT_STRUCTURE1 --input_structure2 INPUT_STRUCTURE2 -o OUTPUT_STRUCTURE_PATH
     
     Concat two PDB structures in a single PDB file.
     
@@ -23,12 +23,12 @@ cat_pdb -h
                             This file can be a YAML file, JSON file or JSON string
     
     required arguments:
-      -i1 INPUT_STRUCTURE1, --input_structure1 INPUT_STRUCTURE1
-                            Input structure 1 file path. Accepted formats: pdb.
-      -i2 INPUT_STRUCTURE2, --input_structure2 INPUT_STRUCTURE2
-                            Input structure 2 file path. Accepted formats: pdb.
+      --input_structure1 INPUT_STRUCTURE1
+                            Input structure 1 file path. Accepted formats: pdb, pdbqt.
+      --input_structure2 INPUT_STRUCTURE2
+                            Input structure 2 file path. Accepted formats: pdb, pdbqt.
       -o OUTPUT_STRUCTURE_PATH, --output_structure_path OUTPUT_STRUCTURE_PATH
-                            Output structure file path. Accepted formats: pdb.
+                            Output protein file path. Accepted formats: pdb, pdbqt.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -86,9 +86,9 @@ closest_residues -h
     
     required arguments:
       -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
-                            Input structure file path. Accepted formats: pdb.
+                            Input structure file path. Accepted formats: pdb, pdbqt.
       -o OUTPUT_RESIDUES_PATH, --output_residues_path OUTPUT_RESIDUES_PATH
-                            Output residues file path. Accepted formats: pdb.
+                            Output molcules file path. Accepted formats: pdb, pdbqt.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -161,9 +161,9 @@ extract_atoms -h
     
     required arguments:
       -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
-                            Input structure file name
+                            Input structure file path. Accepted formats: pdb, gro.
       -o OUTPUT_STRUCTURE_PATH, --output_structure_path OUTPUT_STRUCTURE_PATH
-                            Output structure file name
+                            Output structure file path. Accepted formats: pdb, gro.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -221,9 +221,9 @@ extract_chain -h
     
     required arguments:
       -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
-                            Input structure file path. Accepted formats: pdb.
+                            Input structure file path. Accepted formats: pdb, pdbqt.
       -o OUTPUT_STRUCTURE_PATH, --output_structure_path OUTPUT_STRUCTURE_PATH
-                            Output structure file path. Accepted formats: pdb.
+                            Output structure file path. Accepted formats: pdb, pdbqt.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -290,9 +290,9 @@ extract_heteroatoms -h
     
     required arguments:
       -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
-                            Input structure file path. Accepted formats: pdb.
+                            Input structure file path. Accepted formats: pdb, pdbqt.
       -o OUTPUT_HETEROATOM_PATH, --output_heteroatom_path OUTPUT_HETEROATOM_PATH
-                            Output heteroatom file path. Accepted formats: pdb.
+                            Output heteroatom file path. Accepted formats: pdb, pdbqt.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -362,9 +362,9 @@ extract_model -h
     
     required arguments:
       -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
-                            Input structure file path. Accepted formats: pdb.
+                            Input structure file path. Accepted formats: pdb, pdbqt.
       -o OUTPUT_STRUCTURE_PATH, --output_structure_path OUTPUT_STRUCTURE_PATH
-                            Output structure file path. Accepted formats: pdb.
+                            Output structure file path. Accepted formats: pdb, pdbqt.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -428,9 +428,9 @@ extract_molecule -h
     
     required arguments:
       -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
-                            Input structure file path. Accepted formats: pdb.
+                            Input structure file path. Accepted formats: pdb, pdbqt.
       -o OUTPUT_MOLECULE_PATH, --output_molecule_path OUTPUT_MOLECULE_PATH
-                            Output heteroatom file path. Accepted formats: pdb.
+                            Output molecule file path. Accepted formats: pdb, pdbqt.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -490,9 +490,9 @@ extract_residues -h
     
     required arguments:
       -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
-                            Input structure file path. Accepted formats: pdb.
+                            Input structure file path. Accepted formats: pdb, pdbqt.
       -o OUTPUT_RESIDUES_PATH, --output_residues_path OUTPUT_RESIDUES_PATH
-                            Output residues file path. Accepted formats: pdb.
+                            Output residues file path. Accepted formats: pdb, pdbqt.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -559,9 +559,9 @@ remove_ligand -h
     
     required arguments:
       -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
-                            Input structure file name
+                            Input structure file path. Accepted formats: pdb, gro.
       -o OUTPUT_STRUCTURE_PATH, --output_structure_path OUTPUT_STRUCTURE_PATH
-                            Output structure file name
+                            Output structure file path. Accepted formats: pdb, gro.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -619,9 +619,9 @@ remove_molecules -h
     
     required arguments:
       -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
-                            Input structure file path. Accepted formats: pdb.
+                            Input structure file path. Accepted formats: pdb, pdbqt.
       -o OUTPUT_MOLECULES_PATH, --output_molecules_path OUTPUT_MOLECULES_PATH
-                            Output molecules file path. Accepted formats: pdb.
+                            Output molcules file path. Accepted formats: pdb, pdbqt.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -688,9 +688,9 @@ remove_pdb_water -h
     
     required arguments:
       -i INPUT_PDB_PATH, --input_pdb_path INPUT_PDB_PATH
-                            Input pdb file name
+                            Input PDB file path. Accepted formats: pdb.
       -o OUTPUT_PDB_PATH, --output_pdb_path OUTPUT_PDB_PATH
-                            Output pdb file name
+                            Output PDB file path. Accepted formats: pdb.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -737,7 +737,7 @@ Command:
 ```python
 renumber_structure -h
 ```
-    usage: renumber_structure [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH -o OUTPUT_STRUCTURE_PATH -j OUTPUT_MAPPING_JSON_PATH
+    usage: renumber_structure [-h] [-c CONFIG] -i INPUT_STRUCTURE_PATH --output_structure_path OUTPUT_STRUCTURE_PATH --output_mapping_json_path OUTPUT_MAPPING_JSON_PATH
     
     Renumber atoms and residues from a 3D structure.
     
@@ -748,11 +748,11 @@ renumber_structure -h
     
     required arguments:
       -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
-                            Input structure file name
-      -o OUTPUT_STRUCTURE_PATH, --output_structure_path OUTPUT_STRUCTURE_PATH
-                            Output structure file name
-      -j OUTPUT_MAPPING_JSON_PATH, --output_mapping_json_path OUTPUT_MAPPING_JSON_PATH
-                            Output mapping json file name
+                            Input structure file path. Accepted formats: pdb, gro.
+      --output_structure_path OUTPUT_STRUCTURE_PATH
+                            Output structure file path. Accepted formats: pdb, gro.
+      --output_mapping_json_path OUTPUT_MAPPING_JSON_PATH
+                            Output mapping json file path. Accepted formats: json.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -812,9 +812,9 @@ sort_gro_residues -h
     
     required arguments:
       -i INPUT_GRO_PATH, --input_gro_path INPUT_GRO_PATH
-                            Input GRO file name
+                            Input GRO file path. Accepted formats: gro.
       -o OUTPUT_GRO_PATH, --output_gro_path OUTPUT_GRO_PATH
-                            Output sorted GRO file name
+                            Output sorted GRO file path. Accepted formats: gro.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -948,7 +948,7 @@ structure_check -h
     
     required arguments:
       -i INPUT_STRUCTURE_PATH, --input_structure_path INPUT_STRUCTURE_PATH
-                            Input structure file path. Accepted formats: pdb.
+                            Input structure file path. Accepted formats: pdb, pdbqt.
       -o OUTPUT_SUMMARY_PATH, --output_summary_path OUTPUT_SUMMARY_PATH
                             Output summary checking results. Accepted formats: json.
 ### I / O Arguments

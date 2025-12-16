@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
 
 """Module containing the RemovePdbWater class and the command line interface."""
-
-import argparse
 from typing import Optional
-
-from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
 
@@ -95,7 +91,6 @@ class RemovePdbWater(BiobbObject):
         self.copy_to_host()
 
         # Remove temporal files
-        # self.tmp_files.append(self.stage_io_dict.get("unique_dir", ""))
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -109,52 +104,14 @@ def remove_pdb_water(
     properties: Optional[dict] = None,
     **kwargs,
 ) -> int:
-    """Execute the :class:`RemovePdbWater <utils.remove_pdb_water.RemovePdbWater>` class and
+    """Create the :class:`RemovePdbWater <utils.remove_pdb_water.RemovePdbWater>` class and
     execute the :meth:`launch() <utils.remove_pdb_water.RemovePdbWater.launch>` method."""
 
-    return RemovePdbWater(
-        input_pdb_path=input_pdb_path,
-        output_pdb_path=output_pdb_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
-
-    remove_pdb_water.__doc__ = RemovePdbWater.__doc__
+    return RemovePdbWater(**dict(locals())).launch()
 
 
-def main():
-    """Command line execution of this building block. Please check the command line documentation."""
-    parser = argparse.ArgumentParser(
-        description="Remove the water molecules from a PDB 3D structure.",
-        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
-    )
-    parser.add_argument(
-        "-c",
-        "--config",
-        required=False,
-        help="This file can be a YAML file, JSON file or JSON string",
-    )
-
-    # Specific args of each building block
-    required_args = parser.add_argument_group("required arguments")
-    required_args.add_argument(
-        "-i", "--input_pdb_path", required=True, help="Input pdb file name"
-    )
-    required_args.add_argument(
-        "-o", "--output_pdb_path", required=True, help="Output pdb file name"
-    )
-
-    args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
-
-    # Specific call of each building block
-    remove_pdb_water(
-        input_pdb_path=args.input_pdb_path,
-        output_pdb_path=args.output_pdb_path,
-        properties=properties,
-    )
-
+remove_pdb_water.__doc__ = RemovePdbWater.__doc__
+main = RemovePdbWater.get_main(remove_pdb_water, "Remove the water molecules from a PDB 3D structure.")
 
 if __name__ == "__main__":
     main()

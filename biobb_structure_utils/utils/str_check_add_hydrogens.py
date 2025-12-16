@@ -2,10 +2,8 @@
 
 """Module containing the StrCheckAddHydrogens class and the command line interface."""
 
-import argparse
 from typing import Optional
 
-from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
 
@@ -145,7 +143,6 @@ class StrCheckAddHydrogens(BiobbObject):
         check_output_end(self.io_dict["out"]["output_structure_path"], self.out_log)
 
         # Remove temporal files
-        # self.tmp_files.append(self.stage_io_dict.get("unique_dir", ""))
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -159,58 +156,13 @@ def str_check_add_hydrogens(
     properties: Optional[dict] = None,
     **kwargs,
 ) -> int:
-    """Execute the :class:`StrCheckAddHydrogens <utils.str_check_add_hydrogens.StrCheckAddHydrogens>` class and
+    """Create the :class:`StrCheckAddHydrogens <utils.str_check_add_hydrogens.StrCheckAddHydrogens>` class and
     execute the :meth:`launch() <utils.str_check_add_hydrogens.StrCheckAddHydrogens.launch>` method."""
-
-    return StrCheckAddHydrogens(
-        input_structure_path=input_structure_path,
-        output_structure_path=output_structure_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
-
-    str_check_add_hydrogens.__doc__ = StrCheckAddHydrogens.__doc__
+    return StrCheckAddHydrogens(**dict(locals())).launch()
 
 
-def main():
-    """Command line execution of this building block. Please check the command line documentation."""
-    parser = argparse.ArgumentParser(
-        description="Class to add hydrogens to a 3D structure.",
-        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
-    )
-    parser.add_argument(
-        "-c",
-        "--config",
-        required=False,
-        help="This file can be a YAML file, JSON file or JSON string",
-    )
-
-    # Specific args of each building block
-    required_args = parser.add_argument_group("required arguments")
-    required_args.add_argument(
-        "-i",
-        "--input_structure_path",
-        required=True,
-        help="Input structure file path. Accepted formats: pdb.",
-    )
-    required_args.add_argument(
-        "-o",
-        "--output_structure_path",
-        required=True,
-        help="Output structure file path. Accepted formats: pdb, pdbqt.",
-    )
-
-    args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
-
-    # Specific call of each building block
-    str_check_add_hydrogens(
-        input_structure_path=args.input_structure_path,
-        output_structure_path=args.output_structure_path,
-        properties=properties,
-    )
-
+str_check_add_hydrogens.__doc__ = StrCheckAddHydrogens.__doc__
+main = StrCheckAddHydrogens.get_main(str_check_add_hydrogens, "Class to add hydrogens to a 3D structure.")
 
 if __name__ == "__main__":
     main()

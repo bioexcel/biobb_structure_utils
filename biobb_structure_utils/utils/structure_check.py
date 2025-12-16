@@ -2,10 +2,8 @@
 
 """Module containing the StructureCheck class and the command line interface."""
 
-import argparse
 from typing import Optional
 
-from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
@@ -151,10 +149,7 @@ class StructureCheck(BiobbObject):
         self.copy_to_host()
 
         # Remove temporal files
-        self.tmp_files.extend([
-            # self.stage_io_dict.get("unique_dir", ""),
-            tmp_folder
-        ])
+        self.tmp_files.append(tmp_folder)
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -168,58 +163,13 @@ def structure_check(
     properties: Optional[dict] = None,
     **kwargs,
 ) -> int:
-    """Execute the :class:`StructureCheck <utils.structure_check.StructureCheck>` class and
+    """Create the :class:`StructureCheck <utils.structure_check.StructureCheck>` class and
     execute the :meth:`launch() <utils.structure_check.StructureCheck.launch>` method."""
-
-    return StructureCheck(
-        input_structure_path=input_structure_path,
-        output_summary_path=output_summary_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
-
-    structure_check.__doc__ = StructureCheck.__doc__
+    return StructureCheck(**dict(locals())).launch()
 
 
-def main():
-    """Command line execution of this building block. Please check the command line documentation."""
-    parser = argparse.ArgumentParser(
-        description="This class is a wrapper of the Structure Checking tool to generate summary checking results on a json file.",
-        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
-    )
-    parser.add_argument(
-        "-c",
-        "--config",
-        required=False,
-        help="This file can be a YAML file, JSON file or JSON string",
-    )
-
-    # Specific args of each building block
-    required_args = parser.add_argument_group("required arguments")
-    required_args.add_argument(
-        "-i",
-        "--input_structure_path",
-        required=True,
-        help="Input structure file path. Accepted formats: pdb.",
-    )
-    required_args.add_argument(
-        "-o",
-        "--output_summary_path",
-        required=True,
-        help="Output summary checking results. Accepted formats: json.",
-    )
-
-    args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
-
-    # Specific call of each building block
-    structure_check(
-        input_structure_path=args.input_structure_path,
-        output_summary_path=args.output_summary_path,
-        properties=properties,
-    )
-
+structure_check.__doc__ = StructureCheck.__doc__
+main = StructureCheck.get_main(structure_check, "This class is a wrapper of the Structure Checking tool to generate summary checking results on a json file.")
 
 if __name__ == "__main__":
     main()

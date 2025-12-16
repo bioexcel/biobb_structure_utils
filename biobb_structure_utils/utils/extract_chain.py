@@ -1,12 +1,8 @@
 #!/usr/bin/env python3
 
 """Module containing the ExtractChain class and the command line interface."""
-
-import argparse
 import shutil
 from typing import Optional
-
-from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
@@ -151,7 +147,6 @@ class ExtractChain(BiobbObject):
         self.copy_to_host()
 
         # Remove temporal files
-        # self.tmp_files.append(self.stage_io_dict.get("unique_dir", ""))
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -181,58 +176,13 @@ def extract_chain(
     properties: Optional[dict] = None,
     **kwargs,
 ) -> int:
-    """Execute the :class:`ExtractChain <utils.extract_chain.ExtractChain>` class and
+    """Create the :class:`ExtractChain <utils.extract_chain.ExtractChain>` class and
     execute the :meth:`launch() <utils.extract_chain.ExtractChain.launch>` method."""
-
-    return ExtractChain(
-        input_structure_path=input_structure_path,
-        output_structure_path=output_structure_path,
-        properties=properties,
-        **kwargs,
-    ).launch()
-
-    extract_chain.__doc__ = ExtractChain.__doc__
+    return ExtractChain(**dict(locals())).launch()
 
 
-def main():
-    """Command line execution of this building block. Please check the command line documentation."""
-    parser = argparse.ArgumentParser(
-        description="Extract a chain from a 3D structure.",
-        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
-    )
-    parser.add_argument(
-        "-c",
-        "--config",
-        required=False,
-        help="This file can be a YAML file, JSON file or JSON string",
-    )
-
-    # Specific args of each building block
-    required_args = parser.add_argument_group("required arguments")
-    required_args.add_argument(
-        "-i",
-        "--input_structure_path",
-        required=True,
-        help="Input structure file path. Accepted formats: pdb.",
-    )
-    required_args.add_argument(
-        "-o",
-        "--output_structure_path",
-        required=True,
-        help="Output structure file path. Accepted formats: pdb.",
-    )
-
-    args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
-
-    # Specific call of each building block
-    extract_chain(
-        input_structure_path=args.input_structure_path,
-        output_structure_path=args.output_structure_path,
-        properties=properties,
-    )
-
+extract_chain.__doc__ = ExtractChain.__doc__
+main = ExtractChain.get_main(extract_chain, "Extract a chain from a 3D structure.")
 
 if __name__ == "__main__":
     main()
