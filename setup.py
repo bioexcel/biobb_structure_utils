@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="biobb_structure_utils",
-    version="5.1.0",
+    version="5.2.0",
     author="Biobb developers",
     author_email="pau.andrio@bsc.es",
     description="biobb_structure_utils is the Biobb module collection to perform basic manipulations on 3d structures.",
@@ -19,8 +19,8 @@ setuptools.setup(
     },
     packages=setuptools.find_packages(exclude=["docs", "test"]),
     package_data={"biobb_structure_utils": ["py.typed"]},
-    install_requires=["biobb_common==5.1.1", "biobb_structure_checking>=3.15.6"],
-    python_requires=">=3.9",
+    install_requires=["biobb_common==5.2.0", "biobb_structure_checking>=3.15.6"],
+    python_requires=">=3.10",
     entry_points={
         "console_scripts": [
             "cat_pdb = biobb_structure_utils.utils.cat_pdb:main",
@@ -42,7 +42,7 @@ setuptools.setup(
     },
     classifiers=[
         "Development Status :: 5 - Production/Stable",
-        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: MacOS :: MacOS X",
         "Operating System :: POSIX",
