@@ -2,4 +2,4 @@ from . import utils
 
 name = "biobb_structure_utils"
 __all__ = ["utils"]
-__version__ = "5.2.0"
+__version__ = "5.2.1"
