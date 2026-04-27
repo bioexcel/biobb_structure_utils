@@ -40,9 +40,9 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_structure_utils/blob/master/biobb_structure_utils/test/data/config/config_cat_pdb.yml)
 ```python
@@ -99,12 +99,12 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **residues** (*array*): (None) List of comma separated res_id or list of dictionaries with the name | res_id  | chain | model of the residues to find the closest neighbours. Format: [{"name": "HIS", "res_id": "72", "chain": "A", "model": "1"}]..
-* **radius** (*number*): (5.0) Distance in Ångströms to neighbours of the given list of residues..
-* **preserve_target** (*boolean*): (True) Whether or not to preserve the target residues in the output structure..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+* **residues** (*array*): (None) List of comma separated res_id or list of dictionaries with the name | res_id  | chain | model of the residues to find the closest neighbours. Format: [{"name": "HIS", "res_id": "72", "chain": "A", "model": "1"}].
+* **radius** (*number*): (5.0) Distance in Ångströms to neighbours of the given list of residues.
+* **preserve_target** (*boolean*): (True) Whether or not to preserve the target residues in the output structure.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_structure_utils/blob/master/biobb_structure_utils/test/data/config/config_closest_residues.yml)
 ```python
@@ -174,10 +174,10 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **regular_expression_pattern** (*string*): (^D) Python style regular expression matching the selected atom names..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+* **regular_expression_pattern** (*string*): (^D) Python style regular expression matching the selected atom names.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_structure_utils/blob/master/biobb_structure_utils/test/data/config/config_extract_atoms.yml)
 ```python
@@ -234,12 +234,12 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **chains** (*array*): (None) List of chains to be extracted from the input_structure_path file. If empty, all the chains of the structure will be returned..
-* **permissive** (*boolean*): (False) Use non standard PDB files..
-* **binary_path** (*string*): (check_structure) path to the check_structure application.
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+* **chains** (*array*): (None) List of chains to be extracted from the input_structure_path file. If empty, all the chains of the structure will be returned.
+* **permissive** (*boolean*): (False) Use non standard PDB files.
+* **binary_path** (*string*): (check_structure) path to the check_structure application
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_structure_utils/blob/master/biobb_structure_utils/test/data/config/config_extract_chain.yml)
 ```python
@@ -303,11 +303,11 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **heteroatoms** (*array*): (None) List of dictionaries with the name | res_id | chain | model of the heteroatoms to be extracted. Format: [{"name": "ZZ7", "res_id": "302", "chain": "B", "model": "1"}]. If empty, all the heteroatoms of the structure will be returned..
-* **water** (*boolean*): (False) Add or not waters..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+* **heteroatoms** (*array*): (None) List of dictionaries with the name | res_id | chain | model of the heteroatoms to be extracted. Format: [{"name": "ZZ7", "res_id": "302", "chain": "B", "model": "1"}]. If empty, all the heteroatoms of the structure will be returned.
+* **water** (*boolean*): (False) Add or not waters.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_structure_utils/blob/master/biobb_structure_utils/test/data/config/config_extract_heteroatoms.yml)
 ```python
@@ -375,11 +375,11 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **models** (*array*): (None) List of models to be extracted from the input_structure_path file. If empty, all the models of the structure will be returned..
-* **binary_path** (*string*): (check_structure) path to the check_structure application.
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+* **models** (*array*): (None) List of models to be extracted from the input_structure_path file. If empty, all the models of the structure will be returned.
+* **binary_path** (*string*): (check_structure) path to the check_structure application
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_structure_utils/blob/master/biobb_structure_utils/test/data/config/config_extract_model.yml)
 ```python
@@ -441,12 +441,12 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **molecule_type** (*string*): (all) type of molecule to be extracted. If all, only waters and ligands will be removed from the original structure. .
-* **chains** (*array*): (None) if chains selected in **molecule_type**, specify them here, e.g: ["A", "C", "N"]..
-* **binary_path** (*string*): (check_structure) path to the check_structure application.
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+* **molecule_type** (*string*): (all) type of molecule to be extracted. If all, only waters and ligands will be removed from the original structure. 
+* **chains** (*array*): (None) if chains selected in **molecule_type**, specify them here, e.g: ["A", "C", "N"].
+* **binary_path** (*string*): (check_structure) path to the check_structure application
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_structure_utils/blob/master/biobb_structure_utils/test/data/config/config_extract_molecule.yml)
 ```python
@@ -503,10 +503,10 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **residues** (*array*): (None) List of comma separated res_id (will extract all residues that match the res_id) or list of dictionaries with the name | res_id  | chain | model of the residues to be extracted. Format: [{"name": "HIS", "res_id": "72", "chain": "A", "model": "1"}]..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+* **residues** (*array*): (None) List of comma separated res_id (will extract all residues that match the res_id) or list of dictionaries with the name | res_id  | chain | model of the residues to be extracted. Format: [{"name": "HIS", "res_id": "72", "chain": "A", "model": "1"}].
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_structure_utils/blob/master/biobb_structure_utils/test/data/config/config_extract_residues.yml)
 ```python
@@ -572,10 +572,10 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **ligand** (*string*): (AQ4) Residue code of the ligand to be removed..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+* **ligand** (*string*): (AQ4) Residue code of the ligand to be removed.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_structure_utils/blob/master/biobb_structure_utils/test/data/config/config_remove_ligand.yml)
 ```python
@@ -632,10 +632,10 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **molecules** (*array*): (None) List of comma separated res_id (will remove all molecules that match the res_id) or list of dictionaries with the name | res_id  | chain | model of the molecules to be removed. Format: [{"name": "HIS", "res_id": "72", "chain": "A", "model": "1"}]..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+* **molecules** (*array*): (None) List of comma separated res_id (will remove all molecules that match the res_id) or list of dictionaries with the name | res_id  | chain | model of the molecules to be removed. Format: [{"name": "HIS", "res_id": "72", "chain": "A", "model": "1"}].
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_structure_utils/blob/master/biobb_structure_utils/test/data/config/config_remove_molecules.yml)
 ```python
@@ -701,10 +701,10 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **binary_path** (*string*): (check_structure) path to the check_structure application.
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+* **binary_path** (*string*): (check_structure) path to the check_structure application
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_structure_utils/blob/master/biobb_structure_utils/test/data/config/config_remove_pdb_water.yml)
 ```python
@@ -764,11 +764,11 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **renumber_residues** (*boolean*): (True) Residue code of the ligand to be removed..
-* **renumber_residues_per_chain** (*boolean*): (True) Restart residue enumeration every time a new chain is detected..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+* **renumber_residues** (*boolean*): (True) Residue code of the ligand to be removed.
+* **renumber_residues_per_chain** (*boolean*): (True) Restart residue enumeration every time a new chain is detected.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_structure_utils/blob/master/biobb_structure_utils/test/data/config/config_renumber_structure.yml)
 ```python
@@ -825,10 +825,10 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **residue_name_list** (*array*): ([NA, CL, SOL]) Ordered residue name list..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+* **residue_name_list** (*array*): ([NA, CL, SOL]) Ordered residue name list.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_structure_utils/blob/master/biobb_structure_utils/test/data/config/config_sort_gro_residues.yml)
 ```python
@@ -892,15 +892,15 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **charges** (*boolean*): (False) Whether or not to add charges to the output file. If True the output is in PDBQT format..
-* **mode** (*string*): (auto) Selection mode. .
-* **ph** (*number*): (7.4) Add hydrogens appropriate for pH. Only in case mode ph selected..
-* **list** (*string*): () List of residues to modify separated by commas (i.e HISA234HID,HISB33HIE). Only in case mode list selected..
-* **keep_canonical_resnames** (*boolean*): (False) Whether or not keep canonical residue names.
-* **binary_path** (*string*): (check_structure) path to the check_structure application.
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+* **charges** (*boolean*): (False) Whether or not to add charges to the output file. If True the output is in PDBQT format.
+* **mode** (*string*): (auto) Selection mode. 
+* **ph** (*number*): (7.4) Add hydrogens appropriate for pH. Only in case mode ph selected.
+* **list** (*string*): () List of residues to modify separated by commas (i.e HISA234HID,HISB33HIE). Only in case mode list selected.
+* **keep_canonical_resnames** (*boolean*): (False) Whether or not keep canonical residue names
+* **binary_path** (*string*): (check_structure) path to the check_structure application
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_structure_utils/blob/master/biobb_structure_utils/test/data/config/config_str_check_add_hydrogens.yml)
 ```python
@@ -961,11 +961,11 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **features** (*array*): (None) Features to summarize. If None, all the features will be computed. .
-* **binary_path** (*string*): (check_structure) path to the check_structure application.
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+* **features** (*array*): (None) Features to summarize. If None, all the features will be computed. 
+* **binary_path** (*string*): (check_structure) path to the check_structure application
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_structure_utils/blob/master/biobb_structure_utils/test/data/config/config_structure_check.yml)
 ```python
