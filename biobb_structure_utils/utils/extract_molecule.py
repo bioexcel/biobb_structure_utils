@@ -4,12 +4,9 @@
 from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
 
 from biobb_structure_utils.utils.common import (
     _from_string_to_list,
-    check_input_path,
-    check_output_path,
 )
 
 
@@ -74,10 +71,6 @@ class ExtractMolecule(BiobbObject):
         self.binary_path = properties.get("binary_path", "check_structure")
         self.properties = properties
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
     def create_command_list(self, command_list_path):
         """Creates a command list file as a input for structure checking"""
         instructions_list = ["ligands --remove All", "water --remove Yes"]
@@ -94,25 +87,8 @@ class ExtractMolecule(BiobbObject):
 
         return command_list_path
 
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> int:
         """Execute the :class:`ExtractMolecule <utils.extract_molecule.ExtractMolecule>` utils.extract_molecule.ExtractMolecule object."""
-
-        self.io_dict["in"]["input_structure_path"] = check_input_path(
-            self.io_dict["in"]["input_structure_path"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-        self.io_dict["out"]["output_molecule_path"] = check_output_path(
-            self.io_dict["out"]["output_molecule_path"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # create temporary folder
         tmp_folder = fu.create_unique_dir()
@@ -125,7 +101,7 @@ class ExtractMolecule(BiobbObject):
         self.cmd = [
             self.binary_path,
             "-i",
-            self.io_dict["in"]["input_structure_path"],
+            self.stage_io_dict["in"]["input_structure_path"],
             "-o",
             self.io_dict["out"]["output_molecule_path"],
             "--force_save",

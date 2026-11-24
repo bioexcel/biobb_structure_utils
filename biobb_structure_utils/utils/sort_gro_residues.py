@@ -5,7 +5,6 @@
 from typing import Optional
 
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools.file_utils import launchlogger
 
 from biobb_structure_utils.gro_lib.gro import Gro
 from biobb_structure_utils.utils.common import _from_string_to_list
@@ -67,18 +66,8 @@ class SortGroResidues(BiobbObject):
             properties.get("residue_name_list", ["NA", "CL", "SOL"])
         )
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> int:
         """Execute the :class:`SortGroResidues <utils.sort_gro_residues.SortGroResidues>` utils.sort_gro_residues.SortGroResidues object."""
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # Business code
         in_gro = Gro()

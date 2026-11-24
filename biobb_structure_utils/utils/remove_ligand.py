@@ -5,7 +5,6 @@ from typing import Optional
 from pathlib import Path
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
 
 from biobb_structure_utils.gro_lib.gro import Gro
 
@@ -64,18 +63,8 @@ class RemoveLigand(BiobbObject):
         # Properties specific for BB
         self.ligand = properties.get("ligand", "AQ4")
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> int:
         """Execute the :class:`RemoveLigand <utils.remove_ligand.RemoveLigand>` utils.remove_ligand.RemoveLigand object."""
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # Business code
         extension = Path(

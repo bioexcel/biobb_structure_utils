@@ -1,9 +1,6 @@
 """Module containing the CatPDB class and the command line interface."""
 from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools.file_utils import launchlogger
-
-from biobb_structure_utils.utils.common import check_input_path, check_output_path
 
 
 class CatPDB(BiobbObject):
@@ -67,34 +64,8 @@ class CatPDB(BiobbObject):
         # Properties specific for BB
         self.properties = properties
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> int:
         """Execute the :class:`CatPDB <utils.cat_pdb.CatPDB>` utils.cat_pdb.CatPDB object."""
-
-        self.io_dict["in"]["input_structure1"] = check_input_path(
-            self.io_dict["in"]["input_structure1"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-        self.io_dict["in"]["input_structure2"] = check_input_path(
-            self.io_dict["in"]["input_structure2"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-        self.io_dict["out"]["output_structure_path"] = check_output_path(
-            self.io_dict["out"]["output_structure_path"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # Business code
         filenames = [

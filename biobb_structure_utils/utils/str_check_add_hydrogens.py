@@ -5,12 +5,9 @@
 from typing import Optional
 
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools.file_utils import launchlogger
 
 from biobb_structure_utils.utils.common import (
-    check_input_path,
     check_output_end,
-    check_output_path_pdbqt,
 )
 
 
@@ -81,29 +78,8 @@ class StrCheckAddHydrogens(BiobbObject):
         self.keep_canonical_resnames = properties.get("keep_canonical_resnames", False)
         self.properties = properties
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> int:
         """Execute the :class:`StrCheckAddHydrogens <utils.str_check_add_hydrogens.StrCheckAddHydrogens>` utils.str_check_add_hydrogens.StrCheckAddHydrogens object."""
-
-        self.io_dict["in"]["input_structure_path"] = check_input_path(
-            self.io_dict["in"]["input_structure_path"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-        self.io_dict["out"]["output_structure_path"] = check_output_path_pdbqt(
-            self.io_dict["out"]["output_structure_path"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         self.cmd = [
             self.binary_path,

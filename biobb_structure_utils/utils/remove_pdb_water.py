@@ -3,7 +3,6 @@
 """Module containing the RemovePdbWater class and the command line interface."""
 from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools.file_utils import launchlogger
 
 
 class RemovePdbWater(BiobbObject):
@@ -59,18 +58,8 @@ class RemovePdbWater(BiobbObject):
         # Properties specific for BB
         self.binary_path = properties.get("binary_path", "check_structure")
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> int:
         """Execute the :class:`RemovePdbWater <utils.remove_pdb_water.RemovePdbWater>` utils.remove_pdb_water.RemovePdbWater object."""
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         self.cmd = [
             self.binary_path,

@@ -5,12 +5,9 @@ from typing import Optional
 from Bio.PDB.PDBParser import PDBParser
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
 
 from biobb_structure_utils.utils.common import (
     _from_string_to_list,
-    check_input_path,
-    check_output_path,
     create_biopython_residue,
     create_output_file,
     create_residues_list,
@@ -80,29 +77,8 @@ class ExtractResidues(BiobbObject):
         self.residues = _from_string_to_list(properties.get("residues", []))
         self.properties = properties
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> int:
         """Execute the :class:`ExtractResidues <utils.extract_residues.ExtractResidues>` utils.extract_residues.ExtractResidues object."""
-
-        self.io_dict["in"]["input_structure_path"] = check_input_path(
-            self.io_dict["in"]["input_structure_path"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-        self.io_dict["out"]["output_residues_path"] = check_output_path(
-            self.io_dict["out"]["output_residues_path"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # Business code
         # get list of Residues from properties
