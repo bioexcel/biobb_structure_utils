@@ -62,22 +62,10 @@ class ExtractHeteroAtoms(BiobbObject):
     def __init__(
         self, input_structure_path, output_heteroatom_path, properties=None, **kwargs
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_structure_path": input_structure_path},
-            "out": {"output_heteroatom_path": output_heteroatom_path},
-        }
+        super().__init__(**locals())
 
         # Properties specific for BB
-        self.heteroatoms = _from_string_to_list(properties.get("heteroatoms", []))
-        self.water = properties.get("water", False)
-        self.properties = properties
+        self.heteroatoms = _from_string_to_list(self.heteroatoms)
 
     def run(self) -> None:
         """Execute the :class:`ExtractHeteroAtoms <utils.extract_heteroatoms.ExtractHeteroAtoms>` utils.extract_heteroatoms.ExtractHeteroAtoms object."""

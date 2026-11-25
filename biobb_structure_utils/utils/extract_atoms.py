@@ -50,22 +50,7 @@ class ExtractAtoms(BiobbObject):
     def __init__(
         self, input_structure_path, output_structure_path, properties=None, **kwargs
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_structure_path": input_structure_path},
-            "out": {"output_structure_path": output_structure_path},
-        }
-
-        # Properties specific for BB
-        self.regular_expression_pattern = properties.get(
-            "regular_expression_pattern", "^D"
-        )
+        super().__init__(**locals())
 
     def stage_files(self) -> None:
         """The block does not use the sandbox: there are no files to stage."""

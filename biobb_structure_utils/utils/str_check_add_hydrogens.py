@@ -22,7 +22,7 @@ class StrCheckAddHydrogens(BiobbObject):
         output_structure_path (str): Output structure file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_str_H.pdbqt>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **charges** (*bool*) - (False) Whether or not to add charges to the output file. If True the output is in PDBQT format.
-            * **mode** (*string*) - (auto) Selection mode. Values: auto, list, ph
+            * **mode** (*string*) - ("auto") Selection mode. Values: auto, list, ph
             * **ph** (*float*) - (7.4) [0~14|0.1] Add hydrogens appropriate for pH. Only in case mode ph selected.
             * **list** (*string*) - ("") List of residues to modify separated by commas (i.e HISA234HID,HISB33HIE). Only in case mode list selected.
             * **keep_canonical_resnames** (*bool*) - (False) Whether or not keep canonical residue names
@@ -57,26 +57,7 @@ class StrCheckAddHydrogens(BiobbObject):
     def __init__(
         self, input_structure_path, output_structure_path, properties=None, **kwargs
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_structure_path": input_structure_path},
-            "out": {"output_structure_path": output_structure_path},
-        }
-
-        # Properties specific for BB
-        self.binary_path = properties.get("binary_path", "check_structure")
-        self.charges = properties.get("charges", False)
-        self.mode = properties.get("mode", "auto")
-        self.ph = properties.get("ph", 7.4)
-        self.list = properties.get("list", "")
-        self.keep_canonical_resnames = properties.get("keep_canonical_resnames", False)
-        self.properties = properties
+        super().__init__(**locals())
 
     def run(self) -> None:
         """Execute the :class:`StrCheckAddHydrogens <utils.str_check_add_hydrogens.StrCheckAddHydrogens>` utils.str_check_add_hydrogens.StrCheckAddHydrogens object."""

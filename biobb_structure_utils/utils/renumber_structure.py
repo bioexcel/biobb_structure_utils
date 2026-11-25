@@ -59,35 +59,7 @@ class RenumberStructure(BiobbObject):
         properties=None,
         **kwargs,
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_structure_path": input_structure_path},
-            "out": {
-                "output_structure_path": output_structure_path,
-                "output_mapping_json_path": output_mapping_json_path,
-            },
-        }
-
-        # Properties specific for BB
-        self.renumber_residues = properties.get("renumber_residues", True)
-        self.renumber_residues_per_chain = properties.get(
-            "renumber_residues_per_chain", True
-        )
-
-        # Common in all BB
-        self.can_write_console_log = properties.get("can_write_console_log", True)
-        self.global_log = properties.get("global_log", None)
-        self.prefix = properties.get("prefix", None)
-        self.step = properties.get("step", None)
-        self.path = properties.get("path", "")
-        self.remove_tmp = properties.get("remove_tmp", True)
-        self.restart = properties.get("restart", False)
+        super().__init__(**locals())
 
     def run(self) -> None:
         """Execute the :class:`RenumberStructure <utils.renumber_structure.RenumberStructure>` utils.renumber_structure.RenumberStructure object."""

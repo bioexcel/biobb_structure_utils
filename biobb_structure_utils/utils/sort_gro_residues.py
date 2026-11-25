@@ -49,21 +49,11 @@ class SortGroResidues(BiobbObject):
     def __init__(
         self, input_gro_path, output_gro_path, properties=None, **kwargs
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_gro_path": input_gro_path},
-            "out": {"output_gro_path": output_gro_path},
-        }
+        super().__init__(**locals())
 
         # Properties specific for BB
         self.residue_name_list = _from_string_to_list(
-            properties.get("residue_name_list", ["NA", "CL", "SOL"])
+            self.residue_name_list
         )
 
     def run(self) -> None:

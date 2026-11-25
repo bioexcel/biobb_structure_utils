@@ -53,22 +53,10 @@ class StructureCheck(BiobbObject):
     def __init__(
         self, input_structure_path, output_summary_path, properties=None, **kwargs
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_structure_path": input_structure_path},
-            "out": {"output_summary_path": output_summary_path},
-        }
+        super().__init__(**locals())
 
         # Properties specific for BB
-        self.binary_path = properties.get("binary_path", "check_structure")
-        self.features = _from_string_to_list(properties.get("features", None))
-        self.properties = properties
+        self.features = _from_string_to_list(self.features)
 
     def run(self) -> None:
         """Execute the :class:`StructureCheck <utils.structure_check.StructureCheck>` utils.structure_check.StructureCheck object."""

@@ -65,23 +65,10 @@ class ClosestResidues(BiobbObject):
     def __init__(
         self, input_structure_path, output_residues_path, properties=None, **kwargs
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_structure_path": input_structure_path},
-            "out": {"output_residues_path": output_residues_path},
-        }
+        super().__init__(**locals())
 
         # Properties specific for BB
-        self.residues = _from_string_to_list(properties.get("residues", []))
-        self.radius = properties.get("radius", 5)
-        self.preserve_target = properties.get("preserve_target", True)
-        self.properties = properties
+        self.residues = _from_string_to_list(self.residues)
 
     def run(self) -> None:
         """Execute the :class:`ClosestResidues <utils.closest_residues.ClosestResidues>` utils.closest_residues.ClosestResidues object."""

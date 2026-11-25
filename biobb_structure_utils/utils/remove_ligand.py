@@ -48,20 +48,7 @@ class RemoveLigand(BiobbObject):
     def __init__(
         self, input_structure_path, output_structure_path, properties=None, **kwargs
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_structure_path": input_structure_path},
-            "out": {"output_structure_path": output_structure_path},
-        }
-
-        # Properties specific for BB
-        self.ligand = properties.get("ligand", "AQ4")
+        super().__init__(**locals())
 
     def run(self) -> None:
         """Execute the :class:`RemoveLigand <utils.remove_ligand.RemoveLigand>` utils.remove_ligand.RemoveLigand object."""

@@ -61,21 +61,10 @@ class ExtractResidues(BiobbObject):
     def __init__(
         self, input_structure_path, output_residues_path, properties=None, **kwargs
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_structure_path": input_structure_path},
-            "out": {"output_residues_path": output_residues_path},
-        }
+        super().__init__(**locals())
 
         # Properties specific for BB
-        self.residues = _from_string_to_list(properties.get("residues", []))
-        self.properties = properties
+        self.residues = _from_string_to_list(self.residues)
 
     def run(self) -> None:
         """Execute the :class:`ExtractResidues <utils.extract_residues.ExtractResidues>` utils.extract_residues.ExtractResidues object."""

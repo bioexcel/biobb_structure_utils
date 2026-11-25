@@ -52,23 +52,10 @@ class ExtractMolecule(BiobbObject):
     def __init__(
         self, input_structure_path, output_molecule_path, properties=None, **kwargs
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_structure_path": input_structure_path},
-            "out": {"output_molecule_path": output_molecule_path},
-        }
+        super().__init__(**locals())
 
         # Properties specific for BB
-        self.molecule_type = properties.get("molecule_type", "all")
-        self.chains = _from_string_to_list(properties.get("chains", []))
-        self.binary_path = properties.get("binary_path", "check_structure")
-        self.properties = properties
+        self.chains = _from_string_to_list(self.chains)
 
     def create_command_list(self, command_list_path):
         """Creates a command list file as a input for structure checking"""
