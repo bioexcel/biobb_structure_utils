@@ -113,9 +113,8 @@ class StrCheckAddHydrogens(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
-    def process_outputs(self) -> None:
-        """Remove the END line of the output structure."""
-        check_output_end(self.io_dict["out"]["output_structure_path"], self.out_log)
+        # Remove the END line of the output structure.
+        check_output_end(self.sandbox_file("output_structure_path"), self.out_log)
 
 
 def str_check_add_hydrogens(
