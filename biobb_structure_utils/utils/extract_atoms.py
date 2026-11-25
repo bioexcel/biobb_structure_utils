@@ -67,6 +67,9 @@ class ExtractAtoms(BiobbObject):
             "regular_expression_pattern", "^D"
         )
 
+    def stage_files(self) -> None:
+        """The block does not use the sandbox: there are no files to stage."""
+
     def run(self) -> None:
         """Execute the :class:`ExtractAtoms <utils.extract_atoms.ExtractAtoms>` utils.extract_atoms.ExtractAtoms object."""
 

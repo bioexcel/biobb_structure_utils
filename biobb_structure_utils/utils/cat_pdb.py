@@ -64,6 +64,9 @@ class CatPDB(BiobbObject):
         # Properties specific for BB
         self.properties = properties
 
+    def stage_files(self) -> None:
+        """The block does not use the sandbox: there are no files to stage."""
+
     def run(self) -> None:
         """Execute the :class:`CatPDB <utils.cat_pdb.CatPDB>` utils.cat_pdb.CatPDB object."""
 
