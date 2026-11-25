@@ -103,7 +103,7 @@ class StrCheckAddHydrogens(BiobbObject):
         if self.mode:
             self.cmd.extend(["--add_mode", self.mode])
             if self.mode == "ph":
-                self.cmd.extend(["--pH", self.ph])
+                self.cmd.extend(["--pH", str(self.ph)])
             if self.mode == "list":
                 self.cmd.extend(["--list", self.list])
         else:
