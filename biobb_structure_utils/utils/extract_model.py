@@ -78,9 +78,8 @@ class ExtractModel(BiobbObject):
             )
         else:
             # create temporary folder
-            tmp_folder = fu.create_unique_dir()
+            tmp_folder = self.create_tmp_dir()
             fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
-            self.tmp_files.append(tmp_folder)
 
             filenames = []
 
@@ -92,7 +91,7 @@ class ExtractModel(BiobbObject):
                     "-i",
                     self.stage_io_dict["in"]["input_structure_path"],
                     "-o",
-                    tmp_file,
+                    self.staged_path(tmp_file),
                     "--force_save",
                     "models",
                     "--select",

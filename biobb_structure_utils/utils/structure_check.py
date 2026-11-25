@@ -96,7 +96,7 @@ class StructureCheck(BiobbObject):
             fu.log("Computing features: %s" % ", ".join(self.features), self.out_log)
 
             # create temporary folder
-            tmp_folder = fu.create_unique_dir()
+            tmp_folder = self.create_tmp_dir()
             fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
 
             command_list = tmp_folder + "/command_list.lst"
@@ -115,14 +115,11 @@ class StructureCheck(BiobbObject):
                 "--non_interactive",
                 "command_list",
                 "--list",
-                command_list,
+                self.staged_path(command_list),
             ]
 
         # Run Biobb block
         self.run_biobb()
-
-        # Remove temporal files
-        self.tmp_files.append(tmp_folder)
 
 
 def structure_check(

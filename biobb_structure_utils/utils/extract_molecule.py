@@ -91,7 +91,7 @@ class ExtractMolecule(BiobbObject):
         """Execute the :class:`ExtractMolecule <utils.extract_molecule.ExtractMolecule>` utils.extract_molecule.ExtractMolecule object."""
 
         # create temporary folder
-        tmp_folder = fu.create_unique_dir()
+        tmp_folder = self.create_tmp_dir()
         fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
 
         # create command list file
@@ -108,14 +108,11 @@ class ExtractMolecule(BiobbObject):
             "--non_interactive",
             "command_list",
             "--list",
-            command_list_file,
+            self.staged_path(command_list_file),
         ]
 
         # Run Biobb block
         self.run_biobb()
-
-        # Remove temporal files
-        self.tmp_files.append(tmp_folder)
 
 
 def extract_molecule(
