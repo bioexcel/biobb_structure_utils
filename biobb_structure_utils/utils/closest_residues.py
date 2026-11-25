@@ -127,8 +127,7 @@ class ClosestResidues(BiobbObject):
                 )
             except Exception:
                 fu.log(
-                    self.__class__.__name__ + ": Unable to find residue %s",
-                    sr["res_id"],
+                    self.__class__.__name__ + ": Unable to find residue %s" % sr["res_id"],
                     self.out_log,
                 )
 
