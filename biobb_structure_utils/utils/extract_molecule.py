@@ -103,7 +103,7 @@ class ExtractMolecule(BiobbObject):
             "-i",
             self.stage_io_dict["in"]["input_structure_path"],
             "-o",
-            self.io_dict["out"]["output_molecule_path"],
+            self.stage_io_dict["out"]["output_molecule_path"],
             "--force_save",
             "--non_interactive",
             "command_list",

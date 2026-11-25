@@ -73,8 +73,8 @@ class ExtractModel(BiobbObject):
 
         if models == "All":
             shutil.copyfile(
-                self.io_dict["in"]["input_structure_path"],
-                self.io_dict["out"]["output_structure_path"],
+                self.sandbox_file("input_structure_path"),
+                self.sandbox_file("output_structure_path"),
             )
         else:
             # create temporary folder
@@ -105,7 +105,7 @@ class ExtractModel(BiobbObject):
                 filenames.append(tmp_file)
 
             # concat tmp_file and save them into output file
-            with open(self.io_dict["out"]["output_structure_path"], "w") as outfile:
+            with open(self.sandbox_file("output_structure_path"), "w") as outfile:
                 for i, fname in enumerate(filenames):
                     with open(fname) as infile:
                         outfile.write("MODEL     " + "{:>4}".format(str(i + 1)) + "\n")

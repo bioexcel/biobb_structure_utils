@@ -86,15 +86,15 @@ class ExtractChain(BiobbObject):
             )
             if chains.upper() == "ALL":
                 shutil.copyfile(
-                    self.io_dict["in"]["input_structure_path"],
-                    self.io_dict["out"]["output_structure_path"],
+                    self.sandbox_file("input_structure_path"),
+                    self.sandbox_file("output_structure_path"),
                 )
             else:
                 chain_list = chains.upper().replace(" ", "").split(",")
                 with open(
-                    self.io_dict["in"]["input_structure_path"]
+                    self.sandbox_file("input_structure_path")
                 ) as structure_in, open(
-                    self.io_dict["out"]["output_structure_path"], "w"
+                    self.sandbox_file("output_structure_path"), "w"
                 ) as structure_out:
                     for line in structure_in:
                         if (
@@ -109,7 +109,7 @@ class ExtractChain(BiobbObject):
                 "-i",
                 self.stage_io_dict["in"]["input_structure_path"],
                 "-o",
-                self.io_dict["out"]["output_structure_path"],
+                self.stage_io_dict["out"]["output_structure_path"],
                 "--force_save",
                 "chains",
                 "--select",
