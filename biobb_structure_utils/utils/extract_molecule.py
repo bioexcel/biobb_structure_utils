@@ -3,7 +3,6 @@
 """Module containing the ExtractMolecule class and the command line interface."""
 from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools import file_utils as fu
 
 from biobb_structure_utils.utils.common import (
     _from_string_to_list,
@@ -91,8 +90,7 @@ class ExtractMolecule(BiobbObject):
         """Execute the :class:`ExtractMolecule <utils.extract_molecule.ExtractMolecule>` utils.extract_molecule.ExtractMolecule object."""
 
         # create temporary folder
-        tmp_folder = self.create_tmp_dir()
-        fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
+        tmp_folder = self.create_tmp_dir(log=True)
 
         # create command list file
         command_list_file = self.create_command_list(tmp_folder + "/extract_prot.lst")

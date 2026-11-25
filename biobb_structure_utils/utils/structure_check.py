@@ -96,8 +96,7 @@ class StructureCheck(BiobbObject):
             fu.log("Computing features: %s" % ", ".join(self.features), self.out_log)
 
             # create temporary folder
-            tmp_folder = self.create_tmp_dir()
-            fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
+            tmp_folder = self.create_tmp_dir(log=True)
 
             command_list = tmp_folder + "/command_list.lst"
 

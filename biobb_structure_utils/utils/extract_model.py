@@ -78,8 +78,7 @@ class ExtractModel(BiobbObject):
             )
         else:
             # create temporary folder
-            tmp_folder = self.create_tmp_dir()
-            fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
+            tmp_folder = self.create_tmp_dir(log=True)
 
             filenames = []
 
