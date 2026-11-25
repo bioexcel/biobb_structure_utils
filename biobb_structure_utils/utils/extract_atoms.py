@@ -67,7 +67,7 @@ class ExtractAtoms(BiobbObject):
             "regular_expression_pattern", "^D"
         )
 
-    def run(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`ExtractAtoms <utils.extract_atoms.ExtractAtoms>` utils.extract_atoms.ExtractAtoms object."""
 
         # Business code
@@ -134,16 +134,6 @@ class ExtractAtoms(BiobbObject):
                 )
         self.return_code = 0
         ##########
-
-        # Copy files to host
-        self.copy_to_host()
-
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
 
 
 def extract_atoms(

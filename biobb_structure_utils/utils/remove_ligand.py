@@ -63,7 +63,7 @@ class RemoveLigand(BiobbObject):
         # Properties specific for BB
         self.ligand = properties.get("ligand", "AQ4")
 
-    def run(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`RemoveLigand <utils.remove_ligand.RemoveLigand>` utils.remove_ligand.RemoveLigand object."""
 
         # Business code
@@ -102,16 +102,6 @@ class RemoveLigand(BiobbObject):
 
         self.return_code = 0
         ##########
-
-        # Copy files to host
-        self.copy_to_host()
-
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
 
 
 def remove_ligand(

@@ -79,7 +79,7 @@ class ExtractHeteroAtoms(BiobbObject):
         self.water = properties.get("water", False)
         self.properties = properties
 
-    def run(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`ExtractHeteroAtoms <utils.extract_heteroatoms.ExtractHeteroAtoms>` utils.extract_heteroatoms.ExtractHeteroAtoms object."""
 
         # Business code
@@ -137,16 +137,6 @@ class ExtractHeteroAtoms(BiobbObject):
         )
 
         self.return_code = 0
-
-        # Copy files to host
-        self.copy_to_host()
-
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
 
 
 def extract_heteroatoms(

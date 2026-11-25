@@ -83,7 +83,7 @@ class ClosestResidues(BiobbObject):
         self.preserve_target = properties.get("preserve_target", True)
         self.properties = properties
 
-    def run(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`ClosestResidues <utils.closest_residues.ClosestResidues>` utils.closest_residues.ClosestResidues object."""
 
         # Business code
@@ -174,16 +174,6 @@ class ClosestResidues(BiobbObject):
         )
 
         self.return_code = 0
-
-        # Copy files to host
-        self.copy_to_host()
-
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
 
 
 def closest_residues(

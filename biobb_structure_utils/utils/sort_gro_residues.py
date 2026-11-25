@@ -66,7 +66,7 @@ class SortGroResidues(BiobbObject):
             properties.get("residue_name_list", ["NA", "CL", "SOL"])
         )
 
-    def run(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`SortGroResidues <utils.sort_gro_residues.SortGroResidues>` utils.sort_gro_residues.SortGroResidues object."""
 
         # Business code
@@ -76,16 +76,6 @@ class SortGroResidues(BiobbObject):
         in_gro.write_gro_file(self.stage_io_dict["out"]["output_gro_path"])
         self.return_code = 0
         ##########
-
-        # Copy files to host
-        self.copy_to_host()
-
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
 
 
 def sort_gro_residues(

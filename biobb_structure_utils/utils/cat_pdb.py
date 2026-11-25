@@ -64,7 +64,7 @@ class CatPDB(BiobbObject):
         # Properties specific for BB
         self.properties = properties
 
-    def run(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`CatPDB <utils.cat_pdb.CatPDB>` utils.cat_pdb.CatPDB object."""
 
         # Business code
@@ -91,16 +91,6 @@ class CatPDB(BiobbObject):
                     if not newline[idx]:
                         outfile.write("\n")
         self.return_code = 0
-
-        # Copy files to host
-        self.copy_to_host()
-
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
 
 
 def cat_pdb(

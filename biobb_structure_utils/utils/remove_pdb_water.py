@@ -58,7 +58,7 @@ class RemovePdbWater(BiobbObject):
         # Properties specific for BB
         self.binary_path = properties.get("binary_path", "check_structure")
 
-    def run(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`RemovePdbWater <utils.remove_pdb_water.RemovePdbWater>` utils.remove_pdb_water.RemovePdbWater object."""
 
         self.cmd = [
@@ -75,16 +75,6 @@ class RemovePdbWater(BiobbObject):
 
         # Run Biobb block
         self.run_biobb()
-
-        # Copy files to host
-        self.copy_to_host()
-
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
 
 
 def remove_pdb_water(

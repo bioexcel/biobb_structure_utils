@@ -70,7 +70,7 @@ class StructureCheck(BiobbObject):
         self.features = _from_string_to_list(properties.get("features", None))
         self.properties = properties
 
-    def run(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`StructureCheck <utils.structure_check.StructureCheck>` utils.structure_check.StructureCheck object."""
 
         tmp_folder = None
@@ -121,16 +121,8 @@ class StructureCheck(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
-        # Copy files to host
-        self.copy_to_host()
-
         # Remove temporal files
         self.tmp_files.append(tmp_folder)
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
 
 
 def structure_check(

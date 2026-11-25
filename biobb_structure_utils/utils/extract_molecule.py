@@ -87,7 +87,7 @@ class ExtractMolecule(BiobbObject):
 
         return command_list_path
 
-    def run(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`ExtractMolecule <utils.extract_molecule.ExtractMolecule>` utils.extract_molecule.ExtractMolecule object."""
 
         # create temporary folder
@@ -114,16 +114,8 @@ class ExtractMolecule(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
-        # Copy files to host
-        self.copy_to_host()
-
         # Remove temporal files
         self.tmp_files.append(tmp_folder)
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
 
 
 def extract_molecule(

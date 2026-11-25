@@ -65,7 +65,7 @@ class ExtractModel(BiobbObject):
         self.models = properties.get("models", [])
         self.properties = properties
 
-    def run(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`ExtractModel <utils.extract_model.ExtractModel>` utils.extract_model.ExtractModel object."""
 
         # check if user has passed models properly
@@ -76,12 +76,11 @@ class ExtractModel(BiobbObject):
                 self.io_dict["in"]["input_structure_path"],
                 self.io_dict["out"]["output_structure_path"],
             )
-
-            return 0
         else:
             # create temporary folder
             tmp_folder = fu.create_unique_dir()
             fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
+            self.tmp_files.append(tmp_folder)
 
             filenames = []
 
@@ -115,17 +114,6 @@ class ExtractModel(BiobbObject):
                                 outfile.write(line)
                             else:
                                 outfile.write("ENDMDL\n")
-
-            # Copy files to host
-            self.copy_to_host()
-
-            # Remove temporal files
-            self.tmp_files.append(tmp_folder)
-            self.remove_tmp_files()
-
-            self.check_arguments(output_files_created=True, raise_exception=False)
-
-            return self.return_code
 
 
 def check_format_models(models, out_log):

@@ -77,7 +77,7 @@ class ExtractResidues(BiobbObject):
         self.residues = _from_string_to_list(properties.get("residues", []))
         self.properties = properties
 
-    def run(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`ExtractResidues <utils.extract_residues.ExtractResidues>` utils.extract_residues.ExtractResidues object."""
 
         # Business code
@@ -124,16 +124,6 @@ class ExtractResidues(BiobbObject):
         )
 
         self.return_code = 0
-
-        # Copy files to host
-        self.copy_to_host()
-
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
 
 
 def extract_residues(

@@ -89,7 +89,7 @@ class RenumberStructure(BiobbObject):
         self.remove_tmp = properties.get("remove_tmp", True)
         self.restart = properties.get("restart", False)
 
-    def run(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`RenumberStructure <utils.renumber_structure.RenumberStructure>` utils.renumber_structure.RenumberStructure object."""
 
         # Business code
@@ -157,16 +157,6 @@ class RenumberStructure(BiobbObject):
 
         self.return_code = 0
         ##########
-
-        # Copy files to host
-        self.copy_to_host()
-
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
 
 
 def renumber_structure(

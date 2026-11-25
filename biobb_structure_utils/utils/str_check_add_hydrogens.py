@@ -78,7 +78,7 @@ class StrCheckAddHydrogens(BiobbObject):
         self.keep_canonical_resnames = properties.get("keep_canonical_resnames", False)
         self.properties = properties
 
-    def run(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`StrCheckAddHydrogens <utils.str_check_add_hydrogens.StrCheckAddHydrogens>` utils.str_check_add_hydrogens.StrCheckAddHydrogens object."""
 
         self.cmd = [
@@ -113,17 +113,9 @@ class StrCheckAddHydrogens(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
-        # Copy files to host
-        self.copy_to_host()
-
+    def process_outputs(self) -> None:
+        """Remove the END line of the output structure."""
         check_output_end(self.io_dict["out"]["output_structure_path"], self.out_log)
-
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
 
 
 def str_check_add_hydrogens(
