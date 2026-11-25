@@ -34,7 +34,7 @@ def create_output_file(type, input, residues, output, out_log):
     with open(input) as infile:
         for line in infile:
             if line.startswith("MODEL   "):
-                curr_model = line.rstrip()[-1]
+                curr_model = line.split()[1]
                 if int(curr_model) > 1:
                     new_file_lines.append("ENDMDL\n")
                 new_file_lines.append("MODEL     " + "{:>4}".format(curr_model) + "\n")
