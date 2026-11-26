@@ -11,6 +11,7 @@ from biobb_structure_utils.utils.common import (
     check_format_heteroatoms,
     create_biopython_residue,
     create_output_file,
+    residue_value,
 )
 
 
@@ -87,7 +88,7 @@ class ExtractHeteroAtoms(BiobbObject):
                 for het in list_heteroatoms:
                     match = True
                     for code in het["code"]:
-                        if het[code].strip() != r[code].strip():
+                        if het[code].strip() != residue_value(r, code).strip():
                             match = False
                             break
 

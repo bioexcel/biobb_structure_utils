@@ -85,6 +85,14 @@ def create_biopython_residue(residue):
     }
 
 
+def residue_value(residue, code):
+    """Value of a create_biopython_residue() residue to compare with a selection of
+    create_residues_list(): the res_id with its insertion code, if any ("62A")."""
+    if code == "res_id":
+        return residue["res_id"] + residue["icode"].strip()
+    return residue[code]
+
+
 def create_residues_list(residues, out_log):
     """Check format of residues list"""
     if not residues:

@@ -11,6 +11,7 @@ from biobb_structure_utils.utils.common import (
     create_biopython_residue,
     create_output_file,
     create_residues_list,
+    residue_value,
 )
 
 
@@ -90,7 +91,7 @@ class ClosestResidues(BiobbObject):
                 for res in list_residues:
                     match = True
                     for code in res["code"]:
-                        if res[code].strip() != r[code].strip():
+                        if res[code].strip() != residue_value(r, code).strip():
                             match = False
                             break
                     if match:
