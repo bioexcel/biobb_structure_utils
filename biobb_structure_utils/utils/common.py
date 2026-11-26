@@ -48,7 +48,8 @@ def create_output_file(type, input, residues, output, out_log):
             if conditional_atoms[type]:
                 name = line[17:20].strip()
                 chain = line[21:22].strip()
-                res_id = line[22:27].strip()
+                res_id = line[22:26].strip()
+                icode = line[26:27] or " "
                 if curr_model != 0:
                     model = curr_model.strip()
                 else:
@@ -58,7 +59,7 @@ def create_output_file(type, input, residues, output, out_log):
 
                 for nstr in residues:
                     if (
-                        nstr["res_id"] == res_id and nstr["name"] == name and nstr["chain"] == chain and nstr["model"] == model
+                        nstr["res_id"] == res_id and nstr["icode"] == icode and nstr["name"] == name and nstr["chain"] == chain and nstr["model"] == model
                     ):
                         new_file_lines.append(line)
 
@@ -79,6 +80,8 @@ def create_biopython_residue(residue):
         "chain": residue.get_parent().get_id(),
         "name": residue.get_resname(),
         "res_id": str(residue.get_id()[1]),
+        # insertion code, " " if none
+        "icode": residue.get_id()[2],
     }
 
 

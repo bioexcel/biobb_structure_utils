@@ -104,12 +104,12 @@ class ClosestResidues(BiobbObject):
             # try for residues, if exception, try as HETATM
             try:
                 target_residues.append(
-                    structure[int(sr["model"]) - 1][sr["chain"]][int(sr["res_id"])]
+                    structure[int(sr["model"]) - 1][sr["chain"]][(" ", int(sr["res_id"]), sr["icode"])]
                 )
             except KeyError:
                 target_residues.append(
                     structure[int(sr["model"]) - 1][sr["chain"]][
-                        "H_" + sr["name"], int(sr["res_id"]), " "
+                        "H_" + sr["name"], int(sr["res_id"]), sr["icode"]
                     ]
                 )
             except Exception:
