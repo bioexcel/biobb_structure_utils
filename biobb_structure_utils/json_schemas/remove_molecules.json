@@ -72,7 +72,7 @@
                     "type": "array",
                     "default": null,
                     "wf_prop": false,
-                    "description": "List of comma separated res_id (will remove all molecules that match the res_id) or list of dictionaries with the name | res_id  | chain | model of the molecules to be removed. Format: [{\"name\": \"HIS\", \"res_id\": \"72\", \"chain\": \"A\", \"model\": \"1\"}]."
+                    "description": "List of comma separated res_id (will remove all molecules that match the res_id) or list of dictionaries with the name | res_id  | chain | model of the molecules to be removed. Format: [{\"name\": \"HIS\", \"res_id\": \"72\", \"chain\": \"A\", \"model\": \"1\"}]. The res_id of a residue with an insertion code includes the code (\"62A\")."
                 },
                 "remove_tmp": {
                     "type": "boolean",
