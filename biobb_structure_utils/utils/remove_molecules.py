@@ -7,7 +7,6 @@ from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 
 from biobb_structure_utils.utils.common import (
-    _from_string_to_list,
     create_biopython_residue,
     create_output_file,
     create_residues_list,
@@ -65,7 +64,7 @@ class RemoveMolecules(BiobbObject):
         super().__init__(**locals())
 
         # Properties specific for BB
-        self.molecules = _from_string_to_list(self.molecules)
+        self.molecules = fu.str_to_list(self.molecules)
 
     def run(self) -> None:
         """Execute the :class:`RemoveMolecules <utils.remove_molecules.RemoveMolecules>` utils.remove_molecules.RemoveMolecules object."""

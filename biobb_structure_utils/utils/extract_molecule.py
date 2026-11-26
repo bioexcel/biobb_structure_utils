@@ -3,10 +3,7 @@
 """Module containing the ExtractMolecule class and the command line interface."""
 from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject, launcher
-
-from biobb_structure_utils.utils.common import (
-    _from_string_to_list,
-)
+from biobb_common.tools import file_utils as fu
 
 
 class ExtractMolecule(BiobbObject):
@@ -55,7 +52,7 @@ class ExtractMolecule(BiobbObject):
         super().__init__(**locals())
 
         # Properties specific for BB
-        self.chains = _from_string_to_list(self.chains)
+        self.chains = fu.str_to_list(self.chains)
 
     def create_command_list(self, command_list_path):
         """Creates a command list file as a input for structure checking"""

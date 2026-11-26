@@ -7,10 +7,6 @@ from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 
-from biobb_structure_utils.utils.common import (
-    _from_string_to_list,
-)
-
 
 class StructureCheck(BiobbObject):
     """
@@ -56,7 +52,7 @@ class StructureCheck(BiobbObject):
         super().__init__(**locals())
 
         # Properties specific for BB
-        self.features = _from_string_to_list(self.features)
+        self.features = fu.str_to_list(self.features)
 
     def run(self) -> None:
         """Execute the :class:`StructureCheck <utils.structure_check.StructureCheck>` utils.structure_check.StructureCheck object."""

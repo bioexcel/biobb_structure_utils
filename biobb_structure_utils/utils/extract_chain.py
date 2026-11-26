@@ -6,10 +6,6 @@ from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 
-from biobb_structure_utils.utils.common import (
-    _from_string_to_list,
-)
-
 
 class ExtractChain(BiobbObject):
     """
@@ -56,7 +52,7 @@ class ExtractChain(BiobbObject):
         super().__init__(**locals())
 
         # Properties specific for BB
-        self.chains = _from_string_to_list(self.chains)
+        self.chains = fu.str_to_list(self.chains)
 
     def run(self) -> None:
         """Execute the :class:`ExtractChain <utils.extract_chain.ExtractChain>` utils.extract_chain.ExtractChain object."""

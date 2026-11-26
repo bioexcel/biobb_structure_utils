@@ -7,7 +7,6 @@ from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 
 from biobb_structure_utils.utils.common import (
-    _from_string_to_list,
     check_format_heteroatoms,
     create_biopython_residue,
     create_output_file,
@@ -66,7 +65,7 @@ class ExtractHeteroAtoms(BiobbObject):
         super().__init__(**locals())
 
         # Properties specific for BB
-        self.heteroatoms = _from_string_to_list(self.heteroatoms)
+        self.heteroatoms = fu.str_to_list(self.heteroatoms)
 
     def run(self) -> None:
         """Execute the :class:`ExtractHeteroAtoms <utils.extract_heteroatoms.ExtractHeteroAtoms>` utils.extract_heteroatoms.ExtractHeteroAtoms object."""
