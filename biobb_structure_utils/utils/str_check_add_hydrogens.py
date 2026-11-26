@@ -4,7 +4,7 @@
 
 from typing import Optional
 
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 from biobb_structure_utils.utils.common import (
     check_output_end,
@@ -55,7 +55,7 @@ class StrCheckAddHydrogens(BiobbObject):
     """
 
     def __init__(
-        self, input_structure_path, output_structure_path, properties=None, **kwargs
+        self, input_structure_path: str, output_structure_path: str, properties: Optional[dict] = None, **kwargs
     ) -> None:
         super().__init__(**locals())
 
@@ -98,19 +98,7 @@ class StrCheckAddHydrogens(BiobbObject):
         check_output_end(self.sandbox_file("output_structure_path"), self.out_log)
 
 
-def str_check_add_hydrogens(
-    input_structure_path: str,
-    output_structure_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`StrCheckAddHydrogens <utils.str_check_add_hydrogens.StrCheckAddHydrogens>` class and
-    execute the :meth:`launch() <utils.str_check_add_hydrogens.StrCheckAddHydrogens.launch>` method."""
-    return StrCheckAddHydrogens(**dict(locals())).launch()
-
-
-str_check_add_hydrogens.__doc__ = StrCheckAddHydrogens.__doc__
-main = StrCheckAddHydrogens.get_main(str_check_add_hydrogens, "Class to add hydrogens to a 3D structure.")
+str_check_add_hydrogens = launcher(StrCheckAddHydrogens)
 
 if __name__ == "__main__":
-    main()
+    StrCheckAddHydrogens.main()

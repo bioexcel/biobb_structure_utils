@@ -3,7 +3,7 @@
 """Module containing the ExtractModel class and the command line interface."""
 import shutil
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 
 
@@ -46,7 +46,7 @@ class ExtractModel(BiobbObject):
     """
 
     def __init__(
-        self, input_structure_path, output_structure_path, properties=None, **kwargs
+        self, input_structure_path: str, output_structure_path: str, properties: Optional[dict] = None, **kwargs
     ) -> None:
         super().__init__(**locals())
 
@@ -117,19 +117,7 @@ def check_format_models(models, out_log):
     return models
 
 
-def extract_model(
-    input_structure_path: str,
-    output_structure_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`ExtractModel <utils.extract_model.ExtractModel>` class and
-    execute the :meth:`launch() <utils.extract_model.ExtractModel.launch>` method."""
-    return ExtractModel(**dict(locals())).launch()
-
-
-extract_model.__doc__ = ExtractModel.__doc__
-main = ExtractModel.get_main(extract_model, "Extract a model from a 3D structure.")
+extract_model = launcher(ExtractModel)
 
 if __name__ == "__main__":
-    main()
+    ExtractModel.main()

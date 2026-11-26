@@ -2,7 +2,7 @@
 
 """Module containing the ExtractMolecule class and the command line interface."""
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 from biobb_structure_utils.utils.common import (
     _from_string_to_list,
@@ -50,7 +50,7 @@ class ExtractMolecule(BiobbObject):
     """
 
     def __init__(
-        self, input_structure_path, output_molecule_path, properties=None, **kwargs
+        self, input_structure_path: str, output_molecule_path: str, properties: Optional[dict] = None, **kwargs
     ) -> None:
         super().__init__(**locals())
 
@@ -100,19 +100,7 @@ class ExtractMolecule(BiobbObject):
         self.run_biobb()
 
 
-def extract_molecule(
-    input_structure_path: str,
-    output_molecule_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`ExtractMolecule <utils.extract_molecule.ExtractMolecule>` class and
-    execute the :meth:`launch() <utils.extract_molecule.ExtractMolecule.launch>` method."""
-    return ExtractMolecule(**dict(locals())).launch()
-
-
-extract_molecule.__doc__ = ExtractMolecule.__doc__
-main = ExtractMolecule.get_main(extract_molecule, "Extract a molecule from a 3D structure.")
+extract_molecule = launcher(ExtractMolecule)
 
 if __name__ == "__main__":
-    main()
+    ExtractMolecule.main()

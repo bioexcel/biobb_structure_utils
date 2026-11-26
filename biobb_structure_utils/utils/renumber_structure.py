@@ -4,7 +4,7 @@
 import json
 from pathlib import Path
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 
 from biobb_structure_utils.gro_lib.gro import Gro
@@ -53,10 +53,10 @@ class RenumberStructure(BiobbObject):
 
     def __init__(
         self,
-        input_structure_path,
-        output_structure_path,
-        output_mapping_json_path,
-        properties=None,
+        input_structure_path: str,
+        output_structure_path: str,
+        output_mapping_json_path: str,
+        properties: Optional[dict] = None,
         **kwargs,
     ) -> None:
         super().__init__(**locals())
@@ -131,20 +131,7 @@ class RenumberStructure(BiobbObject):
         ##########
 
 
-def renumber_structure(
-    input_structure_path: str,
-    output_structure_path: str,
-    output_mapping_json_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`RenumberStructure <utils.renumber_structure.RenumberStructure>` class and
-    execute the :meth:`launch() <utils.renumber_structure.RenumberStructure.launch>` method."""
-    return RenumberStructure(**dict(locals())).launch()
-
-
-renumber_structure.__doc__ = RenumberStructure.__doc__
-main = RenumberStructure.get_main(renumber_structure, "Renumber atoms and residues from a 3D structure.")
+renumber_structure = launcher(RenumberStructure)
 
 if __name__ == "__main__":
-    main()
+    RenumberStructure.main()

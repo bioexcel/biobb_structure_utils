@@ -4,7 +4,7 @@
 
 from typing import Optional
 
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 
 from biobb_structure_utils.utils.common import (
@@ -51,7 +51,7 @@ class StructureCheck(BiobbObject):
     """
 
     def __init__(
-        self, input_structure_path, output_summary_path, properties=None, **kwargs
+        self, input_structure_path: str, output_summary_path: str, properties: Optional[dict] = None, **kwargs
     ) -> None:
         super().__init__(**locals())
 
@@ -109,19 +109,7 @@ class StructureCheck(BiobbObject):
         self.run_biobb()
 
 
-def structure_check(
-    input_structure_path: str,
-    output_summary_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`StructureCheck <utils.structure_check.StructureCheck>` class and
-    execute the :meth:`launch() <utils.structure_check.StructureCheck.launch>` method."""
-    return StructureCheck(**dict(locals())).launch()
-
-
-structure_check.__doc__ = StructureCheck.__doc__
-main = StructureCheck.get_main(structure_check, "This class is a wrapper of the Structure Checking tool to generate summary checking results on a json file.")
+structure_check = launcher(StructureCheck)
 
 if __name__ == "__main__":
-    main()
+    StructureCheck.main()

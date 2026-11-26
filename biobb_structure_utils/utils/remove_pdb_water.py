@@ -2,7 +2,7 @@
 
 """Module containing the RemovePdbWater class and the command line interface."""
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
 class RemovePdbWater(BiobbObject):
@@ -41,7 +41,7 @@ class RemovePdbWater(BiobbObject):
     """
 
     def __init__(
-        self, input_pdb_path, output_pdb_path, properties=None, **kwargs
+        self, input_pdb_path: str, output_pdb_path: str, properties: Optional[dict] = None, **kwargs
     ) -> None:
         super().__init__(**locals())
 
@@ -64,20 +64,7 @@ class RemovePdbWater(BiobbObject):
         self.run_biobb()
 
 
-def remove_pdb_water(
-    input_pdb_path: str,
-    output_pdb_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`RemovePdbWater <utils.remove_pdb_water.RemovePdbWater>` class and
-    execute the :meth:`launch() <utils.remove_pdb_water.RemovePdbWater.launch>` method."""
-
-    return RemovePdbWater(**dict(locals())).launch()
-
-
-remove_pdb_water.__doc__ = RemovePdbWater.__doc__
-main = RemovePdbWater.get_main(remove_pdb_water, "Remove the water molecules from a PDB 3D structure.")
+remove_pdb_water = launcher(RemovePdbWater)
 
 if __name__ == "__main__":
-    main()
+    RemovePdbWater.main()

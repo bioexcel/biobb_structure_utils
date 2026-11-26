@@ -1,6 +1,6 @@
 """Module containing the CatPDB class and the command line interface."""
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
 class CatPDB(BiobbObject):
@@ -40,10 +40,10 @@ class CatPDB(BiobbObject):
 
     def __init__(
         self,
-        input_structure1,
-        input_structure2,
-        output_structure_path,
-        properties=None,
+        input_structure1: str,
+        input_structure2: str,
+        output_structure_path: str,
+        properties: Optional[dict] = None,
         **kwargs,
     ) -> None:
         super().__init__(**locals())
@@ -80,20 +80,7 @@ class CatPDB(BiobbObject):
         self.return_code = 0
 
 
-def cat_pdb(
-    input_structure1: str,
-    input_structure2: str,
-    output_structure_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`CatPDB <utils.cat_pdb.CatPDB>` class and
-    execute the :meth:`launch() <utils.cat_pdb.CatPDB.launch>` method."""
-    return CatPDB(**dict(locals())).launch()
-
-
-cat_pdb.__doc__ = CatPDB.__doc__
-main = CatPDB.get_main(cat_pdb, "Concat two PDB structures in a single PDB file.")
+cat_pdb = launcher(CatPDB)
 
 if __name__ == "__main__":
-    main()
+    CatPDB.main()

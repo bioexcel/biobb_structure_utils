@@ -3,7 +3,7 @@
 """Module containing the ClosestResidues class and the command line interface."""
 from typing import Optional
 import Bio.PDB
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 
 from biobb_structure_utils.utils.common import (
@@ -63,7 +63,7 @@ class ClosestResidues(BiobbObject):
     """
 
     def __init__(
-        self, input_structure_path, output_residues_path, properties=None, **kwargs
+        self, input_structure_path: str, output_residues_path: str, properties: Optional[dict] = None, **kwargs
     ) -> None:
         super().__init__(**locals())
 
@@ -163,19 +163,7 @@ class ClosestResidues(BiobbObject):
         self.return_code = 0
 
 
-def closest_residues(
-    input_structure_path: str,
-    output_residues_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`ClosestResidues <utils.closest_residues.ClosestResidues>` class and
-    execute the :meth:`launch() <utils.closest_residues.ClosestResidues.launch>` method."""
-    return ClosestResidues(**dict(locals())).launch()
-
-
-closest_residues.__doc__ = ClosestResidues.__doc__
-main = ClosestResidues.get_main(closest_residues, "Search closest residues to a list of given residues.")
+closest_residues = launcher(ClosestResidues)
 
 if __name__ == "__main__":
-    main()
+    ClosestResidues.main()

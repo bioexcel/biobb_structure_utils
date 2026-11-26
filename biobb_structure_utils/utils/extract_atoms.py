@@ -4,7 +4,7 @@
 import re
 from pathlib import Path
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 
 from biobb_structure_utils.gro_lib.gro import Gro
@@ -48,7 +48,7 @@ class ExtractAtoms(BiobbObject):
     """
 
     def __init__(
-        self, input_structure_path, output_structure_path, properties=None, **kwargs
+        self, input_structure_path: str, output_structure_path: str, properties: Optional[dict] = None, **kwargs
     ) -> None:
         super().__init__(**locals())
 
@@ -124,19 +124,7 @@ class ExtractAtoms(BiobbObject):
         ##########
 
 
-def extract_atoms(
-    input_structure_path: str,
-    output_structure_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`ExtractAtoms <utils.extract_atoms.ExtractAtoms>` class and
-    execute the :meth:`launch() <utils.extract_atoms.ExtractAtoms.launch>` method."""
-    return ExtractAtoms(**dict(locals())).launch()
-
-
-extract_atoms.__doc__ = ExtractAtoms.__doc__
-main = ExtractAtoms.get_main(extract_atoms, "Remove the selected ligand atoms from a 3D structure.")
+extract_atoms = launcher(ExtractAtoms)
 
 if __name__ == "__main__":
-    main()
+    ExtractAtoms.main()

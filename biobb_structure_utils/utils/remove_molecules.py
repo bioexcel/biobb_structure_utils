@@ -3,7 +3,7 @@
 """Module containing the RemoveMolecules class and the command line interface."""
 from typing import Optional
 from Bio.PDB.PDBParser import PDBParser
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 
 from biobb_structure_utils.utils.common import (
@@ -59,7 +59,7 @@ class RemoveMolecules(BiobbObject):
     """
 
     def __init__(
-        self, input_structure_path, output_molecules_path, properties=None, **kwargs
+        self, input_structure_path: str, output_molecules_path: str, properties: Optional[dict] = None, **kwargs
     ) -> None:
         super().__init__(**locals())
 
@@ -120,19 +120,7 @@ class RemoveMolecules(BiobbObject):
         self.return_code = 0
 
 
-def remove_molecules(
-    input_structure_path: str,
-    output_molecules_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`RemoveMolecules <utils.remove_molecules.RemoveMolecules>` class and
-    execute the :meth:`launch() <utils.remove_molecules.RemoveMolecules.launch>` method."""
-    return RemoveMolecules(**dict(locals())).launch()
-
-
-remove_molecules.__doc__ = RemoveMolecules.__doc__
-main = RemoveMolecules.get_main(remove_molecules, "Removes a list of molecules from a 3D structure.")
+remove_molecules = launcher(RemoveMolecules)
 
 if __name__ == "__main__":
-    main()
+    RemoveMolecules.main()

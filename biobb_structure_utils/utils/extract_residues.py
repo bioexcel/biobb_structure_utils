@@ -3,7 +3,7 @@
 """Module containing the ExtractResidues class and the command line interface."""
 from typing import Optional
 from Bio.PDB.PDBParser import PDBParser
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 
 from biobb_structure_utils.utils.common import (
@@ -59,7 +59,7 @@ class ExtractResidues(BiobbObject):
     """
 
     def __init__(
-        self, input_structure_path, output_residues_path, properties=None, **kwargs
+        self, input_structure_path: str, output_residues_path: str, properties: Optional[dict] = None, **kwargs
     ) -> None:
         super().__init__(**locals())
 
@@ -115,19 +115,7 @@ class ExtractResidues(BiobbObject):
         self.return_code = 0
 
 
-def extract_residues(
-    input_structure_path: str,
-    output_residues_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`ExtractResidues <utils.extract_residues.ExtractResidues>` class and
-    execute the :meth:`launch() <utils.extract_residues.ExtractResidues.launch>` method."""
-    return ExtractResidues(**dict(locals())).launch()
-
-
-extract_residues.__doc__ = ExtractResidues.__doc__
-main = ExtractResidues.get_main(extract_residues, "Extract a list of residues from a 3D structure.")
+extract_residues = launcher(ExtractResidues)
 
 if __name__ == "__main__":
-    main()
+    ExtractResidues.main()

@@ -4,7 +4,7 @@
 
 from typing import Optional
 
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 from biobb_structure_utils.gro_lib.gro import Gro
 from biobb_structure_utils.utils.common import _from_string_to_list
@@ -47,7 +47,7 @@ class SortGroResidues(BiobbObject):
     """
 
     def __init__(
-        self, input_gro_path, output_gro_path, properties=None, **kwargs
+        self, input_gro_path: str, output_gro_path: str, properties: Optional[dict] = None, **kwargs
     ) -> None:
         super().__init__(**locals())
 
@@ -68,19 +68,7 @@ class SortGroResidues(BiobbObject):
         ##########
 
 
-def sort_gro_residues(
-    input_gro_path: str,
-    output_gro_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`SortGroResidues <utils.sort_gro_residues.SortGroResidues>` class and
-    execute the :meth:`launch() <utils.sort_gro_residues.SortGroResidues.launch>` method."""
-    return SortGroResidues(**dict(locals())).launch()
-
-
-sort_gro_residues.__doc__ = SortGroResidues.__doc__
-main = SortGroResidues.get_main(sort_gro_residues, "Renumber atoms and residues from a 3D structure.")
+sort_gro_residues = launcher(SortGroResidues)
 
 if __name__ == "__main__":
-    main()
+    SortGroResidues.main()

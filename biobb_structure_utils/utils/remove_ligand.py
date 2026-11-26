@@ -3,7 +3,7 @@
 """Module containing the RemoveLigand class and the command line interface."""
 from typing import Optional
 from pathlib import Path
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 
 from biobb_structure_utils.gro_lib.gro import Gro
@@ -46,7 +46,7 @@ class RemoveLigand(BiobbObject):
     """
 
     def __init__(
-        self, input_structure_path, output_structure_path, properties=None, **kwargs
+        self, input_structure_path: str, output_structure_path: str, properties: Optional[dict] = None, **kwargs
     ) -> None:
         super().__init__(**locals())
 
@@ -91,19 +91,7 @@ class RemoveLigand(BiobbObject):
         ##########
 
 
-def remove_ligand(
-    input_structure_path: str,
-    output_structure_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`RemoveLigand <utils.remove_ligand.RemoveLigand>` class and
-    execute the :meth:`launch() <utils.remove_ligand.RemoveLigand.launch>` method."""
-    return RemoveLigand(**dict(locals())).launch()
-
-
-remove_ligand.__doc__ = RemoveLigand.__doc__
-main = RemoveLigand.get_main(remove_ligand, "Remove the selected ligand atoms from a 3D structure.")
+remove_ligand = launcher(RemoveLigand)
 
 if __name__ == "__main__":
-    main()
+    RemoveLigand.main()
