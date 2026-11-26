@@ -92,58 +92,33 @@ def residue_value(residue, code):
     return residue[code]
 
 
-def create_residues_list(residues, out_log):
-    """Check format of residues list"""
+def create_residues_list(residues):
+    """Goes from a residues property (res_ids or dictionaries with name | res_id | chain | model)
+    to the selections of select_residues(): dictionaries of strings."""
     if not residues:
         return None
 
-    list_residues = []
-
+    selections = []
     for residue in residues:
-        d = residue
-        code = []
-        if isinstance(residue, Mapping):
-            if "name" in residue:
-                code.append("name")
-            if "res_id" in residue:
-                code.append("res_id")
-            if "chain" in residue:
-                code.append("chain")
-            if "model" in residue:
-                code.append("model")
-        else:
-            d = {"res_id": str(residue)}
-            code.append("res_id")
+        if not isinstance(residue, Mapping):
+            residue = {"res_id": residue}
+        selection = {key: str(residue[key]).strip() for key in ("name", "res_id", "chain", "model") if key in residue}
+        if not selection:
+            raise ValueError(f"The residue selection {residue} has no name, res_id, chain or model")
+        selections.append(selection)
 
-        d["code"] = code
-        list_residues.append(d)
-
-    return list_residues
+    return selections
 
 
-def check_format_heteroatoms(hets, out_log):
-    """Check format of heteroatoms list"""
-    if not hets:
-        return 0
-
-    listh = []
-
-    for het in hets:
-        d = het
-        code = []
-        if "name" in het:
-            code.append("name")
-        if "res_id" in het:
-            code.append("res_id")
-        if "chain" in het:
-            code.append("chain")
-        if "model" in het:
-            code.append("model")
-
-        d["code"] = code
-        listh.append(d)
-
-    return listh
-
-
-# TODO: Move this function to biobb_common.tools.file_utils
+def select_residues(structure, selections):
+    """Goes from a Biopython structure and the selections of create_residues_list() to the
+    Biopython residues that match any of them (all the residues if there are no selections)."""
+    selected = []
+    for residue in structure.get_residues():
+        values = create_biopython_residue(residue)
+        if not selections or any(
+            all(residue_value(values, key).strip() == value for key, value in selection.items())
+            for selection in selections
+        ):
+            selected.append(residue)
+    return selected

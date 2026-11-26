@@ -10,7 +10,7 @@ from biobb_structure_utils.utils.common import (
     create_biopython_residue,
     create_output_file,
     create_residues_list,
-    residue_value,
+    select_residues,
 )
 
 
@@ -71,28 +71,15 @@ class ExtractResidues(BiobbObject):
 
         # Business code
         # get list of Residues from properties
-        list_residues = create_residues_list(self.residues, self.out_log)
+        list_residues = create_residues_list(self.residues)
 
         # load input into BioPython structure
         structure = PDBParser(QUIET=True).get_structure(
             "structure", self.sandbox_file("input_structure_path")
         )
 
-        new_structure = []
         # get desired residues
-        for residue in structure.get_residues():
-            r = create_biopython_residue(residue)
-            if list_residues:
-                for res in list_residues:
-                    match = True
-                    for code in res["code"]:
-                        if res[code].strip() != residue_value(r, code).strip():
-                            match = False
-                            break
-                    if match:
-                        new_structure.append(r)
-            else:
-                new_structure.append(r)
+        new_structure = [create_biopython_residue(residue) for residue in select_residues(structure, list_residues)]
 
         # if not residues found in structure, raise exit
         if not new_structure:

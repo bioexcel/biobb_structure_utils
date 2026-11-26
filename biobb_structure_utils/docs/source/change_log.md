@@ -1,5 +1,14 @@
 # Biobb Structure Utils changelog
 
+## [Unreleased]
+
+### Changes
+
+* [FIX] `extract_residues` and `extract_heteroatoms`: a residue that matches more than one entry of the selection is written once; its atoms used to be written once per matching entry.
+* [FIX] `closest_residues`: a water can be a target residue; it failed with a KeyError.
+* [FIX] `extract_residues`, `extract_heteroatoms`, `remove_molecules` and `closest_residues`: the selection dictionaries accept numbers (`{"res_id": 72}`), not only strings; numbers failed with an AttributeError. A plain entry of `heteroatoms` is a res_id, as in the other blocks; it failed with a TypeError.
+* [CHANGE] The same four blocks stop with an error when a selection dictionary has no name, res_id, chain or model, such as a misspelled `resname`. Such an entry used to match every residue: `extract_residues` returned the whole structure and `remove_molecules` removed all of it.
+
 ## What's new in version [5.3.0](https://github.com/bioexcel/biobb_amber/releases/tag/v5.3.0)?
 
 ### Changes

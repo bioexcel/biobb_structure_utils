@@ -7,10 +7,10 @@ from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 
 from biobb_structure_utils.utils.common import (
-    check_format_heteroatoms,
     create_biopython_residue,
     create_output_file,
-    residue_value,
+    create_residues_list,
+    select_residues,
 )
 
 
@@ -72,39 +72,19 @@ class ExtractHeteroAtoms(BiobbObject):
 
         # Business code
         # get list of heteroatoms from properties
-        list_heteroatoms = check_format_heteroatoms(self.heteroatoms, self.out_log)
+        list_heteroatoms = create_residues_list(self.heteroatoms)
 
         # load input into BioPython structure
         structure = PDBParser(QUIET=True).get_structure(
             "structure", self.sandbox_file("input_structure_path")
         )
 
-        new_structure = []
-        # get desired heteroatoms
-        for residue in structure.get_residues():
-            r = create_biopython_residue(residue)
-            if list_heteroatoms:
-                for het in list_heteroatoms:
-                    match = True
-                    for code in het["code"]:
-                        if het[code].strip() != residue_value(r, code).strip():
-                            match = False
-                            break
-
-                    if match:
-                        if not self.water and (
-                            r["name"] == "HOH" or r["name"] == "SOL" or r["name"] == "WAT"
-                        ):
-                            pass
-                        else:
-                            new_structure.append(r)
-            else:
-                if not self.water and (
-                    r["name"] == "HOH" or r["name"] == "SOL" or r["name"] == "WAT"
-                ):
-                    pass
-                else:
-                    new_structure.append(r)
+        # get desired heteroatoms, without waters unless asked
+        new_structure = [
+            create_biopython_residue(residue)
+            for residue in select_residues(structure, list_heteroatoms)
+            if self.water or residue.get_resname() not in ("HOH", "SOL", "WAT")
+        ]
 
         # if not heteroatoms found in structure, raise exit
         if not new_structure:

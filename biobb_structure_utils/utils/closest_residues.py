@@ -10,7 +10,7 @@ from biobb_structure_utils.utils.common import (
     create_biopython_residue,
     create_output_file,
     create_residues_list,
-    residue_value,
+    select_residues,
 )
 
 
@@ -75,48 +75,15 @@ class ClosestResidues(BiobbObject):
 
         # Business code
         # get list of Residues from properties
-        list_residues = create_residues_list(self.residues, self.out_log)
+        list_residues = create_residues_list(self.residues)
 
         # load input into BioPython structure
         structure = Bio.PDB.PDBParser(QUIET=True).get_structure(
             "structure", self.sandbox_file("input_structure_path")
         )
 
-        str_residues = []
-        # format selected residues
-        for residue in structure.get_residues():
-            r = create_biopython_residue(residue)
-            if list_residues:
-                for res in list_residues:
-                    match = True
-                    for code in res["code"]:
-                        if res[code].strip() != residue_value(r, code).strip():
-                            match = False
-                            break
-                    if match:
-                        str_residues.append(r)
-            else:
-                str_residues.append(r)
-
         # get target residues in BioPython format
-        target_residues = []
-        for sr in str_residues:
-            # try for residues, if exception, try as HETATM
-            try:
-                target_residues.append(
-                    structure[int(sr["model"]) - 1][sr["chain"]][(" ", int(sr["res_id"]), sr["icode"])]
-                )
-            except KeyError:
-                target_residues.append(
-                    structure[int(sr["model"]) - 1][sr["chain"]][
-                        "H_" + sr["name"], int(sr["res_id"]), sr["icode"]
-                    ]
-                )
-            except Exception:
-                fu.log(
-                    self.__class__.__name__ + ": Unable to find residue %s" % sr["res_id"],
-                    self.out_log,
-                )
+        target_residues = select_residues(structure, list_residues)
 
         # get all atoms from target_residues
         target_atoms = Bio.PDB.Selection.unfold_entities(target_residues, "A")
@@ -131,15 +98,12 @@ class ClosestResidues(BiobbObject):
             for res in ns.search(center_atom.coord, self.radius, "R")
         }
 
-        # format nearby residues to pure python objects
-        neighbor_residues = []
-        for residue in nearby_residues:
-            r = create_biopython_residue(residue)
-            neighbor_residues.append(r)
-
         # if preserve_target == False, don't add the residues of self.residues to the final structure
         if not self.preserve_target:
-            neighbor_residues = [x for x in neighbor_residues if x not in str_residues]
+            nearby_residues -= set(target_residues)
+
+        # format nearby residues to pure python objects
+        neighbor_residues = [create_biopython_residue(residue) for residue in nearby_residues]
 
         fu.log("Found %d nearby residues" % len(neighbor_residues), self.out_log)
 

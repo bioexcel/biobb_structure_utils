@@ -10,7 +10,7 @@ from biobb_structure_utils.utils.common import (
     create_biopython_residue,
     create_output_file,
     create_residues_list,
-    residue_value,
+    select_residues,
 )
 
 
@@ -71,30 +71,15 @@ class RemoveMolecules(BiobbObject):
 
         # Business code
         # get list of Residues from properties
-        list_residues = create_residues_list(self.molecules, self.out_log)
+        list_residues = create_residues_list(self.molecules)
 
         # load input into BioPython structure
         structure = PDBParser(QUIET=True).get_structure(
             "structure", self.sandbox_file("input_structure_path")
         )
 
-        remove_structure = []
-        whole_structure = []
         # get desired residues
-        for residue in structure.get_residues():
-            r = create_biopython_residue(residue)
-            whole_structure.append(r)
-            if list_residues:
-                for res in list_residues:
-                    match = True
-                    for code in res["code"]:
-                        if res[code].strip() != residue_value(r, code).strip():
-                            match = False
-                            break
-                    if match:
-                        remove_structure.append(r)
-            else:
-                remove_structure.append(r)
+        remove_structure = set(select_residues(structure, list_residues))
 
         # if not residues found in structure, raise exit
         if not remove_structure:
@@ -106,8 +91,10 @@ class RemoveMolecules(BiobbObject):
                 self.__class__.__name__ + ": The residues given by user were not found in input structure"
             )
 
-        # substract residues (remove_structure) from whole_structure
-        new_structure = [x for x in whole_structure if x not in remove_structure]
+        # substract residues (remove_structure) from the whole structure
+        new_structure = [
+            create_biopython_residue(residue) for residue in structure.get_residues() if residue not in remove_structure
+        ]
 
         create_output_file(
             0,
