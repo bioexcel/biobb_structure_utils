@@ -4,9 +4,7 @@ from collections.abc import Mapping
 
 from biobb_common.tools import file_utils as fu
 
-PDB_COORD_RECORDS = ["MODEL", "ANISOU", "HETATM", "ATOM", "TER", "ENDMDL"]
 PDB_SERIAL_RECORDS = ["ANISOU", "HETATM", "ATOM", "TER"]
-PDB_WATERS = ["SOL", "HOH", "WAT", "T3P"]
 
 
 def check_output_end(structure, out_log):
