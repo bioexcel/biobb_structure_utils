@@ -76,7 +76,7 @@ class ExtractResidues(BiobbObject):
 
         # load input into BioPython structure
         structure = PDBParser(QUIET=True).get_structure(
-            "structure", self.stage_io_dict["in"]["input_structure_path"]
+            "structure", self.sandbox_file("input_structure_path")
         )
 
         new_structure = []
@@ -107,9 +107,9 @@ class ExtractResidues(BiobbObject):
 
         create_output_file(
             2,
-            self.stage_io_dict["in"]["input_structure_path"],
+            self.sandbox_file("input_structure_path"),
             new_structure,
-            self.stage_io_dict["out"]["output_residues_path"],
+            self.sandbox_file("output_residues_path"),
             self.out_log,
         )
 

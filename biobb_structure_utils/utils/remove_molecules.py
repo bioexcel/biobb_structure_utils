@@ -76,7 +76,7 @@ class RemoveMolecules(BiobbObject):
 
         # load input into BioPython structure
         structure = PDBParser(QUIET=True).get_structure(
-            "structure", self.stage_io_dict["in"]["input_structure_path"]
+            "structure", self.sandbox_file("input_structure_path")
         )
 
         remove_structure = []
@@ -112,9 +112,9 @@ class RemoveMolecules(BiobbObject):
 
         create_output_file(
             0,
-            self.stage_io_dict["in"]["input_structure_path"],
+            self.sandbox_file("input_structure_path"),
             new_structure,
-            self.stage_io_dict["out"]["output_molecules_path"],
+            self.sandbox_file("output_molecules_path"),
             self.out_log,
         )
 

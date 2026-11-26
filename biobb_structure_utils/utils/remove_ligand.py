@@ -64,9 +64,9 @@ class RemoveLigand(BiobbObject):
                 self.out_log,
             )
             gro_st = Gro()
-            gro_st.read_gro_file(self.stage_io_dict["in"]["input_structure_path"])
+            gro_st.read_gro_file(self.sandbox_file("input_structure_path"))
             gro_st.remove_residues([self.ligand])
-            gro_st.write_gro_file(self.stage_io_dict["out"]["output_structure_path"])
+            gro_st.write_gro_file(self.sandbox_file("output_structure_path"))
 
         else:
             fu.log(
@@ -78,9 +78,9 @@ class RemoveLigand(BiobbObject):
             # presented in commit message (c92aab9604a6a31d13f4170ff47b231df0a588ef)
             # with the Biopython library
             with open(
-                self.stage_io_dict["in"]["input_structure_path"], "r"
+                self.sandbox_file("input_structure_path"), "r"
             ) as input_pdb, open(
-                self.stage_io_dict["out"]["output_structure_path"], "w"
+                self.sandbox_file("output_structure_path"), "w"
             ) as output_pdb:
                 for line in input_pdb:
                     if len(line) > 19 and self.ligand.lower() in line[17:20].lower():

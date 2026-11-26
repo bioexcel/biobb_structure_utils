@@ -61,9 +61,9 @@ class SortGroResidues(BiobbObject):
 
         # Business code
         in_gro = Gro()
-        in_gro.read_gro_file(self.stage_io_dict["in"]["input_gro_path"])
+        in_gro.read_gro_file(self.sandbox_file("input_gro_path"))
         in_gro.sort_residues2(self.residue_name_list)
-        in_gro.write_gro_file(self.stage_io_dict["out"]["output_gro_path"])
+        in_gro.write_gro_file(self.sandbox_file("output_gro_path"))
         self.return_code = 0
         ##########
 

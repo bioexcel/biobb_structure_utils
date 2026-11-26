@@ -71,12 +71,12 @@ class RenumberStructure(BiobbObject):
         if extension.lower() == ".gro":
             fu.log("GRO format detected, reenumerating atoms", self.out_log)
             gro_st = Gro()
-            gro_st.read_gro_file(self.stage_io_dict["in"]["input_structure_path"])
+            gro_st.read_gro_file(self.sandbox_file("input_structure_path"))
             residue_mapping, atom_mapping = gro_st.renumber_atoms(
                 renumber_residues=self.renumber_residues,
                 renumber_residues_per_chain=self.renumber_residues_per_chain,
             )
-            gro_st.write_gro_file(self.stage_io_dict["out"]["output_structure_path"])
+            gro_st.write_gro_file(self.sandbox_file("output_structure_path"))
 
         else:
             fu.log("PDB format detected, reenumerating atoms", self.out_log)
@@ -85,9 +85,9 @@ class RenumberStructure(BiobbObject):
             residue_mapping = {}
             residue_count = 0
             with open(
-                self.stage_io_dict["in"]["input_structure_path"], "r"
+                self.sandbox_file("input_structure_path"), "r"
             ) as input_pdb, open(
-                self.stage_io_dict["out"]["output_structure_path"], "w"
+                self.sandbox_file("output_structure_path"), "w"
             ) as output_pdb:
                 for line in input_pdb:
                     record = line[:6].upper().strip()
@@ -121,7 +121,7 @@ class RenumberStructure(BiobbObject):
                     output_pdb.write(line)
 
         with open(
-            self.stage_io_dict["out"]["output_mapping_json_path"], "w"
+            self.sandbox_file("output_mapping_json_path"), "w"
         ) as output_json:
             output_json.write(
                 json.dumps({"residues": residue_mapping, "atoms": atom_mapping})
