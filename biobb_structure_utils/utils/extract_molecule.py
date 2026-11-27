@@ -2,15 +2,8 @@
 
 """Module containing the ExtractMolecule class and the command line interface."""
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
-
-from biobb_structure_utils.utils.common import (
-    _from_string_to_list,
-    check_input_path,
-    check_output_path,
-)
 
 
 class ExtractMolecule(BiobbObject):
@@ -54,29 +47,12 @@ class ExtractMolecule(BiobbObject):
     """
 
     def __init__(
-        self, input_structure_path, output_molecule_path, properties=None, **kwargs
+        self, input_structure_path: str, output_molecule_path: str, properties: Optional[dict] = None, **kwargs
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_structure_path": input_structure_path},
-            "out": {"output_molecule_path": output_molecule_path},
-        }
+        super().__init__(**locals())
 
         # Properties specific for BB
-        self.molecule_type = properties.get("molecule_type", "all")
-        self.chains = _from_string_to_list(properties.get("chains", []))
-        self.binary_path = properties.get("binary_path", "check_structure")
-        self.properties = properties
-
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
+        self.chains = fu.str_to_list(self.chains)
 
     def create_command_list(self, command_list_path):
         """Creates a command list file as a input for structure checking"""
@@ -94,29 +70,11 @@ class ExtractMolecule(BiobbObject):
 
         return command_list_path
 
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`ExtractMolecule <utils.extract_molecule.ExtractMolecule>` utils.extract_molecule.ExtractMolecule object."""
 
-        self.io_dict["in"]["input_structure_path"] = check_input_path(
-            self.io_dict["in"]["input_structure_path"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-        self.io_dict["out"]["output_molecule_path"] = check_output_path(
-            self.io_dict["out"]["output_molecule_path"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
-
         # create temporary folder
-        tmp_folder = fu.create_unique_dir()
-        fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
+        tmp_folder = self.create_tmp_dir(log=True)
 
         # create command list file
         command_list_file = self.create_command_list(tmp_folder + "/extract_prot.lst")
@@ -125,44 +83,21 @@ class ExtractMolecule(BiobbObject):
         self.cmd = [
             self.binary_path,
             "-i",
-            self.io_dict["in"]["input_structure_path"],
+            self.stage_io_dict["in"]["input_structure_path"],
             "-o",
-            self.io_dict["out"]["output_molecule_path"],
+            self.stage_io_dict["out"]["output_molecule_path"],
             "--force_save",
             "--non_interactive",
             "command_list",
             "--list",
-            command_list_file,
+            self.staged_path(command_list_file),
         ]
 
         # Run Biobb block
         self.run_biobb()
 
-        # Copy files to host
-        self.copy_to_host()
 
-        # Remove temporal files
-        self.tmp_files.append(tmp_folder)
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
-
-
-def extract_molecule(
-    input_structure_path: str,
-    output_molecule_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`ExtractMolecule <utils.extract_molecule.ExtractMolecule>` class and
-    execute the :meth:`launch() <utils.extract_molecule.ExtractMolecule.launch>` method."""
-    return ExtractMolecule(**dict(locals())).launch()
-
-
-extract_molecule.__doc__ = ExtractMolecule.__doc__
-main = ExtractMolecule.get_main(extract_molecule, "Extract a molecule from a 3D structure.")
+extract_molecule = launcher(ExtractMolecule)
 
 if __name__ == "__main__":
-    main()
+    ExtractMolecule.main()

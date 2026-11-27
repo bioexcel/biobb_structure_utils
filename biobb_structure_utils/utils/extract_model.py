@@ -3,11 +3,8 @@
 """Module containing the ExtractModel class and the command line interface."""
 import shutil
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
-
-from biobb_structure_utils.utils.common import check_input_path, check_output_path
 
 
 class ExtractModel(BiobbObject):
@@ -49,63 +46,26 @@ class ExtractModel(BiobbObject):
     """
 
     def __init__(
-        self, input_structure_path, output_structure_path, properties=None, **kwargs
+        self, input_structure_path: str, output_structure_path: str, properties: Optional[dict] = None, **kwargs
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_structure_path": input_structure_path},
-            "out": {"output_structure_path": output_structure_path},
-        }
+        super().__init__(**locals())
 
         # Properties specific for BB
-        self.binary_path = properties.get("binary_path", "check_structure")
-        self.models = properties.get("models", [])
-        self.properties = properties
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`ExtractModel <utils.extract_model.ExtractModel>` utils.extract_model.ExtractModel object."""
-
-        self.io_dict["in"]["input_structure_path"] = check_input_path(
-            self.io_dict["in"]["input_structure_path"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-        self.io_dict["out"]["output_structure_path"] = check_output_path(
-            self.io_dict["out"]["output_structure_path"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # check if user has passed models properly
         models = check_format_models(self.models, self.out_log)
 
         if models == "All":
             shutil.copyfile(
-                self.io_dict["in"]["input_structure_path"],
-                self.io_dict["out"]["output_structure_path"],
+                self.sandbox_file("input_structure_path"),
+                self.sandbox_file("output_structure_path"),
             )
-
-            return 0
         else:
             # create temporary folder
-            tmp_folder = fu.create_unique_dir()
-            fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
+            tmp_folder = self.create_tmp_dir(log=True)
 
             filenames = []
 
@@ -117,7 +77,7 @@ class ExtractModel(BiobbObject):
                     "-i",
                     self.stage_io_dict["in"]["input_structure_path"],
                     "-o",
-                    tmp_file,
+                    self.staged_path(tmp_file),
                     "--force_save",
                     "models",
                     "--select",
@@ -130,7 +90,7 @@ class ExtractModel(BiobbObject):
                 filenames.append(tmp_file)
 
             # concat tmp_file and save them into output file
-            with open(self.io_dict["out"]["output_structure_path"], "w") as outfile:
+            with open(self.sandbox_file("output_structure_path"), "w") as outfile:
                 for i, fname in enumerate(filenames):
                     with open(fname) as infile:
                         outfile.write("MODEL     " + "{:>4}".format(str(i + 1)) + "\n")
@@ -139,17 +99,6 @@ class ExtractModel(BiobbObject):
                                 outfile.write(line)
                             else:
                                 outfile.write("ENDMDL\n")
-
-            # Copy files to host
-            self.copy_to_host()
-
-            # Remove temporal files
-            self.tmp_files.append(tmp_folder)
-            self.remove_tmp_files()
-
-            self.check_arguments(output_files_created=True, raise_exception=False)
-
-            return self.return_code
 
 
 def check_format_models(models, out_log):
@@ -168,19 +117,7 @@ def check_format_models(models, out_log):
     return models
 
 
-def extract_model(
-    input_structure_path: str,
-    output_structure_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`ExtractModel <utils.extract_model.ExtractModel>` class and
-    execute the :meth:`launch() <utils.extract_model.ExtractModel.launch>` method."""
-    return ExtractModel(**dict(locals())).launch()
-
-
-extract_model.__doc__ = ExtractModel.__doc__
-main = ExtractModel.get_main(extract_model, "Extract a model from a 3D structure.")
+extract_model = launcher(ExtractModel)
 
 if __name__ == "__main__":
-    main()
+    ExtractModel.main()

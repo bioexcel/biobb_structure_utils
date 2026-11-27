@@ -2,8 +2,7 @@
 
 """Module containing the RemovePdbWater class and the command line interface."""
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools.file_utils import launchlogger
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
 class RemovePdbWater(BiobbObject):
@@ -42,35 +41,12 @@ class RemovePdbWater(BiobbObject):
     """
 
     def __init__(
-        self, input_pdb_path, output_pdb_path, properties=None, **kwargs
+        self, input_pdb_path: str, output_pdb_path: str, properties: Optional[dict] = None, **kwargs
     ) -> None:
-        properties = properties or {}
+        super().__init__(**locals())
 
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_pdb_path": input_pdb_path},
-            "out": {"output_pdb_path": output_pdb_path},
-        }
-
-        # Properties specific for BB
-        self.binary_path = properties.get("binary_path", "check_structure")
-
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`RemovePdbWater <utils.remove_pdb_water.RemovePdbWater>` utils.remove_pdb_water.RemovePdbWater object."""
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         self.cmd = [
             self.binary_path,
@@ -87,31 +63,8 @@ class RemovePdbWater(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
-        # Copy files to host
-        self.copy_to_host()
 
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
-
-
-def remove_pdb_water(
-    input_pdb_path: str,
-    output_pdb_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`RemovePdbWater <utils.remove_pdb_water.RemovePdbWater>` class and
-    execute the :meth:`launch() <utils.remove_pdb_water.RemovePdbWater.launch>` method."""
-
-    return RemovePdbWater(**dict(locals())).launch()
-
-
-remove_pdb_water.__doc__ = RemovePdbWater.__doc__
-main = RemovePdbWater.get_main(remove_pdb_water, "Remove the water molecules from a PDB 3D structure.")
+remove_pdb_water = launcher(RemovePdbWater)
 
 if __name__ == "__main__":
-    main()
+    RemovePdbWater.main()

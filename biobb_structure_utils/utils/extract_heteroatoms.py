@@ -3,17 +3,14 @@
 """Module containing the ExtractHeteroAtoms class and the command line interface."""
 from typing import Optional
 from Bio.PDB.PDBParser import PDBParser
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
 
 from biobb_structure_utils.utils.common import (
-    _from_string_to_list,
-    check_format_heteroatoms,
-    check_input_path,
-    check_output_path,
     create_biopython_residue,
     create_output_file,
+    create_residues_list,
+    select_residues,
 )
 
 
@@ -27,7 +24,7 @@ class ExtractHeteroAtoms(BiobbObject):
         input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_heteroatom.pdb>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).
         output_heteroatom_path (str): Output heteroatom file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_heteroatom.pdb>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
-            * **heteroatoms** (*list*) - (None) List of dictionaries with the name | res_id | chain | model of the heteroatoms to be extracted. Format: [{"name": "ZZ7", "res_id": "302", "chain": "B", "model": "1"}]. If empty, all the heteroatoms of the structure will be returned.
+            * **heteroatoms** (*list*) - (None) List of dictionaries with the name | res_id | chain | model of the heteroatoms to be extracted. Format: [{"name": "ZZ7", "res_id": "302", "chain": "B", "model": "1"}]. The res_id of a residue with an insertion code includes the code ("62A"). If empty, all the heteroatoms of the structure will be returned.
             * **water** (*bool*) - (False) Add or not waters.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
@@ -63,84 +60,31 @@ class ExtractHeteroAtoms(BiobbObject):
     """
 
     def __init__(
-        self, input_structure_path, output_heteroatom_path, properties=None, **kwargs
+        self, input_structure_path: str, output_heteroatom_path: str, properties: Optional[dict] = None, **kwargs
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_structure_path": input_structure_path},
-            "out": {"output_heteroatom_path": output_heteroatom_path},
-        }
+        super().__init__(**locals())
 
         # Properties specific for BB
-        self.heteroatoms = _from_string_to_list(properties.get("heteroatoms", []))
-        self.water = properties.get("water", False)
-        self.properties = properties
+        self.heteroatoms = fu.str_to_list(self.heteroatoms)
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`ExtractHeteroAtoms <utils.extract_heteroatoms.ExtractHeteroAtoms>` utils.extract_heteroatoms.ExtractHeteroAtoms object."""
-
-        self.io_dict["in"]["input_structure_path"] = check_input_path(
-            self.io_dict["in"]["input_structure_path"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-        self.io_dict["out"]["output_heteroatom_path"] = check_output_path(
-            self.io_dict["out"]["output_heteroatom_path"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # Business code
         # get list of heteroatoms from properties
-        list_heteroatoms = check_format_heteroatoms(self.heteroatoms, self.out_log)
+        list_heteroatoms = create_residues_list(self.heteroatoms)
 
         # load input into BioPython structure
         structure = PDBParser(QUIET=True).get_structure(
-            "structure", self.stage_io_dict["in"]["input_structure_path"]
+            "structure", self.sandbox_file("input_structure_path")
         )
 
-        new_structure = []
-        # get desired heteroatoms
-        for residue in structure.get_residues():
-            r = create_biopython_residue(residue)
-            if list_heteroatoms:
-                for het in list_heteroatoms:
-                    match = True
-                    for code in het["code"]:
-                        if het[code].strip() != r[code].strip():
-                            match = False
-                            break
-
-                    if match:
-                        if not self.water and (
-                            r["name"] == "HOH" or r["name"] == "SOL" or r["name"] == "WAT"
-                        ):
-                            pass
-                        else:
-                            new_structure.append(r)
-            else:
-                if not self.water and (
-                    r["name"] == "HOH" or r["name"] == "SOL" or r["name"] == "WAT"
-                ):
-                    pass
-                else:
-                    new_structure.append(r)
+        # get desired heteroatoms, without waters unless asked
+        new_structure = [
+            create_biopython_residue(residue)
+            for residue in select_residues(structure, list_heteroatoms)
+            if self.water or residue.get_resname() not in ("HOH", "SOL", "WAT")
+        ]
 
         # if not heteroatoms found in structure, raise exit
         if not new_structure:
@@ -154,38 +98,16 @@ class ExtractHeteroAtoms(BiobbObject):
 
         create_output_file(
             1,
-            self.stage_io_dict["in"]["input_structure_path"],
+            self.sandbox_file("input_structure_path"),
             new_structure,
-            self.stage_io_dict["out"]["output_heteroatom_path"],
+            self.sandbox_file("output_heteroatom_path"),
             self.out_log,
         )
 
         self.return_code = 0
 
-        # Copy files to host
-        self.copy_to_host()
 
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
-
-
-def extract_heteroatoms(
-    input_structure_path: str,
-    output_heteroatom_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`ExtractHeteroAtoms <utils.extract_heteroatoms.ExtractHeteroAtoms>` class and
-    execute the :meth:`launch() <utils.extract_heteroatoms.ExtractHeteroAtoms.launch>` method."""
-    return ExtractHeteroAtoms(**dict(locals())).launch()
-
-
-extract_heteroatoms.__doc__ = ExtractHeteroAtoms.__doc__
-main = ExtractHeteroAtoms.get_main(extract_heteroatoms, "Extract a list of heteroatoms from a 3D structure.")
+extract_heteroatoms = launcher(ExtractHeteroAtoms)
 
 if __name__ == "__main__":
-    main()
+    ExtractHeteroAtoms.main()

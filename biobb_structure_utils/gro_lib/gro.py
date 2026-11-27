@@ -134,33 +134,6 @@ class Gro:
             file_id.write("\n")
 
     # -- preservative operations --
-    def rename_atoms(self, old_atom_names, new_atom_names):
-        """
-        rename atoms from the old_atom_names to the new_atom_names
-        """
-        assert len(old_atom_names) == len(
-            new_atom_names
-        ), "old_atom_names doesn't have the same length as new_atom_names"
-        for i_atom in range(self.num_of_atoms):
-            for i_name in range(len(old_atom_names)):
-                if self.atom_name[i_atom] == old_atom_names[i_name]:
-                    self.atom_name[i_atom] = new_atom_names[i_name]
-                    break
-
-    # TODO: may add flexibility to rename atoms with specific residue_names
-    def rename_residues(self, old_residue_names, new_residue_names):
-        """
-        rename residues with an old_residue_name to a new_residue_name
-        """
-        assert len(old_residue_names) == len(
-            new_residue_names
-        ), "old_residue_names doesn't have the same length as new_residue_names"
-        for i_atom in range(self.num_of_atoms):
-            for i_name in range(len(old_residue_names)):
-                if self.residue_name[i_atom] == old_residue_names[i_name]:
-                    self.residue_name[i_atom] = new_residue_names[i_name]
-                    break
-
     def renumber_atoms(self, renumber_residues=True, renumber_residues_per_chain=True):
         """
         renumber residue_id and atom_id starting from 1; the original composition of each resdiue is maintained
@@ -202,44 +175,6 @@ class Gro:
             self.residue_id[i_atom] = residue_count
 
         return residue_mapping, atom_mapping
-
-    def replace_atom_entry(self, i_atom, another_gro_object, j_atom):
-        """
-        replace the i-th atom of the current gro object with the j-th atom of another gro object
-        """
-        self.residue_id[i_atom] = another_gro_object.residue_id[j_atom]
-        self.residue_name[i_atom] = another_gro_object.residue_name[j_atom]
-        self.atom_name[i_atom] = another_gro_object.atom_name[j_atom]
-        self.atom_id[i_atom] = another_gro_object.atom_id[j_atom]
-        self.x[i_atom] = another_gro_object.x[j_atom]
-        self.y[i_atom] = another_gro_object.y[j_atom]
-        self.z[i_atom] = another_gro_object.z[j_atom]
-        self.v_x[i_atom] = another_gro_object.v_x[j_atom]
-        self.v_y[i_atom] = another_gro_object.v_y[j_atom]
-        self.v_z[i_atom] = another_gro_object.v_z[j_atom]
-
-    def sort_residues(self, residue_name_list):
-        """
-        sort residues in the provided order, attaching other unspecified residues to the end
-        """
-        sorted_gro = Gro()
-        # copy provided to another
-        for residue_name in residue_name_list:
-            sorted_gro.copy_residues(self, [residue_name])
-        # remove provided
-        self.remove_residues(residue_name_list)
-        # copy unprovided to another
-        # for i_atom in range(self.num_of_atoms):
-        for i_atom in range(self.num_of_atoms):
-            sorted_gro.copy_atom_entry(self, i_atom)
-        # delete unprovided
-        # for i_atom in range(self.num_of_atoms):
-        for i_atom in range(self.num_of_atoms):
-            self.remove_atom_entry(0)
-        # copy all back from another
-        # for i_atom in range(sorted_gro.num_of_atoms):
-        for i_atom in range(sorted_gro.num_of_atoms):
-            self.copy_atom_entry(sorted_gro, i_atom)
 
     def sort_residues2(self, residue_name_list):
         """
@@ -283,26 +218,6 @@ class Gro:
         self.v_y.append(another_gro_object.v_y[i_atom])
         self.v_z.append(another_gro_object.v_z[i_atom])
 
-    def copy_residue_entry(self, another_gro_object, residue_id, residue_name):
-        """
-        copy atoms of the specified residue from another gro object and append to the end of current gro object
-        """
-        for i_atom in range(another_gro_object.num_of_atoms):
-            if (
-                another_gro_object.residue_id[i_atom] == residue_id and another_gro_object.residue_name[i_atom] == residue_name
-            ):
-                self.copy_atom_entry(another_gro_object, i_atom)
-
-    def copy_atoms(self, another_gro_object, atom_name_list):
-        """
-        copy atoms with the provided atom names from another gro object and append to the end of current gro object
-        """
-        for i_atom in range(another_gro_object.num_of_atoms):
-            for atom_name in atom_name_list:
-                if another_gro_object.atom_name[i_atom] == atom_name:
-                    self.copy_atom_entry(another_gro_object, i_atom)
-                    break
-
     def copy_residues(self, another_gro_object, residue_name_list):
         """
         copy atoms with the provided residue names from another gro object and append to the end of current gro object
@@ -334,41 +249,6 @@ class Gro:
         del self.v_x[i_atom]
         del self.v_y[i_atom]
         del self.v_z[i_atom]
-
-    def remove_residue_entry(self, residue_id, residue_name):
-        """
-        remove atoms of the specified residue
-        """
-        atom_indice_to_be_removed = []
-        for i_atom in range(self.num_of_atoms):
-            if (
-                self.residue_id[i_atom] == residue_id and self.residue_name[i_atom] == residue_name
-            ):
-                atom_indice_to_be_removed.append(
-                    i_atom
-                )  # save indice first; direct removal would shrink the atom list
-
-        num_of_atoms_to_be_removed = len(atom_indice_to_be_removed)
-        for i_atom in range(num_of_atoms_to_be_removed):
-            self.remove_atom_entry(
-                atom_indice_to_be_removed[i_atom] - i_atom
-            )  # shift atom indice to match the shrinkage of atom list
-
-    def remove_atoms(self, atom_name_list):
-        """
-        remove atoms with the provided atom names
-        """
-        atom_indice_to_be_removed = []
-        for i_atom in range(self.num_of_atoms):
-            for atom_name in atom_name_list:
-                if self.atom_name[i_atom] == atom_name:
-                    atom_indice_to_be_removed.append(i_atom)
-                    break
-        num_of_atoms_to_be_removed = len(atom_indice_to_be_removed)
-        for i_atom in range(num_of_atoms_to_be_removed):
-            self.remove_atom_entry(
-                atom_indice_to_be_removed[i_atom] - i_atom
-            )  # shift atom indice to match the shrinkage of atom list
 
     def select_atoms(self, regular_expression_pattern):
         atom_indice_to_be_removed = []

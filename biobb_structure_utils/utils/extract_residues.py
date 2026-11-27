@@ -3,17 +3,14 @@
 """Module containing the ExtractResidues class and the command line interface."""
 from typing import Optional
 from Bio.PDB.PDBParser import PDBParser
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
 
 from biobb_structure_utils.utils.common import (
-    _from_string_to_list,
-    check_input_path,
-    check_output_path,
     create_biopython_residue,
     create_output_file,
     create_residues_list,
+    select_residues,
 )
 
 
@@ -27,7 +24,7 @@ class ExtractResidues(BiobbObject):
         input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/extract_heteroatom.pdb>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).
         output_residues_path (str): Output residues file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_extract_residues.pdb>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
-            * **residues** (*list*) - (None) List of comma separated res_id (will extract all residues that match the res_id) or list of dictionaries with the name | res_id  | chain | model of the residues to be extracted. Format: [{"name": "HIS", "res_id": "72", "chain": "A", "model": "1"}].
+            * **residues** (*list*) - (None) List of comma separated res_id (will extract all residues that match the res_id) or list of dictionaries with the name | res_id  | chain | model of the residues to be extracted. Format: [{"name": "HIS", "res_id": "72", "chain": "A", "model": "1"}]. The res_id of a residue with an insertion code includes the code ("62A").
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
             * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
@@ -62,72 +59,27 @@ class ExtractResidues(BiobbObject):
     """
 
     def __init__(
-        self, input_structure_path, output_residues_path, properties=None, **kwargs
+        self, input_structure_path: str, output_residues_path: str, properties: Optional[dict] = None, **kwargs
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_structure_path": input_structure_path},
-            "out": {"output_residues_path": output_residues_path},
-        }
+        super().__init__(**locals())
 
         # Properties specific for BB
-        self.residues = _from_string_to_list(properties.get("residues", []))
-        self.properties = properties
+        self.residues = fu.str_to_list(self.residues)
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`ExtractResidues <utils.extract_residues.ExtractResidues>` utils.extract_residues.ExtractResidues object."""
-
-        self.io_dict["in"]["input_structure_path"] = check_input_path(
-            self.io_dict["in"]["input_structure_path"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-        self.io_dict["out"]["output_residues_path"] = check_output_path(
-            self.io_dict["out"]["output_residues_path"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # Business code
         # get list of Residues from properties
-        list_residues = create_residues_list(self.residues, self.out_log)
+        list_residues = create_residues_list(self.residues)
 
         # load input into BioPython structure
         structure = PDBParser(QUIET=True).get_structure(
-            "structure", self.stage_io_dict["in"]["input_structure_path"]
+            "structure", self.sandbox_file("input_structure_path")
         )
 
-        new_structure = []
         # get desired residues
-        for residue in structure.get_residues():
-            r = create_biopython_residue(residue)
-            if list_residues:
-                for res in list_residues:
-                    match = True
-                    for code in res["code"]:
-                        if res[code].strip() != r[code].strip():
-                            match = False
-                            break
-                    if match:
-                        new_structure.append(r)
-            else:
-                new_structure.append(r)
+        new_structure = [create_biopython_residue(residue) for residue in select_residues(structure, list_residues)]
 
         # if not residues found in structure, raise exit
         if not new_structure:
@@ -141,38 +93,16 @@ class ExtractResidues(BiobbObject):
 
         create_output_file(
             2,
-            self.stage_io_dict["in"]["input_structure_path"],
+            self.sandbox_file("input_structure_path"),
             new_structure,
-            self.stage_io_dict["out"]["output_residues_path"],
+            self.sandbox_file("output_residues_path"),
             self.out_log,
         )
 
         self.return_code = 0
 
-        # Copy files to host
-        self.copy_to_host()
 
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
-
-
-def extract_residues(
-    input_structure_path: str,
-    output_residues_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`ExtractResidues <utils.extract_residues.ExtractResidues>` class and
-    execute the :meth:`launch() <utils.extract_residues.ExtractResidues.launch>` method."""
-    return ExtractResidues(**dict(locals())).launch()
-
-
-extract_residues.__doc__ = ExtractResidues.__doc__
-main = ExtractResidues.get_main(extract_residues, "Extract a list of residues from a 3D structure.")
+extract_residues = launcher(ExtractResidues)
 
 if __name__ == "__main__":
-    main()
+    ExtractResidues.main()

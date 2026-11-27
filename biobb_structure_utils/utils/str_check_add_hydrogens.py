@@ -4,13 +4,10 @@
 
 from typing import Optional
 
-from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools.file_utils import launchlogger
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 from biobb_structure_utils.utils.common import (
-    check_input_path,
     check_output_end,
-    check_output_path_pdbqt,
 )
 
 
@@ -25,7 +22,7 @@ class StrCheckAddHydrogens(BiobbObject):
         output_structure_path (str): Output structure file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_str_H.pdbqt>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **charges** (*bool*) - (False) Whether or not to add charges to the output file. If True the output is in PDBQT format.
-            * **mode** (*string*) - (auto) Selection mode. Values: auto, list, ph
+            * **mode** (*string*) - ("auto") Selection mode. Values: auto, list, ph
             * **ph** (*float*) - (7.4) [0~14|0.1] Add hydrogens appropriate for pH. Only in case mode ph selected.
             * **list** (*string*) - ("") List of residues to modify separated by commas (i.e HISA234HID,HISB33HIE). Only in case mode list selected.
             * **keep_canonical_resnames** (*bool*) - (False) Whether or not keep canonical residue names
@@ -58,52 +55,12 @@ class StrCheckAddHydrogens(BiobbObject):
     """
 
     def __init__(
-        self, input_structure_path, output_structure_path, properties=None, **kwargs
+        self, input_structure_path: str, output_structure_path: str, properties: Optional[dict] = None, **kwargs
     ) -> None:
-        properties = properties or {}
+        super().__init__(**locals())
 
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_structure_path": input_structure_path},
-            "out": {"output_structure_path": output_structure_path},
-        }
-
-        # Properties specific for BB
-        self.binary_path = properties.get("binary_path", "check_structure")
-        self.charges = properties.get("charges", False)
-        self.mode = properties.get("mode", "auto")
-        self.ph = properties.get("ph", 7.4)
-        self.list = properties.get("list", "")
-        self.keep_canonical_resnames = properties.get("keep_canonical_resnames", False)
-        self.properties = properties
-
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`StrCheckAddHydrogens <utils.str_check_add_hydrogens.StrCheckAddHydrogens>` utils.str_check_add_hydrogens.StrCheckAddHydrogens object."""
-
-        self.io_dict["in"]["input_structure_path"] = check_input_path(
-            self.io_dict["in"]["input_structure_path"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-        self.io_dict["out"]["output_structure_path"] = check_output_path_pdbqt(
-            self.io_dict["out"]["output_structure_path"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         self.cmd = [
             self.binary_path,
@@ -127,7 +84,7 @@ class StrCheckAddHydrogens(BiobbObject):
         if self.mode:
             self.cmd.extend(["--add_mode", self.mode])
             if self.mode == "ph":
-                self.cmd.extend(["--pH", self.ph])
+                self.cmd.extend(["--pH", str(self.ph)])
             if self.mode == "list":
                 self.cmd.extend(["--list", self.list])
         else:
@@ -137,32 +94,11 @@ class StrCheckAddHydrogens(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
-        # Copy files to host
-        self.copy_to_host()
-
-        check_output_end(self.io_dict["out"]["output_structure_path"], self.out_log)
-
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
+        # Remove the END line of the output structure.
+        check_output_end(self.sandbox_file("output_structure_path"), self.out_log)
 
 
-def str_check_add_hydrogens(
-    input_structure_path: str,
-    output_structure_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`StrCheckAddHydrogens <utils.str_check_add_hydrogens.StrCheckAddHydrogens>` class and
-    execute the :meth:`launch() <utils.str_check_add_hydrogens.StrCheckAddHydrogens.launch>` method."""
-    return StrCheckAddHydrogens(**dict(locals())).launch()
-
-
-str_check_add_hydrogens.__doc__ = StrCheckAddHydrogens.__doc__
-main = StrCheckAddHydrogens.get_main(str_check_add_hydrogens, "Class to add hydrogens to a 3D structure.")
+str_check_add_hydrogens = launcher(StrCheckAddHydrogens)
 
 if __name__ == "__main__":
-    main()
+    StrCheckAddHydrogens.main()

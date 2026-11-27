@@ -72,7 +72,7 @@
                     "type": "array",
                     "default": null,
                     "wf_prop": false,
-                    "description": "List of dictionaries with the name | res_id | chain | model of the heteroatoms to be extracted. Format: [{\"name\": \"ZZ7\", \"res_id\": \"302\", \"chain\": \"B\", \"model\": \"1\"}]. If empty, all the heteroatoms of the structure will be returned."
+                    "description": "List of dictionaries with the name | res_id | chain | model of the heteroatoms to be extracted. Format: [{\"name\": \"ZZ7\", \"res_id\": \"302\", \"chain\": \"B\", \"model\": \"1\"}]. The res_id of a residue with an insertion code includes the code (\"62A\"). If empty, all the heteroatoms of the structure will be returned."
                 },
                 "water": {
                     "type": "boolean",

@@ -1,9 +1,6 @@
 """Module containing the CatPDB class and the command line interface."""
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools.file_utils import launchlogger
-
-from biobb_structure_utils.utils.common import check_input_path, check_output_path
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
 class CatPDB(BiobbObject):
@@ -43,58 +40,19 @@ class CatPDB(BiobbObject):
 
     def __init__(
         self,
-        input_structure1,
-        input_structure2,
-        output_structure_path,
-        properties=None,
+        input_structure1: str,
+        input_structure2: str,
+        output_structure_path: str,
+        properties: Optional[dict] = None,
         **kwargs,
     ) -> None:
-        properties = properties or {}
+        super().__init__(**locals())
 
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
+    def stage_files(self) -> None:
+        """The block does not use the sandbox: there are no files to stage."""
 
-        # Input/Output files
-        self.io_dict = {
-            "in": {
-                "input_structure1": input_structure1,
-                "input_structure2": input_structure2,
-            },
-            "out": {"output_structure_path": output_structure_path},
-        }
-
-        # Properties specific for BB
-        self.properties = properties
-
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`CatPDB <utils.cat_pdb.CatPDB>` utils.cat_pdb.CatPDB object."""
-
-        self.io_dict["in"]["input_structure1"] = check_input_path(
-            self.io_dict["in"]["input_structure1"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-        self.io_dict["in"]["input_structure2"] = check_input_path(
-            self.io_dict["in"]["input_structure2"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-        self.io_dict["out"]["output_structure_path"] = check_output_path(
-            self.io_dict["out"]["output_structure_path"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # Business code
         filenames = [
@@ -121,31 +79,8 @@ class CatPDB(BiobbObject):
                         outfile.write("\n")
         self.return_code = 0
 
-        # Copy files to host
-        self.copy_to_host()
 
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
-
-
-def cat_pdb(
-    input_structure1: str,
-    input_structure2: str,
-    output_structure_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`CatPDB <utils.cat_pdb.CatPDB>` class and
-    execute the :meth:`launch() <utils.cat_pdb.CatPDB.launch>` method."""
-    return CatPDB(**dict(locals())).launch()
-
-
-cat_pdb.__doc__ = CatPDB.__doc__
-main = CatPDB.get_main(cat_pdb, "Concat two PDB structures in a single PDB file.")
+cat_pdb = launcher(CatPDB)
 
 if __name__ == "__main__":
-    main()
+    CatPDB.main()

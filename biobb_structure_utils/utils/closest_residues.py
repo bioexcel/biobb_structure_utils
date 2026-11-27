@@ -3,17 +3,14 @@
 """Module containing the ClosestResidues class and the command line interface."""
 from typing import Optional
 import Bio.PDB
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
 
 from biobb_structure_utils.utils.common import (
-    _from_string_to_list,
-    check_input_path,
-    check_output_path,
     create_biopython_residue,
     create_output_file,
     create_residues_list,
+    select_residues,
 )
 
 
@@ -27,7 +24,7 @@ class ClosestResidues(BiobbObject):
         input_structure_path (str): Input structure file path. File type: input. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/data/utils/2vgb.pdb>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).
         output_residues_path (str): Output molcules file path. File type: output. `Sample file <https://github.com/bioexcel/biobb_structure_utils/raw/master/biobb_structure_utils/test/reference/utils/ref_closest_residues.pdb>`_. Accepted formats: pdb (edam:format_1476), pdbqt (edam:format_1476).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
-            * **residues** (*list*) - (None) List of comma separated res_id or list of dictionaries with the name | res_id  | chain | model of the residues to find the closest neighbours. Format: [{"name": "HIS", "res_id": "72", "chain": "A", "model": "1"}].
+            * **residues** (*list*) - (None) List of comma separated res_id or list of dictionaries with the name | res_id  | chain | model of the residues to find the closest neighbours. Format: [{"name": "HIS", "res_id": "72", "chain": "A", "model": "1"}]. The res_id of a residue with an insertion code includes the code ("62A").
             * **radius** (*float*) - (5) Distance in Ångströms to neighbours of the given list of residues.
             * **preserve_target** (*bool*) - (True) Whether or not to preserve the target residues in the output structure.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
@@ -66,95 +63,27 @@ class ClosestResidues(BiobbObject):
     """
 
     def __init__(
-        self, input_structure_path, output_residues_path, properties=None, **kwargs
+        self, input_structure_path: str, output_residues_path: str, properties: Optional[dict] = None, **kwargs
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_structure_path": input_structure_path},
-            "out": {"output_residues_path": output_residues_path},
-        }
+        super().__init__(**locals())
 
         # Properties specific for BB
-        self.residues = _from_string_to_list(properties.get("residues", []))
-        self.radius = properties.get("radius", 5)
-        self.preserve_target = properties.get("preserve_target", True)
-        self.properties = properties
+        self.residues = fu.str_to_list(self.residues)
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`ClosestResidues <utils.closest_residues.ClosestResidues>` utils.closest_residues.ClosestResidues object."""
-
-        self.io_dict["in"]["input_structure_path"] = check_input_path(
-            self.io_dict["in"]["input_structure_path"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-        self.io_dict["out"]["output_residues_path"] = check_output_path(
-            self.io_dict["out"]["output_residues_path"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # Business code
         # get list of Residues from properties
-        list_residues = create_residues_list(self.residues, self.out_log)
+        list_residues = create_residues_list(self.residues)
 
         # load input into BioPython structure
         structure = Bio.PDB.PDBParser(QUIET=True).get_structure(
-            "structure", self.stage_io_dict["in"]["input_structure_path"]
+            "structure", self.sandbox_file("input_structure_path")
         )
 
-        str_residues = []
-        # format selected residues
-        for residue in structure.get_residues():
-            r = create_biopython_residue(residue)
-            if list_residues:
-                for res in list_residues:
-                    match = True
-                    for code in res["code"]:
-                        if res[code].strip() != r[code].strip():
-                            match = False
-                            break
-                    if match:
-                        str_residues.append(r)
-            else:
-                str_residues.append(r)
-
         # get target residues in BioPython format
-        target_residues = []
-        for sr in str_residues:
-            # try for residues, if exception, try as HETATM
-            try:
-                target_residues.append(
-                    structure[int(sr["model"]) - 1][sr["chain"]][int(sr["res_id"])]
-                )
-            except KeyError:
-                target_residues.append(
-                    structure[int(sr["model"]) - 1][sr["chain"]][
-                        "H_" + sr["name"], int(sr["res_id"]), " "
-                    ]
-                )
-            except Exception:
-                fu.log(
-                    self.__class__.__name__ + ": Unable to find residue %s",
-                    sr["res_id"],
-                    self.out_log,
-                )
+        target_residues = select_residues(structure, list_residues)
 
         # get all atoms from target_residues
         target_atoms = Bio.PDB.Selection.unfold_entities(target_residues, "A")
@@ -169,15 +98,12 @@ class ClosestResidues(BiobbObject):
             for res in ns.search(center_atom.coord, self.radius, "R")
         }
 
-        # format nearby residues to pure python objects
-        neighbor_residues = []
-        for residue in nearby_residues:
-            r = create_biopython_residue(residue)
-            neighbor_residues.append(r)
-
         # if preserve_target == False, don't add the residues of self.residues to the final structure
         if not self.preserve_target:
-            neighbor_residues = [x for x in neighbor_residues if x not in str_residues]
+            nearby_residues -= set(target_residues)
+
+        # format nearby residues to pure python objects
+        neighbor_residues = [create_biopython_residue(residue) for residue in nearby_residues]
 
         fu.log("Found %d nearby residues" % len(neighbor_residues), self.out_log)
 
@@ -192,38 +118,16 @@ class ClosestResidues(BiobbObject):
 
         create_output_file(
             0,
-            self.stage_io_dict["in"]["input_structure_path"],
+            self.sandbox_file("input_structure_path"),
             neighbor_residues,
-            self.stage_io_dict["out"]["output_residues_path"],
+            self.sandbox_file("output_residues_path"),
             self.out_log,
         )
 
         self.return_code = 0
 
-        # Copy files to host
-        self.copy_to_host()
 
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
-
-
-def closest_residues(
-    input_structure_path: str,
-    output_residues_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`ClosestResidues <utils.closest_residues.ClosestResidues>` class and
-    execute the :meth:`launch() <utils.closest_residues.ClosestResidues.launch>` method."""
-    return ClosestResidues(**dict(locals())).launch()
-
-
-closest_residues.__doc__ = ClosestResidues.__doc__
-main = ClosestResidues.get_main(closest_residues, "Search closest residues to a list of given residues.")
+closest_residues = launcher(ClosestResidues)
 
 if __name__ == "__main__":
-    main()
+    ClosestResidues.main()

@@ -4,11 +4,10 @@
 
 from typing import Optional
 
-from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools.file_utils import launchlogger
+from biobb_common.generic.biobb_object import BiobbObject, launcher
+from biobb_common.tools import file_utils as fu
 
 from biobb_structure_utils.gro_lib.gro import Gro
-from biobb_structure_utils.utils.common import _from_string_to_list
 
 
 class SortGroResidues(BiobbObject):
@@ -48,70 +47,26 @@ class SortGroResidues(BiobbObject):
     """
 
     def __init__(
-        self, input_gro_path, output_gro_path, properties=None, **kwargs
+        self, input_gro_path: str, output_gro_path: str, properties: Optional[dict] = None, **kwargs
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_gro_path": input_gro_path},
-            "out": {"output_gro_path": output_gro_path},
-        }
+        super().__init__(**locals())
 
         # Properties specific for BB
-        self.residue_name_list = _from_string_to_list(
-            properties.get("residue_name_list", ["NA", "CL", "SOL"])
-        )
+        self.residue_name_list = fu.str_to_list(self.residue_name_list)
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`SortGroResidues <utils.sort_gro_residues.SortGroResidues>` utils.sort_gro_residues.SortGroResidues object."""
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # Business code
         in_gro = Gro()
-        in_gro.read_gro_file(self.stage_io_dict["in"]["input_gro_path"])
+        in_gro.read_gro_file(self.sandbox_file("input_gro_path"))
         in_gro.sort_residues2(self.residue_name_list)
-        in_gro.write_gro_file(self.stage_io_dict["out"]["output_gro_path"])
+        in_gro.write_gro_file(self.sandbox_file("output_gro_path"))
         self.return_code = 0
         ##########
 
-        # Copy files to host
-        self.copy_to_host()
 
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
-
-
-def sort_gro_residues(
-    input_gro_path: str,
-    output_gro_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`SortGroResidues <utils.sort_gro_residues.SortGroResidues>` class and
-    execute the :meth:`launch() <utils.sort_gro_residues.SortGroResidues.launch>` method."""
-    return SortGroResidues(**dict(locals())).launch()
-
-
-sort_gro_residues.__doc__ = SortGroResidues.__doc__
-main = SortGroResidues.get_main(sort_gro_residues, "Renumber atoms and residues from a 3D structure.")
+sort_gro_residues = launcher(SortGroResidues)
 
 if __name__ == "__main__":
-    main()
+    SortGroResidues.main()

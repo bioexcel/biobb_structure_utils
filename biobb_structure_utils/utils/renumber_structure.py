@@ -4,9 +4,8 @@
 import json
 from pathlib import Path
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
 
 from biobb_structure_utils.gro_lib.gro import Gro
 from biobb_structure_utils.utils.common import PDB_SERIAL_RECORDS
@@ -54,54 +53,16 @@ class RenumberStructure(BiobbObject):
 
     def __init__(
         self,
-        input_structure_path,
-        output_structure_path,
-        output_mapping_json_path,
-        properties=None,
+        input_structure_path: str,
+        output_structure_path: str,
+        output_mapping_json_path: str,
+        properties: Optional[dict] = None,
         **kwargs,
     ) -> None:
-        properties = properties or {}
+        super().__init__(**locals())
 
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_structure_path": input_structure_path},
-            "out": {
-                "output_structure_path": output_structure_path,
-                "output_mapping_json_path": output_mapping_json_path,
-            },
-        }
-
-        # Properties specific for BB
-        self.renumber_residues = properties.get("renumber_residues", True)
-        self.renumber_residues_per_chain = properties.get(
-            "renumber_residues_per_chain", True
-        )
-
-        # Common in all BB
-        self.can_write_console_log = properties.get("can_write_console_log", True)
-        self.global_log = properties.get("global_log", None)
-        self.prefix = properties.get("prefix", None)
-        self.step = properties.get("step", None)
-        self.path = properties.get("path", "")
-        self.remove_tmp = properties.get("remove_tmp", True)
-        self.restart = properties.get("restart", False)
-
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`RenumberStructure <utils.renumber_structure.RenumberStructure>` utils.renumber_structure.RenumberStructure object."""
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # Business code
         extension = Path(
@@ -110,12 +71,12 @@ class RenumberStructure(BiobbObject):
         if extension.lower() == ".gro":
             fu.log("GRO format detected, reenumerating atoms", self.out_log)
             gro_st = Gro()
-            gro_st.read_gro_file(self.stage_io_dict["in"]["input_structure_path"])
+            gro_st.read_gro_file(self.sandbox_file("input_structure_path"))
             residue_mapping, atom_mapping = gro_st.renumber_atoms(
                 renumber_residues=self.renumber_residues,
                 renumber_residues_per_chain=self.renumber_residues_per_chain,
             )
-            gro_st.write_gro_file(self.stage_io_dict["out"]["output_structure_path"])
+            gro_st.write_gro_file(self.sandbox_file("output_structure_path"))
 
         else:
             fu.log("PDB format detected, reenumerating atoms", self.out_log)
@@ -124,9 +85,9 @@ class RenumberStructure(BiobbObject):
             residue_mapping = {}
             residue_count = 0
             with open(
-                self.stage_io_dict["in"]["input_structure_path"], "r"
+                self.sandbox_file("input_structure_path"), "r"
             ) as input_pdb, open(
-                self.stage_io_dict["out"]["output_structure_path"], "w"
+                self.sandbox_file("output_structure_path"), "w"
             ) as output_pdb:
                 for line in input_pdb:
                     record = line[:6].upper().strip()
@@ -160,7 +121,7 @@ class RenumberStructure(BiobbObject):
                     output_pdb.write(line)
 
         with open(
-            self.stage_io_dict["out"]["output_mapping_json_path"], "w"
+            self.sandbox_file("output_mapping_json_path"), "w"
         ) as output_json:
             output_json.write(
                 json.dumps({"residues": residue_mapping, "atoms": atom_mapping})
@@ -169,31 +130,8 @@ class RenumberStructure(BiobbObject):
         self.return_code = 0
         ##########
 
-        # Copy files to host
-        self.copy_to_host()
 
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
-
-
-def renumber_structure(
-    input_structure_path: str,
-    output_structure_path: str,
-    output_mapping_json_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`RenumberStructure <utils.renumber_structure.RenumberStructure>` class and
-    execute the :meth:`launch() <utils.renumber_structure.RenumberStructure.launch>` method."""
-    return RenumberStructure(**dict(locals())).launch()
-
-
-renumber_structure.__doc__ = RenumberStructure.__doc__
-main = RenumberStructure.get_main(renumber_structure, "Renumber atoms and residues from a 3D structure.")
+renumber_structure = launcher(RenumberStructure)
 
 if __name__ == "__main__":
-    main()
+    RenumberStructure.main()

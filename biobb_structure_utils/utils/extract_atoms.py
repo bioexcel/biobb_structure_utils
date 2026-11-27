@@ -4,9 +4,8 @@
 import re
 from pathlib import Path
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
 
 from biobb_structure_utils.gro_lib.gro import Gro
 from biobb_structure_utils.utils.common import PDB_SERIAL_RECORDS
@@ -49,37 +48,15 @@ class ExtractAtoms(BiobbObject):
     """
 
     def __init__(
-        self, input_structure_path, output_structure_path, properties=None, **kwargs
+        self, input_structure_path: str, output_structure_path: str, properties: Optional[dict] = None, **kwargs
     ) -> None:
-        properties = properties or {}
+        super().__init__(**locals())
 
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
+    def stage_files(self) -> None:
+        """The block does not use the sandbox: there are no files to stage."""
 
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_structure_path": input_structure_path},
-            "out": {"output_structure_path": output_structure_path},
-        }
-
-        # Properties specific for BB
-        self.regular_expression_pattern = properties.get(
-            "regular_expression_pattern", "^D"
-        )
-
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`ExtractAtoms <utils.extract_atoms.ExtractAtoms>` utils.extract_atoms.ExtractAtoms object."""
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # Business code
         extension = Path(self.io_dict["in"]["input_structure_path"]).suffix.lower()
@@ -146,30 +123,8 @@ class ExtractAtoms(BiobbObject):
         self.return_code = 0
         ##########
 
-        # Copy files to host
-        self.copy_to_host()
 
-        # Remove temporal files
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
-
-
-def extract_atoms(
-    input_structure_path: str,
-    output_structure_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`ExtractAtoms <utils.extract_atoms.ExtractAtoms>` class and
-    execute the :meth:`launch() <utils.extract_atoms.ExtractAtoms.launch>` method."""
-    return ExtractAtoms(**dict(locals())).launch()
-
-
-extract_atoms.__doc__ = ExtractAtoms.__doc__
-main = ExtractAtoms.get_main(extract_atoms, "Remove the selected ligand atoms from a 3D structure.")
+extract_atoms = launcher(ExtractAtoms)
 
 if __name__ == "__main__":
-    main()
+    ExtractAtoms.main()

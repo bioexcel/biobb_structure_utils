@@ -4,15 +4,8 @@
 
 from typing import Optional
 
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
-
-from biobb_structure_utils.utils.common import (
-    _from_string_to_list,
-    check_input_path,
-    check_output_path_json,
-)
 
 
 class StructureCheck(BiobbObject):
@@ -54,48 +47,15 @@ class StructureCheck(BiobbObject):
     """
 
     def __init__(
-        self, input_structure_path, output_summary_path, properties=None, **kwargs
+        self, input_structure_path: str, output_summary_path: str, properties: Optional[dict] = None, **kwargs
     ) -> None:
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_structure_path": input_structure_path},
-            "out": {"output_summary_path": output_summary_path},
-        }
+        super().__init__(**locals())
 
         # Properties specific for BB
-        self.binary_path = properties.get("binary_path", "check_structure")
-        self.features = _from_string_to_list(properties.get("features", None))
-        self.properties = properties
+        self.features = fu.str_to_list(self.features)
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    @launchlogger
-    def launch(self) -> int:
+    def run(self) -> None:
         """Execute the :class:`StructureCheck <utils.structure_check.StructureCheck>` utils.structure_check.StructureCheck object."""
-
-        self.io_dict["in"]["input_structure_path"] = check_input_path(
-            self.io_dict["in"]["input_structure_path"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-        self.io_dict["out"]["output_summary_path"] = check_output_path_json(
-            self.io_dict["out"]["output_summary_path"],
-            self.out_log,
-            self.__class__.__name__,
-        )
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         tmp_folder = None
 
@@ -120,8 +80,7 @@ class StructureCheck(BiobbObject):
             fu.log("Computing features: %s" % ", ".join(self.features), self.out_log)
 
             # create temporary folder
-            tmp_folder = fu.create_unique_dir()
-            fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
+            tmp_folder = self.create_tmp_dir(log=True)
 
             command_list = tmp_folder + "/command_list.lst"
 
@@ -139,37 +98,14 @@ class StructureCheck(BiobbObject):
                 "--non_interactive",
                 "command_list",
                 "--list",
-                command_list,
+                self.staged_path(command_list),
             ]
 
         # Run Biobb block
         self.run_biobb()
 
-        # Copy files to host
-        self.copy_to_host()
 
-        # Remove temporal files
-        self.tmp_files.append(tmp_folder)
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
-
-
-def structure_check(
-    input_structure_path: str,
-    output_summary_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`StructureCheck <utils.structure_check.StructureCheck>` class and
-    execute the :meth:`launch() <utils.structure_check.StructureCheck.launch>` method."""
-    return StructureCheck(**dict(locals())).launch()
-
-
-structure_check.__doc__ = StructureCheck.__doc__
-main = StructureCheck.get_main(structure_check, "This class is a wrapper of the Structure Checking tool to generate summary checking results on a json file.")
+structure_check = launcher(StructureCheck)
 
 if __name__ == "__main__":
-    main()
+    StructureCheck.main()
